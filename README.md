@@ -11,6 +11,24 @@ This is the starter for the Flask React project.
       pipenv install -r requirements.txt
       ```
 
+      ```bash
+      pipenv install Flask
+      ```
+
+      ```bash
+      pipenv install python-dotenv
+      ```
+
+       ```bash
+      pipenv install Jinja2
+      pipenv install Flask-WTF
+      ```
+
+       ```bash
+      pipenv install SQLAlchemy Flask-SQLAlchemy
+      pipenv install alembic Flask-Migrate
+      ```
+
 3. Create a **.env** file based on the example with proper settings for your
    development environment
 
@@ -28,11 +46,12 @@ This is the starter for the Flask React project.
    ```
 
    ```bash
-   flask db upgrade
+   pipenv run flask db init
    ```
 
    ```bash
-   flask seed all
+   pipenv run flask db migrate -m "create tables"
+   pipenv run flask db upgrade
    ```
 
    ```bash
