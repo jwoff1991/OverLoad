@@ -21,11 +21,16 @@ This is the starter for the Flask React project.
 
        ```bash
       pipenv install Jinja2
+      ```
+       ```bash
       pipenv install Flask-WTF
       ```
 
        ```bash
       pipenv install SQLAlchemy Flask-SQLAlchemy
+      ```
+
+       ```bash
       pipenv install alembic Flask-Migrate
       ```
 
@@ -51,6 +56,9 @@ This is the starter for the Flask React project.
 
    ```bash
    pipenv run flask db migrate -m "create tables"
+   ```
+   
+   ```bash
    pipenv run flask db upgrade
    ```
 
