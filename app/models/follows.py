@@ -12,9 +12,8 @@ class Follows(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     followee_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
-    #StoryLikes has a many to one relationship with Stories and Users
-    follower = db.relationship('User', back_populates='follows')
-    followee = db.relationship('User', back_populates='follows')
+    follower = db.relationship('User', back_populates='follower')
+    followee = db.relationship('User', back_populates='followee')
 
     def to_dict(self):
         return {
