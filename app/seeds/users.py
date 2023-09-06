@@ -13,6 +13,7 @@ def seed_users():
             password='password'
         )
 
+
     marnie = User(
             first_name='marnie'
             last_name= 'Higgins'
