@@ -1,4 +1,7 @@
 const GET_ARTICLES = '/articles/getAll'
+const GET_SINGLE = '/article/single'
+
+
 
 const getArticles = (data) => {
     return {
@@ -7,10 +10,19 @@ const getArticles = (data) => {
     }
 }
 
+const getSingleArticle = (data) => {
+    return {
+        type: GET_SINGLE,
+        article: data
+    }
+}
+
 
 export const getAllArticles = () => async (dispatch) => {
     try {
-        const response = await fetch('/api/articles/all');
+        const response = await fetch('/api/articles/all', {
+            method: 'GET'
+        });
         if(response.ok) {
             const data = await response.json();
             dispatch(getArticles(data));
@@ -25,9 +37,61 @@ export const getAllArticles = () => async (dispatch) => {
     }
 }
 
+export const getOneArticle = (id) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/articles/${id}`, {
+            method: 'GET'
+        });
+        if(response.ok) {
+            const data = await response.json();
+            dispatch(getSingleArticle(data));
+            return data;
+        } else {
+            const errors = await response.json();
+            return errors;
+        }
+    } catch (error) {
+        const errors = (error && error.json) ? await error.json() : { message: error.toString() };
+        return errors;
+    }
+}
+
+export const postArticle = (article) => async (dispatch) => {
+    try {
+        const request = await fetch('/api/articles/new-article/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(article)
+        })
+        const data = await request.json()
+        const newArticle = data
+        dispatch(getSingleArticle(newArticle))
+        return newArticle
+    } catch (error) {
+        const errors = (error && error.json) ? await error.json() : { message: error.toString() }
+        return errors
+    }
+}
+
+export const deleteArticle = (id) => async (dispatch) => {
+    const response = await fetch(`/api/articles/${id}/`, {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        const article = await response.json();
+        return article
+    }
+    else {
+        return response
+    }
+}
+
 
 const initialState = {
-    allArticles: {}
+    allArticles: {},
+    singleArticle: {}
 }
 
 const articleReducer = (state = initialState, action) => {
@@ -36,6 +100,10 @@ const articleReducer = (state = initialState, action) => {
         case GET_ARTICLES:
             newState = Object.assign({ ...state })
             newState.allArticles = action.articles
+            return newState
+        case GET_SINGLE:
+            newState = Object.assign({ ...state })
+            newState.singleArticle = action.article
             return newState
         default:
             return state;

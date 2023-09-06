@@ -1,8 +1,9 @@
 from flask import Blueprint, request
 from app.models import User, Article
 from ..models.db import db
-from flask_login import current_user, login_required
+from ..forms.new_article_form import NewArticleForm
 from datetime import datetime
+
 
 
 article_routes = Blueprint('articles', __name__)
@@ -11,7 +12,7 @@ session = db.session
 
 @article_routes.route('/all', methods=['GET'])
 def article_index():
-    all_articles = session.query(Article) #.order_by(Article.date_created)
+    all_articles = session.query(Article).order_by(Article.date_created)
     print(all_articles)
     if not all_articles:
         error = {}
@@ -20,3 +21,58 @@ def article_index():
     else:
         result = [article.to_dict() for article in all_articles]
         return result
+
+@article_routes.route('/<int:id>', methods=['GET'])
+def single_article(id):
+    article = Article.query.get(id)
+    if not article:
+        return {'message': 'No articles with this id'}
+    else:
+        result = article.to_dict()
+        return result
+
+@article_routes.route('/new-article/', methods=['POST'])
+def post_article():
+    form = NewArticleForm()
+    print('csrf_token', form.csrf_token)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user_id = request.json["user_id"]
+        title = request.json["title"]
+        body = request.json["body"]
+        article = Article (
+            user_id = user_id,
+            title=title,
+            body=body,
+            date_created=datetime.now()
+        )
+        db.session.add(article)
+        db.session.commit()
+        return article.to_dict()
+    print('errors', form.errors)
+    return form.errors
+
+
+@article_routes.route('/<int:id>/', methods=['PUT'])
+def put_comment(id):
+    form = NewArticleForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        article_to_update = Article.query.get(id)
+        article_to_update.title = form.data['title']
+        article_to_update.body = form.data['body']
+        db.session.commit()
+        return article_to_update.to_dict()
+    if form.errors:
+        return {"errors": "we got some errors"}
+
+
+@article_routes.route('/<int:id>/', methods=['DELETE'])
+def delete_article(id):
+    article = Article.query.get(id)
+    if article:
+        db.session.delete(article)
+        db.session.commit()
+        return {"message": "Comment deleted successfully"}
+    else:
+        return {"error": "Failed to delete comment"}, 400

@@ -6,6 +6,8 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ArticlesComponent from "./components/ArticlesComponent";
+import SingleArticle from "./components/SingleArticleComponent";
+import CreateNewArticle from "./components/CreateArticle";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,9 +27,15 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/'>
+          <Route path='/' exact>
             <ArticlesComponent />
           </Route>
+          <Route path='/articles/:id' exact>
+            <SingleArticle />
+          </Route>
+            <Route path='/new-article' exact>
+            <CreateNewArticle />
+            </Route>
         </Switch>
       )}
     </>
