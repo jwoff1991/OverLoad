@@ -2,13 +2,13 @@ from flask_sqlalchemy import SQLAlchemy
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class ArticleLikes(db.Model):
-    __tablename__ = "article"
+    __tablename__ = "articlelikes"
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
 
-    id = db.Column(db.Integer, primary_key=True)
+    #id = db.Column(db.Integer, primary_key=True) //DO NOT BELIEVE THIS NEEDS ID BUT ASK
     story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
@@ -18,7 +18,7 @@ class ArticleLikes(db.Model):
 
     def to_dict(self):
         return {
-            "id": self.id,
+            #"id": self.id,
             "article_id": self.story_id,
             "user_id": self.user_id,
             "article": self.article.to_dict(),
