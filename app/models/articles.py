@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class Articles(db.Model):
+class Article(db.Model):
     __tablename__ = "articles"
 
     if environment == "production":

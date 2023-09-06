@@ -1,5 +1,6 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, Article, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime
 
 
 
@@ -464,11 +465,361 @@ def seed_users():
             password="password48"
         )
 
+    article_1 = Article(
+        user_id=5,
+        title="The Power of Python: A Versatile Programming Language",
+        body="""
+            Python has established itself as a powerhouse in the world of programming, and its versatility makes it a
+            favorite among developers. From web development and data analysis to machine learning and automation, Python
+            excels in a wide range of applications.
+
+            One of Python's key strengths is its readability and ease of learning, making it an excellent choice for
+            beginners. With a vast community and an abundance of libraries and frameworks, Python empowers developers to
+            turn their ideas into reality with ease.
+
+            In this article, we explore the diverse applications of Python, its role in the tech industry, and how it
+            continues to evolve to meet the demands of modern development.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_2 = Article(
+        user_id=5,
+        title="Demystifying Machine Learning: A Beginner's Guide",
+        body="""
+            Machine learning is no longer a niche field but a transformative technology that has found applications
+            in various industries. For beginners looking to dive into the world of machine learning, understanding the
+            fundamentals is key.
+
+            In this article, we break down the core concepts of machine learning, from supervised and unsupervised
+            learning to neural networks and deep learning. We demystify the jargon and provide practical examples to
+            help you grasp the concepts.
+
+            Whether you're a programmer, a data scientist, or simply curious about this exciting field, this beginner's
+            guide will lay the foundation for your journey into the captivating world of machine learning.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_3 = Article(
+        user_id=5,
+        title="JavaScript: The Language of the Web",
+        body="""
+            JavaScript is the driving force behind the dynamic and interactive experiences you encounter on the web.
+            As a front-end programming language, it plays a pivotal role in web development, allowing developers to
+            create responsive and user-friendly websites.
+
+            In this article, we delve into the world of JavaScript, exploring its syntax, core concepts, and its
+            integration with HTML and CSS. We discuss the power of JavaScript libraries and frameworks like React,
+            Angular, and Vue.js, which have revolutionized web development.
+
+            Whether you're a web developer looking to enhance your skills or someone considering a career in front-end
+            development, understanding JavaScript is essential for navigating the ever-evolving landscape of web
+            technologies.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+
+    article_4 = Article(
+        user_id=8,
+        title="Exploring the World: Top Travel Tips for Adventurers",
+        body="""
+            Traveling is a rewarding experience, but it can also be challenging without the right tips and tricks. In this
+            article, we share invaluable advice for adventurers seeking to explore the world.
+
+            From packing efficiently and navigating airports to immersing in local cultures and staying safe during your
+            adventures, we cover it all. Learn how to make the most of your travel experiences and create lasting memories.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_5 = Article(
+        user_id=8,
+        title="Traveling on a Budget: How to Explore the World Without Breaking the Bank",
+        body="""
+            Traveling doesn't have to be expensive. With careful planning and budget-friendly strategies, you can explore
+            new destinations without breaking the bank. In this article, we share practical tips for budget travelers.
+
+            Discover ways to find affordable accommodations, save on transportation costs, and enjoy local cuisine
+            without overspending. With the right approach, you can embark on memorable adventures while keeping your
+            finances in check.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_6 = Article(
+        user_id=8,
+        title="Solo Travel: Embracing the World on Your Own Terms",
+        body="""
+            Solo travel can be a transformative experience, allowing you to embrace new cultures and discover your
+            independence. In this article, we explore the joys and challenges of solo travel and offer tips for those
+            embarking on solo adventures.
+
+            Learn how to plan a solo trip, stay safe while traveling alone, and make the most of your solo journey.
+            Whether you're a seasoned solo traveler or considering it for the first time, this article will inspire and
+            empower you to explore the world on your terms.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_7 = Article(
+        user_id=19,
+        title="The Art of Brewing: Mastering Your Morning Coffee",
+        body="""
+            Coffee is more than a beverage; it's an art form. In this article, we delve into the world of coffee brewing,
+            from selecting the perfect beans to mastering various brewing methods. Whether you're a coffee connoisseur or
+            a novice, you'll discover tips and techniques to elevate your morning coffee ritual.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_8 = Article(
+        user_id=19,
+        title="Coffee Culture Around the World: A Global Journey of Flavors",
+        body="""
+            Coffee transcends borders and cultures, and each region has its unique coffee traditions. Join us on a
+            flavorful journey as we explore coffee culture around the world. From Italian espresso to Turkish coffee,
+            discover the diverse flavors and rituals that make coffee an international phenomenon.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_9 = Article(
+        user_id=19,
+        title="The Science of Coffee: Decoding Beans, Roasts, and Brewing",
+        body="""
+            Coffee is a complex beverage, and its flavors are influenced by a myriad of factors. In this article, we
+            unravel the science behind coffee, from the chemistry of beans to the art of roasting and brewing.
+            Understanding the science can help you fine-tune your coffee experience and discover your perfect cup.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_10 = Article(
+        user_id=17,
+        title="Yoga for Beginners: A Step-by-Step Guide to Finding Inner Peace",
+        body="""
+            Yoga is not just a physical practice; it's a journey toward inner peace and well-being. In this article, we
+            provide a step-by-step guide for beginners looking to start their yoga journey. Learn about fundamental yoga
+            poses, breathing techniques, and how to create a tranquil space for your practice. Embark on a path to
+            mindfulness and discover the transformative power of yoga.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_11 = Article(
+        user_id=17,
+        title="The Mind-Body Connection: How Yoga Enhances Mental and Physical Health",
+        body="""
+            Yoga is more than just physical postures; it's a practice that nurtures the mind-body connection. In this
+            article, we explore the profound impact of yoga on mental and physical health. Discover how yoga reduces
+            stress, improves flexibility, and enhances mindfulness. Whether you're a seasoned yogi or new to the practice,
+            this article highlights the holistic benefits of yoga.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_12 = Article(
+        user_id=17,
+        title="Yoga Beyond Asanas: Exploring the Eight Limbs of Yoga Philosophy",
+        body="""
+            Yoga is a comprehensive philosophy that extends beyond physical postures. Dive deep into the essence of yoga
+            by exploring the Eight Limbs of Yoga Philosophy. From ethical principles (Yamas) to self-discipline (Niyamas)
+            and meditation (Dhyana), these limbs guide practitioners toward spiritual growth and self-realization.
+            Discover the timeless wisdom of yoga philosophy and its relevance in the modern world.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+    article_13 = Article(
+        user_id=45,
+        title="Crafting Compelling Narratives: The Art of Storytelling",
+        body="""
+            Storytelling is a timeless art form that has the power to captivate, inspire, and connect people on a profound
+            level. In this article, we delve into the craft of storytelling, exploring the elements that make narratives
+            compelling and unforgettable.
+
+            Discover the importance of well-defined characters, engaging plots, and the emotional resonance that drives
+            powerful storytelling. Whether you're a writer, filmmaker, or simply an enthusiast, this article will
+            illuminate the path to becoming a master storyteller.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_14 = Article(
+        user_id=45,
+        title="The Influence of Storytelling: Shaping Culture and Society",
+        body="""
+            Stories have the remarkable ability to shape culture, society, and our collective understanding of the world.
+            In this article, we examine the profound influence of storytelling throughout history and in contemporary
+            society.
+
+            Explore how stories have been used to convey cultural values, drive social change, and create lasting
+            legacies. Gain insights into the role of storytelling in literature, film, and even marketing, and how it
+            continues to impact our lives.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_15 = Article(
+        user_id=45,
+        title="Digital Storytelling: Navigating the Narrative Landscape in the Digital Age",
+        body="""
+            In the digital age, storytelling has taken on new dimensions and platforms. From interactive narratives in
+            video games to immersive experiences in virtual reality, storytelling has evolved. In this article, we
+            navigate the landscape of digital storytelling.
+
+            Discover how technology has expanded the possibilities of storytelling and how creators are pushing the
+            boundaries of narrative in the digital realm. Whether you're a storyteller in the traditional sense or
+            exploring digital avenues, this article offers insights into the exciting world of narrative innovation.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+    article_16 = Article(
+        user_id=24,
+        title="Hiking Essentials: Gear and Tips for a Memorable Trek",
+        body="""
+            Hiking is a thrilling outdoor adventure that allows you to connect with nature and challenge yourself. In this
+            article, we delve into the essentials of hiking, covering gear, preparation, and tips for a memorable trek.
+
+            Discover the must-have hiking gear, from comfortable footwear to essential safety items. Learn how to plan
+            your hikes, navigate trails, and stay safe in the wilderness. Whether you're a beginner or an experienced
+            hiker, this article is your guide to an enriching hiking experience.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_17 = Article(
+        user_id=24,
+        title="Hiking Trails That Take Your Breath Away: A Journey to Natural Beauty",
+        body="""
+            The world is adorned with breathtaking hiking trails that offer stunning vistas and encounters with the
+            natural world. In this article, we embark on a virtual journey to some of the most awe-inspiring hiking
+            destinations.
+
+            Explore trails that lead to towering mountain peaks, serene lakes, and lush forests. From the Appalachian
+            Trail in the United States to the Inca Trail in Peru, discover the wonders of these remarkable hiking
+            routes and start planning your next adventure.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_18 = Article(
+        user_id=24,
+        title="Hiking as a Mindful Practice: Finding Peace in Nature's Embrace",
+        body="""
+            Hiking is not just about physical exertion; it's also an opportunity for mindfulness and inner peace.
+            In this article, we explore the meditative aspects of hiking and how it can be a transformative experience.
+
+            Learn how to use hiking as a form of mindfulness practice, connecting with the natural world and finding
+            tranquility in the great outdoors. Whether you seek solitude or wish to share the experience with others,
+            this article invites you to discover the spiritual dimensions of hiking.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_19 = Article(
+        user_id=25,
+        title="Embracing Veganism: A Compassionate Journey to a Plant-Based Lifestyle",
+        body="""
+            Veganism is more than a dietary choice; it's a lifestyle that promotes compassion for animals and a
+            sustainable future. In this article, we delve into the world of veganism, exploring the reasons people
+            choose to go vegan and the positive impacts it can have on health and the environment.
+
+            Discover the benefits of a plant-based diet, learn about common misconceptions, and find resources to
+            support your vegan journey. Whether you're considering a transition to veganism or seeking to deepen
+            your commitment, this article provides insights and guidance.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_20 = Article(
+        user_id=25,
+        title="Vegan Culinary Delights: Exploring the Flavors of Plant-Based Cuisine",
+        body="""
+            Plant-based cuisine is a vibrant world of flavors and creativity. In this article, we celebrate the
+            culinary delights of vegan cooking, showcasing delicious and nutritious dishes that embrace the
+            diversity of plant-based ingredients.
+
+            From mouthwatering vegan burgers to delectable desserts, we explore the art of vegan cooking and provide
+            recipes and cooking tips to inspire your own culinary adventures. Whether you're a seasoned vegan chef
+            or just starting to explore plant-based cooking, this article offers a taste of the exciting world of
+            vegan cuisine.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_21 = Article(
+        user_id=25,
+        title="Veganism and Sustainability: A Powerful Combination for a Better Planet",
+        body="""
+            Veganism is not only good for your health but also for the planet. In this article, we delve into the
+            relationship between veganism and sustainability, highlighting how choosing plant-based options can
+            reduce our environmental footprint and combat climate change.
+
+            Learn about the environmental impacts of animal agriculture, the concept of food sustainability, and how
+            veganism contributes to a more sustainable future. Whether you're an environmental advocate or curious
+            about the intersection of food choices and sustainability, this article explores the positive impact of
+            going vegan.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+    article_22 = Article(
+        user_id=27,
+        title="Front Row Bliss: My Unforgettable Experience at the Rock Legends Concert",
+        body="""
+            Attending a live concert can be a transcendent experience, and my journey to the front row of the Rock Legends
+            Concert was nothing short of magical. In this article, I recount my unforgettable adventure, from scoring
+            coveted tickets to feeling the adrenaline rush as the music filled the air.
+
+            Join me as I relive the electrifying performances, the camaraderie of fellow fans, and the unforgettable
+            moments that made this concert a memory for a lifetime. Discover the power of live music and the joy of
+            sharing it with a passionate crowd.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_23 = Article(
+        user_id=27,
+        title="Music Festivals: A Journey Through Sound, Art, and Community",
+        body="""
+            Music festivals are immersive experiences that blend music, art, and community into a harmonious celebration
+            of life. In this article, I take you on a journey through the vibrant world of music festivals, sharing my
+            experiences and the unique culture that defines these events.
+
+            Explore the diverse music genres, the captivating art installations, and the sense of belonging that
+            festivals offer. Whether you're a seasoned festival-goer or someone considering your first festival
+            adventure, this article offers a glimpse into the transformative power of music festivals.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
+    article_24 = Article(
+        user_id=27,
+        title="Intimate Concerts: Discovering Hidden Gems in Acoustic Serenity",
+        body="""
+            While stadium concerts are grand spectacles, intimate acoustic performances offer a different kind of magic.
+            In this article, I share my love for intimate concerts and the unique connection they create between artists
+            and the audience.
+
+            Join me on a journey to small venues, where talented musicians pour their hearts into every note. Discover
+            the beauty of stripped-down performances and the joy of being part of an intimate audience. Whether you're
+            a music enthusiast or simply curious about the magic of acoustic serenity, this article will resonate with
+            your love for music.
+        """,
+        date_created=datetime.today().strftime('%Y-%m-%d'),
+    )
+
     db.session.add_all([demo, marnie,bobbie,user4,user5,user6,user7,user8,user9,user10,
         user11,user12,user13,user14,user15,user16,user17,user18,user19,user20,
         user21,user22,user23,user24,user25,user26,user27,user28,user29,user30,
         user31,user32,user33,user34,user35,user36,user37,user38,user39,user40,
         user41,user42,user43,user44,user45,user46,user47,user48,user49,user50])
+
+    db.session.add_all([article_1, article_2, article_3, article_4, article_5, article_6,
+                        article_7, article_8, article_9, article_10, article_11, article_12,
+                        article_13, article_14, article_15, article_16, article_17, article_18,
+                        article_19, article_20, article_21, article_22, article_23, article_24]) #vegan, hiking, coding, yoga, traveling, coffee, story-telling, live concerts
     db.session.commit()
 
 
