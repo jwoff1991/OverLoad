@@ -1,26 +1,26 @@
 from flask_sqlalchemy import SQLAlchemy
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class ArticleLikes(db.Model):
-    __tablename__ = "article_likes"
+class ReadingList(db.Model):
+    __tablename__ = "reading_lists"
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
 
     #id = db.Column(db.Integer, primary_key=True) //DO NOT BELIEVE THIS NEEDS ID BUT ASK
-    article_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
+    story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
-    #StoryLikes has a many to one relationship with Articles and Users
-    article = db.relationship('Articles', back_populates='likes')
-    liker = db.relationship('User', back_populates='article_likes')
+    #StoryLikes has a many to one relationship with Stories and Users
+    article = db.relationship('Articles', back_populates='articles')
+    reader = db.relationship('User', back_populates='reading_lists')
 
     def to_dict(self):
         return {
             #"id": self.id,
-            "article_id": self.article_id,
+            "article_id": self.story_id,
             "user_id": self.user_id,
             "article": self.article.to_dict(),
-            "liker": self.liker.to_dict()
+            "reader": self.liker.to_dict()
         }
