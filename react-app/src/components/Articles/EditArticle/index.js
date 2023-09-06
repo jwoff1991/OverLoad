@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { editArticle } from "../../store/articles";
+import { editArticle } from "../../../store/articles";
 import React, { useState, useEffect } from "react";
 import "./UpdateArticle.css";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
-import { getOneArticle } from "../../store/articles";
+import { getOneArticle } from "../../../store/articles";
 
 const EditArticle = () => {
   const articleId = useParams().id;

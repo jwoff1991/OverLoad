@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllArticles } from "../../store/articles";
+import { getAllArticles } from "../../../store/articles";
 import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
 

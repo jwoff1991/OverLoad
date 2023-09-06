@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { postArticle } from "../../store/articles";
+import { postArticle } from "../../../store/articles";
 import "./createArticle.css";
 
 const CreateNewArticle = () => {

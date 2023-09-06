@@ -2,9 +2,9 @@ import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { getOneArticle } from "../../store/articles";
+import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
-import OpenModal from "../OpenModalButton";
+import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 const SingleArticle = () => {

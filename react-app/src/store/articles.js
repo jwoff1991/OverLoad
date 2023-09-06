@@ -78,7 +78,6 @@ export const postArticle = (article) => async (dispatch) => {
 export const editArticle = (article) => async (dispatch) => {
   try {
     let id = article.id;
-    console.log("WE HITTING THIS", id);
     const request = await fetch(`/api/articles/edit/${id}/`, {
       method: "PUT",
       headers: {

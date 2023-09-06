@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom'
-import { useModal } from "../../context/Modal";
-import { deleteArticle } from '../../store/articles'
+import { useModal } from "../../../context/Modal";
+import { deleteArticle } from '../../../store/articles'
 import "./DeleteArticleModal.css";
 
 function DeleteArticleModal(props) {
