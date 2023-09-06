@@ -16,7 +16,7 @@ class ArticleComment(db.Model):
     date_created = db.Column(db.DateTime, nullable=False)
 
     # Story Comments has a Many to one relationship with Stories and Users
-    article = db.relationship('Articles', back_populates='comments')
+    article = db.relationship('Article', back_populates='comments')
     commenter = db.relationship('User', back_populates='article_comments')
 
     def to_dict(self):

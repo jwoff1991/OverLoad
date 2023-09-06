@@ -19,12 +19,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
      # Users has one => many relationships with Articles, Reading List, Comments, Likes
-    articles = db.relationship('Articles', back_populates='author', cascade='all, delete-orphan')
-    reading_list = db.relationship('ReadingList', back_populates='reader', cascade='all, delete-orphan')
-    article_comments = db.relationship('ArticleComments', back_populates='commenter', cascade='all, delete-orphan')
-    article_likes = db.relationship('ArticleLikes', back_populates='liker', cascade='all, delete-orphan')
-    follower = db.relationship("Follower", back_populates="follower", cascade='all, delete-orphan')
-    followee = db.relationship("Followee", back_populates="followee", cascade='all, delete-orphan')
+    articles = db.relationship('Article', back_populates='author', cascade='all, delete-orphan')
+    # reading_list = db.relationship('ReadingList', back_populates='reader', cascade='all, delete-orphan')
+    # article_comments = db.relationship('ArticleComment', back_populates='commenter', cascade='all, delete-orphan')
+    # article_likes = db.relationship('ArticleLike', back_populates='liker', cascade='all, delete-orphan')
+    # follower = db.relationship("Follow", back_populates="follower", cascade='all, delete-orphan')
+    # followee = db.relationship("Follow", back_populates="followee", cascade='all, delete-orphan')
 
     ##ASK ABOUT FOLLOWER/FOLLOWEE relationships
 
