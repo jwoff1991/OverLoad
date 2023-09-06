@@ -5,10 +5,10 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import ArticlesComponent from "./components/ArticlesComponent";
-import SingleArticle from "./components/SingleArticleComponent";
-import CreateNewArticle from "./components/CreateArticle";
-import EditArticle from "./components/EditArticle";
+import ArticlesComponent from "./components/Articles/ArticlesComponent";
+import SingleArticle from "./components/Articles/SingleArticleComponent";
+import CreateNewArticle from "./components/Articles/CreateArticle";
+import EditArticle from "./components/Articles/EditArticle";
 
 function App() {
   const dispatch = useDispatch();
