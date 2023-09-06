@@ -76,3 +76,17 @@ def delete_article(id):
         return {"message": "Comment deleted successfully"}
     else:
         return {"error": "Failed to delete comment"}, 400
+
+@article_routes.route('/edit/<int:id>/', methods=['PUT'])
+def edit_article(id):
+    print('WE HITTING THIS')
+    form = NewArticleForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        article_to_update = Article.query.get(id)
+        article_to_update.title = form.data['title']
+        article_to_update.body = form.data['body']
+        db.session.commit()
+        return article_to_update.to_dict()
+    if form.errors:
+        return {"errors": "we got some errors"}

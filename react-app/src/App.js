@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import ArticlesComponent from "./components/ArticlesComponent";
 import SingleArticle from "./components/SingleArticleComponent";
 import CreateNewArticle from "./components/CreateArticle";
+import EditArticle from "./components/EditArticle";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
             <Route path='/new-article' exact>
             <CreateNewArticle />
+            </Route>
+            <Route path='/article/:id/edit' exact>
+              <EditArticle />
             </Route>
         </Switch>
       )}

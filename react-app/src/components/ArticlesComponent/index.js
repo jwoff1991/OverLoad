@@ -14,7 +14,6 @@ const ArticlesComponent = () => {
       }, [dispatch]);
 
     const articlesList = Object.values(articles)
-    console.log(articlesList)
 
     return (
         <>

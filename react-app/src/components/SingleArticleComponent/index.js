@@ -1,10 +1,11 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getOneArticle } from "../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../OpenModalButton";
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
@@ -14,7 +15,7 @@ const SingleArticle = () => {
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-  }, [dispatch, articleId, article]);
+  }, [dispatch, articleId]);
 
   if (!article.id) {
     return (
@@ -41,11 +42,16 @@ const SingleArticle = () => {
             {article.author &&
               article.author.id &&
               sessionUser.id === article.author.id && (
-                <OpenModal
-                  buttonText="Delete"
-                  modalComponent={<DeleteArticleModal props={articleId} />}
-                  className="article-comments-delete-button"
-                />
+                <>
+                  <OpenModal
+                    buttonText="Delete"
+                    modalComponent={<DeleteArticleModal props={articleId} />}
+                    className="article-comments-delete-button"
+                  />
+                  <NavLink key={article.id} to={`/article/${article.id}/edit`}>
+                    <button>Edit Article</button>
+                  </NavLink>
+                </>
               )}
           </div>
           <div className="article-body">{article.body}</div>
