@@ -6,8 +6,8 @@ from datetime import datetime
 
 def seed_users():
     demo = User(
-            first_name='demo'
-            last_name= 'user'
+            first_name='demo',
+            last_name= 'user',
             username='Demo',
             email='demo@aa.io',
             bio='',
@@ -16,8 +16,8 @@ def seed_users():
 
 
     marnie = User(
-            first_name='marnie'
-            last_name= 'Higgins'
+            first_name='marnie',
+            last_name= 'Higgins',
             username='marnie',
             email='marnie@aa.io',
             bio='',
@@ -26,7 +26,7 @@ def seed_users():
 
     bobbie = User(
             first_name= 'Bobbie',
-            last_name= 'Higgins'
+            last_name= 'Higgins',
             username='bobbie',
             email='bobbie@aa.io',
             bio='',
@@ -480,7 +480,7 @@ def seed_users():
             In this article, we explore the diverse applications of Python, its role in the tech industry, and how it
             continues to evolve to meet the demands of modern development.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_2 = Article(
@@ -498,7 +498,7 @@ def seed_users():
             Whether you're a programmer, a data scientist, or simply curious about this exciting field, this beginner's
             guide will lay the foundation for your journey into the captivating world of machine learning.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_3 = Article(
@@ -517,7 +517,7 @@ def seed_users():
             development, understanding JavaScript is essential for navigating the ever-evolving landscape of web
             technologies.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
 
@@ -531,7 +531,7 @@ def seed_users():
             From packing efficiently and navigating airports to immersing in local cultures and staying safe during your
             adventures, we cover it all. Learn how to make the most of your travel experiences and create lasting memories.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_5 = Article(
@@ -545,7 +545,7 @@ def seed_users():
             without overspending. With the right approach, you can embark on memorable adventures while keeping your
             finances in check.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_6 = Article(
@@ -560,7 +560,7 @@ def seed_users():
             Whether you're a seasoned solo traveler or considering it for the first time, this article will inspire and
             empower you to explore the world on your terms.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_7 = Article(
@@ -571,7 +571,7 @@ def seed_users():
             from selecting the perfect beans to mastering various brewing methods. Whether you're a coffee connoisseur or
             a novice, you'll discover tips and techniques to elevate your morning coffee ritual.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_8 = Article(
@@ -582,7 +582,7 @@ def seed_users():
             flavorful journey as we explore coffee culture around the world. From Italian espresso to Turkish coffee,
             discover the diverse flavors and rituals that make coffee an international phenomenon.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_9 = Article(
@@ -593,7 +593,7 @@ def seed_users():
             unravel the science behind coffee, from the chemistry of beans to the art of roasting and brewing.
             Understanding the science can help you fine-tune your coffee experience and discover your perfect cup.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_10 = Article(
@@ -605,7 +605,7 @@ def seed_users():
             poses, breathing techniques, and how to create a tranquil space for your practice. Embark on a path to
             mindfulness and discover the transformative power of yoga.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_11 = Article(
@@ -617,7 +617,7 @@ def seed_users():
             stress, improves flexibility, and enhances mindfulness. Whether you're a seasoned yogi or new to the practice,
             this article highlights the holistic benefits of yoga.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_12 = Article(
@@ -629,7 +629,7 @@ def seed_users():
             and meditation (Dhyana), these limbs guide practitioners toward spiritual growth and self-realization.
             Discover the timeless wisdom of yoga philosophy and its relevance in the modern world.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
     article_13 = Article(
         user_id=45,
@@ -643,7 +643,7 @@ def seed_users():
             powerful storytelling. Whether you're a writer, filmmaker, or simply an enthusiast, this article will
             illuminate the path to becoming a master storyteller.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_14 = Article(
@@ -658,7 +658,7 @@ def seed_users():
             legacies. Gain insights into the role of storytelling in literature, film, and even marketing, and how it
             continues to impact our lives.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_15 = Article(
@@ -673,7 +673,7 @@ def seed_users():
             boundaries of narrative in the digital realm. Whether you're a storyteller in the traditional sense or
             exploring digital avenues, this article offers insights into the exciting world of narrative innovation.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
     article_16 = Article(
         user_id=24,
@@ -686,7 +686,7 @@ def seed_users():
             your hikes, navigate trails, and stay safe in the wilderness. Whether you're a beginner or an experienced
             hiker, this article is your guide to an enriching hiking experience.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_17 = Article(
@@ -701,7 +701,7 @@ def seed_users():
             Trail in the United States to the Inca Trail in Peru, discover the wonders of these remarkable hiking
             routes and start planning your next adventure.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_18 = Article(
@@ -715,7 +715,7 @@ def seed_users():
             tranquility in the great outdoors. Whether you seek solitude or wish to share the experience with others,
             this article invites you to discover the spiritual dimensions of hiking.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_19 = Article(
@@ -730,7 +730,7 @@ def seed_users():
             support your vegan journey. Whether you're considering a transition to veganism or seeking to deepen
             your commitment, this article provides insights and guidance.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_20 = Article(
@@ -746,7 +746,7 @@ def seed_users():
             or just starting to explore plant-based cooking, this article offers a taste of the exciting world of
             vegan cuisine.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_21 = Article(
@@ -762,7 +762,7 @@ def seed_users():
             about the intersection of food choices and sustainability, this article explores the positive impact of
             going vegan.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
     article_22 = Article(
         user_id=27,
@@ -776,7 +776,7 @@ def seed_users():
             moments that made this concert a memory for a lifetime. Discover the power of live music and the joy of
             sharing it with a passionate crowd.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_23 = Article(
@@ -791,7 +791,7 @@ def seed_users():
             festivals offer. Whether you're a seasoned festival-goer or someone considering your first festival
             adventure, this article offers a glimpse into the transformative power of music festivals.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     article_24 = Article(
@@ -807,7 +807,7 @@ def seed_users():
             a music enthusiast or simply curious about the magic of acoustic serenity, this article will resonate with
             your love for music.
         """,
-        date_created=datetime.today().strftime('%Y-%m-%d'),
+        date_created=datetime(2023, 9, 6),
     )
 
     db.session.add_all([demo, marnie,bobbie,user4,user5,user6,user7,user8,user9,user10,
