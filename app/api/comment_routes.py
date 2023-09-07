@@ -41,6 +41,19 @@ def post_comment():
     return form.errors
 
 
+@comment_routes.route('/<int:id>/', methods=['PUT'])
+def edit_comment(id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment_to_update = Comment.query.get(id)
+        comment_to_update.body = request.json["body"]
+
+        db.session.commit()
+        return comment_to_update.to_dict()
+    print('errors', form.errors)
+    return form.errors
+
 @comment_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_comment(id):
     comment = Comment.query.get(id)

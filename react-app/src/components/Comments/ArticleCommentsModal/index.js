@@ -6,7 +6,9 @@ import { postComment } from "../../../store/comments";
 import { getOneArticle } from "../../../store/articles";
 import OpenModal from "../../OpenModalButton";
 import DeleteCommentModal from "../DeleteCommentModal";
-import { deleteComment } from "../../../store/comments";
+import EditCommentModal from "../UpdateComment";
+
+
 
 function CommentsModal(props) {
   const { closeModal } = useModal();
@@ -41,39 +43,12 @@ function CommentsModal(props) {
     setReload(reload + 1);
   };
 
-  //   const handleDelete = async (e) => {
-  //     const data = await dispatch(deleteComment(id));
-  //     setpopupDelete(false)
-  //   };
-
-  //   if(popupDelete === true) {
-  //     return (
-  //       <div className="delete-story-confirm-delete-modal">
-  //         <h1 className="confirm-delete-modal-heading">Delete Comment?</h1>
-  //         <h2 className="confirm-delete-modal-text">
-  //           Deletion is not reversible, and the story will be completely deleted.
-  //           If you do not want to delete, you can cancel.
-  //         </h2>
-  //         <div>
-  //           <button
-  //             className="delete-modal-delete-Comment"
-  //             onClick={handleDelete}
-  //           >
-  //             Delete
-  //           </button>
-  //           <button className="delete-modal-keep-Comment" onclick={setpopupDelete(false)}>
-  //             Cancel
-  //           </button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-
   return (
     <div className="comments-create-read-div">
       <div className="comments-responses-div">
         <h1>Responses ({comments.length})</h1>
       </div>
+      {sessionUser && sessionUser.id && (
       <div className="comments-create-div-with-buttons">
         <div className="comments-create">
           <textarea
@@ -89,7 +64,7 @@ function CommentsModal(props) {
             Respond
           </button>
         </div>
-      </div>
+      </div>)}
       <div className="comments-display">
         {comments &&
           !comments.message &&
@@ -104,15 +79,22 @@ function CommentsModal(props) {
                   <div className="comment-post-date">{date_created}</div>
                 </div>
                 <div className="edit-delete-buttons">
-                  {/* <button onclick={setpopupDelete(true)}>Delete</button> */}
+
                   {sessionUser &&
                     sessionUser.id &&
                     sessionUser.id === commenter.id && (
-                      <OpenModal
-                        buttonText="Delete"
-                        modalComponent={<DeleteCommentModal props={id} />}
+                      <>
+                        <OpenModal
+                        buttonText="Edit Comment"
+                        modalComponent={<EditCommentModal props={[id, body, sessionUser]} />}
                         className="article-delete-button"
                       />
+                        <OpenModal
+                          buttonText="Delete"
+                          modalComponent={<DeleteCommentModal props={id} />}
+                          className="article-delete-button"
+                        />
+                      </>
                     )}
                 </div>
               </div>

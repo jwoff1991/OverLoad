@@ -1,6 +1,6 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
@@ -8,11 +8,17 @@ import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 
+
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector((state) => state.articles.singleArticle);
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const comments = useSelector(
+    (state) => state.articles.singleArticle.comments
+  );
+
+
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
@@ -25,7 +31,6 @@ const SingleArticle = () => {
       </div>
     );
   }
-
 
   return (
     <>
@@ -41,14 +46,17 @@ const SingleArticle = () => {
           </div>
           <div className="likes-comments-edit-delete-container">
             <div className="comments-modal-button-container">
-                  <OpenModal
-                    buttonText="Comments"
+
+
+              <OpenModal
+                    buttonText={comments.length}
                     modalComponent={<CommentsModal props={articleId} />}
                     className="article-comments-modal-button"
                   />
             </div>
             {article.author &&
-              article.author.id && sessionUser &&
+              article.author.id &&
+              sessionUser &&
               sessionUser.id === article.author.id && (
                 <>
                   <OpenModal
