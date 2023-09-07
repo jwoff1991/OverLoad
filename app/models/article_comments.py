@@ -9,11 +9,11 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
 
-    id = db.Column(db.Integer, primary_key=True)
-    article_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    body = db.Column(db.String, nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    article_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    body = db.Column(db.String(), nullable=False)
+    date_created = db.Column(db.DateTime(), nullable=False)
 
     # Story Comments has a Many to one relationship with Stories and Users
     article = db.relationship('Article', back_populates='comments')
