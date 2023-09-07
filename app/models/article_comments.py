@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-class ArticleComment(db.Model):
+class Comment(db.Model):
     __tablename__ = "article_comments"
 
     if environment == "production":

@@ -18,7 +18,7 @@ class Article(db.Model):
 
     # Articles has one => many relationships with Users, ArticleComments, ArticleLikes
     author = db.relationship('User', back_populates='articles')
-    # comments = db.relationship('ArticleComment', back_populates='article', cascade='all, delete-orphan')
+    comments = db.relationship('Comment', back_populates='article', cascade='all, delete-orphan')
     # likes = db.relationship('ArticleLike', back_populates='article', cascade='all, delete-orphan')
 
     def to_dict(self):

@@ -1,4 +1,4 @@
-from app.models import db, User, Article, environment, SCHEMA
+from app.models import db, User, Article, Comment, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
@@ -810,6 +810,356 @@ def seed_users():
         date_created=datetime(2023, 9, 6),
     )
 
+
+    comment1 = Comment(
+        article_id = 10,
+        user_id = 23,
+        body = "This is a great article!",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment2 = Comment(
+        article_id = 6,
+        user_id = 44,
+        body = "I found this information very useful.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment3 = Comment(
+        article_id = 17,
+        user_id = 9,
+        body = "I have a question about this topic.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment4 = Comment(
+        article_id = 3,
+        user_id = 36,
+        body = "I disagree with some points in the article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment5 = Comment(
+        article_id = 25,
+        user_id = 16,
+        body = "Thank you for sharing this knowledge!",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment6 = Comment(
+        article_id = 12,
+        user_id = 7,
+        body = "I would like to know more about this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment7 = Comment(
+        article_id = 2,
+        user_id = 28,
+        body = "This article is well-written and informative.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment8 = Comment(
+        article_id = 8,
+        user_id = 49,
+        body = "I'm having trouble understanding a concept here.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment9 = Comment(
+        article_id = 20,
+        user_id = 2,
+        body = "I think this article needs more examples.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment10 = Comment(
+        article_id = 15,
+        user_id = 30,
+        body = "I've been looking for information on this topic.",
+        date_created=datetime(2023, 9, 6)
+    )
+    comment11 = Comment(
+        article_id = 21,
+        user_id = 12,
+        body = "This is a must-read for anyone interested in this subject.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment12 = Comment(
+        article_id = 5,
+        user_id = 37,
+        body = "I have a different perspective on this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment13 = Comment(
+        article_id = 9,
+        user_id = 25,
+        body = "The author did a great job explaining this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment14 = Comment(
+        article_id = 13,
+        user_id = 41,
+        body = "I'd like to see more articles like this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment15 = Comment(
+        article_id = 19,
+        user_id = 14,
+        body = "I have a suggestion for improvement.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment16 = Comment(
+        article_id = 18,
+        user_id = 5,
+        body = "I'm not sure if I agree with the conclusion.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment17 = Comment(
+        article_id = 4,
+        user_id = 33,
+        body = "I appreciate the effort put into this article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment18 = Comment(
+        article_id = 24,
+        user_id = 20,
+        body = "I have a question about a specific point.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment19 = Comment(
+        article_id = 7,
+        user_id = 47,
+        body = "I've bookmarked this for future reference.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment20 = Comment(
+        article_id = 16,
+        user_id = 10,
+        body = "I'm looking forward to more content from this author.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment21 = Comment(
+        article_id = 11,
+        user_id = 31,
+        body = "This article is a valuable resource.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment22 = Comment(
+        article_id = 1,
+        user_id = 26,
+        body = "I'm still trying to wrap my head around this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment23 = Comment(
+        article_id = 14,
+        user_id = 18,
+        body = "I have a different interpretation of the data.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment24 = Comment(
+        article_id = 22,
+        user_id = 48,
+        body = "I think the examples provided are excellent.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment25 = Comment(
+        article_id = 23,
+        user_id = 21,
+        body = "I've shared this with my colleagues.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment26 = Comment(
+        article_id = 25,
+        user_id = 34,
+        body = "I'm excited to apply this knowledge in my work.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment27 = Comment(
+        article_id = 3,
+        user_id = 1,
+        body = "I have a question about the methodology.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment28 = Comment(
+        article_id = 10,
+        user_id = 42,
+        body = "This article exceeded my expectations.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment29 = Comment(
+        article_id = 6,
+        user_id = 38,
+        body = "I've learned something new from this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment30 = Comment(
+        article_id = 17,
+        user_id = 15,
+        body = "I have a suggestion for future research.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment31 = Comment(
+        article_id = 2,
+        user_id = 29,
+        body = "I'm not sure I agree with the hypothesis.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment32 = Comment(
+        article_id = 8,
+        user_id = 35,
+        body = "I've recommended this to my peers.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment33 = Comment(
+        article_id = 20,
+        user_id = 22,
+        body = "I'm curious about the implications of this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment34 = Comment(
+        article_id = 15,
+        user_id = 17,
+        body = "I'm interested in learning more about this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment35 = Comment(
+        article_id = 21,
+        user_id = 46,
+        body = "I'm considering incorporating this into my work.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment36 = Comment(
+        article_id = 5,
+        user_id = 32,
+        body = "I appreciate the thoroughness of the article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment37 = Comment(
+        article_id = 9,
+        user_id = 4,
+        body = "I'm excited to dive deeper into this subject.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment38 = Comment(
+        article_id = 13,
+        user_id = 13,
+        body = "I'm sharing this with my study group.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment39 = Comment(
+        article_id = 19,
+        user_id = 39,
+        body = "I'd like to see more case studies on this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment40 = Comment(
+        article_id = 18,
+        user_id = 8,
+        body = "I have some concerns about the methodology.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment41 = Comment(
+        article_id = 4,
+        user_id = 27,
+        body = "I've gained valuable insights from this article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment42 = Comment(
+        article_id = 24,
+        user_id = 43,
+        body = "I'm considering using this in my research.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment43 = Comment(
+        article_id = 7,
+        user_id = 3,
+        body = "I have a different perspective on this topic.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment44 = Comment(
+        article_id = 16,
+        user_id = 19,
+        body = "I'm looking forward to more research on this.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment45 = Comment(
+        article_id = 11,
+        user_id = 45,
+        body = "I found this to be a valuable resource.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment46 = Comment(
+        article_id = 1,
+        user_id = 40,
+        body = "I'm still processing the information in this article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment47 = Comment(
+        article_id = 14,
+        user_id = 6,
+        body = "I have a different interpretation of the results.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment48 = Comment(
+        article_id = 22,
+        user_id = 24,
+        body = "I'm applying the concepts from this article.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment49 = Comment(
+        article_id = 23,
+        user_id = 50,
+        body = "I've recommended this to my colleagues.",
+        date_created=datetime(2023, 9, 6)
+    )
+
+    comment50 = Comment(
+        article_id = 25,
+        user_id = 34,
+        body = "I'm excited to apply this knowledge in my work.",
+        date_created=datetime(2023, 9, 6)
+    )
+
     db.session.add_all([demo, marnie,bobbie,user4,user5,user6,user7,user8,user9,user10,
         user11,user12,user13,user14,user15,user16,user17,user18,user19,user20,
         user21,user22,user23,user24,user25,user26,user27,user28,user29,user30,
@@ -820,6 +1170,14 @@ def seed_users():
                         article_7, article_8, article_9, article_10, article_11, article_12,
                         article_13, article_14, article_15, article_16, article_17, article_18,
                         article_19, article_20, article_21, article_22, article_23, article_24]) #vegan, hiking, coding, yoga, traveling, coffee, story-telling, live concerts
+
+    db.session.add_all([comment1, comment2, comment3, comment4, comment5, comment6, comment7,
+                        comment8, comment9, comment10, comment11, comment12, comment13, comment14,
+                        comment15, comment16, comment17, comment18, comment19, comment20, comment21,
+                        comment22, comment23, comment24, comment25, comment26, comment27, comment28,
+                        comment29, comment30, comment31, comment32, comment33, comment34, comment35,
+                        comment36, comment37, comment38, comment39, comment40, comment41, comment42,
+                        comment43, comment44, comment45, comment46, comment47, comment48, comment49, comment50])
     db.session.commit()
 
 
