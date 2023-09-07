@@ -6,6 +6,7 @@ import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import CommentsModal from "../../Comments/ArticleCommentsModal";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
@@ -38,15 +39,22 @@ const SingleArticle = () => {
             </div>
             <div className="date-created">{article.date_created}</div>
           </div>
-          <div>
+          <div className="likes-comments-edit-delete-container">
+            <div className="comments-modal-button-container">
+                  <OpenModal
+                    buttonText="Comments"
+                    modalComponent={<CommentsModal props={articleId} />}
+                    className="article-comments-modal-button"
+                  />
+            </div>
             {article.author &&
-              article.author.id &&
+              article.author.id && sessionUser &&
               sessionUser.id === article.author.id && (
                 <>
                   <OpenModal
                     buttonText="Delete"
                     modalComponent={<DeleteArticleModal props={articleId} />}
-                    className="article-comments-delete-button"
+                    className="article-delete-button"
                   />
                   <NavLink key={article.id} to={`/article/${article.id}/edit`}>
                     <button>Edit Article</button>

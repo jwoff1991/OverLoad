@@ -40,8 +40,13 @@ export const getOneArticle = (id) => async (dispatch) => {
     const response = await fetch(`/api/articles/${id}`, {
       method: "GET",
     });
+    const res = await fetch(`/api/comments/${id}/all`, {
+      method: 'GET'
+    })
     if (response.ok) {
       const data = await response.json();
+      const commentData = await res.json()
+      data['comments'] = commentData
       dispatch(getSingleArticle(data));
       return data;
     } else {

@@ -1,5 +1,5 @@
-from flask import Blueprint, request
-from app.models import User, Article
+from flask import Blueprint, request, jsonify
+from app.models import User, Article, Comment
 from ..models.db import db
 from ..forms.new_article_form import NewArticleForm
 from datetime import datetime
@@ -13,7 +13,6 @@ session = db.session
 @article_routes.route('/all', methods=['GET'])
 def article_index():
     all_articles = session.query(Article).order_by(Article.date_created)
-    print(all_articles)
     if not all_articles:
         error = {}
         error.message = "No stories found!"
@@ -25,8 +24,9 @@ def article_index():
 @article_routes.route('/<int:id>', methods=['GET'])
 def single_article(id):
     article = Article.query.get(id)
+    print(article)
     if not article:
-        return {'message': 'No articles with this id'}
+        return {'message': 'This article could nto be found'}
     else:
         result = article.to_dict()
         return result
@@ -34,7 +34,6 @@ def single_article(id):
 @article_routes.route('/new-article/', methods=['POST'])
 def post_article():
     form = NewArticleForm()
-    print('csrf_token', form.csrf_token)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user_id = request.json["user_id"]
@@ -75,7 +74,7 @@ def delete_article(id):
         db.session.commit()
         return {"message": "Comment deleted successfully"}
     else:
-        return {"error": "Failed to delete comment"}, 400
+        return {"error": "Failed to delete article"}, 400
 
 @article_routes.route('/edit/<int:id>/', methods=['PUT'])
 def edit_article(id):
