@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False, unique=True)
-    bio = db.Column(db.String())
+    bio = db.Column(db.Text)
     #ADD IN type_of_article_preference
     hashed_password = db.Column(db.Text, nullable=False)
 
