@@ -9,9 +9,9 @@ class Article(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    title = db.Column(db.String(), nullable=False)
-    body = db.Column(db.Text(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
+    body = db.Column(db.Text, nullable=False)
     # MAKE SURE TO ADD IN ARTICLE TYPE
     date_created = db.Column(db.DateTime, nullable=False)
 
