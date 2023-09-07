@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     bio = db.Column(db.Text)
     #ADD IN type_of_article_preference
-    hashed_password = db.Column(db.String(255), nullable=False)
+    hashed_password = db.Column(db.Text, nullable=False)
 
      # Users has one => many relationships with Articles, Reading List, Comments, Likes
     articles = db.relationship('Article', back_populates='author', cascade='all, delete-orphan')
