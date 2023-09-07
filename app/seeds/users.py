@@ -840,7 +840,7 @@ def seed_users():
     )
 
     comment5 = Comment(
-        article_id = 25,
+        article_id = 5,
         user_id = 16,
         body = "Thank you for sharing this knowledge!",
         date_created=datetime(2023, 9, 6)
@@ -986,7 +986,7 @@ def seed_users():
     )
 
     comment26 = Comment(
-        article_id = 25,
+        article_id = 2,
         user_id = 34,
         body = "I'm excited to apply this knowledge in my work.",
         date_created=datetime(2023, 9, 6)
@@ -1154,7 +1154,7 @@ def seed_users():
     )
 
     comment50 = Comment(
-        article_id = 25,
+        article_id = 24,
         user_id = 34,
         body = "I'm excited to apply this knowledge in my work.",
         date_created=datetime(2023, 9, 6)
