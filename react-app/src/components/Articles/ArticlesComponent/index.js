@@ -18,6 +18,8 @@ const ArticlesComponent = () => {
     return (
         <>
             <div className="articles-container">
+
+
                 {articlesList.map(({ id, author, title, body, date_created }) => (
                     <NavLink key={id} to={`/articles/${id}`} className='text-link'>
                         <div className="full-article-div">

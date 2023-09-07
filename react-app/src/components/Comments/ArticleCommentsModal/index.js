@@ -7,7 +7,7 @@ import { getOneArticle } from "../../../store/articles";
 import OpenModal from "../../OpenModalButton";
 import DeleteCommentModal from "../DeleteCommentModal";
 import EditCommentModal from "../UpdateComment";
-
+import EditDeleteButton from "../EditDeleteButton/editDeleteButton";
 
 
 function CommentsModal(props) {
@@ -79,13 +79,13 @@ function CommentsModal(props) {
                   <div className="comment-post-date">{date_created}</div>
                 </div>
                 <div className="edit-delete-buttons">
-
                   {sessionUser &&
                     sessionUser.id &&
                     sessionUser.id === commenter.id && (
                       <>
+                        {/* <EditDeleteButton props={[id, body, sessionUser]} /> */}
                         <OpenModal
-                        buttonText="Edit Comment"
+                        buttonText="Edit"
                         modalComponent={<EditCommentModal props={[id, body, sessionUser]} />}
                         className="article-delete-button"
                       />
