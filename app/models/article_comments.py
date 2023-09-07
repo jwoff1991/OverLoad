@@ -12,7 +12,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     article_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
     user_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    body = db.Column(db.String(), nullable=False)
+    body = db.Column(db.Text(), nullable=False)
     date_created = db.Column(db.DateTime(), nullable=False)
 
     # Story Comments has a Many to one relationship with Stories and Users
