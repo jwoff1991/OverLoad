@@ -16,12 +16,23 @@ const ArticlesComponent = () => {
     const articlesList = Object.values(articles)
     articlesList.forEach(article => {
         let articlebody = article.body
-        let articlebodySplit = articlebody.split('')
-        let articlebodysplice = articlebodySplit.slice(0, 150)
-        let articlebodyjoin = articlebodysplice.join('')
-        console.log(articlebodyjoin)
-        article.body = articlebodyjoin
+        let newArticleBody = articlebody.split('').slice(0, 150).join('')
+        article.body = newArticleBody
+        let createdAtSplit = article.date_created.split('').slice(2, 11).join('')
+        article.date_created = createdAtSplit
     })
+
+    // let createdAtSplit;
+    // let createdAtSlice;
+    // if (commentsList.length > 0 && commentsList[0].body) {
+    //   let createdAtDate = commentsList.map((comment) => (
+
+    //     createdAtSplit = article.date_created.split('').slice(5, 10).join('')
+    //      article.date_created = createdAtSplit
+    //     createdAtSlice = createdAtSplit.slice(5, 10).join('')
+    //   ))
+    // }
+
     return (
         <>
         {sessionUser ? (

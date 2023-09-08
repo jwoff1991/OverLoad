@@ -31,6 +31,9 @@ const SingleArticle = () => {
       </div>
     );
   }
+  let createdAtSplit = article.date_created.split('').slice(2, 11).join('')
+  article.date_created = createdAtSplit
+  
   const commentButton = (<i class="fa-thin fa-comment fa-flip-horizontal"></i>)
   return (
     <>
