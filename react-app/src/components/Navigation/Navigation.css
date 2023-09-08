@@ -5,3 +5,10 @@
 .hidden {
   display: none;
 }
+
+.nav-div {
+  border: red solid 2px;
+  display: flex;
+  flex-direction: row;
+
+}

@@ -6,8 +6,11 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
+	const [firstname, setFirstname] = useState("");
+	const [lastname, setLastname] = useState("");
 	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [bio, setBio] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
@@ -16,7 +19,7 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
 			if (data) {
 				setErrors(data);
 			} else {
@@ -48,11 +51,38 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
+					First Name:
+					<input
+						type="text"
+						value={firstname}
+						onChange={(e) => setFirstname(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					Lastname
+					<input
+						type="text"
+						value={lastname}
+						onChange={(e) => setLastname(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
 					Username
 					<input
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					Bio
+					<textarea
+						type="text"
+						value={bio}
+						onChange={(e) => setBio(e.target.value)}
 						required
 					/>
 				</label>
