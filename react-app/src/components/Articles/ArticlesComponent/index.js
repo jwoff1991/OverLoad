@@ -22,17 +22,6 @@ const ArticlesComponent = () => {
         article.date_created = createdAtSplit
     })
 
-    // let createdAtSplit;
-    // let createdAtSlice;
-    // if (commentsList.length > 0 && commentsList[0].body) {
-    //   let createdAtDate = commentsList.map((comment) => (
-
-    //     createdAtSplit = article.date_created.split('').slice(5, 10).join('')
-    //      article.date_created = createdAtSplit
-    //     createdAtSlice = createdAtSplit.slice(5, 10).join('')
-    //   ))
-    // }
-
     return (
         <>
         {sessionUser ? (
