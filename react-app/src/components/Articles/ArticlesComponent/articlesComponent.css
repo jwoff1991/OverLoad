@@ -4,8 +4,8 @@
 }
 
 .articles-topics-footer-container{
-    margin-left: 150px;
-    margin-right: 150px;
+    display:flex;
+    justify-content: center;
 }
 .articles-container {
     width: 625px;

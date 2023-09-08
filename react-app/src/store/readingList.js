@@ -9,16 +9,14 @@ const getReadingList = (data) => {
 
 export const getUserReadingList = (userId) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/reading-list/${userId}`, {
+    const response = await fetch(`/api/reading-list/${userId.userid}/`, {
       method: "GET",
     });
     if (response.ok) {
       const data = await response.json();
-      console.log('good DATA',data)
       dispatch(getReadingList(data));
       return data;
     } else {
-    console.log('bad DATA')
       const errors = await response.json();
       return errors;
     }

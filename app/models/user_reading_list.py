@@ -14,7 +14,6 @@ class ReadingList(db.Model):
 
     #ArticleLikes has a many to one relationship with Articles and Users
     article = db.relationship('Article', back_populates='reading_list')
-    reader = db.relationship('User', back_populates='reading_list')
 
     def to_dict(self):
         return {
@@ -22,5 +21,5 @@ class ReadingList(db.Model):
             "article_id": self.article_id,
             "user_id": self.user_id,
             "article": self.article.to_dict(),
-            "reader": self.reader.to_dict()
+
         }

@@ -7,7 +7,7 @@ reading_list_routes = Blueprint('reading_list', __name__)
 session = db.session
 
 # prefix /api/reading-list
-@reading_list_routes.route('/<int:userId>', methods=['GET'])
+@reading_list_routes.route('/<int:userId>/', methods=['GET'])
 def get_reading_list(userId):
     reading_list = ReadingList.query.filter_by(user_id = userId).all()
     if not reading_list:
