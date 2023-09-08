@@ -31,10 +31,13 @@ const ArticlesComponent = () => {
                 {articlesList.map(({ id, author, title, body, date_created }) => (
                     <NavLink key={id} to={`/articles/${id}`} className='text-link'>
                         <div className="full-article-div">
-                            <div className="date-article-author">
-                                <div className="author">{author.firstname} {author.lastname}</div>
-                                <span>&#183;</span>
-                                <div className="date-created">{date_created}</div>
+                            <div className="date-author-reading-list-div">
+                                <div className="date-article-author">
+                                    <div className="author">{author.firstname} {author.lastname}</div>
+                                    <span>&#183;</span>
+                                    <div className="date-created">{date_created}</div>
+                                </div>
+                                <div className="reading-list-button">Reading List Button</div>
                             </div>
                             <div className="article-title">{title}</div>
                             <div className="article-body">{body}...</div>

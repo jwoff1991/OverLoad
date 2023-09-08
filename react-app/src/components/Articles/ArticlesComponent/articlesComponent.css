@@ -9,8 +9,6 @@
 }
 .articles-container {
     width: 625px;
-
-
 }
 
 
@@ -21,13 +19,21 @@
     padding-top: 25px;
 }
 
+.date-author-reading-list-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-article-author{
+    gap: 5px
+}
 .article-author, .date-article-author {
     height: 20px;
     display: flex;
     align-items: center;
 }
 
-.author, .date-created{
+.author, .date-created, .reading-list-button{
     font-size: 13px;
 }
 

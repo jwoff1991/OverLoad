@@ -40,53 +40,6 @@ function Navigation({ isLoaded }) {
 
   return (
     <>
-      {/* <div className="nav-div">
-        <div className="nav-icon">
-          <NavLink exact to="/">
-            Icon
-          </NavLink>
-        </div>
-        <div className="nav-blank"></div>
-        <div className="rest-of-nav">
-          <div className="nav-my-story">
-            <Link>My Story</Link>
-            </div>
-          <div className="nav-create">
-          <Link to="/new-article">Create</Link>
-
-          </div>
-
-          <div className={ulClassName} ref={ulRef}></div>
-          {sessionUser ? (
-            <>
-              {isLoaded && (
-                <div>
-                  <ProfileButton user={sessionUser} />
-                </div>
-              )}
-            </>
-          ) : (
-            <>
-            <div className="nav-login">
-              <OpenModalButton
-                buttonText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-
-            </div>
-            <div className="nav-sign-up">
-              <OpenModalButton
-                buttonText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-
-            </div>
-            </>
-          )}
-        </div>
-      </div> */}
       {sessionUser ? (
         <>
           <div className="nav-div-user-logged-in">

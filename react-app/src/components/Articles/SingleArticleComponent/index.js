@@ -33,7 +33,7 @@ const SingleArticle = () => {
   }
   let createdAtSplit = article.date_created.split('').slice(2, 11).join('')
   article.date_created = createdAtSplit
-  
+
   const commentButton = (<i class="fa-thin fa-comment fa-flip-horizontal"></i>)
   return (
     <>
@@ -45,17 +45,20 @@ const SingleArticle = () => {
               {article.author && article.author.firstname}{" "}
               {article.author && article.author.lastname}
             </div>
+            <span>&#183;</span>
             <div className="date-created">{article.date_created}</div>
           </div>
           <div className="likes-comments-edit-delete-container">
-            <div className="comments-modal-button-container">
+            <div className="comment-and-reading-list-buttons">
+              <div className="comments-modal-button-container">
+                <OpenModal
+                      buttonText={[commentButton, comments.length]}
+                      modalComponent={<CommentsModal props={articleId} />}
+                      className="article-comments-modal-button"
+                    />
+              </div>
+              <div className="reading-list-button">Reading List Button</div>
 
-
-              <OpenModal
-                    buttonText={[commentButton, comments.length]}
-                    modalComponent={<CommentsModal props={articleId} />}
-                    className="article-comments-modal-button"
-                  />
             </div>
             {article.author &&
               article.author.id &&
