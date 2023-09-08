@@ -8,9 +8,11 @@ const ArticlesComponent = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const articles = useSelector((state) => state.articles.allArticles)
+    const readingList = useSelector((state) => state.readingListReducer)
 
     useEffect(() => {
         dispatch(getAllArticles());
+        // dispatch(getUserReadingList(sessionUser.id))
       }, [dispatch]);
 
     const articlesList = Object.values(articles)

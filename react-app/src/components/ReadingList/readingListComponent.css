@@ -1,6 +1,7 @@
 .reading-list-topics-footer-container{
     display:flex;
-    justify-content: center;
+    flex-direction: column;
+    margin-left: 15em;
 }
 
 .reading-list-container {
