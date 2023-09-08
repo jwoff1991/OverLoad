@@ -2,3 +2,42 @@
     color: inherit;
     text-decoration: inherit;
 }
+
+.articles-topics-footer-container{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.articles-container {
+    width: 625px;
+
+
+}
+
+
+.full-article-div {
+    height: 150px;
+    /* make adjustments to height to 120 once you figure out body */
+    border-bottom: rgb(179, 179, 179) solid 0.5px;
+    padding-top: 25px;
+}
+
+.article-author, .date-article-author {
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.author, .date-created{
+    font-size: 10px;
+}
+
+
+.article-title {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.article-body {
+    padding-bottom: 12px;
+    font-size: 12px;
+}

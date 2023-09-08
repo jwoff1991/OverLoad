@@ -7,8 +7,66 @@
 }
 
 .nav-div {
-  border: red solid 2px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
 
+
+.nav-blank {
+  width: 650px
+}
+
+.rest-of-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+}
+
+.nav-login > button{
+  background: none;
+	color: inherit;
+	border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+.nav-sign-up > button {
+  background: black;
+  color: white;
+	border-radius: 15px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.user-not-logged-in-div {
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+  height: 285px
+}
+
+/* \/ MAKE THIS A GRID WITH PERCENTAGES \/ */
+.nav-div-user-logged-in {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  border-bottom: rgb(232, 232, 232) solid 0.5px;
+}
+/* /\ MAKE THIS A GRID WITH PERCENTAGES /\ */
+
+.nav-blank-user-logged-in{
+  width: 900px
+}
+
+
+.profile-create-user-logged-in {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }

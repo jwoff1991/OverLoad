@@ -6,7 +6,7 @@ import './articlesComponent.css'
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
-
+    const sessionUser = useSelector((state) => state.session.user);
     const articles = useSelector((state) => state.articles.allArticles)
 
     useEffect(() => {
@@ -17,14 +17,16 @@ const ArticlesComponent = () => {
 
     return (
         <>
+        {sessionUser ? (
+        <>
+        <div className="articles-topics-footer-container">
             <div className="articles-container">
-
-
                 {articlesList.map(({ id, author, title, body, date_created }) => (
                     <NavLink key={id} to={`/articles/${id}`} className='text-link'>
                         <div className="full-article-div">
-                            <div className="article-author-and-date">
+                            <div className="date-article-author">
                                 <div className="author">{author.firstname} {author.lastname}</div>
+                                <span>&#183;</span>
                                 <div className="date-created">{date_created}</div>
                             </div>
                             <div className="article-title">{title}</div>
@@ -33,6 +35,27 @@ const ArticlesComponent = () => {
                     </NavLink>
                 ))}
             </div>
+        </div>
+        </>
+        ) : (
+        <>
+        <div className="articles-topics-footer-container">
+            <div className="articles-container">
+                {articlesList.map(({ id, author, title, body, date_created }) => (
+                    <NavLink key={id} to={`/articles/${id}`} className='text-link'>
+                        <div className="full-article-div">
+                            <div className="article-author">
+                                <div className="author">{author.firstname} {author.lastname}</div>
+                            </div>
+                            <div className="article-title">{title}</div>
+                            <div className="article-body">{body}</div>
+                            <div className="date-created">{date_created}</div>
+                        </div>
+                    </NavLink>
+                ))}
+            </div>
+        </div>
+        </>)}
         </>
     )
 };

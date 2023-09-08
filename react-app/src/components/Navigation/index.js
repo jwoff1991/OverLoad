@@ -40,13 +40,13 @@ function Navigation({ isLoaded }) {
 
   return (
     <>
-      <div className="nav-div">
+      {/* <div className="nav-div">
         <div className="nav-icon">
           <NavLink exact to="/">
             Icon
           </NavLink>
         </div>
-        <div className="blank"></div>
+        <div className="nav-blank"></div>
         <div className="rest-of-nav">
           <div className="nav-my-story">
             <Link>My Story</Link>
@@ -86,7 +86,68 @@ function Navigation({ isLoaded }) {
             </>
           )}
         </div>
-      </div>
+      </div> */}
+      {sessionUser ? (
+        <>
+          <div className="nav-div-user-logged-in">
+            <div className="nav-icon-user-logged-in">
+              <NavLink exact to="/">
+                Icon
+              </NavLink>
+            </div>
+            <div className="nav-blank-user-logged-in"></div>
+            <div className="profile-create-user-logged-in">
+              <div className="nav-create-user-logged-in">
+                <Link to="/new-article">Create</Link>
+              </div>
+              <div className={ulClassName} ref={ulRef}></div>
+              {isLoaded && (
+                <div className="profile-button-user-logged-in">
+                  <ProfileButton user={sessionUser} />
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="nav-div">
+            <div className="nav-icon">
+              <NavLink exact to="/">
+                Icon
+              </NavLink>
+            </div>
+            <div className="nav-blank"></div>
+            <div className="rest-of-nav">
+              <div className="nav-my-story">
+                <Link>My Story</Link>
+              </div>
+              <div className="nav-create">
+                <Link>Create</Link>
+                {/* getting started link with signup form */}
+              </div>
+
+              <div className={ulClassName} ref={ulRef}></div>
+
+              <div className="nav-login">
+                <OpenModalButton
+                  buttonText="Log In"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+              </div>
+              <div className="nav-sign-up">
+                <OpenModalButton
+                  buttonText="Sign Up"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="user-not-logged-in-div">stuff</div>
+        </>
+      )}
     </>
   );
 }
