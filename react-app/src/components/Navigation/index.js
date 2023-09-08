@@ -108,6 +108,7 @@ function Navigation({ isLoaded }) {
               )}
             </div>
           </div>
+          <span class="divider"></span>
         </>
       ) : (
         <>
@@ -145,7 +146,6 @@ function Navigation({ isLoaded }) {
               </div>
             </div>
           </div>
-          {/* <div className="user-not-logged-in-div">stuff</div> */}
         </>
       )}
     </>
