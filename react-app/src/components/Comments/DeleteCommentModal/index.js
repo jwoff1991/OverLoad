@@ -1,8 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { deleteComment } from "../../../store/comments";
-import OpenModal from "../../OpenModalButton";
-import CommentsModal from "../ArticleCommentsModal";
 import "./DeleteCommentModal.css";
 
 function DeleteCommentModal(props) {
@@ -12,9 +10,9 @@ function DeleteCommentModal(props) {
 
   const handleDelete = async (e) => {
     const data = await dispatch(deleteComment(id));
-
-    closeModal()
-
+    if(data) {
+      closeModal()
+    }
   };
 
   return (

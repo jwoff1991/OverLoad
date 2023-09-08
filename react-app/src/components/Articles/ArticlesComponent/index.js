@@ -18,7 +18,7 @@ const ArticlesComponent = () => {
         let articlebody = article.body
         let newArticleBody = articlebody.split('').slice(0, 150).join('')
         article.body = newArticleBody
-        let createdAtSplit = article.date_created.split('').slice(2, 11).join('')
+        let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
         article.date_created = createdAtSplit
     })
 
@@ -37,7 +37,7 @@ const ArticlesComponent = () => {
                                     <span>&#183;</span>
                                     <div className="date-created">{date_created}</div>
                                 </div>
-                                <div className="reading-list-button">Reading List Button</div>
+                                <button className="reading-list-button">Reading List Button</button>
                             </div>
                             <div className="article-title">{title}</div>
                             <div className="article-body">{body}...</div>

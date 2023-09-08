@@ -14,8 +14,10 @@ function DeleteArticleModal(props) {
 
   const handleDelete = async (e) => {
     const data = await dispatch(deleteArticle(id));
-    closeModal();
-    return history.push(`/`)
+    if(data.ok) {
+      closeModal();
+      return history.push(`/`)
+    }
   };
 
   return (

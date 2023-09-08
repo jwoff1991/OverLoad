@@ -9,7 +9,6 @@ function EditCommentModal(props) {
   const [id, body, sessionUser] = props.props;
   const { closeModal } = useModal();
   const [comment, setComment] = useState(body);
-  const [reload, setReload] = useState(0);
   const dispatch = useDispatch();
 
 
@@ -25,7 +24,9 @@ function EditCommentModal(props) {
       body: comment,
     };
     const data = await dispatch(editComment(editedComment));
-    closeModal()
+    if(data) {
+      closeModal()
+    }
   };
 
   return (

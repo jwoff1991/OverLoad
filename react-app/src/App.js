@@ -9,6 +9,7 @@ import ArticlesComponent from "./components/Articles/ArticlesComponent";
 import SingleArticle from "./components/Articles/SingleArticleComponent";
 import CreateNewArticle from "./components/Articles/CreateArticle";
 import EditArticle from "./components/Articles/EditArticle";
+import ReadingListComponent from "./components/ReadingList";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path='/article/:id/edit' exact>
               <EditArticle />
+            </Route>
+            <Route path='/:userid/reading-list' exact>
+              <ReadingListComponent />
             </Route>
         </Switch>
       )}

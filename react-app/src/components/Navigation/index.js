@@ -61,7 +61,7 @@ function Navigation({ isLoaded }) {
               )}
             </div>
           </div>
-          <span class="divider"></span>
+          <span className="divider"></span>
         </>
       ) : (
         <>
@@ -74,10 +74,10 @@ function Navigation({ isLoaded }) {
             <div className="nav-blank"></div>
             <div className="rest-of-nav">
               <div className="nav-my-story">
-                <Link>My Story</Link>
+                <Link to='/'>My Story</Link>
               </div>
               <div className="nav-create">
-                <Link>Create</Link>
+                <Link to='/'>Create</Link>
                 {/* getting started link with signup form */}
               </div>
 

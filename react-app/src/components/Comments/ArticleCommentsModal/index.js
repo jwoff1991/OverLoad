@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../../context/Modal";
 import "./CommentsModal.css";
 import { useEffect, useState } from "react";
 import { postComment } from "../../../store/comments";
@@ -7,11 +6,9 @@ import { getOneArticle } from "../../../store/articles";
 import OpenModal from "../../OpenModalButton";
 import DeleteCommentModal from "../DeleteCommentModal";
 import EditCommentModal from "../UpdateComment";
-import EditDeleteButton from "../EditDeleteButton/editDeleteButton";
 
 
 function CommentsModal(props) {
-  const { closeModal } = useModal();
   const [comment, setComment] = useState("");
   //   const [popupDelete, setpopupDelete] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
@@ -29,7 +26,7 @@ function CommentsModal(props) {
 
   useEffect(() => {
     dispatch(getOneArticle(id));
-  }, [reload]);
+  }, [dispatch, id, reload]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,8 +36,10 @@ function CommentsModal(props) {
       body: comment,
     };
     const data = await dispatch(postComment(newComment));
-    setComment("");
-    setReload(reload + 1);
+    if(data) {
+      setComment("");
+      setReload(reload + 1);
+    }
   };
 
   return (

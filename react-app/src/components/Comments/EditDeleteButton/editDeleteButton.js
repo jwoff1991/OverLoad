@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import DeleteCommentModal from "../DeleteCommentModal";
 import EditCommentModal from "../UpdateComment";
 import OpenModal from "../../OpenModalButton";
 import './editDeleteButton.css'
 
 function EditDeleteButton(props) {
-const [id, body, sessionUser] = props.props
-  const dispatch = useDispatch();
+  const [id, body, sessionUser] = props.props
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 

@@ -1,6 +1,6 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
@@ -31,10 +31,10 @@ const SingleArticle = () => {
       </div>
     );
   }
-  let createdAtSplit = article.date_created.split('').slice(2, 11).join('')
+  let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
   article.date_created = createdAtSplit
 
-  const commentButton = (<i class="fa-thin fa-comment fa-flip-horizontal"></i>)
+  const commentButton = (<i className="fa-thin fa-comment fa-flip-horizontal"></i>)
   return (
     <>
       <div className="article-container">
@@ -57,7 +57,7 @@ const SingleArticle = () => {
                       className="article-comments-modal-button"
                     />
               </div>
-              <div className="reading-list-button">Reading List Button</div>
+              {sessionUser ? (<button className="reading-list-button">Reading List Button</button>) : (<></>)}
 
             </div>
             {article.author &&

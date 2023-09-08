@@ -9,18 +9,18 @@ class ReadingList(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True) #DO NOT BELIEVE THIS NEEDS ID BUT ASK
-    story_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
+    article_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
-    #StoryLikes has a many to one relationship with Stories and Users
-    article = db.relationship('Article', back_populates='article')
-    reader = db.relationship('User', back_populates='reading_lists')
+    #ArticleLikes has a many to one relationship with Articles and Users
+    article = db.relationship('Article', back_populates='reading_list')
+    reader = db.relationship('User', back_populates='reading_list')
 
     def to_dict(self):
         return {
-            #"id": self.id,
-            "article_id": self.story_id,
+            "id": self.id,
+            "article_id": self.article_id,
             "user_id": self.user_id,
             "article": self.article.to_dict(),
-            "reader": self.liker.to_dict()
+            "reader": self.reader.to_dict()
         }

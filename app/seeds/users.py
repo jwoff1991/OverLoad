@@ -1,4 +1,4 @@
-from app.models import db, User, Article, Comment, environment, SCHEMA
+from app.models import db, User, Article, Comment, ReadingList, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
@@ -1160,6 +1160,31 @@ def seed_users():
         date_created=datetime(2023, 9, 6)
     )
 
+    readingListDemo1 = ReadingList(
+        article_id= 1,
+        user_id=1
+    )
+
+    readingListDemo2 = ReadingList(
+        article_id= 3,
+        user_id=1
+    )
+
+    readingListDemo3 = ReadingList(
+        article_id= 4,
+        user_id=1
+    )
+
+    readingListDemo4 = ReadingList(
+        article_id= 5,
+        user_id=1
+    )
+
+    readingListDemo5 = ReadingList(
+        article_id= 2,
+        user_id=1
+    )
+
     db.session.add_all([demo, marnie,bobbie,user4,user5,user6,user7,user8,user9,user10,
         user11,user12,user13,user14,user15,user16,user17,user18,user19,user20,
         user21,user22,user23,user24,user25,user26,user27,user28,user29,user30,
@@ -1178,6 +1203,10 @@ def seed_users():
                         comment29, comment30, comment31, comment32, comment33, comment34, comment35,
                         comment36, comment37, comment38, comment39, comment40, comment41, comment42,
                         comment43, comment44, comment45, comment46, comment47, comment48, comment49, comment50])
+
+    db.session.add_all([readingListDemo1, readingListDemo2, readingListDemo3,
+                        readingListDemo4, readingListDemo5])
+
     db.session.commit()
 
 

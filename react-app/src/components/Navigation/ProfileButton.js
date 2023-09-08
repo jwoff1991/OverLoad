@@ -38,6 +38,10 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+  const readingListRedirect = (e) => {
+    e.preventDefault();
+    history.push(`/${user.id}/reading-list`)
+  }
 
   return (
     <>
@@ -47,9 +51,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <>
-              <button onClick={handleLogout}>Sign Out</button>
-            </>
+            <div className="user-dropdown-menu">
+
+              <button onClick={readingListRedirect}>Reading List</button>
+              <button onClick={handleLogout} className="drop-down-sign-out">Sign Out</button>
+            </div>
+
           </>
         ) : (
           <>
