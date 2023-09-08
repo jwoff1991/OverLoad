@@ -28,18 +28,20 @@
 }
 
 .author, .date-created{
-    font-size: 10px;
+    font-size: 13px;
 }
 
 
 .article-title {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 1.5em;
+    /* ^ change to 1.5em */
 }
 
 .article-body {
     padding-bottom: 12px;
-    font-size: 12px;
+    font-size: 1.17em;
+    /* ^ change to 1.17em */
 }
 
 

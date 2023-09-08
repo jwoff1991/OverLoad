@@ -31,7 +31,7 @@ const SingleArticle = () => {
       </div>
     );
   }
-
+  const commentButton = (<i class="fa-thin fa-comment fa-flip-horizontal"></i>)
   return (
     <>
       <div className="article-container">
@@ -49,7 +49,7 @@ const SingleArticle = () => {
 
 
               <OpenModal
-                    buttonText={comments.length}
+                    buttonText={[commentButton, comments.length]}
                     modalComponent={<CommentsModal props={articleId} />}
                     className="article-comments-modal-button"
                   />

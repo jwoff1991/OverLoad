@@ -14,7 +14,14 @@ const ArticlesComponent = () => {
       }, [dispatch]);
 
     const articlesList = Object.values(articles)
-
+    articlesList.forEach(article => {
+        let articlebody = article.body
+        let articlebodySplit = articlebody.split('')
+        let articlebodysplice = articlebodySplit.slice(0, 150)
+        let articlebodyjoin = articlebodysplice.join('')
+        console.log(articlebodyjoin)
+        article.body = articlebodyjoin
+    })
     return (
         <>
         {sessionUser ? (
@@ -30,7 +37,7 @@ const ArticlesComponent = () => {
                                 <div className="date-created">{date_created}</div>
                             </div>
                             <div className="article-title">{title}</div>
-                            <div className="article-body">{body}</div>
+                            <div className="article-body">{body}...</div>
                         </div>
                     </NavLink>
                 ))}
@@ -49,7 +56,7 @@ const ArticlesComponent = () => {
                                 <div className="author">{author.firstname} {author.lastname}</div>
                             </div>
                             <div className="article-title">{title}</div>
-                            <div className="article-body">{body}</div>
+                            <div className="article-body">{body}...</div>
                             <div className="date-created">{date_created}</div>
                         </div>
                     </NavLink>
