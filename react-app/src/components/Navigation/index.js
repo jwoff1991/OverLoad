@@ -145,7 +145,7 @@ function Navigation({ isLoaded }) {
               </div>
             </div>
           </div>
-          <div className="user-not-logged-in-div">stuff</div>
+          {/* <div className="user-not-logged-in-div">stuff</div> */}
         </>
       )}
     </>

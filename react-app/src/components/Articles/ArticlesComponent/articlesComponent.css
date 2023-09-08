@@ -41,3 +41,10 @@
     padding-bottom: 12px;
     font-size: 12px;
 }
+
+
+.user-not-logged-in-div {
+    border-top: black solid 1px;
+    border-bottom: black solid 1px;
+    height: 285px
+  }
