@@ -47,6 +47,7 @@ export const getOneArticle = (id) => async (dispatch) => {
       const data = await response.json();
       const commentData = await res.json()
       data['comments'] = commentData
+
       dispatch(getSingleArticle(data));
       return data;
     } else {
@@ -115,7 +116,6 @@ export const deleteArticle = (id) => async (dispatch) => {
         return response
     }
 }
-
 
 const initialState = {
     allArticles: {},

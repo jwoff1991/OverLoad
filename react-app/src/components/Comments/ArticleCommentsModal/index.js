@@ -15,9 +15,10 @@ function CommentsModal(props) {
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments
   );
+
   const [reload, setReload] = useState(0);
   const dispatch = useDispatch();
-  const id = props.props;
+  const articleId = props.props;
 
   let isDisabled = true;
   if (comment.length > 0) {
@@ -25,13 +26,13 @@ function CommentsModal(props) {
   }
 
   useEffect(() => {
-    dispatch(getOneArticle(id));
-  }, [dispatch, id, reload]);
+    dispatch(getOneArticle(articleId));
+  }, [dispatch, articleId, reload]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newComment = {
-      article_id: id,
+      article_id: articleId,
       user_id: sessionUser.id,
       body: comment,
     };
@@ -90,7 +91,7 @@ function CommentsModal(props) {
                       />
                         <OpenModal
                           buttonText="Delete"
-                          modalComponent={<DeleteCommentModal props={id} />}
+                          modalComponent={<DeleteCommentModal props={[id, articleId]} />}
                           className="article-delete-button"
                         />
                       </>

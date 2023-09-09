@@ -43,8 +43,6 @@ const EditArticle = () => {
     };
 
     dispatch(editArticle(new_article)).then((data) => {
-
-      console.log(data)
       history.push(`/articles/${articleId}`);
       return;
     });

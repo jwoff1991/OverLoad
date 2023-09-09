@@ -18,11 +18,14 @@ const SingleArticle = () => {
     (state) => state.articles.singleArticle.comments
   );
 
-
+    let commentsLength;
+    if(comments && comments.length) {
+      commentsLength = comments.length
+    }
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-  }, [dispatch, articleId]);
+  }, [dispatch, articleId, commentsLength]);
 
   if (!article.id) {
     return (
@@ -34,7 +37,7 @@ const SingleArticle = () => {
   let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
   article.date_created = createdAtSplit
 
-  const commentButton = (<i className="fa-thin fa-comment fa-flip-horizontal"></i>)
+  const commentButton = (<></>)
   return (
     <>
       <div className="article-container">

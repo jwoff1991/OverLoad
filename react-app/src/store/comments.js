@@ -1,4 +1,4 @@
-import getSingleArticle from './articles'
+import getOneArticle from './articles'
 
 export const postComment = (comment) => async (dispatch) => {
     try {
@@ -10,9 +10,8 @@ export const postComment = (comment) => async (dispatch) => {
         body: JSON.stringify(comment),
       });
       const data = await request.json();
-      console.log(data)
       const newComment = data;
-      dispatch(getSingleArticle(newComment.article_id));
+      dispatch(getOneArticle(newComment.article_id));
       return newComment;
     } catch (error) {
       const errors =
@@ -33,7 +32,7 @@ export const postComment = (comment) => async (dispatch) => {
       });
       const data = await request.json();
       const editedComment = data;
-      dispatch(getSingleArticle(editedComment.article_id));
+      dispatch(getOneArticle(editedComment.article_id));
       return editedComment;
     } catch (error) {
       const errors =
@@ -42,15 +41,17 @@ export const postComment = (comment) => async (dispatch) => {
     }
   };
 
-  export const deleteComment = (id) => async (dispatch) => {
-    const response = await fetch(`/api/comments/${id}/`, {
+  export const deleteComment = (commentId) => async (dispatch) => {
+
+    const response = await fetch(`/api/comments/${commentId}/`, {
       method: 'DELETE'
-  })
-  if(response.ok) {
-      const comment = await response.json();
-      return comment
-  }
-  else {
-      return response
-  }
+    })
+    if(response.ok) {
+        const comment = await response.json();
+
+        return comment
+    }
+    else {
+        return response
+    }
   }

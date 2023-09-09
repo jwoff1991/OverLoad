@@ -2,15 +2,18 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
+import { getOneArticle } from "../../../store/articles";
 
 function DeleteCommentModal(props) {
-  const id = props.props;
+  const commentId = props.props[0];
+  const articleId = props.props[1]
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
   const handleDelete = async (e) => {
-    const data = await dispatch(deleteComment(id));
+    const data = await dispatch(deleteComment(commentId));
     if(data) {
+      dispatch(getOneArticle(articleId))
       closeModal()
     }
   };
