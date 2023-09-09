@@ -10,8 +10,6 @@ function DeleteArticleModal(props) {
   const history = useHistory()
   const dispatch = useDispatch();
 
-
-
   const handleDelete = async (e) => {
     const data = await dispatch(deleteArticle(id));
     if(data.ok) {

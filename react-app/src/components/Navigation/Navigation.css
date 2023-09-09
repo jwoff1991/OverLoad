@@ -75,11 +75,12 @@
 
 /* \/ MAKE THIS A GRID WITH PERCENTAGES \/ */
 .nav-div-user-logged-in {
+  padding: 0px 10px 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 30px;
+  height: 40px;
   border-bottom: rgb(232, 232, 232) solid 0.5px;
 }
 /* /\ MAKE THIS A GRID WITH PERCENTAGES /\ */
