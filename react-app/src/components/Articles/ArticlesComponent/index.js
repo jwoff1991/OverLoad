@@ -51,7 +51,7 @@ const ArticlesComponent = () => {
         </>
         ) : (
         <>
-        <div className="user-not-logged-in-div"><img src='./5302912.jpeg' alt='blue honeycomb' /></div>
+        <div className="user-not-logged-in-div"><img className='image-for-front-page'src='/icons/5302912.jpg' alt='blue honeycomb' /></div>
         <div className="articles-topics-footer-container">
             <div className="articles-container">
                 {articlesList.map(({ id, author, title, body, date_created }) => (

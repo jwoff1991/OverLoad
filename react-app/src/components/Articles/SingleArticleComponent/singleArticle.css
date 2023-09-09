@@ -24,3 +24,18 @@
     justify-content: baseline;
     gap: 5px
 }
+
+.reading-list-button, .comments-modal-button-container > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.comments-icon {
+    height: 12px;
+}
+
+.comments-icon-and-number-container{
+    display: flex;
+    gap: 8px
+}

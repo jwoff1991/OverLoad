@@ -37,7 +37,16 @@ const SingleArticle = () => {
   let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
   article.date_created = createdAtSplit
 
-  const commentButton = (<></>)
+  const commentButton = (
+  <div className="comments-icon-and-number-container">
+    <div className="comments-icon-container">
+      <img className='comments-icon' src='/icons/chat_589670.png' alt='chat icon'/>
+    </div>
+    <div className="comments-number-container">
+      {comments.length}
+    </div>
+  </div>
+  )
   return (
     <>
       <div className="article-container">
@@ -55,7 +64,7 @@ const SingleArticle = () => {
             <div className="comment-and-reading-list-buttons">
               <div className="comments-modal-button-container">
                 <OpenModal
-                      buttonText={[commentButton, comments.length]}
+                      buttonText={commentButton}
                       modalComponent={<CommentsModal props={articleId} />}
                       className="article-comments-modal-button"
                     />

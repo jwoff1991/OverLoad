@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import "./Navigation.css"
 
 
 function ProfileButton({ user }) {
@@ -45,7 +46,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="user-profile-dropdown-button">
         {user.username}
       </button>
       <ul className={ulClassName} ref={ulRef}>
