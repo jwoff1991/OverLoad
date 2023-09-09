@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Navigation.css"
 
 
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -41,6 +42,7 @@ function ProfileButton({ user }) {
 
   const readingListRedirect = (e) => {
     e.preventDefault();
+    closeMenu()
     history.push(`/${user.id}/reading-list`)
   }
 

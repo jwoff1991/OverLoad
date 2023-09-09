@@ -3,10 +3,6 @@
 }
 
 
-.comment-and-reading-list-buttons {
-    display: flex;
-    justify-content: space-between;
-}
 
 
 .article-container {
@@ -20,11 +16,21 @@
 
 
 .article-author-and-date {
+    margin-top: 17px;
+    margin-bottom: 13px;
     display: flex;
     justify-content: baseline;
     gap: 5px
 }
 
+.comment-and-reading-list-buttons {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: lightgray solid 1px;
+    border-top: lightgray solid 1px;
+    margin-bottom: 25px;
+    padding: 6px 0 6px;
+}
 .reading-list-button, .comments-modal-button-container > button {
     background: none;
     border: none;

@@ -41,6 +41,7 @@
 .article-title {
     font-weight: bold;
     font-size: 1.5em;
+    padding: 10px 0px 10px;
     /* ^ change to 1.5em */
 }
 
@@ -58,7 +59,11 @@
     margin-top: 100px;
   }
 
+.div-next-to-image{
+    width: 50%;
+    height: 1px;
+}
 .image-for-front-page{
-    width: 100%;
+    width: 50%;
     height: 350px
 }
