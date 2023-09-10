@@ -40,34 +40,34 @@ const CreateNewArticle = () => {
   };
   return (
     <>
-      <div id="create-new-article-form-container">
-        <form id="create-article-form" onSubmit={handleSubmit}>
-          <div id="article-title-input-container">
+      <div className="create-new-article-form-container">
+        <form className="create-article-form" onSubmit={handleSubmit}>
+          <div className="article-form-submit-container">
+            <button
+              type="submit"
+              className="submit-new-article-button"
+              disabled={isDisabled}
+            >
+              Publish
+            </button>
+          </div>
+          <div className="article-title-input-container">
             <input
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
-              id="article-title-input"
+              className="article-title-input"
             />
           </div>
-          <div id="article-body-input-container">
+          <div className="article-body-input-container">
             <textarea
               name="body"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Tell your story..."
-              id="article-body-input"
+              className="article-body-input"
             />
-          </div>
-          <div id="article-form-submit-container">
-            <button
-              type="submit"
-              id="submit-new-article-button"
-              disabled={isDisabled}
-            >
-              Submit
-            </button>
           </div>
         </form>
       </div>

@@ -43,28 +43,42 @@ function CommentsModal(props) {
     }
   };
 
+  const dateChanger = (date) => {
+    const newDate = date.split('').slice(5, 11).join('')
+    return newDate
+  }
+
   return (
     <div className="comments-create-read-div">
       <div className="comments-responses-div">
-        <h1>Responses ({comments.length})</h1>
+        <h3>Responses ({comments.length})</h3>
       </div>
       {sessionUser && sessionUser.id && (
-      <div className="comments-create-div-with-buttons">
-        <div className="comments-create">
-          <textarea
-            className="post-comment-form"
-            placeholder="What are your thoughts?"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          ></textarea>
+        <div className="comments-create-div-with-buttons">
+          <div className="comments-create">
+            <textarea
+              className="post-comment-form"
+              placeholder="What are your thoughts?"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            ></textarea>
+            <div className="comment-create-buttons">
+              <div className="comment-form-buttons">
+                <button className="cancle-button-comment-form">Cancel</button>
+              </div>
+              <div className="comment-form-buttons">
+                <button
+                  className="submit-new-comment-button"
+                  onClick={handleSubmit}
+                  disabled={isDisabled}
+                >
+                  Respond
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="comment-create-buttons">
-          <button>Cancel</button>
-          <button onClick={handleSubmit} disabled={isDisabled}>
-            Respond
-          </button>
-        </div>
-      </div>)}
+      )}
       <div className="comments-display">
         {comments &&
           !comments.message &&
@@ -74,24 +88,27 @@ function CommentsModal(props) {
                 <div className="commentor-name-post-date">
                   <div className="commentor-name">
                     {commenter.firstname}
-                    {commenter.lastname}
+                    <span>&#183;</span>
+                    <div className="comment-post-date">{dateChanger(date_created)}</div>
                   </div>
-                  <div className="comment-post-date">{date_created}</div>
                 </div>
                 <div className="edit-delete-buttons">
                   {sessionUser &&
                     sessionUser.id &&
                     sessionUser.id === commenter.id && (
                       <>
-                        {/* <EditDeleteButton props={[id, body, sessionUser]} /> */}
                         <OpenModal
-                        buttonText="Edit"
-                        modalComponent={<EditCommentModal props={[id, body, sessionUser]} />}
-                        className="article-delete-button"
-                      />
+                          buttonText="Edit"
+                          modalComponent={
+                            <EditCommentModal props={[id, body, sessionUser]} />
+                          }
+                          className="article-delete-button"
+                        />
                         <OpenModal
                           buttonText="Delete"
-                          modalComponent={<DeleteCommentModal props={[id, articleId]} />}
+                          modalComponent={
+                            <DeleteCommentModal props={[id, articleId]} />
+                          }
                           className="article-delete-button"
                         />
                       </>

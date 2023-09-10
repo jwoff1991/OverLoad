@@ -1,0 +1,42 @@
+.create-new-article-form-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create-article-form {
+    padding-top: 20px;
+    width: 40%
+}
+
+.article-title-input {
+    height: 35px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+    outline: none;
+}
+
+.article-body-input {
+    resize: none;
+    width: 100%;
+    height: 350px;
+    border: none;
+    outline: none;
+}
+
+.article-form-submit-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submit-new-article-button {
+    background: green;
+    color: white;
+    border-radius: 10px;
+    height: 21px;
+	border: none;
+    font-size: 12px;
+    cursor: pointer;
+}
