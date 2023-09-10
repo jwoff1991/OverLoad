@@ -26,88 +26,102 @@ function SignupFormModal() {
 				closeModal();
 			}
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			setErrors({
+        password:
+          "Confirm Password field must be the same as the Password field",
+      });
 		}
 	};
+	const emailErrorsClass = errors.email ? "email-login-errors" : "";
+  const firstNameErrorsClass = errors.firstname ? "email-login-errors" : "";
+  const lastNameErrorsClass = errors.lastname ? "email-login-errors" : "";
+  const userNameErrorsClass = errors.username ? "email-login-errors" : "";
+  const passwordErrorsClass = errors.password ? "email-login-errors" : "";
 
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					First Name:
-					<input
-						type="text"
-						value={firstname}
-						onChange={(e) => setFirstname(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Lastname
-					<input
-						type="text"
-						value={lastname}
-						onChange={(e) => setLastname(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Username
-					<input
-						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Bio
-					<textarea
-						type="text"
-						value={bio}
-						onChange={(e) => setBio(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<button type="submit">Sign Up</button>
-			</form>
-		</>
-	);
+    <>
+      <div className="sign-up-form-container">
+        <h3>Sign Up</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="input-fields-signup-form">
+            <div className="sign-up-form-email">
+              <label>Email</label>
+              <input
+                className={emailErrorsClass}
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-firstname">
+              <label>First Name</label>
+              <input
+                className={firstNameErrorsClass}
+                type="text"
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-lastname">
+              <label>Lastname</label>
+              <input
+                className={lastNameErrorsClass}
+                type="text"
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-username">
+              <label>Username</label>
+              <input
+                className={userNameErrorsClass}
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-bio">
+              <label>Bio</label>
+              <textarea
+                className="bio-textarea-field"
+                type="text"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-password">
+              <label>Password</label>
+              <input
+                className={passwordErrorsClass}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-up--form-confirm-password">
+              <label>Confirm Password</label>
+              <input
+                className={passwordErrorsClass}
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" className="signup-button-submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default SignupFormModal;
