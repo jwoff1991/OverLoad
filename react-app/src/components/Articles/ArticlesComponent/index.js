@@ -39,7 +39,7 @@ const ArticlesComponent = () => {
                                     <span>&#183;</span>
                                     <div className="date-created">{date_created}</div>
                                 </div>
-                                <button className="reading-list-button">Reading List Button</button>
+                                <button className="reading-list-button"><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
                             </div>
                             <div className="article-title">{title}</div>
                             <div className="article-body">{body}...</div>

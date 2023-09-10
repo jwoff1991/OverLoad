@@ -45,3 +45,9 @@
     display: flex;
     gap: 8px
 }
+
+
+
+.bookmark-icon {
+    height: 12px;
+}

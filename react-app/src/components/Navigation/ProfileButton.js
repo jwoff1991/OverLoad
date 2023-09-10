@@ -50,6 +50,7 @@ function ProfileButton({ user }) {
     <>
       <button onClick={openMenu} className="user-profile-dropdown-button">
         {user.username}
+        <img className="profile-dropdwon-down-arrow" src='/icons/down-arrow_5343114.png' alt='down arrow'/>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

@@ -2,7 +2,8 @@
   position: absolute;
   left: 95%;
   top: 3%;
-  border: black 1px solid;
+  border: 1px solid lightgrey;
+  box-shadow: -5px 5px 5px lightgrey;
   background-color: white;
   width: 7em;
   padding-right: 25px;
@@ -101,5 +102,11 @@
   background: none;
   border: none;
   cursor: pointer;
+  display: flex;
+  gap: 2px
+}
 
+.profile-dropdwon-down-arrow {
+  height: 13px;
+  color: lightgray
 }

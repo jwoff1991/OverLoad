@@ -69,7 +69,7 @@ const SingleArticle = () => {
                       className="article-comments-modal-button"
                     />
               </div>
-              {sessionUser ? (<button className="reading-list-button">Reading List Button</button>) : (<></>)}
+              {sessionUser ? (<button className="reading-list-button"><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>) : (<></>)}
 
             </div>
             {article.author &&
