@@ -21,35 +21,43 @@ function LoginFormModal() {
     }
   };
 
+  const errorsClass = errors.email || errors.password ? "email-login-errors" : ''
+
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+      <div className="login-form-container">
+        <h2>Welcome back.</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="email-and-password-container">
+          <div className="email-div-for-login">
+            <label>
+              Email
+            </label>
+              <input
+              className={errorsClass}
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+          </div>
+          <div className="password-for-login">
+            <label>
+              Password
+              </label>
+              <input
+                className={errorsClass}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+          </div>
+
+          </div>
+          <button className='login-form-submit-button'type="submit">Log In</button>
+        </form>
+      </div>
     </>
   );
 }
