@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -19,7 +21,14 @@ function LoginFormModal() {
     } else {
         closeModal()
     }
-  };
+  }
+
+  const loginDemo = (e) => {
+    e.preventDefault();
+    dispatch(login('demo@aa.io', 'password' ))
+    .then(closeModal)
+    history.push('/')
+  }
 
   const errorsClass = errors.email || errors.password ? "email-login-errors" : ''
 
@@ -56,6 +65,7 @@ function LoginFormModal() {
 
           </div>
           <button className='login-form-submit-button'type="submit">Log In</button>
+          <button className='login-form-submit-button' onClick={loginDemo}>Log In as Demo User</button>
         </form>
       </div>
     </>

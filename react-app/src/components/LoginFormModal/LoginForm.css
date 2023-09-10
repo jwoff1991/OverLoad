@@ -33,6 +33,6 @@
 
 .email-login-errors {
     border-color: rgb(255, 145, 145);
-    box-shadow: none !important;
+    box-shadow: 0px 0px 3px  rgb(255, 145, 145);
     background-color: rgb(255, 186, 186) !important;
 }
