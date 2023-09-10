@@ -7,7 +7,7 @@ import readingListReducer from "./readingList"
 const rootReducer = combineReducers({
   session,
   articles: articleReducer,
-  readingListReducer
+  readingList: readingListReducer
 });
 
 

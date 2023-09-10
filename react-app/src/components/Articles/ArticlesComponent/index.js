@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
 import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
+import { getUserReadingList } from "../../../store/readingList";
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const ArticlesComponent = () => {
     useEffect(() => {
         dispatch(getAllArticles());
         // dispatch(getUserReadingList(sessionUser.id))
-      }, [dispatch]);
+      }, [dispatch, sessionUser]);
 
     const articlesList = Object.values(articles)
     articlesList.forEach(article => {

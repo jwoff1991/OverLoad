@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 const ReadingListComponent = () => {
     const userId = useParams()
     const dispatch = useDispatch();
-    const readingList = useSelector((state) => state.readingListReducer)
+    const readingList = useSelector((state) => state.readingList)
     const sessionUser = useSelector((state) => state.session.user);
     const readingListAll = Object.values(readingList)
     useEffect(() => {
