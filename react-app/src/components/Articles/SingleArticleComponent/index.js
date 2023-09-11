@@ -7,12 +7,14 @@ import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
+import { getUserReadingList } from "../../../store/readingList";
 
 
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector((state) => state.articles.singleArticle);
   const sessionUser = useSelector((state) => state.session.user);
+  const readingList = useSelector((state) => state.readingList)
   const dispatch = useDispatch();
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments
@@ -25,6 +27,9 @@ const SingleArticle = () => {
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
+    if(sessionUser && sessionUser.id) {
+      dispatch(getUserReadingList(sessionUser.id))
+  }
   }, [dispatch, articleId, commentsLength]);
 
   if (!article.id) {
@@ -35,10 +40,26 @@ const SingleArticle = () => {
     );
   }
 
-
   const articleDateConverter =(article) => {
     let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
     return createdAtSplit
+  }
+
+
+  let userReadingListArticleId = []
+  const userReadingList = Object.values(readingList)
+  const articleInReadingList = (userReadingList) => {
+      userReadingList.map(({article_id}) => {
+          userReadingListArticleId.push(article_id)
+      })
+  }
+  articleInReadingList(userReadingList, sessionUser)
+  const readingListButton = () => {
+     if (userReadingListArticleId.includes(article.id)) {
+      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark-black-shape_25353.png' alt='black bookmark'/></button>
+    } else {
+      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
+    }
   }
 
   const commentButton = (
@@ -73,8 +94,13 @@ const SingleArticle = () => {
                       className="article-comments-modal-button"
                     />
               </div>
-              {sessionUser ? (<button className="reading-list-button"><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>) : (<></>)}
-
+              { sessionUser ? (
+              <>
+              {readingListButton()}
+              </>
+              ) : (
+              <></>
+              )}
             </div>
             {article.author &&
               article.author.id &&

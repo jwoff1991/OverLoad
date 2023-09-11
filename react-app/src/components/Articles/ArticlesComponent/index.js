@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
 import { getUserReadingList } from "../../../store/readingList";
 
+
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -23,11 +24,21 @@ const ArticlesComponent = () => {
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
-      }
-      const articleDateConverter =(date) => {
+    }
+    const articleDateConverter =(date) => {
         let createdAtSplit = date.split('').slice(5, 11).join('')
         return createdAtSplit
-      }
+    }
+
+
+    let userReadingListArticleId = []
+    const userReadingList = Object.values(readingList)
+    const articleInReadingList = (userReadingList) => {
+        userReadingList.map(({article_id}) => {
+            userReadingListArticleId.push(article_id)
+        })
+    }
+    articleInReadingList(userReadingList)
 
     return (
         <>
@@ -44,7 +55,14 @@ const ArticlesComponent = () => {
                                     <span>&#183;</span>
                                     <div className="date-created">{articleDateConverter(date_created)}</div>
                                 </div>
-                                <button className="reading-list-button"><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
+                                {userReadingListArticleId.includes(id) ? (<>
+                                    <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark-black-shape_25353.png' alt='black bookmark'/></button>
+                                </>
+                                ) : (
+                                <>
+                                    <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
+                                </>)}
+
                             </div>
                             <div className="article-title">{title}</div>
                             <div className="article-body">{articleBodyConverter(body)}...</div>
