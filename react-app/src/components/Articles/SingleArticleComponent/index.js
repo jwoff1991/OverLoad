@@ -34,9 +34,12 @@ const SingleArticle = () => {
       </div>
     );
   }
-  let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
-  article.date_created = createdAtSplit
-
+  // let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
+  // article.date_created = createdAtSplit
+        const articleDateConverter =(article) => {
+        let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
+        return createdAtSplit
+      }
   const commentButton = (
   <div className="comments-icon-and-number-container">
     <div className="comments-icon-container">
@@ -58,7 +61,7 @@ const SingleArticle = () => {
               {article.author && article.author.lastname}
             </div>
             <span>&#183;</span>
-            <div className="date-created">{article.date_created}</div>
+            <div className="date-created">{articleDateConverter(article)}</div>
           </div>
           <div className="likes-comments-edit-delete-container">
             <div className="comment-and-reading-list-buttons">

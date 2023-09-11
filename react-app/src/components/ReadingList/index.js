@@ -18,14 +18,13 @@ const ReadingListComponent = () => {
       }, [dispatch, userId]);
 
 
-    if(readingListAll && readingListAll[0].article) {
-    readingListAll.forEach(article => {
-        let articlebody = article.article.body
-        let newArticleBody = articlebody.split('').slice(0, 150).join('')
-        article.article.body = newArticleBody
-        let createdAtSplit = article.article.date_created.split('').slice(5, 11).join('')
-        article.article.date_created = createdAtSplit
-    })
+    const articleBodyConverter = (body) => {
+      let newArticleBody = body.split('').slice(0, 150).join('')
+      return newArticleBody
+    }
+    const articleDateConverter =(date) => {
+      let createdAtSplit = date.split('').slice(5, 11).join('')
+      return createdAtSplit
     }
 
     return (
@@ -61,7 +60,7 @@ const ReadingListComponent = () => {
                           </div>
                           <span>&#183;</span>
                           <div className="date-created">
-                            {article.date_created}
+                            {articleDateConverter(article.date_created)}
                           </div>
                         </div>
                         <button className="reading-list-button">
@@ -69,7 +68,7 @@ const ReadingListComponent = () => {
                         </button>
                       </div>
                       <div className="article-title">{article.title}</div>
-                      <div className="article-body">{article.body}...</div>
+                      <div className="article-body">{articleBodyConverter(article.body)}...</div>
                     </div>
                   </NavLink>
                 ))}

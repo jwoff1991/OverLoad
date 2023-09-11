@@ -9,21 +9,22 @@ const ArticlesComponent = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const articles = useSelector((state) => state.articles.allArticles)
-    const readingList = useSelector((state) => state.readingListReducer)
+    const readingList = useSelector((state) => state.readingList)
 
     useEffect(() => {
         dispatch(getAllArticles());
-        // dispatch(getUserReadingList(sessionUser.id))
+        dispatch(getUserReadingList(sessionUser.id))
       }, [dispatch, sessionUser]);
 
     const articlesList = Object.values(articles)
-    articlesList.forEach(article => {
-        let articlebody = article.body
-        let newArticleBody = articlebody.split('').slice(0, 150).join('')
-        article.body = newArticleBody
-        let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
-        article.date_created = createdAtSplit
-    })
+    const articleBodyConverter = (body) => {
+        let newArticleBody = body.split('').slice(0, 150).join('')
+        return newArticleBody
+      }
+      const articleDateConverter =(date) => {
+        let createdAtSplit = date.split('').slice(5, 11).join('')
+        return createdAtSplit
+      }
 
     return (
         <>
@@ -38,12 +39,12 @@ const ArticlesComponent = () => {
                                 <div className="date-article-author">
                                     <div className="author">{author.firstname} {author.lastname}</div>
                                     <span>&#183;</span>
-                                    <div className="date-created">{date_created}</div>
+                                    <div className="date-created">{articleDateConverter(date_created)}</div>
                                 </div>
                                 <button className="reading-list-button"><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
                             </div>
                             <div className="article-title">{title}</div>
-                            <div className="article-body">{body}...</div>
+                            <div className="article-body">{articleBodyConverter(body)}...</div>
                         </div>
                     </NavLink>
                 ))}
