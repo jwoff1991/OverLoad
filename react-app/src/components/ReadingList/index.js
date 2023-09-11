@@ -42,7 +42,7 @@ const ReadingListComponent = () => {
             </div>
           </div>
           <div className="heading-div">
-          <h1>Reading List</h1>
+            <h1>Reading List</h1>
           </div>
           {readingListAll && readingListAll[0].article && (
             <>
@@ -65,11 +65,17 @@ const ReadingListComponent = () => {
                           </div>
                         </div>
                         <button className="reading-list-button">
-                          Reading List Button
+                          <img
+                            className="bookmark-icon"
+                            src="/icons/bookmark_10330015.png"
+                            alt="bookmark"
+                          />
                         </button>
                       </div>
                       <div className="article-title">{article.title}</div>
-                      <div className="article-body">{articleBodyConverter(article.body)}...</div>
+                      <div className="article-body">
+                        {articleBodyConverter(article.body)}...
+                      </div>
                     </div>
                   </NavLink>
                 ))}
