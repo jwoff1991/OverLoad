@@ -31,24 +31,25 @@ function EditCommentModal(props) {
 
   return (
     <>
-      {/*sessionUser && sessionUser.id &&*/  (
-        <div className="comments-create-div-with-buttons">
+
+        <div className="comments-edit-div-with-buttons">
+          <h4>Edit your comment</h4>
           <div className="comments-create">
             <textarea
-              className="post-comment-form"
+              className="edit-comment-form"
               placeholder={comment}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
           </div>
-          <div className="comment-create-buttons">
-            <button onClick={closeModal}>Cancel</button>
-            <button onClick={handleSubmit} disabled={isDisabled}>
+          <div className="comment-edit-buttons">
+            <button className='cancle-edit-button' onClick={closeModal}>Cancel</button>
+            <button className='submit-edited-comment'onClick={handleSubmit} disabled={isDisabled}>
               Confirm
             </button>
           </div>
         </div>
-      )}
+
     </>
   );
 }

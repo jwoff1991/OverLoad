@@ -36,7 +36,7 @@ function EditDeleteButton(props) {
   return (
     <>
       <button onClick={openMenu}>
-        ...
+        <img src='icons/dot_7080735.png' alt='elipsis' />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         (
