@@ -75,7 +75,11 @@ const ArticlesComponent = () => {
         ) : (
         <>
         <div className="user-not-logged-in-div">
-            <div className="div-next-to-image" >This will have content with information about the site</div>
+            <div className="div-next-to-image" >
+                <h1>Welcome to OverLoad</h1>
+                <h4>(a Medium.com clone)</h4>
+                <p>Feel free to navigate the site, you can create your own signin, or login as a demo user. You can also, create an article, or comment on one you find interesting! If you have any questions or want to find out more about the sourcecode, visit the My Story link!</p>
+            </div>
             <img className='image-for-front-page'src='/icons/frontpageimage.png' alt='blue honeycomb' />
         </div>
         <div className="articles-topics-footer-container">

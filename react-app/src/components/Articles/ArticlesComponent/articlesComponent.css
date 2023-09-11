@@ -61,10 +61,7 @@
     justify-content: flex-end;
   }
 
-.div-next-to-image{
-    height: 1px;
-    background: linear-gradient(to left, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-}
+
 .image-for-front-page{
     width: 60%;
     height: 349px
@@ -73,4 +70,14 @@
 
 .bookmark-icon {
     height: 12px;
+}
+
+
+.div-next-to-image {
+  width: 40%;
+  margin-left: 40px;
+}
+
+.div-next-to-image > h1 {
+    padding-bottom: 0px;
 }
