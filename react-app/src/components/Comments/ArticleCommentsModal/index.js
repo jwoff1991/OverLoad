@@ -51,7 +51,7 @@ function CommentsModal(props) {
   return (
     <div className="comments-create-read-div">
       <div className="comments-responses-div">
-        <h3>Responses ({comments.length})</h3>
+        <h3>Responses ({comments.length ? (comments.length) : (0)})</h3>
       </div>
       {sessionUser && sessionUser.id && (
         <div className="comments-create-div-with-buttons">

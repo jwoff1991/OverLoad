@@ -68,7 +68,7 @@ const SingleArticle = () => {
       <img className='comments-icon' src='/icons/chat_589670.png' alt='chat icon'/>
     </div>
     <div className="comments-number-container">
-      {comments.length}
+      {comments && comments.length ? (comments.length) : (0)}
     </div>
   </div>
   )
