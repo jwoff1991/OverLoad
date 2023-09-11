@@ -34,12 +34,14 @@ const SingleArticle = () => {
       </div>
     );
   }
+  
   // let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
   // article.date_created = createdAtSplit
-        const articleDateConverter =(article) => {
-        let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
-        return createdAtSplit
-      }
+  const articleDateConverter =(article) => {
+    let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
+    return createdAtSplit
+  }
+
   const commentButton = (
   <div className="comments-icon-and-number-container">
     <div className="comments-icon-container">

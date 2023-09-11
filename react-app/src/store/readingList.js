@@ -8,8 +8,9 @@ const getReadingList = (data) => {
 };
 
 export const getUserReadingList = (userId) => async (dispatch) => {
+  console.log('backend', userId)
   try {
-    const response = await fetch(`/api/reading-list/${userId.userid}/`, {
+    const response = await fetch(`/api/reading-list/${userId}/`, {
       method: "GET",
     });
     if (response.ok) {

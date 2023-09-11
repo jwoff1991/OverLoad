@@ -11,9 +11,12 @@ const ArticlesComponent = () => {
     const articles = useSelector((state) => state.articles.allArticles)
     const readingList = useSelector((state) => state.readingList)
 
+
     useEffect(() => {
         dispatch(getAllArticles());
-        dispatch(getUserReadingList(sessionUser.id))
+        if(sessionUser && sessionUser.id) {
+            dispatch(getUserReadingList(sessionUser.id))
+        }
       }, [dispatch, sessionUser]);
 
     const articlesList = Object.values(articles)
@@ -66,8 +69,8 @@ const ArticlesComponent = () => {
                                 <div className="author">{author.firstname} {author.lastname}</div>
                             </div>
                             <div className="article-title">{title}</div>
-                            <div className="article-body">{body}...</div>
-                            <div className="date-created">{date_created}</div>
+                            <div className="article-body">{articleBodyConverter(body)}...</div>
+                            <div className="date-created">{articleDateConverter(date_created)}</div>
                         </div>
                     </NavLink>
                 ))}
