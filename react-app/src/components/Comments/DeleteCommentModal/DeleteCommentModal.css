@@ -1,0 +1,34 @@
+.delete-comment-confirm-delete-modal {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    border-left: 2px solid lightgrey;
+    background-color: white;
+    height: 100%;
+    padding: 0px 15px 15px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.delete-modal-delete-Comment {
+    background: red;
+    color: white;
+    border-radius: 10px;
+    height: 21px;
+	border: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.delete-modal-keep-Comment {
+    background: none;
+	border: none;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+    padding-right: 15px;
+}
