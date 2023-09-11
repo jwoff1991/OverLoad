@@ -74,11 +74,10 @@ function Navigation({ isLoaded }) {
             <div className="nav-blank"></div>
             <div className="rest-of-nav">
               <div className="nav-my-story">
-                <Link to='/'>My Story</Link>
+                <Link to='/my-story'>My Story</Link>
               </div>
               <div className="nav-create">
-                <Link to='/'>Create</Link>
-                {/* getting started link with signup form */}
+                <Link to='/create'>Create</Link>
               </div>
 
               <div className={ulClassName} ref={ulRef}></div>
