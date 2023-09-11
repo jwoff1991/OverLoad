@@ -21,6 +21,7 @@ const ArticlesComponent = () => {
       }, [dispatch, sessionUser]);
 
     const articlesList = Object.values(articles)
+    articlesList.reverse()
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
