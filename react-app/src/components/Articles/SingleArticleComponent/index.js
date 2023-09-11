@@ -106,15 +106,17 @@ const SingleArticle = () => {
               article.author.id &&
               sessionUser &&
               sessionUser.id === article.author.id && (
-                <>
+                <><div className="edit-delete-buttons">
                   <OpenModal
                     buttonText="Delete"
                     modalComponent={<DeleteArticleModal props={articleId} />}
                     className="article-delete-button"
                   />
                   <NavLink key={article.id} to={`/article/${article.id}/edit`}>
-                    <button>Edit Article</button>
+                    <button className="article-edit-button">Edit Article</button>
                   </NavLink>
+
+                </div>
                 </>
               )}
           </div>
