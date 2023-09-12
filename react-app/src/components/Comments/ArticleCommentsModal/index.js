@@ -63,6 +63,7 @@ function CommentsModal(props) {
             <textarea
               className="post-comment-form"
               placeholder="What are your thoughts?"
+              maxLength='255'
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
