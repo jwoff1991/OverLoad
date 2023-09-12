@@ -1,0 +1,29 @@
+
+.staff-picks-container {
+    width: 20vw;
+    margin-left: 70px;
+    box-shadow: 0px 0px 20px lightgray;
+    padding: 0px 10px 10px
+}
+
+
+.staff-date-article-author {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 10px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+}
+
+.staff-article-title {
+    font-size: 13px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+
+.staff-picks-article-div {
+    margin-bottom: 10px;
+}

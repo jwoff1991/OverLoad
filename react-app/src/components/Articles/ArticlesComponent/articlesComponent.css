@@ -8,11 +8,14 @@
     justify-content: center;
 }
 .articles-container {
-    width: 625px;
+    width: 40%;
     height: 100%;
     padding-bottom: 20px;
 }
 
+.staff-picks-user-not-logged-in {
+    width: 30%;
+}
 
 .full-article-div {
     height: 200px;
@@ -20,6 +23,7 @@
     border-bottom: rgb(179, 179, 179) solid 0.5px;
     padding-top: 30px;
     padding-bottom: 30px;
+    overflow: hidden;
 }
 
 .date-author-reading-list-div{
@@ -79,11 +83,10 @@
 .div-next-to-image {
   width: 40%;
   margin-left: 40px;
+  height: 349px;
+  overflow: hidden;
 }
 
 .div-next-to-image > h1 {
     padding-bottom: 0px;
 }
-
-
-

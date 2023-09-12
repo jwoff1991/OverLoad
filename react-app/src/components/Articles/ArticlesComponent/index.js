@@ -4,7 +4,7 @@ import { getAllArticles } from "../../../store/articles";
 import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
 import { getUserReadingList } from "../../../store/readingList";
-
+import StaffPicks from "../StaffPicks";
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
@@ -71,6 +71,14 @@ const ArticlesComponent = () => {
                     </NavLink>
                 ))}
             </div>
+            <div className="topics-footer-container-user-not-logged-in">
+                <div className="staff-picks-user-not-logged-in">
+                    <StaffPicks />
+                </div>
+                <div className="footer-user-not-logged-in">
+                    This will be the footer
+                </div>
+            </div>
         </div>
         </>
         ) : (
@@ -97,6 +105,14 @@ const ArticlesComponent = () => {
                         </div>
                     </NavLink>
                 ))}
+            </div>
+            <div className="topics-footer-container-user-not-logged-in">
+                <div className="staff-picks-user-not-logged-in">
+                    <StaffPicks />
+                </div>
+                <div className="footer-user-not-logged-in">
+                    This will be footer
+                </div>
             </div>
         </div>
         </>)}
