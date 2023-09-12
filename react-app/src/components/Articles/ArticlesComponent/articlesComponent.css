@@ -15,6 +15,14 @@
 
 .staff-picks-user-not-logged-in {
     width: 30%;
+    position: sticky;
+    top: 120px;
+}
+
+.staff-picks-user-logged-in {
+    width: 30%;
+    position: sticky;
+    top: 45px;
 }
 
 .full-article-div {

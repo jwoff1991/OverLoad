@@ -72,7 +72,7 @@ const ArticlesComponent = () => {
                 ))}
             </div>
             <div className="topics-footer-container-user-not-logged-in">
-                <div className="staff-picks-user-not-logged-in">
+                <div className="staff-picks-user-logged-in">
                     <StaffPicks />
                 </div>
                 <div className="footer-user-not-logged-in">
