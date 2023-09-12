@@ -77,7 +77,7 @@ function Navigation({ isLoaded }) {
                 <Link to='/my-story'>My Story</Link>
               </div>
               <div className="nav-create">
-                <Link to='/create'>Create</Link>
+                <Link to='/create'>Learn</Link>
               </div>
 
               <div className={ulClassName} ref={ulRef}></div>

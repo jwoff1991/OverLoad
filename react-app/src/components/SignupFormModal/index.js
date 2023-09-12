@@ -25,13 +25,22 @@ function SignupFormModal() {
 			} else {
 				closeModal();
 			}
-		} else {
+		} else if (password.length < 8 ) {
+      setErrors({password: "Password should be at least 8 characters"})
+    } else {
 			setErrors({
         password:
           "Confirm Password field must be the same as the Password field",
       });
 		}
 	};
+  let isDisabled = true;
+  console.log(password)
+  if(password.length >= 8) {
+    isDisabled = false
+  }
+
+
 	const emailErrorsClass = errors.email ? "email-login-errors" : "";
   const firstNameErrorsClass = errors.firstname ? "email-login-errors" : "";
   const lastNameErrorsClass = errors.lastname ? "email-login-errors" : "";
@@ -115,7 +124,7 @@ function SignupFormModal() {
               />
             </div>
           </div>
-          <button type="submit" className="signup-button-submit">
+          <button type="submit" disabled={isDisabled} className="signup-button-submit">
             Sign Up
           </button>
         </form>

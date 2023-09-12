@@ -72,9 +72,11 @@ const SingleArticle = () => {
     </div>
   </div>
   )
+
+  const loggedIn = sessionUser ? ('article-container') : ('article-container-logged-out')
   return (
     <>
-      <div className="article-container">
+      <div className={loggedIn}>
         <div className="single-article-div">
           <div className="article-title">{article.title}</div>
           <div className="article-author-and-date">

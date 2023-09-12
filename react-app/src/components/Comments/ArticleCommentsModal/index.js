@@ -43,6 +43,10 @@ function CommentsModal(props) {
     }
   };
 
+  const resetComment = (e) => {
+    setComment('')
+  }
+
   const dateChanger = (date) => {
     const newDate = date.split('').slice(5, 11).join('')
     return newDate
@@ -64,7 +68,9 @@ function CommentsModal(props) {
             ></textarea>
             <div className="comment-create-buttons">
               <div className="comment-form-buttons">
-                <button className="cancle-button-comment-form">Cancel</button>
+                <button className="cancle-button-comment-form"
+                  onClick={resetComment}
+                >Cancel</button>
               </div>
               <div className="comment-form-buttons">
                 <button
