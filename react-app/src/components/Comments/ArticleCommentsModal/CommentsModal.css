@@ -6,6 +6,7 @@
     background-color: white;
     height: 100%;
     padding: 0px 15px 15px;
+    width: 250px;
 
 }
 
@@ -81,7 +82,7 @@
     border-bottom: lightgray solid 1px;
 }
 
-.edit-delete-buttons > button {
+.edit-delete-buttons-comments > button {
     background: none;
 	border: none;
     font-size: 9px;
@@ -92,3 +93,4 @@
     display: flex;
     justify-content: space-between;
 }
+

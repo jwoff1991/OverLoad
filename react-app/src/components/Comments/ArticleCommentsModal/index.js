@@ -98,7 +98,7 @@ function CommentsModal(props) {
                     <div className="comment-post-date">{dateChanger(date_created)}</div>
                   </div>
                 </div>
-                <div className="edit-delete-buttons">
+                <div className="edit-delete-buttons-comments">
                   {sessionUser &&
                     sessionUser.id &&
                     sessionUser.id === commenter.id && (
@@ -108,14 +108,14 @@ function CommentsModal(props) {
                           modalComponent={
                             <EditCommentModal props={[id, body, sessionUser]} />
                           }
-                          className="article-delete-button"
+                          className="comment-edit-button"
                         />
                         <OpenModal
                           buttonText="Delete"
                           modalComponent={
                             <DeleteCommentModal props={[id, articleId]} />
                           }
-                          className="article-delete-button"
+                          className="comment-delete-button"
                         />
                       </>
                     )}
