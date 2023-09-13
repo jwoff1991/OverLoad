@@ -15,6 +15,14 @@
   display: none;
 }
 
+.nav-icon > img{
+  height: 10px;
+}
+
+.nav-icon-user-logged-in > img {
+  height: 10px;
+}
+
 .user-dropdown-menu > button{
   background: none;
 	border: none;

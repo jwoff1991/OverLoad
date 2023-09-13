@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
 import { getUserReadingList } from "../../../store/readingList";
 import StaffPicks from "../StaffPicks";
+import Footer from "../../Footer";
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
@@ -71,12 +72,12 @@ const ArticlesComponent = () => {
                     </NavLink>
                 ))}
             </div>
-            <div className="topics-footer-container-user-not-logged-in">
+            <div className="topics-footer-container-user-logged-in">
                 <div className="staff-picks-user-logged-in">
                     <StaffPicks />
+                    <Footer />
                 </div>
                 <div className="footer-user-not-logged-in">
-                    This will be the footer
                 </div>
             </div>
         </div>
@@ -109,10 +110,9 @@ const ArticlesComponent = () => {
             <div className="topics-footer-container-user-not-logged-in">
                 <div className="staff-picks-user-not-logged-in">
                     <StaffPicks />
+                    <Footer />
                 </div>
-                <div className="footer-user-not-logged-in">
-                    This will be footer
-                </div>
+
             </div>
         </div>
         </>)}
