@@ -1,58 +1,8 @@
-.text-link {
-    color: inherit;
-    text-decoration: inherit;
-}
-
-.articles-topics-footer-container{
-    display:flex;
-    justify-content: center;
-}
 .articles-container {
     width: 40%;
     height: 100%;
     padding-bottom: 20px;
 }
-
-.staff-picks-user-not-logged-in {
-    width: 30%;
-    position: sticky;
-    top: 120px;
-}
-
-.topics-footer-container-user-not-logged-in{
-    margin-left: 70px
-}
-.staff-picks-user-logged-in {
-    width: 30%;
-    position: sticky;
-    top: 45px;
-    padding-left: 70px
-}
-
-
-
-.full-article-div {
-    height: 200px;
-    border-bottom: rgb(179, 179, 179) solid 0.5px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    overflow: hidden;
-}
-
-.date-author-reading-list-div{
-    display: flex;
-    justify-content: space-between;
-}
-
-.date-article-author{
-    gap: 5px
-}
-.article-author, .date-article-author {
-    height: 20px;
-    display: flex;
-    align-items: center;
-}
-
 .author, .date-created, .reading-list-button{
     font-size: 13px;
 }
@@ -71,22 +21,16 @@
     /* ^ change to 1.17em */
 }
 
-
-.user-not-logged-in-div {
-    border-top: black solid 1px;
-    border-bottom: black solid 1px;
-    height: 350px;
-    margin-top: 100px;
+.article-author, .date-article-author {
+    height: 20px;
     display: flex;
-    justify-content: flex-end;
-  }
-
-
-.image-for-front-page{
-    width: 60%;
-    height: 349px
+    align-items: center;
 }
 
+.articles-topics-footer-container{
+    display:flex;
+    justify-content: center;
+}
 
 .bookmark-icon {
     height: 12px;
@@ -103,3 +47,58 @@
 .div-next-to-image > h1 {
     padding-bottom: 0px;
 }
+.date-author-reading-list-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-article-author{
+    gap: 5px
+}
+
+.full-article-div {
+    height: 200px;
+    border-bottom: rgb(179, 179, 179) solid 0.5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+
+
+
+.image-for-front-page{
+    width: 60%;
+    height: 349px
+}
+
+.staff-picks-user-not-logged-in {
+    width: 30%;
+    position: sticky;
+    top: 120px;
+}
+
+.staff-picks-user-logged-in {
+    width: 30%;
+    position: sticky;
+    top: 45px;
+    padding-left: 70px
+}
+
+.topics-footer-container-user-not-logged-in{
+    margin-left: 70px
+}
+
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+.user-not-logged-in-div {
+    border-top: black solid 1px;
+    border-bottom: black solid 1px;
+    height: 350px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: flex-end;
+  }
