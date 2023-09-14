@@ -13,10 +13,10 @@ https://aacapstoneproj.onrender.com
 - Wireframes : https://github.com/jwoff1991/OverLoad/wiki/Wireframes
 
 
--[screenshots/landingpage.png]
--[screenshots/articles.png]
--[screenshots/readingList.png]
--[screenshots/create.png]
+![screenshots/landingpage.png]
+![screenshots/articles.png]
+![screenshots/readingList.png]
+![screenshots/create.png]
 
 ## Getting Started
 
