@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="footer-fiv">
 
         <Link to='/my-story'>Story</Link>
-        <Link to='https://github.com/jwoff1991'>Gitub</Link>
-        <Link to='https://www.linkedin.com/in/jonathanbwofford/'>LinkedIn</Link>
-        <Link to='https://myportfolio-jonathanwofford.netlify.app/'>Portfolio</Link>
+        <a href='https://github.com/jwoff1991' target='_blank'>Gitub</a>
+        <a href='https://www.linkedin.com/in/jonathanbwofford/' target='_blank'>LinkedIn</a>
+        <a href='https://myportfolio-jonathanwofford.netlify.app/' target='_blank'>Portfolio</a>
         </div>
 
     )
