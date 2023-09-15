@@ -8,7 +8,8 @@ import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 import { getUserReadingList } from "../../../store/readingList";
-
+import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
@@ -27,10 +28,10 @@ const SingleArticle = () => {
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-    if(sessionUser && sessionUser.id) {
-      dispatch(getUserReadingList(sessionUser.id))
-  }
-  }, [dispatch, articleId, commentsLength]);
+    if (sessionUser && sessionUser.id) {
+      dispatch(getUserReadingList(sessionUser.id));
+    }
+  }, [dispatch, articleId, commentsLength, sessionUser]);
 
   if (!article.id) {
     return (
@@ -56,9 +57,9 @@ const SingleArticle = () => {
   articleInReadingList(userReadingList, sessionUser)
   const readingListButton = () => {
      if (userReadingListArticleId.includes(article.id)) {
-      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark-black-shape_25353.png' alt='black bookmark'/></button>
+      return <ReadingListRemoveButtonComponent props={[article.id, sessionUser.id]} />;
     } else {
-      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
+      return <ReadingListAddButtonComponent props={[article.id, sessionUser.id]} />;
     }
   }
 

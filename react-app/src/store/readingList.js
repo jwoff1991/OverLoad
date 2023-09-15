@@ -8,7 +8,6 @@ const getReadingList = (data) => {
 };
 
 export const getUserReadingList = (userId) => async (dispatch) => {
-  console.log('backend', userId)
   try {
     const response = await fetch(`/api/reading-list/${userId}/`, {
       method: "GET",
@@ -27,6 +26,34 @@ export const getUserReadingList = (userId) => async (dispatch) => {
     return errors;
   }
 };
+
+export const addToReadingList = (articleId, userId) => async (dispatch) => {
+
+  const response = await fetch(`/api/reading-list/add/${articleId}/${userId}/`, {
+    method: "POST",
+  });
+  if (response.ok) {
+    const article = await response.json();
+    const waiting = await dispatch(getUserReadingList(userId));
+    return article;
+  } else {
+    return response;
+  }
+};
+
+export const removeFromReadingList =
+  (articleId, userId) => async (dispatch) => {
+    const response = await fetch(`/api/reading-list/remove/${userId}/${articleId}/`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      const article = await response.json();
+      dispatch(getUserReadingList(userId));
+      return article;
+    } else {
+      return response;
+    }
+  };
 
 const initialState = {
   readingList: {},

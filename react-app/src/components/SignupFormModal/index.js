@@ -35,7 +35,6 @@ function SignupFormModal() {
 		}
 	};
   let isDisabled = true;
-  console.log(password)
   if(password.length >= 8) {
     isDisabled = false
   }
