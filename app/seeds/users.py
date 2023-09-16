@@ -1,4 +1,4 @@
-from app.models import db, User, Article, Comment, ReadingList, environment, SCHEMA
+from app.models import db, User, Article, Comment, ReadingList, ArticleLike, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
@@ -1185,6 +1185,366 @@ def seed_users():
         user_id=1
     )
 
+    like1 = ArticleLike(
+    id=1,
+    article_id=12,
+    user_id=31
+    )
+
+    like2 = ArticleLike(
+        id=2,
+        article_id=4,
+        user_id=16
+    )
+
+    like3 = ArticleLike(
+        id=3,
+        article_id=21,
+        user_id=8
+    )
+
+    like4 = ArticleLike(
+        id=4,
+        article_id=18,
+        user_id=45
+    )
+
+    like5 = ArticleLike(
+        id=5,
+        article_id=5,
+        user_id=23
+    )
+
+    like6 = ArticleLike(
+        id=6,
+        article_id=7,
+        user_id=37
+    )
+
+    like7 = ArticleLike(
+        id=7,
+        article_id=10,
+        user_id=19
+    )
+
+    like8 = ArticleLike(
+        id=8,
+        article_id=3,
+        user_id=42
+    )
+
+    like9 = ArticleLike(
+        id=9,
+        article_id=14,
+        user_id=11
+    )
+
+    like10 = ArticleLike(
+        id=10,
+        article_id=24,
+        user_id=29
+    )
+
+    like11 = ArticleLike(
+        id=11,
+        article_id=2,
+        user_id=44
+    )
+
+    like12 = ArticleLike(
+        id=12,
+        article_id=15,
+        user_id=6
+    )
+
+    like13 = ArticleLike(
+        id=13,
+        article_id=1,
+        user_id=36
+    )
+
+    like14 = ArticleLike(
+        id=14,
+        article_id=22,
+        user_id=13
+    )
+
+    like15 = ArticleLike(
+        id=15,
+        article_id=9,
+        user_id=49
+    )
+
+    like16 = ArticleLike(
+        id=16,
+        article_id=17,
+        user_id=26
+    )
+
+    like17 = ArticleLike(
+        id=17,
+        article_id=19,
+        user_id=2
+    )
+
+    like18 = ArticleLike(
+        id=18,
+        article_id=20,
+        user_id=38
+    )
+
+    like19 = ArticleLike(
+        id=19,
+        article_id=11,
+        user_id=15
+    )
+
+    like20 = ArticleLike(
+        id=20,
+        article_id=6,
+        user_id=30
+    )
+
+    like21 = ArticleLike(
+        id=21,
+        article_id=16,
+        user_id=48
+    )
+
+    like22 = ArticleLike(
+        id=22,
+        article_id=23,
+        user_id=25
+    )
+
+    like23 = ArticleLike(
+        id=23,
+        article_id=8,
+        user_id=3
+    )
+
+    like24 = ArticleLike(
+        id=24,
+        article_id=13,
+        user_id=20
+    )
+
+    like25 = ArticleLike(
+        id=25,
+        article_id=10,
+        user_id=4
+    )
+
+    like26 = ArticleLike(
+        id=26,
+        article_id=1,
+        user_id=43
+    )
+
+    like27 = ArticleLike(
+        id=27,
+        article_id=22,
+        user_id=21
+    )
+
+    like28 = ArticleLike(
+        id=28,
+        article_id=16,
+        user_id=9
+    )
+
+    like29 = ArticleLike(
+        id=29,
+        article_id=24,
+        user_id=35
+    )
+
+    like30 = ArticleLike(
+        id=30,
+        article_id=5,
+        user_id=40
+    )
+
+    like31 = ArticleLike(
+        id=31,
+        article_id=14,
+        user_id=47
+    )
+
+    like32 = ArticleLike(
+        id=32,
+        article_id=2,
+        user_id=18
+    )
+
+    like33 = ArticleLike(
+        id=33,
+        article_id=9,
+        user_id=32
+    )
+
+    like34 = ArticleLike(
+        id=34,
+        article_id=21,
+        user_id=5
+    )
+
+    like35 = ArticleLike(
+        id=35,
+        article_id=8,
+        user_id=14
+    )
+
+    like36 = ArticleLike(
+        id=36,
+        article_id=12,
+        user_id=46
+    )
+
+    like37 = ArticleLike(
+        id=37,
+        article_id=17,
+        user_id=28
+    )
+
+    like38 = ArticleLike(
+        id=38,
+        article_id=15,
+        user_id=1
+    )
+
+    like39 = ArticleLike(
+        id=39,
+        article_id=20,
+        user_id=41
+    )
+
+    like40 = ArticleLike(
+        id=40,
+        article_id=4,
+        user_id=22
+    )
+
+    like41 = ArticleLike(
+        id=41,
+        article_id=19,
+        user_id=12
+    )
+
+    like42 = ArticleLike(
+        id=42,
+        article_id=7,
+        user_id=34
+    )
+
+    like43 = ArticleLike(
+        id=43,
+        article_id=3,
+        user_id=50
+    )
+
+    like44 = ArticleLike(
+        id=44,
+        article_id=6,
+        user_id=33
+    )
+
+    like45 = ArticleLike(
+        id=45,
+        article_id=13,
+        user_id=10
+    )
+
+    like46 = ArticleLike(
+        id=46,
+        article_id=11,
+        user_id=39
+    )
+
+    like47 = ArticleLike(
+        id=47,
+        article_id=23,
+        user_id=17
+    )
+
+    like48 = ArticleLike(
+        id=48,
+        article_id=18,
+        user_id=45
+    )
+
+    like49 = ArticleLike(
+        id=49,
+        article_id=1,
+        user_id=27
+    )
+
+    like50 = ArticleLike(
+        id=50,
+        article_id=15,
+        user_id=7
+    )
+
+    like51 = ArticleLike(
+        id=51,
+        article_id=14,
+        user_id=24
+    )
+
+    like52 = ArticleLike(
+        id=52,
+        article_id=2,
+        user_id=31
+    )
+
+    like53 = ArticleLike(
+        id=53,
+        article_id=12,
+        user_id=16
+    )
+
+    like54 = ArticleLike(
+        id=54,
+        article_id=24,
+        user_id=8
+    )
+
+    like55 = ArticleLike(
+        id=55,
+        article_id=5,
+        user_id=45
+    )
+
+    like56 = ArticleLike(
+        id=56,
+        article_id=7,
+        user_id=23
+    )
+
+    like57 = ArticleLike(
+        id=57,
+        article_id=10,
+        user_id=37
+    )
+
+    like58 = ArticleLike(
+        id=58,
+        article_id=3,
+        user_id=19
+    )
+
+    like59 = ArticleLike(
+        id=59,
+        article_id=21,
+        user_id=42
+    )
+
+    like60 = ArticleLike(
+        id=60,
+        article_id=18,
+        user_id=11
+    )
+
     db.session.add_all([demo, marnie,bobbie,user4,user5,user6,user7,user8,user9,user10,
         user11,user12,user13,user14,user15,user16,user17,user18,user19,user20,
         user21,user22,user23,user24,user25,user26,user27,user28,user29,user30,
@@ -1194,7 +1554,7 @@ def seed_users():
     db.session.add_all([article_1, article_2, article_3, article_4, article_5, article_6,
                         article_7, article_8, article_9, article_10, article_11, article_12,
                         article_13, article_14, article_15, article_16, article_17, article_18,
-                        article_19, article_20, article_21, article_22, article_23, article_24]) #vegan, hiking, coding, yoga, traveling, coffee, story-telling, live concerts
+                        article_19, article_20, article_21, article_22, article_23, article_24])
 
     db.session.add_all([comment1, comment2, comment3, comment4, comment5, comment6, comment7,
                         comment8, comment9, comment10, comment11, comment12, comment13, comment14,
@@ -1204,8 +1564,18 @@ def seed_users():
                         comment36, comment37, comment38, comment39, comment40, comment41, comment42,
                         comment43, comment44, comment45, comment46, comment47, comment48, comment49, comment50])
 
+    db.session.add_all([
+                        like1, like2, like3, like4, like5, like6, like7, like8, like9, like10,
+                        like11, like12, like13, like14, like15, like16, like17, like18, like19, like20,
+                        like21, like22, like23, like24, like25, like26, like27, like28, like29, like30,
+                        like31, like32, like33, like34, like35, like36, like37, like38, like39, like40,
+                        like41, like42, like43, like44, like45, like46, like47, like48, like49, like50,
+                        like51, like52, like53, like54, like55, like56, like57, like58, like59, like60])
+
     db.session.add_all([readingListDemo1, readingListDemo2, readingListDemo3,
                         readingListDemo4, readingListDemo5])
+
+
 
     db.session.commit()
 

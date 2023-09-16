@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Article(db.Model):
@@ -20,7 +21,7 @@ class Article(db.Model):
     author = db.relationship('User', back_populates='articles')
     comments = db.relationship('Comment', back_populates='article', cascade='all, delete-orphan')
     reading_list = db.relationship('ReadingList', back_populates='article', cascade='all, delete-orphan')
-    # likes = db.relationship('ArticleLike', back_populates='article', cascade='all, delete-orphan')
+    likes = db.relationship('ArticleLike', back_populates='article', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

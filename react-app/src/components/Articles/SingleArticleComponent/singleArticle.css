@@ -37,16 +37,19 @@
     cursor: pointer;
 }
 
-.comments-icon {
+.comments-icon, .likes-icon {
     height: 12px;
 }
 
-.comments-icon-and-number-container{
+.comments-icon-and-number-container, .likes-icon-and-number-container{
     display: flex;
     gap: 8px
 }
 
-
+.comments-modal-button-container {
+    display: flex;
+    
+}
 
 .bookmark-icon {
     height: 12px;
