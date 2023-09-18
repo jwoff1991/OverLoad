@@ -65,7 +65,7 @@ const CreateNewArticle = () => {
             <textarea
               name="body"
               value={body}
-              maxLength='2500'
+              maxLength='5000'
               onChange={(e) => setBody(e.target.value)}
               placeholder="Tell your story..."
               className="article-body-input"

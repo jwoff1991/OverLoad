@@ -12,7 +12,6 @@ class Article(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    # MAKE SURE TO ADD IN ARTICLE TYPE LATER
     date_created = db.Column(db.DateTime, nullable=False)
 
 
@@ -30,5 +29,4 @@ class Article(db.Model):
             "body": self.body,
             "date_created": self.date_created,
             "author": self.author.to_dict(),
-            # "readingList": self.reading_list
         }

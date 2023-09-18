@@ -55,6 +55,7 @@ const EditArticle = () => {
             <input
               name="title"
               value={title}
+              maxLength='100'
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
               className="article-title-input"
@@ -64,6 +65,7 @@ const EditArticle = () => {
             <textarea
               name="body"
               value={body}
+              maxLength='5000'
               onChange={(e) => setBody(e.target.value)}
               placeholder="Tell your story..."
               className="article-body-input"
