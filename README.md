@@ -50,6 +50,7 @@ This is the starter for the Flask React project.
    pipenv shell
    ```
 
+
    ```bash
    pipenv run flask db init
    ```
@@ -57,7 +58,7 @@ This is the starter for the Flask React project.
    ```bash
    pipenv run flask db migrate -m "create tables"
    ```
-   
+
    ```bash
    pipenv run flask db upgrade
    ```
