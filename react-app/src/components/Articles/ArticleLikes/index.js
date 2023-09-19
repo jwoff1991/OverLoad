@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
+import './articlelikes.css'
 
 const ArticleLikes = (sessionUser, likes, articleId) => {
   const dispatch = useDispatch();
