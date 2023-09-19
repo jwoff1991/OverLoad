@@ -18,32 +18,21 @@ function SignupFormModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-
-    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
-
-    if(regex.test(email) === false) {
-      setErrors({'email': 'This is not a valid email'})
+		if (password === confirmPassword) {
+			const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
+			if (data) {
+				setErrors(data);
+			} else {
+				closeModal();
+			}
+		} else if (password.length < 8 ) {
+      setErrors({password: "Password should be at least 8 characters"})
     } else {
-      if (password === confirmPassword) {
-        const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
-        if (data) {
-          setErrors(data);
-        } else {
-          closeModal();
-        }
-      } else if (password.length < 8 ) {
-        setErrors({password: "Password should be at least 8 characters"})
-      } else {
-        setErrors({
-          password:
-            "Confirm Password field must be the same as the Password field",
-        });
-      }
-    }
-
-
+			setErrors({
+        password:
+          "Confirm Password field must be the same as the Password field",
+      });
+		}
 	};
   let isDisabled = true;
   if(password.length >= 8) {
@@ -117,7 +106,6 @@ function SignupFormModal() {
               <label>Password</label>
               <input
                 className={passwordErrorsClass}
-                placeholder="min 8 characters"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -128,7 +116,6 @@ function SignupFormModal() {
               <label>Confirm Password</label>
               <input
                 className={passwordErrorsClass}
-                placeholder="min 8 characters"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
