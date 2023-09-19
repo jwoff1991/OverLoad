@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
      # Users has one => many relationships with Articles, Reading List, Comments, Likes
     articles = db.relationship('Article', back_populates='author', cascade='all, delete-orphan')
     article_comments = db.relationship('Comment', back_populates='commenter', cascade='all, delete-orphan')
-    # article_likes = db.relationship('ArticleLike', back_populates='liker', cascade='all, delete-orphan')
+    article_likes = db.relationship('ArticleLike', back_populates='liker', cascade='all, delete-orphan')
     # follower = db.relationship("Follow", back_populates="follower", cascade='all, delete-orphan')
     # followee = db.relationship("Follow", back_populates="followee", cascade='all, delete-orphan')
 

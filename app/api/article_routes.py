@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import User, Article, Comment
+from app.models import User, Article, Comment, ArticleLike
 from ..models.db import db
 from ..forms.new_article_form import NewArticleForm
 from datetime import datetime

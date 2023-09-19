@@ -1,8 +1,12 @@
 """create tables
 
 Revision ID: 458a1fd9fef8
+<<<<<<< HEAD
 Revises:
 Revises:
+=======
+Revises: 
+>>>>>>> parent of c8aaba2 (finished up last CRUD feature)
 Create Date: 2023-09-08 22:42:45.119923
 
 """

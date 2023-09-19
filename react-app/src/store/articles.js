@@ -43,15 +43,21 @@ export const getOneArticle = (id) => async (dispatch) => {
     const res = await fetch(`/api/comments/${id}/all`, {
       method: 'GET'
     })
+    const likeResponse = await fetch(`/api/article-likes/${id}`)
     if (response.ok) {
       const data = await response.json();
       const commentData = await res.json()
       data['comments'] = commentData
 
+      const likeData = await likeResponse.json()
+      data['likes'] = likeData
+
+
       dispatch(getSingleArticle(data));
       return data;
     } else {
       const errors = await response.json();
+      console.log(errors)
       return errors;
     }
   } catch (error) {
@@ -60,6 +66,8 @@ export const getOneArticle = (id) => async (dispatch) => {
     return errors;
   }
 };
+
+
 
 export const postArticle = (article) => async (dispatch) => {
   try {
