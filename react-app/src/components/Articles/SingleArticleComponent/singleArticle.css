@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .article-container {
     margin-top: 100px;
     display: flex;
@@ -12,6 +13,10 @@
 
 .single-article-div{
     width: 48%;
+}
+
+.article-body {
+    overflow-wrap: break-word;
 }
 
 
@@ -66,3 +71,5 @@
     font-size: 9px;
     cursor: pointer;
 }
+=======
+>>>>>>> articlelikes
