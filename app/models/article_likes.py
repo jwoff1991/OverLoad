@@ -8,7 +8,7 @@ class ArticleLike(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
 
-    id = db.Column(db.Integer, primary_key=True) #DO NOT BELIEVE THIS NEEDS ID BUT ASK
+    id = db.Column(db.Integer, primary_key=True)
     article_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('articles.id')), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
@@ -18,9 +18,7 @@ class ArticleLike(db.Model):
 
     def to_dict(self):
         return {
-            #"id": self.id,
+            "id": self.id,
             "article_id": self.article_id,
             "user_id": self.user_id,
-            "article": self.article.to_dict(),
-            "liker": self.liker.to_dict()
         }

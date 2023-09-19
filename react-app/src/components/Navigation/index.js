@@ -45,7 +45,7 @@ function Navigation({ isLoaded }) {
           <div className="nav-div-user-logged-in">
             <div className="nav-icon-user-logged-in">
               <Link exact to="/">
-              <img classname='logo-on-nav' src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
+              <img className='logo-on-nav' src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
               </Link>
             </div>
             <div className="nav-blank-user-logged-in"></div>
@@ -68,7 +68,7 @@ function Navigation({ isLoaded }) {
           <div className="nav-div">
             <div className="nav-icon">
               <Link exact to="/">
-              <img classname='logo-on-nav'src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
+              <img className='logo-on-nav'src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
               </Link>
             </div>
             <div className="nav-blank"></div>

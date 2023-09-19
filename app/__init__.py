@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.comment_routes import comment_routes
 from .api.reading_list_route import reading_list_routes
+from .api.article_likes import article_like_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.article_routes import article_routes
@@ -34,6 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(article_routes, url_prefix='/api/articles')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(reading_list_routes, url_prefix='/api/reading-list')
+app.register_blueprint(article_like_routes, url_prefix='/api/article-likes')
 db.init_app(app)
 Migrate(app, db)
 

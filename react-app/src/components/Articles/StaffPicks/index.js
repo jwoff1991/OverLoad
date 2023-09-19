@@ -15,11 +15,6 @@ const StaffPicks = () => {
     return createdAtSplit;
   };
 
-  console.log(article1);
-  const generateRandomNumber = () => {
-    return Math.floor(Math.random() * (articles.length - 0 + 1)) + 0;
-  };
-
   return (
     <>
       <div className="staff-picks-container">

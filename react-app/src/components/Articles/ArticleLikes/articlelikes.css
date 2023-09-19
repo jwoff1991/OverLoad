@@ -1,0 +1,10 @@
+.likes-icon {
+    height: 15px
+}
+
+
+.likes-icon-and-number-container {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}

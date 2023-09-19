@@ -7,30 +7,33 @@ import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
+import ArticleLikes from "../ArticleLikes";
 import { getUserReadingList } from "../../../store/readingList";
-
+import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector((state) => state.articles.singleArticle);
   const sessionUser = useSelector((state) => state.session.user);
-  const readingList = useSelector((state) => state.readingList)
+  const readingList = useSelector((state) => state.readingList);
   const dispatch = useDispatch();
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments
   );
+  const likes = useSelector((state) => state.articles.singleArticle.likes);
 
-    let commentsLength;
-    if(comments && comments.length) {
-      commentsLength = comments.length
-    }
+  let commentsLength;
+  if (comments && comments.length) {
+    commentsLength = comments.length;
+  }
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-    if(sessionUser && sessionUser.id) {
-      dispatch(getUserReadingList(sessionUser.id))
-  }
-  }, [dispatch, articleId, commentsLength]);
+    if (sessionUser && sessionUser.id) {
+      dispatch(getUserReadingList(sessionUser.id));
+    }
+  }, [dispatch, articleId, commentsLength, sessionUser]);
 
   if (!article.id) {
     return (
@@ -40,40 +43,58 @@ const SingleArticle = () => {
     );
   }
 
-  const articleDateConverter =(article) => {
-    let createdAtSplit = article.date_created.split('').slice(5, 11).join('')
-    return createdAtSplit
-  }
+  //converts date from database format to usable format
+  const articleDateConverter = (article) => {
+    let createdAtSplit = article.date_created.split("").slice(5, 11).join("");
+    return createdAtSplit;
+  };
 
-
-  let userReadingListArticleId = []
-  const userReadingList = Object.values(readingList)
+  //READING LIST
+  //pulls article ids from user reading list
+  let userReadingListArticleId = [];
+  const userReadingList = Object.values(readingList);
   const articleInReadingList = (userReadingList) => {
-      userReadingList.map(({article_id}) => {
-          userReadingListArticleId.push(article_id)
-      })
-  }
-  articleInReadingList(userReadingList, sessionUser)
+    userReadingList.map(({ article_id }) => {
+      userReadingListArticleId.push(article_id);
+    });
+  };
+  articleInReadingList(userReadingList);
+
+  //compares article list from above to current article id
+  //to determine which button to render
   const readingListButton = () => {
-     if (userReadingListArticleId.includes(article.id)) {
-      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark-black-shape_25353.png' alt='black bookmark'/></button>
+    if (userReadingListArticleId.includes(article.id)) {
+      return (
+        <ReadingListRemoveButtonComponent
+          props={[article.id, sessionUser.id]}
+        />
+      );
     } else {
-      return <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
+      return (
+        <ReadingListAddButtonComponent props={[article.id, sessionUser.id]} />
+      );
     }
-  }
+  };
 
+  //COMMENT BUTTON
   const commentButton = (
-  <div className="comments-icon-and-number-container">
-    <div className="comments-icon-container">
-      <img className='comments-icon' src='/icons/chat_589670.png' alt='chat icon'/>
+    <div className="comments-icon-and-number-container">
+      <div className="comments-icon-container">
+        <img
+          className="comments-icon"
+          src="/icons/chat_589670.png"
+          alt="chat icon"
+        />
+      </div>
+      <div className="comments-number-container">
+        {comments && comments.length ? comments.length : 0}
+      </div>
     </div>
-    <div className="comments-number-container">
-      {comments && comments.length ? (comments.length) : (0)}
-    </div>
-  </div>
-  )
+  );
 
-  const loggedIn = sessionUser ? ('article-container') : ('article-container-logged-out')
+  const loggedIn = sessionUser
+    ? "article-container"
+    : "article-container-logged-out";
   return (
     <>
       <div className={loggedIn}>
@@ -90,35 +111,35 @@ const SingleArticle = () => {
           <div className="likes-comments-edit-delete-container">
             <div className="comment-and-reading-list-buttons">
               <div className="comments-modal-button-container">
+                {ArticleLikes(sessionUser, likes, articleId)}
                 <OpenModal
-                      buttonText={commentButton}
-                      modalComponent={<CommentsModal props={articleId} />}
-                      className="article-comments-modal-button"
-                    />
+                  buttonText={commentButton}
+                  modalComponent={<CommentsModal props={articleId} />}
+                  className="article-comments-modal-button"
+                />
               </div>
-              { sessionUser ? (
-              <>
-              {readingListButton()}
-              </>
-              ) : (
-              <></>
-              )}
+              {sessionUser ? <>{readingListButton()}</> : <></>}
             </div>
             {article.author &&
               article.author.id &&
               sessionUser &&
               sessionUser.id === article.author.id && (
-                <><div className="edit-delete-buttons">
-                  <OpenModal
-                    buttonText="Delete"
-                    modalComponent={<DeleteArticleModal props={articleId} />}
-                    className="article-delete-button"
-                  />
-                  <NavLink key={article.id} to={`/article/${article.id}/edit`}>
-                    <button className="article-edit-button">Edit Article</button>
-                  </NavLink>
-
-                </div>
+                <>
+                  <div className="edit-delete-buttons">
+                    <OpenModal
+                      buttonText="Delete"
+                      modalComponent={<DeleteArticleModal props={articleId} />}
+                      className="article-delete-button"
+                    />
+                    <NavLink
+                      key={article.id}
+                      to={`/article/${article.id}/edit`}
+                    >
+                      <button className="article-edit-button">
+                        Edit Article
+                      </button>
+                    </NavLink>
+                  </div>
                 </>
               )}
           </div>

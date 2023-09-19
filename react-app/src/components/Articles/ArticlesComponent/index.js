@@ -6,6 +6,8 @@ import './articlesComponent.css'
 import { getUserReadingList } from "../../../store/readingList";
 import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
+import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
@@ -43,81 +45,119 @@ const ArticlesComponent = () => {
     articleInReadingList(userReadingList)
 
     return (
-        <>
+      <>
         {sessionUser ? (
-        <>
-        <div className="articles-topics-footer-container">
-            <div className="articles-container">
-                {articlesList.map(({ id, author, title, body, date_created }) => (
-                    <NavLink key={id} to={`/articles/${id}`} className='text-link'>
-                        <div className="full-article-div">
-                            <div className="date-author-reading-list-div">
-                                <div className="date-article-author">
-                                    <div className="author">{author.firstname} {author.lastname}</div>
-                                    <span>&#183;</span>
-                                    <div className="date-created">{articleDateConverter(date_created)}</div>
-                                </div>
-                                {userReadingListArticleId.includes(id) ? (<>
-                                    <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark-black-shape_25353.png' alt='black bookmark'/></button>
-                                </>
-                                ) : (
-                                <>
-                                    <button className="reading-list-button" ><img className='bookmark-icon' src='/icons/bookmark_10330015.png' alt='bookmark'/></button>
-                                </>)}
-
+          <>
+            <div className="articles-topics-footer-container">
+              <div className="articles-container">
+                {articlesList.map(
+                  ({ id, author, title, body, date_created }) => (
+                    <NavLink
+                      key={id}
+                      to={`/articles/${id}`}
+                      className="text-link"
+                    >
+                      <div className="full-article-div">
+                        <div className="date-author-reading-list-div">
+                          <div className="date-article-author">
+                            <div className="author">
+                              {author.firstname} {author.lastname}
                             </div>
-                            <div className="article-title">{title}</div>
-                            <div className="article-body">{articleBodyConverter(body)}...</div>
+                            <span>&#183;</span>
+                            <div className="date-created">
+                              {articleDateConverter(date_created)}
+                            </div>
+                          </div>
+                          {userReadingListArticleId.includes(id) ? (
+                            <>
+                              <ReadingListRemoveButtonComponent
+                                props={[id, sessionUser.id]}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <ReadingListAddButtonComponent
+                                props={[id, sessionUser.id]}
+                              />
+                            </>
+                          )}
                         </div>
+                        <div className="article-title">{title}</div>
+                        <div className="article-body">
+                          {articleBodyConverter(body)}...
+                        </div>
+                      </div>
                     </NavLink>
-                ))}
-            </div>
-            <div className="topics-footer-container-user-logged-in">
+                  )
+                )}
+              </div>
+              <div className="topics-footer-container-user-logged-in">
                 <div className="staff-picks-user-logged-in">
-                    <StaffPicks />
-                    <Footer />
+                  <StaffPicks />
+                  <Footer />
                 </div>
-                <div className="footer-user-not-logged-in">
-                </div>
+                <div className="footer-user-not-logged-in"></div>
+              </div>
             </div>
-        </div>
-        </>
+          </>
         ) : (
-        <>
-        <div className="user-not-logged-in-div">
-            <div className="div-next-to-image" >
+          <>
+            <div className="user-not-logged-in-div">
+              <div className="div-next-to-image">
                 <h1>Welcome to OverLoad</h1>
                 <h4>(a Medium.com clone)</h4>
-                <p>Feel free to navigate the site, you can create your own signin, or login as a demo user. You can also, create an article, or comment on one you find interesting! If you have any questions or want to find out more about the sourcecode, visit the My Story link!</p>
+                <p>
+                  Feel free to navigate the site, you can create your own
+                  signin, or login as a demo user. You can also, create an
+                  article, or comment on one you find interesting! If you have
+                  any questions or want to find out more about the sourcecode,
+                  visit the My Story link!
+                </p>
+              </div>
+              <img
+                className="image-for-front-page"
+                src="/icons/frontpageimage.png"
+                alt="blue honeycomb"
+              />
             </div>
-            <img className='image-for-front-page'src='/icons/frontpageimage.png' alt='blue honeycomb' />
-        </div>
-        <div className="articles-topics-footer-container">
-            <div className="articles-container">
-                {articlesList.map(({ id, author, title, body, date_created }) => (
-                    <NavLink key={id} to={`/articles/${id}`} className='text-link'>
-                        <div className="full-article-div">
-                            <div className="article-author">
-                                <div className="author">{author.firstname} {author.lastname}</div>
-                            </div>
-                            <div className="article-title">{title}</div>
-                            <div className="article-body">{articleBodyConverter(body)}...</div>
-                            <div className="date-created">{articleDateConverter(date_created)}</div>
+            <div className="articles-topics-footer-container">
+              <div className="articles-container">
+                {articlesList.map(
+                  ({ id, author, title, body, date_created }) => (
+                    <NavLink
+                      key={id}
+                      to={`/articles/${id}`}
+                      className="text-link"
+                    >
+                      <div className="full-article-div">
+                        <div className="article-author">
+                          <div className="author">
+                            {author.firstname} {author.lastname}
+                          </div>
                         </div>
+                        <div className="article-title">{title}</div>
+                        <div className="article-body">
+                          {articleBodyConverter(body)}...
+                        </div>
+                        <div className="date-created">
+                          {articleDateConverter(date_created)}
+                        </div>
+                      </div>
                     </NavLink>
-                ))}
-            </div>
-            <div className="topics-footer-container-user-not-logged-in">
+                  )
+                )}
+              </div>
+              <div className="topics-footer-container-user-not-logged-in">
                 <div className="staff-picks-user-not-logged-in">
-                    <StaffPicks />
-                    <Footer />
+                  <StaffPicks />
+                  <Footer />
                 </div>
-
+              </div>
             </div>
-        </div>
-        </>)}
-        </>
-    )
+          </>
+        )}
+      </>
+    );
 };
 
 export default ArticlesComponent;

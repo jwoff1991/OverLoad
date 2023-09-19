@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import User, Article, Comment
+from app.models import User, Article, Comment, ArticleLike
 from ..models.db import db
 from ..forms.new_article_form import NewArticleForm
 from datetime import datetime
@@ -24,7 +24,6 @@ def article_index():
 @article_routes.route('/<int:id>', methods=['GET'])
 def single_article(id):
     article = Article.query.get(id)
-    print(article)
     if not article:
         return {'message': 'This article could nto be found'}
     else:
@@ -78,7 +77,6 @@ def delete_article(id):
 
 @article_routes.route('/edit/<int:id>/', methods=['PUT'])
 def edit_article(id):
-    print('WE HITTING THIS')
     form = NewArticleForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
