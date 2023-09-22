@@ -25,6 +25,30 @@ https://aacapstoneproj.onrender.com
 ```
 pipenv install -r requirements.txt
 ```
+```bash
+pipenv install Flask
+```
+
+```bash
+pipenv install python-dotenv
+```
+
+```bash
+pipenv install Jinja2
+```
+
+```bash
+pipenv install Flask-WTF
+```
+
+```bash
+pipenv install SQLAlchemy Flask-SQLAlchemy
+```
+
+```bash
+pipenv install alembic Flask-Migrate
+```
+
 
 2. Create a .env file based on the example with proper settings for your development environment
 
