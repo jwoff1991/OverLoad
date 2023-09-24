@@ -69,7 +69,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
 
   //choses which button to display based on if user is in artile like list or not
   const likeButton = () => {
-    if (userIdFromLikes.includes(sessionUser.id)) {
+    if (userIdFromLikes && userIdFromLikes.includes(sessionUser.id)) {
       return likeButtonBlack;
     } else {
       return likeButtonClear;
