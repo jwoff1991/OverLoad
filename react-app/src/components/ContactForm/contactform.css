@@ -1,0 +1,40 @@
+.form-container {
+    border: lightgrey 2px solid;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.contact-form-label {
+    padding-right: 10px;
+}
+
+.contact-form-name , .contact-form-email, .contact-form-message {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-message-textarea {
+    resize: none;
+}
+
+.submit-button {
+    margin-top: 10px;
+}
+
+.contact-form-message-text {
+    text-align: start;
+}
+
+.submit-button {
+    background-color: black;
+    color: white;
+}
+
+
+.form-container > form {
+    width: 250px;
+}
