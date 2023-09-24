@@ -28,14 +28,14 @@ const ReadingListComponent = () => {
     let createdAtSplit = date.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
-  console.log(readingListAll)
+  console.log(readingList[0])
   return (
     <>
       <div className="reading-list-topics-footer-container">
         <div className="user-information">
           <div className="username">{sessionUser.username}</div>
           <div className="list-length">
-            {readingListAll.length && readingListAll['0'].articles ? (
+            {readingListAll && readingListAll.length && readingList[0] ? (
               <>{readingListAll.length} Article(s)</>
             ) : (
               <>0 Articles</>
