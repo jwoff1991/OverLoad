@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getUserReadingList, addToReadingList } from "../../store/readingList";
+import { useDispatch } from "react-redux";
+import { addToReadingList } from "../../store/readingList";
 
 
 

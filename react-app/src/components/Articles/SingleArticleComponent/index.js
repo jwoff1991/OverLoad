@@ -56,6 +56,7 @@ const SingleArticle = () => {
   const articleInReadingList = (userReadingList) => {
     userReadingList.map(({ article_id }) => {
       userReadingListArticleId.push(article_id);
+      return userReadingListArticleId;
     });
   };
   articleInReadingList(userReadingList);

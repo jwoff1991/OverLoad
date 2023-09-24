@@ -1,11 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  getUserReadingList,
-  removeFromReadingList,
-} from "../../store/readingList";
-import { NavLink } from 'react-router-dom';
-import './readingListComponent.css'
+import { getUserReadingList } from "../../store/readingList";
+import { NavLink } from "react-router-dom";
+import "./readingListComponent.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import ReadingListRemoveButtonComponent from "./removeFromReadingListButton";
 
@@ -28,17 +25,26 @@ const ReadingListComponent = () => {
     let createdAtSplit = date.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
+
+  const readingListDisplay = (readingListAll, readingList) => {
+    if (readingListAll && readingListAll.length && readingList[0]) {
+      return <>{readingListAll.length} Article(s)</>;
+    } else {
+      return <>0 Articles</>;
+    }
+  };
   return (
     <>
       <div className="reading-list-topics-footer-container">
         <div className="user-information">
           <div className="username">{sessionUser.username}</div>
           <div className="list-length">
-            {readingListAll && readingListAll.length && readingList[0] ? (
+            {readingListDisplay(readingListAll, readingList)}
+            {/* {readingListAll && readingListAll.length && readingList[0] ? (
               <>{readingListAll.length} Article(s)</>
             ) : (
               <>0 Articles</>
-            )}
+            )} */}
           </div>
         </div>
         <div className="heading-div">
@@ -48,7 +54,7 @@ const ReadingListComponent = () => {
           <>
             <div className="reading-list-container">
               {readingListAll.map(({ article }) => (
-                <div className="full-article-div">
+                <div key={article.id} className="full-article-div">
                   <div className="date-author-reading-list-div">
                     <div className="date-article-author">
                       <div className="author">
@@ -59,7 +65,9 @@ const ReadingListComponent = () => {
                         {articleDateConverter(article.date_created)}
                       </div>
                     </div>
-                    <ReadingListRemoveButtonComponent props={[article.id, userId]} />
+                    <ReadingListRemoveButtonComponent
+                      props={[article.id, userId]}
+                    />
                   </div>
                   <NavLink
                     key={article.id}
