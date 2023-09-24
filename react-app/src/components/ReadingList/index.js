@@ -28,7 +28,6 @@ const ReadingListComponent = () => {
     let createdAtSplit = date.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
-  console.log(readingList[0])
   return (
     <>
       <div className="reading-list-topics-footer-container">
