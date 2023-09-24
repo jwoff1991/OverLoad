@@ -1,6 +1,7 @@
 import "./mystory.css";
 import ContactForm from "../ContactForm";
 import Footer from "../Footer";
+import React from "react";
 
 function MyStoryComponent() {
   return (

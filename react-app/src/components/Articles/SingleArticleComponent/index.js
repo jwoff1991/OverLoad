@@ -1,3 +1,4 @@
+import React from "react";
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

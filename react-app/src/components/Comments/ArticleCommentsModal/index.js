@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CommentsModal.css";
 import { useEffect, useState } from "react";
