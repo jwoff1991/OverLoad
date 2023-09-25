@@ -20,7 +20,7 @@ function ContactForm() {
     e.preventDefault();
 
     // Send data to Formspree using Fetch API
-    fetch('https://formspree.io/your-email@example.com', {
+    fetch('https://formspree.io/f/xdorwjqg', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,11 +30,19 @@ function ContactForm() {
     .then(response => response.json())
     .then(data => {
       console.log('Form submitted:', data);
+      alert('Thank you for your message!');
       // Add any additional logic for successful submission
     })
     .catch(error => {
       console.error('Error submitting form:', error);
       // Handle error
+    });
+
+    // Reset form fields
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
     });
 
   };
