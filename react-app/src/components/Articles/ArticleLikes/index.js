@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
 import './articlelikes.css'

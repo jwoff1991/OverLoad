@@ -3,7 +3,8 @@ import { useModal } from "../../../context/Modal";
 import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
 import { getOneArticle } from "../../../store/articles";
-import React from "react";
+import OpenModalButton from "../../OpenModalButton";
+import CommentsModal from "../ArticleCommentsModal";
 
 function DeleteCommentModal(props) {
   const commentId = props.props[0];

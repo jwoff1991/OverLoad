@@ -3,7 +3,6 @@ import { useModal } from "../../../context/Modal";
 import { editComment } from "../../../store/comments";
 import "./EditCommentModal.css";
 import { useState } from "react";
-import React from "react";
 
 
 function EditCommentModal(props) {

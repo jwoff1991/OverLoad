@@ -1,5 +1,4 @@
 import './create.css'
-import React from "react";
 
 
 function CreateComponent() {
