@@ -19,7 +19,7 @@ function DeleteArticleModal(props) {
       return
     }
   };
-
+  <drawer></drawer>
   return (
     <div className="delete-story-confirm-delete-modal">
       <h1 className="confirm-delete-modal-heading">Delete article?</h1>
