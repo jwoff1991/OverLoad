@@ -36,12 +36,12 @@ function ContactForm() {
       console.error('Error submitting form:', error);
       // Handle error
     });
-    
+
   };
 
   return (
-    <div>
-      <h1>Contact Us</h1>
+    <div className='form-container'>
+      <h1>Contact</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
@@ -65,11 +65,13 @@ function ContactForm() {
         <textarea
           id="message"
           name="message"
+          className='form-textarea'
+          rows={5}
           value={formData.message}
           onChange={handleChange}
           required
         ></textarea><br />
-        <input type="submit" value="Submit" />
+        <button type="submit" value="Submit" className='contact-form-submit'>Submit</button>
       </form>
     </div>
   );
