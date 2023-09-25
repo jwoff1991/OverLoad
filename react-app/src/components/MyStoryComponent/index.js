@@ -1,8 +1,10 @@
 import "./mystory.css";
+import ContactForm from "../ContactForm";
+import Footer from "../Footer";
 
 function MyStoryComponent() {
   return (
-    <>
+    <div className="story-form-footer-container">
       <div className="my-story-container">
         <h1>Jonathan Wofford</h1>
         <h2>Fullstack Software Engineer</h2>
@@ -71,10 +73,14 @@ function MyStoryComponent() {
         </p>
       </div>
       <div className='div-for-picture-and-footer'>
-        <div className='picture-container'></div>
-        <div className='footer-container'></div>
+        <div className='picture-container'>
+          <ContactForm />
+        </div>
+        <div className='footer-container'>
+          <Footer />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
