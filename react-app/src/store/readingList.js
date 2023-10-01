@@ -63,7 +63,7 @@ const readingListReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_LIST:
-      newState = Object.assign({ ...state });
+      // newState = Object.assign({ ...state });
       newState = action.readingList;
       return newState;
     default:

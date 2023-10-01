@@ -40,11 +40,6 @@ const ReadingListComponent = () => {
           <div className="username">{sessionUser.username}</div>
           <div className="list-length">
             {readingListDisplay(readingListAll, readingList)}
-            {/* {readingListAll && readingListAll.length && readingList[0] ? (
-              <>{readingListAll.length} Article(s)</>
-            ) : (
-              <>0 Articles</>
-            )} */}
           </div>
         </div>
         <div className="heading-div">
