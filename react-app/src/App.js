@@ -12,6 +12,9 @@ import EditArticle from "./components/Articles/EditArticle";
 import ReadingListComponent from "./components/ReadingList";
 import MyStoryComponent from "./components/MyStoryComponent";
 import CreateComponent from "./components/CreateComponent";
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   const dispatch = useDispatch();
