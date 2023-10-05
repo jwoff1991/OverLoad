@@ -19,8 +19,8 @@
   height: 10px;
 }
 
-.nav-icon-user-logged-in > img {
-  height: 10px;
+.logo-on-nav {
+  height: 54px !important;
 }
 
 .user-dropdown-menu > button{
@@ -37,6 +37,7 @@
 
   color: red;
 }
+
 .nav-div {
   display: flex;
   flex-direction: row;
