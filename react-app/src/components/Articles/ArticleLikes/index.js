@@ -37,20 +37,39 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
 
   //renders clear like button if user is not inclued in article likes list
   const likeButtonClear = (
-    <button onClick={addUserLike}>
-      <div className="likes-icon-and-number-container">
-        <div className="likes-icon-container">
-          <img
-            className="likes-icon"
-            src="/icons/likeclear.png"
-            alt="like icon"
-          />
-        </div>
-        <div className="likes-number-container">
-          {likes && likes.length ? likes.length : 0}
-        </div>
-      </div>
-    </button>
+    <>
+      {sessionUser ? (
+        <button onClick={addUserLike}>
+          <div className="likes-icon-and-number-container">
+            <div className="likes-icon-container">
+              <img
+                className="likes-icon"
+                src="/icons/likeclear.png"
+                alt="like icon"
+              />
+            </div>
+            <div className="likes-number-container">
+              {likes && likes.length ? likes.length : 0}
+            </div>
+          </div>
+        </button>
+      ) : (
+        <button>
+          <div className="likes-icon-and-number-container">
+            <div className="likes-icon-container">
+              <img
+                className="likes-icon"
+                src="/icons/likeclear.png"
+                alt="like icon"
+              />
+            </div>
+            <div className="likes-number-container">
+              {likes && likes.length ? likes.length : 0}
+            </div>
+          </div>
+        </button>
+      )}
+    </>
   );
 
   //renders black like button if user is inclued in article likes list
