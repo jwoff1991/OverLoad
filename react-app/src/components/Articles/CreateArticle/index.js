@@ -12,12 +12,6 @@ const CreateNewArticle = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-
-  let isDisabled = true;
-  if (title.length > 4 && body.length > 10) {
-    isDisabled = false;
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let articleId;
@@ -26,14 +20,32 @@ const CreateNewArticle = () => {
       title: title,
       body: body,
     };
-
-    dispatch(postArticle(new_article))
-        .then((data) => {
-            articleId = data.id;
-            history.push(`/articles/${articleId}`);
-            return
-        })
+    if (title.length > 4 && body.length > 10) {
+      dispatch(postArticle(new_article)).then((data) => {
+        articleId = data.id;
+        history.push(`/articles/${articleId}`);
+        return;
+      });
+    }
+    console.log(title)
+    if (title.length < 4) {
+      setErrors({ title: "Title must be at least 4 characters" });
+    }
+    if (body.length < 10) {
+      setErrors({ body: "Body must be at least 10 characters" });
+    }
+    if (title.length < 4 && body.length < 10) {
+      setErrors({
+        title: "Title must be at least 4 characters",
+        body: "Body must be at least 10 characters",
+      });
+    }
   };
+
+    const titleClass = errors.title
+      ? "article-title-errors"
+      : "article-title-input";
+    const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
   return (
     <>
       <div className="create-new-article-form-container">
@@ -42,7 +54,7 @@ const CreateNewArticle = () => {
             <button
               type="submit"
               className="submit-new-article-button"
-              disabled={isDisabled}
+              // disabled={isDisabled}
             >
               Publish
             </button>
@@ -51,20 +63,20 @@ const CreateNewArticle = () => {
             <input
               name="title"
               value={title}
-              maxLength='100'
+              maxLength="100"
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title (min 4 characters)"
-              className="article-title-input"
+              className={titleClass}
             />
           </div>
           <div className="article-body-input-container">
             <textarea
               name="body"
               value={body}
-              maxLength='2500'
+              maxLength="2500"
               onChange={(e) => setBody(e.target.value)}
               placeholder="Tell your story...(min 10 characters)"
-              className="article-body-input"
+              className={bodyClass}
             />
           </div>
         </form>

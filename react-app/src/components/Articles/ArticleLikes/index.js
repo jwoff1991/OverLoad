@@ -15,6 +15,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
   let userIdFromLikes = [];
   let articleLikes;
 
+
   const userIdsInLikesList = (articleLikes) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
@@ -25,12 +26,19 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     articleLikes = Object.values(likes);
     userIdsInLikesList(articleLikes);
   }
+
+  let buttonDisabled = false;
+
   const removeUserLike = (e) => {
+    // console.log("button clicked");
+    // e.currentTarget.disabled = true;
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
   };
 
   const addUserLike = (e) => {
+    // console.log("button clicked");
+    // e.currentTarget.disabled = true;
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };
@@ -39,7 +47,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
   const likeButtonClear = (
     <>
       {sessionUser ? (
-        <button onClick={addUserLike}>
+        <button onClick={addUserLike} /*disabled={buttonDisabled} */>
           <div className="likes-icon-and-number-container">
             <div className="likes-icon-container">
               <img
@@ -74,7 +82,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
 
   //renders black like button if user is inclued in article likes list
   const likeButtonBlack = (
-    <button onClick={removeUserLike}>
+    <button onClick={removeUserLike} /*disabled={buttonDisabled} */>
       <div className="likes-icon-and-number-container">
         <div className="likes-icon-container">
           <img className="likes-icon" src="/icons/like.png" alt="like icon" />

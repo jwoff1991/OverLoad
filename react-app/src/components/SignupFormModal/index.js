@@ -16,28 +16,33 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
-		} else if (password.length < 8 ) {
+    const regex =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    //tests if email is valid
+    if (regex.test(email) === false) {
+      setErrors({ email: "This is not a valid email" });
+    } else if (password.length < 8 ) {
       setErrors({password: "Password should be at least 8 characters"})
-    } else {
-			setErrors({
+    } else if (password !== confirmPassword) {
+      setErrors({
         password:
           "Confirm Password field must be the same as the Password field",
       });
-		}
+    } else if (password === confirmPassword && password.length >= 8) {
+			const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
+			if (data) {
+				setErrors(data);
+
+			} else {
+				closeModal();
+			}
+    }
 	};
-  let isDisabled = true;
-  if(password.length >= 8) {
-    isDisabled = false
-  }
+
 
 
 	const emailErrorsClass = errors.email ? "email-login-errors" : "";
@@ -122,8 +127,11 @@ function SignupFormModal() {
                 required
               />
             </div>
+            <div>{errors.email}</div>
+            <div>{errors.username}</div>
+            <div>{errors.password}</div>
           </div>
-          <button type="submit" disabled={isDisabled} className="signup-button-submit">
+          <button type="submit" className="signup-button-submit">
             Sign Up
           </button>
         </form>
