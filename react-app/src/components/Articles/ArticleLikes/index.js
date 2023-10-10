@@ -11,11 +11,10 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     likesLength = likes.length;
   }
 
-  //get userId from likes list
   let userIdFromLikes = [];
   let articleLikes;
 
-
+  //get userId from likes list
   const userIdsInLikesList = (articleLikes) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
@@ -27,7 +26,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     userIdsInLikesList(articleLikes);
   }
 
-  let buttonDisabled = false;
+  // let buttonDisabled = false;
 
   const removeUserLike = (e) => {
     // console.log("button clicked");
@@ -43,7 +42,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     dispatch(addLike(articleId, sessionUser.id));
   };
 
-  //renders clear like button if user is not inclued in article likes list
+  //renders clickable like button if user is logged in and not on likeList, or renders unclickable like button if user is not logged in
   const likeButtonClear = (
     <>
       {sessionUser ? (

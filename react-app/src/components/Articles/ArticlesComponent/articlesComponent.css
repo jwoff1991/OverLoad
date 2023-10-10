@@ -1,7 +1,8 @@
 body {
     height: 100vh;
     background-image:
-        linear-gradient(.25turn, rgb(255, 255, 255), rgb(239, 251, 255) 100%);
+        linear-gradient(.25turn, rgb(255, 255, 255), rgb(220, 244, 253) 100%);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 

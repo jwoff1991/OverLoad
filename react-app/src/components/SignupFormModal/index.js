@@ -24,7 +24,7 @@ function SignupFormModal() {
 
     //tests if email is valid
     if (regex.test(email) === false) {
-      setErrors({ email: "This is not a valid email" });
+      setErrors({ email: "Please enter a valid email" });
     } else if (password.length < 8 ) {
       setErrors({password: "Password should be at least 8 characters"})
     } else if (password !== confirmPassword) {
@@ -127,9 +127,9 @@ function SignupFormModal() {
                 required
               />
             </div>
-            <div>{errors.email}</div>
-            <div>{errors.username}</div>
-            <div>{errors.password}</div>
+            <div className="error-validation-div">{errors.email}</div>
+            <div className="error-validation-div">{errors.username}</div>
+            <div className="error-validation-div">{errors.password}</div>
           </div>
           <button type="submit" className="signup-button-submit">
             Sign Up

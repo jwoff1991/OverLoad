@@ -25,7 +25,7 @@
 	border: none;
     font-size: 12px;
     cursor: pointer;
-    margin-top: 15px;
+    /* margin-top: 10px; */
 }
 
 .sign-up-form-email, .sign-up--form-firstname,
@@ -65,4 +65,14 @@
     border-color: rgb(255, 145, 145);
     box-shadow: 0px 0px 3px  rgb(255, 145, 145);
     background-color: rgb(255, 186, 186) !important;
+}
+
+
+.error-validation-div {
+    color: rgb(255, 145, 145);
+    font-size: 15px;
+    margin-top: 15px;
+    /* margin-bottom: 5px; */
+    display: flex;
+    justify-content: center;
 }
