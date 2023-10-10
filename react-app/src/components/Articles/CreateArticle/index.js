@@ -7,15 +7,11 @@ import "./createArticle.css";
 const CreateNewArticle = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-  // const reset = () => {
-  //   setTitle("");
-  //   setBody("");
-  // };
 
   let isDisabled = true;
   if (title.length > 4 && body.length > 10) {
@@ -57,7 +53,7 @@ const CreateNewArticle = () => {
               value={title}
               maxLength='100'
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
+              placeholder="Title (min 4 characters)"
               className="article-title-input"
             />
           </div>
@@ -67,7 +63,7 @@ const CreateNewArticle = () => {
               value={body}
               maxLength='2500'
               onChange={(e) => setBody(e.target.value)}
-              placeholder="Tell your story..."
+              placeholder="Tell your story...(min 10 characters)"
               className="article-body-input"
             />
           </div>

@@ -9,7 +9,7 @@ const EditArticle = () => {
   const articleId = useParams().id;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-//   const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -23,17 +23,16 @@ const EditArticle = () => {
         })
   }, [dispatch, articleId]);
 
-//   const reset = () => {
-//     setTitle("");
-//     setBody("");
-//   };
+  const titleClass = errors.title ? "article-title-errors" : "article-title-input";
+  const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
 
-  let isDisabled = true;
-  if (title.length > 4 && body.length > 10) {
-    isDisabled = false;
-  }
+  // let isDisabled = true;
+  // if (title.length > 4 && body.length > 10) {
+  //   isDisabled = false;
+  // }
 
   const handleSubmit = (e) => {
+    console.log(title)
     e.preventDefault();
     const new_article = {
       id: article.id,
@@ -42,10 +41,21 @@ const EditArticle = () => {
       body: body,
     };
 
-    dispatch(editArticle(new_article)).then((data) => {
-      history.push(`/articles/${articleId}`);
-      return;
-    });
+    if (title.length > 4 && body.length > 10) {
+      dispatch(editArticle(new_article)).then((data) => {
+        history.push(`/articles/${articleId}`);
+        return;
+      });
+    }
+    if (title.length < 4) {
+        setErrors({title: 'Title must be at least 4 characters'})
+    }
+    if (body.length < 10) {
+        setErrors({body: 'Body must be at least 10 characters'})
+    }
+    if (title.length < 4 && body.length < 10) {
+        setErrors({title: 'Title must be at least 4 characters', body: 'Body must be at least 10 characters'})
+    }
   };
   return (
     <>
@@ -56,8 +66,8 @@ const EditArticle = () => {
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              className="article-title-input"
+              placeholder="Title (min 4 chars)"
+              className={titleClass}
             />
           </div>
           <div className="article-body-input-container">
@@ -65,15 +75,15 @@ const EditArticle = () => {
               name="body"
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              placeholder="Tell your story..."
-              className="article-body-input"
+              placeholder="Tell your story...(min 10 chars)"
+              className={bodyClass}
             />
           </div>
           <div className="article-form-submit-container">
             <button
               type="submit"
               className="submit-new-article-button"
-              disabled={isDisabled}
+              // disabled={isDisabled}
             >
               Submit
             </button>
