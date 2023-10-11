@@ -63,7 +63,7 @@ const CreateNewArticle = () => {
             <input
               name="title"
               value={title}
-              maxLength="100"
+              maxLength={100}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title (min 4 characters)"
               className={titleClass}
@@ -73,7 +73,7 @@ const CreateNewArticle = () => {
             <textarea
               name="body"
               value={body}
-              maxLength="2500"
+              maxLength={5000}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Tell your story...(min 10 characters)"
               className={bodyClass}
