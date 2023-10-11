@@ -57,7 +57,6 @@ export const getOneArticle = (id) => async (dispatch) => {
       return data;
     } else {
       const errors = await response.json();
-      console.log(errors)
       return errors;
     }
   } catch (error) {

@@ -32,7 +32,6 @@ const EditArticle = () => {
   // }
 
   const handleSubmit = (e) => {
-    console.log(title)
     e.preventDefault();
     const new_article = {
       id: article.id,

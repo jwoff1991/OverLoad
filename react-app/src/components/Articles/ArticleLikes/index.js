@@ -29,15 +29,11 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
   // let buttonDisabled = false;
 
   const removeUserLike = (e) => {
-    // console.log("button clicked");
-    // e.currentTarget.disabled = true;
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
   };
 
   const addUserLike = (e) => {
-    // console.log("button clicked");
-    // e.currentTarget.disabled = true;
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };

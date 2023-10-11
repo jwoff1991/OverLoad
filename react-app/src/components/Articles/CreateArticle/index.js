@@ -27,7 +27,7 @@ const CreateNewArticle = () => {
         return;
       });
     }
-    console.log(title)
+
     if (title.length < 4) {
       setErrors({ title: "Title must be at least 4 characters" });
     }
