@@ -15,7 +15,7 @@ const ReadingListComponent = () => {
 
   useEffect(() => {
     dispatch(getUserReadingList(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId, sessionUser]);
 
   const articleBodyConverter = (body) => {
     let newArticleBody = body.split("").slice(0, 150).join("");
