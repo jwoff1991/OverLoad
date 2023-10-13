@@ -18,6 +18,12 @@
     word-wrap: break-word;
 }
 
+.comments-display {
+    height: 60vh;
+    overflow-y: auto;
+    padding-bottom: 250px;
+}
+
 .post-comment-form {
     resize: none;
     width: 100%;

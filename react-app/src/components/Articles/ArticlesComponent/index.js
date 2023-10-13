@@ -46,7 +46,7 @@ const ArticlesComponent = () => {
         })
     }
     articleInReadingList(userReadingList)
-
+    
     return (
       <>
         {sessionUser ? (
