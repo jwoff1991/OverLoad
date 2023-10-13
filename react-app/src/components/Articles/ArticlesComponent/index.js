@@ -23,18 +23,21 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
+    //converts article body so no more than 150 chars chows on preview
     const articlesList = Object.values(articles)
     articlesList.reverse()
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
     }
+
+    //converts date_created to a more readable format
     const articleDateConverter =(date) => {
         let createdAtSplit = date.split('').slice(5, 11).join('')
         return createdAtSplit
     }
 
-
+    //gets all article ids in user reading list
     let userReadingListArticleId = []
     const userReadingList = Object.values(readingList)
     const articleInReadingList = (userReadingList) => {

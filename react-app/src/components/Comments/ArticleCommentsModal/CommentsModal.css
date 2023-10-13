@@ -12,7 +12,10 @@
 
 .comments-create {
     box-shadow: 0px 0px 10px lightgray;
+}
 
+.comment-body {
+    word-wrap: break-word;
 }
 
 .post-comment-form {
