@@ -29,7 +29,6 @@ function ContactForm() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Form submitted:', data);
       alert('Thank you for your message!');
       // Add any additional logic for successful submission
     })

@@ -31,7 +31,6 @@ function LoginFormModal() {
   }
 
   const errorsClass = errors.email || errors.password ? "email-login-errors" : ''
-  console.log(errors)
   return (
     <>
       <div className="login-form-container">
