@@ -14,7 +14,7 @@ const ArticlesComponent = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const articles = useSelector((state) => state.articles.allArticles)
     const readingList = useSelector((state) => state.readingList)
-
+    
 
     useEffect(() => {
         dispatch(getAllArticles());
@@ -23,9 +23,10 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
+      const articlesList = Object.values(articles)
+      articlesList.reverse()
+
     //converts article body so no more than 150 chars chows on preview
-    const articlesList = Object.values(articles)
-    articlesList.reverse()
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
@@ -46,7 +47,7 @@ const ArticlesComponent = () => {
         })
     }
     articleInReadingList(userReadingList)
-    
+
     return (
       <>
         {sessionUser ? (

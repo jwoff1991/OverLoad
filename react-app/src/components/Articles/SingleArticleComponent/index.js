@@ -19,6 +19,7 @@ const SingleArticle = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const readingList = useSelector((state) => state.readingList);
   const dispatch = useDispatch();
+
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments
   );
@@ -29,12 +30,13 @@ const SingleArticle = () => {
     commentsLength = comments.length;
   }
 
-
+  //creates a loading screen
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
+  //gets article and user reading list
   useEffect(() => {
     dispatch(getOneArticle(articleId));
     if (sessionUser && sessionUser.id) {
@@ -42,6 +44,7 @@ const SingleArticle = () => {
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
+  //if no article is found, renders this
   if (!article.id) {
     return (
       <div className="article-id-not-found">
