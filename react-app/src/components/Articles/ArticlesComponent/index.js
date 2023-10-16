@@ -14,7 +14,7 @@ const ArticlesComponent = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const articles = useSelector((state) => state.articles.allArticles)
     const readingList = useSelector((state) => state.readingList)
-    
+
 
     useEffect(() => {
         dispatch(getAllArticles());

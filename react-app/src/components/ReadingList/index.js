@@ -16,7 +16,7 @@ const ReadingListComponent = () => {
 
   useEffect(() => {
     dispatch(getUserReadingList(userId));
-  }, [dispatch, userId, readingListAll]);
+  }, [dispatch, userId]);
 
 
   const [loading, setLoading] = useState(true);
@@ -60,7 +60,7 @@ const ReadingListComponent = () => {
           <div className="heading-div">
             <h1>Reading List</h1>
           </div>
-          {readingListAll && readingListAll[0].article && (
+          {readingListAll && readingListAll[0]?.article && (
             <>
               <div className="reading-list-container">
                 {readingListAll.map(({ article }) => (
