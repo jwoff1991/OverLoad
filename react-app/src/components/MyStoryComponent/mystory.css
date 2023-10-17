@@ -15,3 +15,29 @@
     margin-top: 150px;
     margin-left: 100px;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .story-form-footer-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0px !important;
+    }
+    .picture-container {
+        margin-top: 10px;
+    }
+    .my-story-container {
+        margin-top: 120px;
+        margin-left: 20px !important;
+        width: 85%;
+    }
+    .div-for-picture-and-footer {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0px !important;
+    }
+    .footer-container {
+        display: flex;
+        /* flex-direction: flex-start; */
+    }
+}
