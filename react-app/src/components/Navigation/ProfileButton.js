@@ -34,7 +34,6 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(clearUserReadingList())
     dispatch(logout());
     history.push('/')
   };

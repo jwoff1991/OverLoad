@@ -16,7 +16,7 @@ const ReadingListComponent = () => {
 
   useEffect(() => {
     dispatch(getUserReadingList(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId, sessionUser]);
 
 
   const [loading, setLoading] = useState(true);

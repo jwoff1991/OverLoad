@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
 import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
-import { getUserReadingList } from "../../../store/readingList";
+import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
 import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
@@ -19,6 +19,7 @@ const ArticlesComponent = () => {
     useEffect(() => {
         dispatch(getAllArticles());
         if(sessionUser && sessionUser.id) {
+            dispatch(clearUserReadingList())
             dispatch(getUserReadingList(sessionUser.id))
         }
       }, [dispatch, sessionUser]);
