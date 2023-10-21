@@ -4,6 +4,18 @@
     width: 45%;
 }
 
+.profile-picture > img {
+    width: 200px
+}
+
+.profile-picture {
+    margin-top: 150px;
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .story-form-footer-container {
     display: flex;

@@ -73,6 +73,12 @@ function MyStoryComponent() {
         </p>
       </div>
       <div className='div-for-picture-and-footer'>
+        <div className="profile-picture">
+          <img
+            src="./profile-picture/photodecanditure.jpg"
+            alt="Jonathan Wofford"
+          />
+        </div>
         <div className='picture-container'>
           <ContactForm />
         </div>
