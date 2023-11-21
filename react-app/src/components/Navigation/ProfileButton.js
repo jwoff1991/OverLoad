@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { clearUserReadingList } from "../../store/readingList";
 import "./Navigation.css"
 
 

@@ -40,3 +40,32 @@
     font-size: 12px;
     cursor: pointer;
 }
+
+
+
+.article-body-errors {
+    border-color: rgb(255, 145, 145);
+    box-shadow: 0px 0px 3px  rgb(255, 145, 145);
+    background-color: rgb(255, 186, 186) !important;
+    height: 350px;
+    width: 100%;
+    resize: none;
+}
+
+.article-title-errors {
+    border-color: rgb(255, 145, 145);
+    box-shadow: 0px 0px 3px  rgb(255, 145, 145);
+    background-color: rgb(255, 186, 186) !important;
+    height: 35px;
+    width: 100%;
+    resize: none;
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .create-article-form {
+        padding-top: 20px;
+        width: 95% !important
+    }
+}

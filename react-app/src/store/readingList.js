@@ -1,4 +1,5 @@
 const GET_LIST = "list/get";
+const CLEAR_LIST = "CLEAR_LIST";
 
 const getReadingList = (data) => {
   return {
@@ -7,9 +8,22 @@ const getReadingList = (data) => {
   };
 };
 
-export const getUserReadingList = (userId) => async (dispatch) => {
+const clearReadingList = () => {
+  return {
+    type: CLEAR_LIST,
+  };
+};
+
+export const clearUserReadingList = () => async (dispatch) => {
+  dispatch(clearReadingList());
+  return
+}
+
+
+
+export const getUserReadingList = () => async (dispatch) => {
   try {
-    const response = await fetch(`/api/reading-list/${userId}/`, {
+    const response = await fetch(`/api/reading-list/`, {
       method: "GET",
     });
     if (response.ok) {
@@ -63,9 +77,11 @@ const readingListReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_LIST:
-      newState = Object.assign({ ...state });
+      // newState = Object.assign({ ...state });
       newState = action.readingList;
       return newState;
+    case CLEAR_LIST:
+      return {};
     default:
       return state;
   }

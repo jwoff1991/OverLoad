@@ -19,8 +19,8 @@
   height: 10px;
 }
 
-.nav-icon-user-logged-in > img {
-  height: 10px;
+.logo-on-nav {
+  height: 54px !important;
 }
 
 .user-dropdown-menu > button{
@@ -30,13 +30,12 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .drop-down-sign-out{
-
   color: red;
 }
+
 .nav-div {
   display: flex;
   flex-direction: row;
@@ -119,4 +118,30 @@
 .profile-dropdwon-down-arrow {
   height: 13px;
   color: lightgray
+}
+
+
+@media only screen and (max-width: 600px) {
+  .nav-sign-up > button {
+    height: 40px;
+
+  }
+  .nav-sign-up {
+    margin-right:20px
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    left: 65%;
+    top: 5%;
+    border: 1px solid lightgrey;
+    box-shadow: 0px 0px 20px lightgrey;
+    background-color: white;
+    width: 5em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .drop-down-sign-out {
+    margin-top: 10px;
+  }
 }

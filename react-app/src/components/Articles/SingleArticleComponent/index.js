@@ -1,6 +1,6 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
@@ -11,6 +11,7 @@ import ArticleLikes from "../ArticleLikes";
 import { getUserReadingList } from "../../../store/readingList";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import SpinnerLoadingScreen from "../../LoadingScreen";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
@@ -18,6 +19,7 @@ const SingleArticle = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const readingList = useSelector((state) => state.readingList);
   const dispatch = useDispatch();
+
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments
   );
@@ -28,6 +30,13 @@ const SingleArticle = () => {
     commentsLength = comments.length;
   }
 
+  //creates a loading screen
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1500);
+  }, []);
+
+  //gets article and user reading list
   useEffect(() => {
     dispatch(getOneArticle(articleId));
     if (sessionUser && sessionUser.id) {
@@ -35,6 +44,7 @@ const SingleArticle = () => {
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
+  //if no article is found, renders this
   if (!article.id) {
     return (
       <div className="article-id-not-found">
@@ -56,6 +66,7 @@ const SingleArticle = () => {
   const articleInReadingList = (userReadingList) => {
     userReadingList.map(({ article_id }) => {
       userReadingListArticleId.push(article_id);
+      return userReadingListArticleId;
     });
   };
   articleInReadingList(userReadingList);
@@ -97,56 +108,66 @@ const SingleArticle = () => {
     : "article-container-logged-out";
   return (
     <>
-      <div className={loggedIn}>
-        <div className="single-article-div">
-          <div className="article-title">{article.title}</div>
-          <div className="article-author-and-date">
-            <div className="author">
-              {article.author && article.author.firstname}{" "}
-              {article.author && article.author.lastname}
-            </div>
-            <span>&#183;</span>
-            <div className="date-created">{articleDateConverter(article)}</div>
-          </div>
-          <div className="likes-comments-edit-delete-container">
-            <div className="comment-and-reading-list-buttons">
-              <div className="comments-modal-button-container">
-                {ArticleLikes(sessionUser, likes, articleId)}
-                <OpenModal
-                  buttonText={commentButton}
-                  modalComponent={<CommentsModal props={articleId} />}
-                  className="article-comments-modal-button"
-                />
+      {loading ? (
+        <SpinnerLoadingScreen />
+      ) : (
+        <>
+          <div className={loggedIn}>
+            <div className="single-article-div">
+              <div className="article-title">{article.title}</div>
+              <div className="article-author-and-date">
+                <div className="author">
+                  {article.author && article.author.firstname}{" "}
+                  {article.author && article.author.lastname}
+                </div>
+                <span>&#183;</span>
+                <div className="date-created">
+                  {articleDateConverter(article)}
+                </div>
               </div>
-              {sessionUser ? <>{readingListButton()}</> : <></>}
-            </div>
-            {article.author &&
-              article.author.id &&
-              sessionUser &&
-              sessionUser.id === article.author.id && (
-                <>
-                  <div className="edit-delete-buttons">
+              <div className="likes-comments-edit-delete-container">
+                <div className="comment-and-reading-list-buttons">
+                  <div className="comments-modal-button-container">
+                    {ArticleLikes(sessionUser, likes, articleId)}
                     <OpenModal
-                      buttonText="Delete"
-                      modalComponent={<DeleteArticleModal props={articleId} />}
-                      className="article-delete-button"
+                      buttonText={commentButton}
+                      modalComponent={<CommentsModal props={articleId} />}
+                      className="article-comments-modal-button"
                     />
-                    <NavLink
-                      key={article.id}
-                      to={`/article/${article.id}/edit`}
-                    >
-                      <button className="article-edit-button">
-                        Edit Article
-                      </button>
-                    </NavLink>
                   </div>
-                </>
-              )}
+                  {sessionUser ? <>{readingListButton()}</> : <></>}
+                </div>
+                {article.author &&
+                  article.author.id &&
+                  sessionUser &&
+                  sessionUser.id === article.author.id && (
+                    <>
+                      <div className="edit-delete-buttons">
+                        <OpenModal
+                          buttonText="Delete"
+                          modalComponent={
+                            <DeleteArticleModal props={articleId} />
+                          }
+                          className="article-delete-button"
+                        />
+                        <NavLink
+                          key={article.id}
+                          to={`/article/${article.id}/edit`}
+                        >
+                          <button className="article-edit-button">
+                            Edit Article
+                          </button>
+                        </NavLink>
+                      </div>
+                    </>
+                  )}
+              </div>
+              <div className="article-body">{article.body}</div>
+              <div></div>
+            </div>
           </div>
-          <div className="article-body">{article.body}</div>
-          <div></div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

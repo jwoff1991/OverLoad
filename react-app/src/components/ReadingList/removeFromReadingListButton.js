@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getUserReadingList, removeFromReadingList } from "../../store/readingList";
+import { useDispatch } from "react-redux";
+import { removeFromReadingList } from "../../store/readingList";
 
 
 const ReadingListRemoveButtonComponent = (props) => {

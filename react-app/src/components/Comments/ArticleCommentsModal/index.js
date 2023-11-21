@@ -10,7 +10,6 @@ import EditCommentModal from "../UpdateComment";
 
 function CommentsModal(props) {
   const [comment, setComment] = useState("");
-  //   const [popupDelete, setpopupDelete] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const comments = useSelector(
     (state) => state.articles.singleArticle.comments

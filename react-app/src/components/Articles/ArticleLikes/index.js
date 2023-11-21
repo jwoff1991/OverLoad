@@ -11,10 +11,10 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     likesLength = likes.length;
   }
 
-  //get userId from likes list
   let userIdFromLikes = [];
   let articleLikes;
 
+  //get userId from likes list
   const userIdsInLikesList = (articleLikes) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
@@ -25,6 +25,9 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     articleLikes = Object.values(likes);
     userIdsInLikesList(articleLikes);
   }
+
+  // let buttonDisabled = false;
+
   const removeUserLike = (e) => {
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
@@ -35,27 +38,46 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     dispatch(addLike(articleId, sessionUser.id));
   };
 
-  //renders clear like button if user is not inclued in article likes list
+  //renders clickable like button if user is logged in and not on likeList, or renders unclickable like button if user is not logged in
   const likeButtonClear = (
-    <button onClick={addUserLike}>
-      <div className="likes-icon-and-number-container">
-        <div className="likes-icon-container">
-          <img
-            className="likes-icon"
-            src="/icons/likeclear.png"
-            alt="like icon"
-          />
-        </div>
-        <div className="likes-number-container">
-          {likes && likes.length ? likes.length : 0}
-        </div>
-      </div>
-    </button>
+    <>
+      {sessionUser ? (
+        <button onClick={addUserLike} /*disabled={buttonDisabled} */>
+          <div className="likes-icon-and-number-container">
+            <div className="likes-icon-container">
+              <img
+                className="likes-icon"
+                src="/icons/likeclear.png"
+                alt="like icon"
+              />
+            </div>
+            <div className="likes-number-container">
+              {likes && likes.length ? likes.length : 0}
+            </div>
+          </div>
+        </button>
+      ) : (
+        <button>
+          <div className="likes-icon-and-number-container">
+            <div className="likes-icon-container">
+              <img
+                className="likes-icon"
+                src="/icons/likeclear.png"
+                alt="like icon"
+              />
+            </div>
+            <div className="likes-number-container">
+              {likes && likes.length ? likes.length : 0}
+            </div>
+          </div>
+        </button>
+      )}
+    </>
   );
 
   //renders black like button if user is inclued in article likes list
   const likeButtonBlack = (
-    <button onClick={removeUserLike}>
+    <button onClick={removeUserLike} /*disabled={buttonDisabled} */>
       <div className="likes-icon-and-number-container">
         <div className="likes-icon-container">
           <img className="likes-icon" src="/icons/like.png" alt="like icon" />
@@ -69,7 +91,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
 
   //choses which button to display based on if user is in artile like list or not
   const likeButton = () => {
-    if (userIdFromLikes.includes(sessionUser.id)) {
+    if (sessionUser && userIdFromLikes.includes(sessionUser.id)) {
       return likeButtonBlack;
     } else {
       return likeButtonClear;

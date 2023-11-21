@@ -22,6 +22,12 @@ def get_article_likes(articleId):
 
 @article_like_routes.route('/add/<int:articleId>/<int:userId>/', methods=['POST'])
 def post_article_likes(articleId, userId):
+    likes = ArticleLike.query.filter_by(article_id = articleId).all()
+    if likes:
+        for like in likes:
+            if like.user_id == userId:
+                return {"error": "You already liked this article"}, 400
+            
     addedLike = ArticleLike (
         article_id=articleId,
         user_id = userId,

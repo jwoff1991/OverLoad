@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
 import { NavLink } from 'react-router-dom';
 import './articlesComponent.css'
-import { getUserReadingList } from "../../../store/readingList";
+import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
 import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
@@ -19,22 +19,27 @@ const ArticlesComponent = () => {
     useEffect(() => {
         dispatch(getAllArticles());
         if(sessionUser && sessionUser.id) {
+            dispatch(clearUserReadingList())
             dispatch(getUserReadingList(sessionUser.id))
         }
       }, [dispatch, sessionUser]);
 
-    const articlesList = Object.values(articles)
-    articlesList.reverse()
+      const articlesList = Object.values(articles)
+      articlesList.reverse()
+
+    //converts article body so no more than 150 chars chows on preview
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
     }
+
+    //converts date_created to a more readable format
     const articleDateConverter =(date) => {
         let createdAtSplit = date.split('').slice(5, 11).join('')
         return createdAtSplit
     }
 
-
+    //gets all article ids in user reading list
     let userReadingListArticleId = []
     const userReadingList = Object.values(readingList)
     const articleInReadingList = (userReadingList) => {

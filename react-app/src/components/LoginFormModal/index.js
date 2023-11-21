@@ -31,7 +31,6 @@ function LoginFormModal() {
   }
 
   const errorsClass = errors.email || errors.password ? "email-login-errors" : ''
-
   return (
     <>
       <div className="login-form-container">
@@ -62,7 +61,7 @@ function LoginFormModal() {
                 required
               />
           </div>
-
+          {errors.password ? (<div>Email and password combination are incorrect</div>) : (<></>)}
           </div>
           <button className='login-form-submit-button'type="submit">Log In</button>
           <button className='login-form-submit-button' onClick={loginDemo}>Log In as Demo User</button>

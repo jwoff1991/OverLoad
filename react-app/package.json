@@ -9,6 +9,7 @@
     "http-proxy-middleware": "^1.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-ga": "^3.3.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
@@ -38,6 +39,7 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "@types/node": "^20.9.3",
@@ -45,4 +47,7 @@
     "@types/react-dom": "^18.2.16",
     "typescript": "^5.3.2"
   }
+=======
+  "proxy": "http://localhost:5000"
+>>>>>>> main
 }

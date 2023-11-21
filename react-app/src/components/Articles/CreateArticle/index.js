@@ -7,20 +7,10 @@ import "./createArticle.css";
 const CreateNewArticle = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-
-  // const reset = () => {
-  //   setTitle("");
-  //   setBody("");
-  // };
-
-  let isDisabled = true;
-  if (title.length > 4 && body.length > 10) {
-    isDisabled = false;
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,14 +20,32 @@ const CreateNewArticle = () => {
       title: title,
       body: body,
     };
+    if (title.length > 4 && body.length > 10) {
+      dispatch(postArticle(new_article)).then((data) => {
+        articleId = data.id;
+        history.push(`/articles/${articleId}`);
+        return;
+      });
+    }
 
-    dispatch(postArticle(new_article))
-        .then((data) => {
-            articleId = data.id;
-            history.push(`/articles/${articleId}`);
-            return
-        })
+    if (title.length < 4) {
+      setErrors({ title: "Title must be at least 4 characters" });
+    }
+    if (body.length < 10) {
+      setErrors({ body: "Body must be at least 10 characters" });
+    }
+    if (title.length < 4 && body.length < 10) {
+      setErrors({
+        title: "Title must be at least 4 characters",
+        body: "Body must be at least 10 characters",
+      });
+    }
   };
+
+    const titleClass = errors.title
+      ? "article-title-errors"
+      : "article-title-input";
+    const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
   return (
     <>
       <div className="create-new-article-form-container">
@@ -46,7 +54,7 @@ const CreateNewArticle = () => {
             <button
               type="submit"
               className="submit-new-article-button"
-              disabled={isDisabled}
+              // disabled={isDisabled}
             >
               Publish
             </button>
@@ -55,20 +63,20 @@ const CreateNewArticle = () => {
             <input
               name="title"
               value={title}
-              maxLength='100'
+              maxLength={100}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              className="article-title-input"
+              placeholder="Title (min 4 characters)"
+              className={titleClass}
             />
           </div>
           <div className="article-body-input-container">
             <textarea
               name="body"
               value={body}
-              maxLength='2500'
+              maxLength={5000}
               onChange={(e) => setBody(e.target.value)}
-              placeholder="Tell your story..."
-              className="article-body-input"
+              placeholder="Tell your story...(min 10 characters)"
+              className={bodyClass}
             />
           </div>
         </form>
