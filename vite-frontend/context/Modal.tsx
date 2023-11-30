@@ -2,21 +2,27 @@ import React, { useRef, useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 
-const ModalContext = React.createContext();
+type ModalContextType = {
+  modalRef: React.RefObject<HTMLDivElement>;
+  modalContent: React.ReactNode;
+  closeModal: () => void;
+}
+
+const ModalContext = React.createContext({} as ModalContextType);
 
 export function ModalProvider({ children }) {
-  const modalRef = useRef();
-  const [modalContent, setModalContent] = useState(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);;
   // callback function that will be called when modal is closing
-  const [onModalClose, setOnModalClose] = useState(null);
+  const [onModalClose, setOnModalClose] = useState<(() => void) | null>(null);;
 
   const closeModal = () => {
     setModalContent(null); // clear the modal contents
     // If callback function is truthy, call the callback function and reset it
     // to null:
     if (typeof onModalClose === 'function') {
-      setOnModalClose(null);
       onModalClose();
+      setOnModalClose(null);
     }
   };
 
@@ -38,8 +44,8 @@ export function ModalProvider({ children }) {
   );
 }
 
-export function Modal() {
-  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+export function Modal(): React.ReactPortal | null {
+  const { modalRef, modalContent, closeModal } = useContext<ModalContextType>(ModalContext);
   // If there is no div referenced by the modalRef or modalContent is not a
   // truthy value, render nothing:
   if (!modalRef || !modalRef.current || !modalContent) return null;
