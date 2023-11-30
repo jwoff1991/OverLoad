@@ -1,16 +1,13 @@
-import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES } from "react";
+type article = {
+    id: number;
+    user_id: number;
+    title: string;
+    body: string;
+};
+
 
 const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
-
-
-
-type article = {
-  id: number;
-  user_id: number;
-  title: string;
-  body: string;
-};
 
 const getArticles = (data) => {
   return {

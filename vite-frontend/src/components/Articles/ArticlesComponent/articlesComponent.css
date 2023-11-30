@@ -1,0 +1,151 @@
+body {
+    height: 100vh;
+    background-image:
+        linear-gradient(.25turn, rgb(255, 255, 255), rgb(220, 244, 253) 100%);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.articles-container {
+    width: 40%;
+    height: 100%;
+    padding-bottom: 20px;
+}
+.author, .date-created, .reading-list-button{
+    font-size: 13px;
+}
+
+
+.article-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 10px 0px 10px;
+    /* ^ change to 1.5em */
+}
+
+.article-body {
+    padding-bottom: 12px;
+    font-size: 1.17em;
+    /* ^ change to 1.17em */
+}
+
+.article-author, .date-article-author {
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.articles-topics-footer-container{
+    display: flex;
+    justify-content: center;
+}
+
+.bookmark-icon {
+    height: 12px;
+}
+
+
+.div-next-to-image {
+  width: 40%;
+  margin-left: 40px;
+  height: 349px;
+  overflow: hidden;
+}
+
+.div-next-to-image > h1 {
+    padding-bottom: 0px;
+}
+.date-author-reading-list-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-article-author{
+    gap: 5px
+}
+
+.full-article-div {
+    height: 200px;
+    border-bottom: rgb(179, 179, 179) solid 0.5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+
+
+
+.image-for-front-page{
+    width: 60%;
+    height: 349px
+}
+
+.staff-picks-user-not-logged-in {
+    width: 30%;
+    position: sticky;
+    top: 120px;
+}
+
+.staff-picks-user-logged-in {
+    width: 30%;
+    position: sticky;
+    top: 45px;
+    padding-left: 70px
+}
+
+.topics-footer-container-user-not-logged-in{
+    margin-left: 70px
+}
+
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+.user-not-logged-in-div {
+    border-top: black solid 1px;
+    border-bottom: black solid 1px;
+    height: 350px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+
+  @media only screen and (max-width: 600px) {
+    body {
+        height: 100vh;
+        background-image:
+            linear-gradient(.25turn, rgb(255, 255, 255), rgb(231, 249, 255) 100%);
+    }
+    .articles-topics-footer-container {
+        width: 95%;
+        display: contents;
+    }
+    .staff-picks-user-not-logged-in, .staff-picks-user-logged-in{
+        display: none;
+    }
+
+    .full-article-div {
+        width: 95%;
+        min-height: 200px;
+        overflow-x: hidden;
+    }
+
+    .articles-container{
+        width: 95%;
+        overflow-x: hidden;
+    }
+    .image-for-front-page {
+        display: none;
+    }
+    .user-not-logged-in-div {
+        margin: 0px;
+        padding: 0px;
+    }
+    .div-next-to-image {
+        width: 100%;
+        margin-top: 100px;
+    }
+  }
