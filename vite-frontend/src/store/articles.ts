@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+
 type article = {
     id: number;
     user_id: number;
@@ -9,21 +11,21 @@ type article = {
 const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
 
-const getArticles = (data) => {
+const getArticles = (data: {}) => {
   return {
     type: GET_ARTICLES,
     articles: data,
   };
 };
 
-const getSingleArticle = (data) => {
+const getSingleArticle = (data: {}) => {
   return {
     type: GET_SINGLE,
     article: data,
   };
 };
 
-export const getAllArticles = () => async (dispatch) => {
+export const getAllArticles = () => async (dispatch: Dispatch) => {
   try {
     const response = await fetch("/api/articles/all", {
       method: "GET",
@@ -43,7 +45,7 @@ export const getAllArticles = () => async (dispatch) => {
   }
 };
 
-export const getOneArticle = (id: number) => async (dispatch) => {
+export const getOneArticle = (id: string) => async (dispatch) => {
   try {
     const response = await fetch(`/api/articles/${id}`, {
       method: "GET",

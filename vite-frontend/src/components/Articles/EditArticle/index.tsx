@@ -1,38 +1,68 @@
 import { useDispatch, useSelector } from "react-redux";
 import { editArticle } from "../../../store/articles";
-import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate} from "react-router-dom";
 import { getOneArticle } from "../../../store/articles";
 import "./UpdateArticle.css";
+
+type ErrorsType = {
+  title: string,
+  body: string
+}
+
+type ArticleType = {
+  id: number,
+  user_id: number,
+  title: string,
+  body: string,
+};
+
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+
+type StateType = {
+  session: {
+    user: UserType; // Replace UserType with the actual type of user
+  };
+  articles: {
+    singleArticle: ArticleType; // Replace ArticleType with the actual type of singleArticle
+  };
+}
 
 const EditArticle = () => {
   const articleId = useParams().id;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [errors, setErrors] = useState([]);
-  const history = useHistory();
+  const [errors, setErrors] = useState<ErrorsType | undefined>();
+  const nav = useNavigate();
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
-  const article = useSelector((state) => state.articles.singleArticle);
+  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const article = useSelector((state: StateType) => state.articles.singleArticle);
 
   useEffect(() => {
-    dispatch(getOneArticle(articleId)).then((article) => {
+    dispatch(getOneArticle(articleId)).then((article: ArticleType) => {
       setTitle(article.title);
       setBody(article.body);
     });
   }, [dispatch, articleId]);
 
-  const titleClass = errors.title
+  const titleClass = errors?.title
     ? "article-title-errors"
     : "article-title-input";
-  const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
+  const bodyClass = errors?.body ? "article-body-errors" : "article-body-input";
 
   // let isDisabled = true;
   // if (title.length > 4 && body.length > 10) {
   //   isDisabled = false;
   // }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const new_article = {
       id: article.id,
@@ -42,16 +72,16 @@ const EditArticle = () => {
     };
 
     if (title.length > 4 && body.length > 10) {
-      dispatch(editArticle(new_article)).then((data) => {
-        history.push(`/articles/${articleId}`);
+      dispatch(editArticle(new_article)).then(() => {
+        nav(`/articles/${articleId}`);
         return;
       });
     }
     if (title.length < 4) {
-      setErrors({ title: "Title must be at least 4 characters" });
+      setErrors({ title: "Title must be at least 4 characters", body: '' });
     }
     if (body.length < 10) {
-      setErrors({ body: "Body must be at least 10 characters" });
+      setErrors({ title: '', body: "Body must be at least 10 characters" });
     }
     if (title.length < 4 && body.length < 10) {
       setErrors({
