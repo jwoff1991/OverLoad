@@ -40,12 +40,14 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
     }
   } catch (error) {
     const errors =
-      error && error.json ? await error.json() : { message: error.toString() };
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
     return errors;
   }
 };
 
-export const getOneArticle = (id: string) => async (dispatch) => {
+export const getOneArticle = (id: string) => async (dispatch: Dispatch) => {
   try {
     const response = await fetch(`/api/articles/${id}`, {
       method: "GET",
@@ -70,12 +72,14 @@ export const getOneArticle = (id: string) => async (dispatch) => {
     }
   } catch (error) {
     const errors =
-      error && error.json ? await error.json() : { message: error.toString() };
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
     return errors;
   }
 };
 
-export const postArticle = (article: article) => async (dispatch) => {
+export const postArticle = (article: article) => async (dispatch: Dispatch) => {
   try {
     const request = await fetch("/api/articles/new-article/", {
       method: "POST",
@@ -90,12 +94,14 @@ export const postArticle = (article: article) => async (dispatch) => {
     return newArticle;
   } catch (error) {
     const errors =
-      error && error.json ? await error.json() : { message: error.toString() };
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
     return errors;
   }
 };
 
-export const editArticle = (article: article) => async (dispatch) => {
+export const editArticle = (article: article) => async (dispatch: Dispatch) => {
   try {
     let id = article.id;
     const request = await fetch(`/api/articles/edit/${id}/`, {
@@ -113,12 +119,14 @@ export const editArticle = (article: article) => async (dispatch) => {
     }
   } catch (error) {
     const errors =
-      error && error.json ? await error.json() : { message: error.toString() };
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
     return errors;
   }
 };
 
-export const deleteArticle = (id: number) => async (dispatch) => {
+export const deleteArticle = (id: number) => async () => {
   const response = await fetch(`/api/articles/${id}/`, {
     method: "DELETE",
   });
@@ -135,7 +143,14 @@ const initialState = {
   singleArticle: {},
 };
 
-const articleReducer = (state = initialState, action) => {
+const articleReducer = (
+  state = initialState,
+  action: {
+    type: typeof GET_ARTICLES | typeof GET_SINGLE;
+    articles: {} | null;
+    article: {} | null;
+  }
+) => {
   let newState;
   switch (action.type) {
     case GET_ARTICLES:
