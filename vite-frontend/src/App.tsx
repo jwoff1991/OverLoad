@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import store from '../../store/index.ts';
+import store from './store/index.ts';
 
 const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
