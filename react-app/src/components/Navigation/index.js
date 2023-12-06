@@ -1,39 +1,28 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import OpenModalButton from "../OpenModalButton/index.tsx";
-import ProfileButton from "./ProfileButton.tsx";
-import LoginFormModal from "../LoginFormModal/index.tsx";
-import SignupFormModal from "../SignupFormModal/index.tsx";
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import OpenModalButton from "../OpenModalButton";
+import ProfileButton from "./ProfileButton";
+import { logout } from "../../store/session";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type StateType = {
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-}
-
-function Navigation({ isLoaded }: { isLoaded: boolean }) {
-  const sessionUser = useSelector((state: StateType) => state.session.user);
+function Navigation({ isLoaded }) {
+  const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef<HTMLDivElement>(null);
+  const ulRef = useRef();
 
-
-
+  const dispatch = useDispatch();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
   useEffect(() => {
     if (!showMenu) return;
 
-    const closeMenu = (e: MouseEvent) => {
-      if (ulRef.current && !ulRef.current.contains(e.target as Node)) {
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -43,10 +32,10 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
   const closeMenu = () => setShowMenu(false);
-  // const openMenu = () => {
-  //   if (showMenu) return;
-  //   setShowMenu(true);
-  // };
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -55,7 +44,7 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
         <>
           <div className="nav-div-user-logged-in">
             <div className="nav-icon-user-logged-in">
-              <Link to="/">
+              <Link exact to="/">
               <img className='logo-on-nav' src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
               </Link>
             </div>
@@ -78,7 +67,7 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
         <>
           <div className="nav-div">
             <div className="nav-icon">
-              <Link to="/">
+              <Link exact to="/">
               <img className='logo-on-nav'src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
               </Link>
             </div>

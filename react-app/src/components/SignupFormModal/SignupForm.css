@@ -1,0 +1,78 @@
+.sign-up-form-container {
+    height: 500px;
+    width: 450px ;
+    border: lightgrey 1px solid !important;
+    box-shadow: 0px 0px 20px rgb(185, 185, 185);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+}
+
+.input-fields-signup-form {
+    width: 350px;
+}
+
+.login-form-container > form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-button-submit {
+    background: none;
+	border: none;
+    font-size: 12px;
+    cursor: pointer;
+    /* margin-top: 10px; */
+}
+
+.sign-up-form-email, .sign-up--form-firstname,
+.sign-up--form-lastname, .sign-up--form-username,
+.sign-up--form-password,
+.sign-up--form-confirm-password, .signup-button-submit {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px
+}
+
+
+.signup-button-submit{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.sign-up--form-bio {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    margin-top: 15px;
+}
+
+.bio-textarea-field {
+    resize: none;
+    height: 60px;
+    width: 225px;
+}
+
+
+.class-for-errors {
+    border-color: rgb(255, 145, 145);
+    box-shadow: 0px 0px 3px  rgb(255, 145, 145);
+    background-color: rgb(255, 186, 186) !important;
+}
+
+
+.error-validation-div {
+    color: rgb(255, 145, 145);
+    font-size: 15px;
+    margin-top: 15px;
+    /* margin-bottom: 5px; */
+    display: flex;
+    justify-content: center;
+}
