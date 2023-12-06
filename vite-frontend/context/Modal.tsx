@@ -6,11 +6,13 @@ type ModalContextType = {
   modalRef: React.RefObject<HTMLDivElement>;
   modalContent: React.ReactNode;
   closeModal: () => void;
+  setModalContent: (content: React.ReactNode) => void;
+  setOnModalClose: (callback: () => void) => void;
 }
 
 const ModalContext = React.createContext({} as ModalContextType);
 
-export function ModalProvider({ children }) {
+export function ModalProvider({ children }: { children: React.ReactNode }) {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(null);;
   // callback function that will be called when modal is closing

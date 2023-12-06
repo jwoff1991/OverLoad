@@ -1,55 +1,93 @@
-import React, { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import { signUp } from "../../store/session";
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import store from '../../store/index.ts';
 import "./SignupForm.css";
 
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
+type ErrorsType = {
+  password: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  username: string | null;
+  email: string | null;
+  bio: string | null;
+};
 function SignupFormModal() {
-	const dispatch = useDispatch();
-	const [firstname, setFirstname] = useState("");
-	const [lastname, setLastname] = useState("");
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [bio, setBio] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
-	const { closeModal } = useModal();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<ErrorsType>({
+    password: null,
+    firstname: null,
+    lastname: null,
+    username: null,
+    bio: null,
+    email: null,
+  });
+  const { closeModal } = useModal();
 
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const regex =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     //tests if email is valid
     if (regex.test(email) === false) {
-      setErrors({ email: "Please enter a valid email" });
-    } else if (password.length < 8 ) {
-      setErrors({password: "Password should be at least 8 characters"})
+      setErrors({
+        email: "Please enter a valid email",
+        password: null,
+        firstname: null,
+        lastname: null,
+        username: null,
+        bio: null,
+      });
+    } else if (password.length < 8) {
+      setErrors({
+        password: "Password should be at least 8 characters",
+        firstname: null,
+        lastname: null,
+        username: null,
+        bio: null,
+        email: null,
+      });
     } else if (password !== confirmPassword) {
       setErrors({
         password:
           "Confirm Password field must be the same as the Password field",
+        firstname: null,
+        lastname: null,
+        username: null,
+        bio: null,
+        email: null,
       });
     } else if (password === confirmPassword && password.length >= 8) {
-			const data = await dispatch(signUp(firstname, lastname, username, email, bio, password));
-			if (data) {
-				setErrors(data);
-
-			} else {
-				closeModal();
-			}
+      const data = await dispatch(
+        signUp(firstname, lastname, username, email, bio, password)
+      );
+      if (data) {
+        setErrors(data);
+      } else {
+        closeModal();
+      }
     }
-	};
+  };
 
-	const emailErrorsClass = errors.email ? "email-login-errors" : "";
+  const emailErrorsClass = errors.email ? "email-login-errors" : "";
   const firstNameErrorsClass = errors.firstname ? "email-login-errors" : "";
   const lastNameErrorsClass = errors.lastname ? "email-login-errors" : "";
   const userNameErrorsClass = errors.username ? "email-login-errors" : "";
   const passwordErrorsClass = errors.password ? "email-login-errors" : "";
 
-	return (
+  return (
     <>
       <div className="sign-up-form-container">
         <h3>Sign Up</h3>
@@ -99,7 +137,6 @@ function SignupFormModal() {
               <label>Bio</label>
               <textarea
                 className="bio-textarea-field"
-                type="text"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 required

@@ -46,7 +46,7 @@ const EditArticle = () => {
   const article = useSelector((state: StateType) => state.articles.singleArticle);
 
   useEffect(() => {
-    dispatch(getOneArticle(articleId)).then((article: ArticleType) => {
+    dispatch(getOneArticle(articleId?)).then((article: ArticleType) => {
       setTitle(article.title);
       setBody(article.body);
     });

@@ -6,17 +6,18 @@ const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 import './App.css'
+import Navigation from './components/Navigation';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    // dispatch(authenticate()).then(() => setIsLoaded(true));
+    dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Routes>
           <Route path="/login" >
@@ -53,3 +54,6 @@ function App() {
 }
 
 export default App
+function authenticate(): any {
+  throw new Error('Function not implemented.');
+}
