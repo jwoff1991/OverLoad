@@ -43,8 +43,6 @@ function SignupFormModal() {
     }
 	};
 
-
-
 	const emailErrorsClass = errors.email ? "email-login-errors" : "";
   const firstNameErrorsClass = errors.firstname ? "email-login-errors" : "";
   const lastNameErrorsClass = errors.lastname ? "email-login-errors" : "";

@@ -27,7 +27,7 @@ const ArticlesComponent = () => {
       const articlesList = Object.values(articles)
       articlesList.reverse()
 
-    //converts article body so no more than 150 chars chows on preview
+    //converts article body so no more than 150 chars shows on preview
     const articleBodyConverter = (body) => {
         let newArticleBody = body.split('').slice(0, 150).join('')
         return newArticleBody
