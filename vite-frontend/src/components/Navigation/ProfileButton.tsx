@@ -1,17 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { clearUserReadingList } from "../../store/readingList";
-import "./Navigation.css"
+import { logout } from "../../store/session.ts";
+import { useNavigate } from "react-router-dom";
+import "./Navigation.css";
 
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
 
-
-function ProfileButton({ user }) {
+function ProfileButton({ user }: { user: UserType}) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef();
-  const history = useHistory()
+  const nav = useNavigate();
+  const ulRef = useRef<HTMLUListElement>(null);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -21,8 +27,8 @@ function ProfileButton({ user }) {
   useEffect(() => {
     if (!showMenu) return;
 
-    const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+    const closeMenu = (e: MouseEvent) => {
+      if (ulRef.current && !ulRef.current.contains(e.target as Node)) {
         setShowMenu(false);
       }
     };
@@ -32,41 +38,43 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/')
+    nav("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
-  const readingListRedirect = (e) => {
+  const readingListRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    closeMenu()
-    history.push(`/${user.id}/reading-list`)
-  }
+    closeMenu();
+    nav(`/${user.id}/reading-list`);
+  };
 
   return (
     <>
       <button onClick={openMenu} className="user-profile-dropdown-button">
         {user.username}
-        <img className="profile-dropdwon-down-arrow" src='/icons/down-arrow_5343114.png' alt='down arrow'/>
+        <img
+          className="profile-dropdwon-down-arrow"
+          src="/icons/down-arrow_5343114.png"
+          alt="down arrow"
+        />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <div className="user-dropdown-menu">
-
               <button onClick={readingListRedirect}>Reading List</button>
-              <button onClick={handleLogout} className="drop-down-sign-out">Sign Out</button>
+              <button onClick={handleLogout} className="drop-down-sign-out">
+                Sign Out
+              </button>
             </div>
-
           </>
         ) : (
-          <>
-
-          </>
+          <></>
         )}
       </ul>
     </>
