@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/session.ts";
 import { useNavigate } from "react-router-dom";
 import "./Navigation.css";
@@ -14,7 +13,6 @@ type UserType = {
 }
 
 function ProfileButton({ user }: { user: UserType}) {
-  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const nav = useNavigate();
   const ulRef = useRef<HTMLUListElement>(null);
@@ -40,7 +38,7 @@ function ProfileButton({ user }: { user: UserType}) {
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(logout());
+    logout();
     nav("/");
   };
 
