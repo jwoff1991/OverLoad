@@ -2,14 +2,22 @@ import ReactGA from 'react-ga';
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { authenticate } from "./store/session";
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import store from '../../store/index.ts';
+
 const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
-import './App.css'
+import './index.css'
 import Navigation from './components/Navigation';
 
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
+
 function App() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -54,6 +62,3 @@ function App() {
 }
 
 export default App
-function authenticate(): any {
-  throw new Error('Function not implemented.');
-}

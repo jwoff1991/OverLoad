@@ -23,7 +23,7 @@ type StateType = {
 }
 
 function Navigation({ isLoaded }: { isLoaded: boolean }) {
-  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const sessionUser = useSelector((state: StateType) => state.session?.user);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement>(null);
 

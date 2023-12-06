@@ -18,7 +18,8 @@ type ErrorsType = {
   bio: string | null;
 };
 function SignupFormModal() {
-  const dispatch: AppDispatch = useDispatch<AppDispatch>();  const [firstname, setFirstname] = useState("");
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
+  const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
