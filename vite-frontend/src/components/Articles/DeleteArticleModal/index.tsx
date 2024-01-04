@@ -1,24 +1,30 @@
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom'
-import { useModal } from "../../../context/Modal";
+import { useNavigate } from 'react-router-dom'
 import { deleteArticle } from '../../../store/articles'
 import "./DeleteArticleModal.css";
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import store from "../../../store";
+import { FormEvent } from "react";
+import { useModal } from "../../../context/Modal";
 
-function DeleteArticleModal(props) {
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
+function DeleteArticleModal(props: {props: number}) {
   const id = props.props;
   const { closeModal } = useModal();
-  const history = useHistory()
-  const dispatch = useDispatch();
+  const nav = useNavigate()
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  const handleDelete = async (e) => {
+  const handleDelete = async (e: FormEvent) => {
     const data = await dispatch(deleteArticle(id));
     if(data) {
       closeModal();
-      history.push(`/`)
+      nav(`/`)
       return
     }
   };
-  <drawer></drawer>
+
   return (
     <div className="delete-story-confirm-delete-modal">
       <h1 className="confirm-delete-modal-heading">Delete article?</h1>
