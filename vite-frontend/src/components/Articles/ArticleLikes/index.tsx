@@ -1,9 +1,15 @@
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
+import { FormEvent } from "react";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import store from "../../../store";
 import './articlelikes.css'
 
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
 const ArticleLikes = (sessionUser, likes, articleId) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   //gets like length
   let likesLength;
@@ -12,10 +18,10 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
   }
 
   let userIdFromLikes = [];
-  let articleLikes;
+  let articleLikes: { user_id: number }[];
 
   //get userId from likes list
-  const userIdsInLikesList = (articleLikes) => {
+  const userIdsInLikesList = (articleLikes: { user_id: number }[]) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
     });
@@ -28,12 +34,12 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
 
   // let buttonDisabled = false;
 
-  const removeUserLike = (e) => {
+  const removeUserLike = (e: FormEvent) => {
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
   };
 
-  const addUserLike = (e) => {
+  const addUserLike = (e: FormEvent) => {
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };
