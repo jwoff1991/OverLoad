@@ -3,7 +3,11 @@ import { editArticle } from "../../../store/articles";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 import { getOneArticle } from "../../../store/articles";
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import store from "../../../store";
 import "./UpdateArticle.css";
+
 
 type ErrorsType = {
   title: string,
@@ -35,21 +39,24 @@ type StateType = {
   };
 }
 
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
 const EditArticle = () => {
   const articleId = useParams().id;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState<ErrorsType | undefined>();
   const nav = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const sessionUser = useSelector((state: StateType) => state.session.user);
   const article = useSelector((state: StateType) => state.articles.singleArticle);
 
   useEffect(() => {
-    dispatch(getOneArticle(articleId?)).then((article: ArticleType) => {
+    articleId ?
+    dispatch(getOneArticle(articleId)).then((article: ArticleType) => {
       setTitle(article.title);
       setBody(article.body);
-    });
+    }) : null;
   }, [dispatch, articleId]);
 
   const titleClass = errors?.title
