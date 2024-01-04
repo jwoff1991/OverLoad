@@ -2,7 +2,8 @@ import { useModal } from '../../../context/Modal.tsx';
 
 interface OpenModalButtonProps {
   modalComponent: React.ReactNode;
-  buttonText: string;
+  buttonText: string | React.ReactNode;
+  className?: string;
   onButtonClick?: () => void;
   onModalClose?: () => void;
   onItemClick?: () => void;

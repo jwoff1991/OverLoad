@@ -8,10 +8,9 @@ import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import ArticleLikes from "../ArticleLikes";
 import store from "../../../store";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import CommentsModal from "../../Comments/ArticleCommentsModal";
+import { Link, useParams } from "react-router-dom";
 import { getUserReadingList } from "../../../store/readingList";
+import CommentsModal from "../../Comments/ArticleCommentsModal";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import SpinnerLoadingScreen from "../../LoadingScreen";
@@ -74,7 +73,7 @@ const SingleArticle = () => {
   useEffect(() => {
     dispatch(getOneArticle(articleId));
     if (sessionUser && sessionUser.id) {
-      dispatch(getUserReadingList(sessionUser.id));
+      dispatch(getUserReadingList());
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
