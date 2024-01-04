@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import store from "../../../store";
 import { FormEvent } from "react";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../../context/Modal";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
