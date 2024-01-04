@@ -17,6 +17,7 @@ function DeleteArticleModal(props: {props: number}) {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const handleDelete = async (e: FormEvent) => {
+    e.preventDefault();
     const data = await dispatch(deleteArticle(id));
     if(data) {
       closeModal();
