@@ -1,29 +1,63 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
-import CommentsModal from "../../Comments/ArticleCommentsModal";
 import ArticleLikes from "../ArticleLikes";
+import store from "../../../store";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import CommentsModal from "../../Comments/ArticleCommentsModal";
 import { getUserReadingList } from "../../../store/readingList";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import SpinnerLoadingScreen from "../../LoadingScreen";
 
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+  author: UserType;
+  comments: string;
+  likes: string;
+  date_created: string;
+}
+type StateType = {
+  articles: {
+    allArticles: ArticleType[];
+    singleArticle: ArticleType;
+  };
+  session: {
+    user: UserType; // Replace UserType with the actual type of user
+  };
+  readingList: {
+    [key: string]: any;
+  };
+}
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
 const SingleArticle = () => {
   const articleId = useParams().id;
-  const article = useSelector((state) => state.articles.singleArticle);
-  const sessionUser = useSelector((state) => state.session.user);
-  const readingList = useSelector((state) => state.readingList);
-  const dispatch = useDispatch();
+  const article = useSelector((state: StateType) => state.articles.singleArticle);
+  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const readingList = useSelector((state: StateType) => state.readingList);
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const comments = useSelector(
-    (state) => state.articles.singleArticle.comments
+    (state: StateType) => state.articles.singleArticle.comments
   );
-  const likes = useSelector((state) => state.articles.singleArticle.likes);
+  const likes = useSelector((state: StateType) => state.articles.singleArticle.likes);
 
   let commentsLength;
   if (comments && comments.length) {
@@ -54,16 +88,16 @@ const SingleArticle = () => {
   }
 
   //converts date from database format to usable format
-  const articleDateConverter = (article) => {
+  const articleDateConverter = (article: ArticleType) => {
     let createdAtSplit = article.date_created.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
 
   //READING LIST
   //pulls article ids from user reading list
-  let userReadingListArticleId = [];
+  let userReadingListArticleId: Number[] = [];
   const userReadingList = Object.values(readingList);
-  const articleInReadingList = (userReadingList) => {
+  const articleInReadingList = (userReadingList: any[]) => {
     userReadingList.map(({ article_id }) => {
       userReadingListArticleId.push(article_id);
       return userReadingListArticleId;
@@ -150,14 +184,14 @@ const SingleArticle = () => {
                           }
                           className="article-delete-button"
                         />
-                        <NavLink
+                        <Link
                           key={article.id}
                           to={`/article/${article.id}/edit`}
                         >
                           <button className="article-edit-button">
                             Edit Article
                           </button>
-                        </NavLink>
+                        </Link>
                       </div>
                     </>
                   )}

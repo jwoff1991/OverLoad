@@ -3,10 +3,13 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { combineReducers } from 'redux';
 import articleReducer from './articles';
+import readingListReducer from './readingList';
+
 
 // Define the root reducer
 const rootReducer = combineReducers({
   articles: articleReducer,
+  readingList: readingListReducer,
 });
 
 // Define the middlewares
