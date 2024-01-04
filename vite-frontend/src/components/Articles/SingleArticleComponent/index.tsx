@@ -71,7 +71,7 @@ const SingleArticle = () => {
 
   //gets article and user reading list
   useEffect(() => {
-    dispatch(getOneArticle(articleId));
+    dispatch(getOneArticle(articleId!));
     if (sessionUser && sessionUser.id) {
       dispatch(getUserReadingList());
     }
@@ -179,7 +179,7 @@ const SingleArticle = () => {
                         <OpenModal
                           buttonText="Delete"
                           modalComponent={
-                            <DeleteArticleModal props={articleId} />
+                            <DeleteArticleModal props={articleId!} />
                           }
                           className="article-delete-button"
                         />

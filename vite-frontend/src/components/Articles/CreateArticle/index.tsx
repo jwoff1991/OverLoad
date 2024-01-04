@@ -1,18 +1,55 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { postArticle } from "../../../store/articles";
 import "./createArticle.css";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import store from "../../../store";
+
+
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+  author: UserType;
+  comments: string;
+  likes: string;
+  date_created: string;
+}
+type StateType = {
+  articles: {
+    allArticles: ArticleType[];
+    singleArticle: ArticleType;
+  };
+  session: {
+    user: UserType; // Replace UserType with the actual type of user
+  };
+  readingList: {
+    [key: string]: any;
+  };
+}
+
+
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 const CreateNewArticle = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [errors, setErrors] = useState([]);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  const [errors, setErrors] = useState<{ title?: string, body?: string }>({});
+    const nav = useNavigate();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
+  const sessionUser = useSelector((state: StateType) => state.session.user);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     let articleId;
     const new_article = {
@@ -23,7 +60,7 @@ const CreateNewArticle = () => {
     if (title.length > 4 && body.length > 10) {
       dispatch(postArticle(new_article)).then((data) => {
         articleId = data.id;
-        history.push(`/articles/${articleId}`);
+        nav(`/articles/${articleId}`);
         return;
       });
     }

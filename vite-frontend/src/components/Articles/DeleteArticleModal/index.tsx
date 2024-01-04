@@ -10,8 +10,8 @@ import { useModal } from "../../../../context/Modal";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
-function DeleteArticleModal(props: {props: number}) {
-  const id = props.props;
+function DeleteArticleModal(props: {props: string}) {
+  const id = parseInt(props.props);
   const { closeModal } = useModal();
   const nav = useNavigate()
   const dispatch: AppDispatch = useDispatch<AppDispatch>();

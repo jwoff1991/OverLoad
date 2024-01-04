@@ -7,6 +7,12 @@ type article = {
     body: string;
 };
 
+type newArticle = {
+  user_id: number;
+  title: string;
+  body: string;
+}
+
 
 const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
@@ -79,7 +85,7 @@ export const getOneArticle = (id: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export const postArticle = (article: article) => async (dispatch: Dispatch) => {
+export const postArticle = (article: newArticle) => async (dispatch: Dispatch) => {
   try {
     const request = await fetch("/api/articles/new-article/", {
       method: "POST",
