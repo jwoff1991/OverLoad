@@ -1,18 +1,38 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import './staffpicks.css'
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
+
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+  author: UserType;
+  date_created: string;
+}
+type StateType = {
+  articles: {
+    allArticles: ArticleType[];
+  };
+}
 
 
 const StaffPicks = () => {
-  const articles = useSelector((state) => state.articles.allArticles);
+  const articles: ArticleType[] = useSelector((state: StateType) => state.articles.allArticles);
   let article1 = articles[5];
   let article2 = articles[14];
   let article3 = articles[20];
   let article4 = articles[1];
   let article5 = articles[7];
 
-  const articleDateConverter = (date) => {
+  const articleDateConverter = (date: String) => {
     let createdAtSplit = date?.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
@@ -22,7 +42,7 @@ const StaffPicks = () => {
       <div className="staff-picks-container">
         <h4>Staff Picks</h4>
         <div className="staff-picks-article-div">
-        <NavLink key={article1?.id} to={`/articles/${article1?.id}`} className='text-link'>
+        <Link key={article1?.id} to={`/articles/${article1?.id}`} className='text-link'>
           <div className="date-author-staff-div">
             <div className="staff-date-article-author">
               <div className="staff-author">
@@ -35,10 +55,10 @@ const StaffPicks = () => {
             </div>
           </div>
           <div className="staff-article-title">{article1?.title}</div>
-          </NavLink>
+          </Link>
         </div>
         <div className="staff-picks-article-div">
-        <NavLink key={article2?.id} to={`/articles/${article2?.id}`} className='text-link'>
+        <Link key={article2?.id} to={`/articles/${article2?.id}`} className='text-link'>
           <div className="date-author-staff-div">
             <div className="staff-date-article-author">
               <div className="staff-author">
@@ -51,10 +71,10 @@ const StaffPicks = () => {
             </div>
           </div>
           <div className="staff-article-title">{article2?.title}</div>
-          </NavLink>
+          </Link>
         </div>
         <div className="staff-picks-article-div">
-        <NavLink key={article3?.id} to={`/articles/${article3?.id}`} className='text-link'>
+        <Link key={article3?.id} to={`/articles/${article3?.id}`} className='text-link'>
           <div className="date-author-staff-div">
             <div className="staff-date-article-author">
               <div className="staff-author">
@@ -67,10 +87,10 @@ const StaffPicks = () => {
             </div>
           </div>
           <div className="staff-article-title">{article3?.title}</div>
-          </NavLink>
+          </Link>
         </div>
         <div className="staff-picks-article-div">
-        <NavLink key={article4?.id} to={`/articles/${article4?.id}`} className='text-link'>
+        <Link key={article4?.id} to={`/articles/${article4?.id}`} className='text-link'>
           <div className="date-author-staff-div">
             <div className="staff-date-article-author">
               <div className="staff-author">
@@ -83,10 +103,10 @@ const StaffPicks = () => {
             </div>
           </div>
           <div className="staff-article-title">{article4?.title}</div>
-          </NavLink>
+          </Link>
         </div>
         <div className="staff-picks-article-div">
-        <NavLink key={article5?.id} to={`/articles/${article5?.id}`} className='text-link'>
+        <Link key={article5?.id} to={`/articles/${article5?.id}`} className='text-link'>
           <div className="date-author-staff-div">
             <div className="staff-date-article-author">
               <div className="staff-author">
@@ -99,7 +119,7 @@ const StaffPicks = () => {
             </div>
           </div>
           <div className="staff-article-title">{article5?.title}</div>
-          </NavLink>
+          </Link>
         </div>
       </div>
     </>
