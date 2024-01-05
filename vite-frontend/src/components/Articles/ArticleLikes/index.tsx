@@ -8,7 +8,16 @@ import './articlelikes.css'
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
-const ArticleLikes = (sessionUser, likes, articleId) => {
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+
+const ArticleLikes = (sessionUser: UserType, likes: String, articleId: String) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   //gets like length
@@ -17,7 +26,7 @@ const ArticleLikes = (sessionUser, likes, articleId) => {
     likesLength = likes.length;
   }
 
-  let userIdFromLikes = [];
+  let userIdFromLikes:number[] = [];
   let articleLikes: { user_id: number }[];
 
   //get userId from likes list
