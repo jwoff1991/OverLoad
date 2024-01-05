@@ -17,7 +17,11 @@ type UserType = {
   bio: string;
 }
 
-const ArticleLikes = (sessionUser: UserType, likes: String, articleId: String) => {
+const ArticleLikes = (
+  sessionUser: UserType,
+  likes: ArrayLike<{ user_id: number }>,
+  articleId: string
+) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   //gets like length
@@ -26,7 +30,7 @@ const ArticleLikes = (sessionUser: UserType, likes: String, articleId: String) =
     likesLength = likes.length;
   }
 
-  let userIdFromLikes:number[] = [];
+  let userIdFromLikes: number[] = [];
   let articleLikes: { user_id: number }[];
 
   //get userId from likes list

@@ -6,7 +6,7 @@ import { getOneArticle } from "./articles";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
-export const addLike = (articleId: string, userId: string) => async (dispatch: AppDispatch) => {
+export const addLike = (articleId: string, userId: number) => async (dispatch: AppDispatch) => {
     const response = await fetch(`/api/article-likes/add/${articleId}/${userId}/`, {
         method: "POST",
       });
@@ -20,7 +20,7 @@ export const addLike = (articleId: string, userId: string) => async (dispatch: A
 }
 
 
-export const removeLike = (articleId: string, userId: string) => async (dispatch: AppDispatch) => {
+export const removeLike = (articleId: string, userId: number) => async (dispatch: AppDispatch) => {
     const response = await fetch(`/api/article-likes/remove/${userId}/${articleId}/`, {
         method: "DELETE",
       });
