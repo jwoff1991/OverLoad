@@ -10,10 +10,10 @@ import ArticleLikes from "../ArticleLikes";
 import store from "../../../store";
 import { Link, useParams } from "react-router-dom";
 import { getUserReadingList } from "../../../store/readingList";
+import SpinnerLoadingScreen from "../../LoadingScreen";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
-import SpinnerLoadingScreen from "../../LoadingScreen";
 
 type UserType = {
   id: number;
@@ -29,7 +29,7 @@ type ArticleType = {
   body: string;
   author: UserType;
   comments: string;
-  likes: string;
+  likes: ArrayLike<{ user_id: number; }>;
   date_created: string;
 }
 type StateType = {
@@ -161,7 +161,7 @@ const SingleArticle = () => {
               <div className="likes-comments-edit-delete-container">
                 <div className="comment-and-reading-list-buttons">
                   <div className="comments-modal-button-container">
-                    {ArticleLikes(sessionUser, likes, articleId)}
+                    {ArticleLikes(sessionUser, likes, articleId!)}
                     <OpenModal
                       buttonText={commentButton}
                       modalComponent={<CommentsModal props={articleId} />}
