@@ -5,43 +5,48 @@ import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import store from '../../store/index.ts';
+import store from '../../store/index.ts'; // Importing the Redux store
 import "./LoginForm.css";
 
+// Defining types for dispatch and error handling
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
-
 type ErrorsType = {
   email: string | null;
   password: string | null;
-}
-;
+};
 
+// Main component for the login form
 function LoginFormModal() {
+  // Initializing Redux dispatch, navigation, state variables, and modal context
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const nav = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errors, setErrors] = useState<ErrorsType>({email: null, password: null});
+  const [errors, setErrors] = useState<ErrorsType>({ email: null, password: null });
   const { closeModal } = useModal();
 
+  // Handling form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      setErrors(data); // Setting errors if login is unsuccessful
     } else {
-      closeModal();
+      closeModal(); // Closing modal if login is successful
     }
   };
 
+  // Logging in as a demo user
   const loginDemo = (e: FormEvent) => {
     e.preventDefault();
     dispatch(login("demo@aa.io", "password")).then(closeModal);
-    nav("/");
+    nav("/"); // Navigating to the home page after logging in as a demo user
   };
 
-  const errorsClass =
-    errors.email || errors.password ? "email-login-errors" : "";
+  // Determining the CSS class for displaying errors
+  const errorsClass = errors.email || errors.password ? "email-login-errors" : "";
+
+  // Rendering the login form
   return (
     <>
       <div className="login-form-container">
