@@ -1,27 +1,39 @@
-import getOneArticle from './articles'
-//need to migrate to ts
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import store from '.';
+import {getOneArticle} from './articles'
 
-export const postComment = (comment) => async (dispatch) => {
+
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
+export const postComment = (comment) => async (dispatch: AppDispatch) => {
     try {
-      const request = await fetch("/api/comments/new-comment/", {
+      const response = await fetch("/api/comments/new-comment/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(comment),
       });
-      const data = await request.json();
+      if(response.ok) {
+      const data = await response.json();
       const newComment = data;
       dispatch(getOneArticle(newComment.article_id));
       return newComment;
+      } else {
+        const errors = await response.json();
+        return errors;
+      }
     } catch (error) {
       const errors =
-        error && error.json ? await error.json() : { message: error.toString() };
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
       return errors;
     }
   };
 
-  export const editComment = (comment) => async (dispatch) => {
+  export const editComment = (comment) => async (dispatch: AppDispatch) => {
     const id = comment.id
     try {
       const request = await fetch(`/api/comments/${id}/`, {
@@ -31,18 +43,24 @@ export const postComment = (comment) => async (dispatch) => {
         },
         body: JSON.stringify(comment),
       });
+      if(!request.ok) {
       const data = await request.json();
       const editedComment = data;
       dispatch(getOneArticle(editedComment.article_id));
       return editedComment;
+      } else {
+        const errors = await request.json();
+        return errors;
+      }
     } catch (error) {
-      const errors =
-        error && error.json ? await error.json() : { message: error.toString() };
-      return errors;
+      error instanceof Error
+        ? { message: error.toString() }
+        : { message: "An error occurred" };
+        return error;
     }
   };
 
-  export const deleteComment = (commentId) => async (dispatch) => {
+  export const deleteComment = (commentId: number) => async () => {
 
     const response = await fetch(`/api/comments/${commentId}/`, {
       method: 'DELETE'
