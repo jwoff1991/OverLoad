@@ -1,4 +1,5 @@
 import getOneArticle from './articles'
+//need to migrate to ts
 
 export const postComment = (comment) => async (dispatch) => {
     try {
