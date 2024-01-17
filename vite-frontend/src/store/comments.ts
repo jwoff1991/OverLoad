@@ -5,17 +5,18 @@ import {getOneArticle} from './articles'
 
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
-type Comment = {
-  id: number,
-  article_id: number,
-  user_id: number,
-  body: String,
-}
+
 
 type NewComment = {
   article_id: number,
   user_id: number,
   body: String,
+}
+
+type EditedComment = {
+  id: number;
+  user_id: number;
+  body: string;
 }
 
 export const postComment = (comment: NewComment) => async (dispatch: AppDispatch) => {
@@ -45,7 +46,7 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
     }
   };
 
-  export const editComment = (comment: Comment) => async (dispatch: AppDispatch) => {
+  export const editComment = (comment: EditedComment) => async (dispatch: AppDispatch) => {
     const id = comment.id
     try {
       const request = await fetch(`/api/comments/${id}/`, {

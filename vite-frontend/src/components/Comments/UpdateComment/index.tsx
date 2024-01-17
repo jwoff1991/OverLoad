@@ -2,24 +2,46 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
 import { editComment } from "../../../store/comments";
 import "./EditCommentModal.css";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import store from "../../../store";
 
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+type EditCommentModalProps = {
+  props: [id: number, body: string, sessionUser: UserType];
+};
 
-function EditCommentModal(props) {
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+};
+
+type EditedComment = {
+  id: number;
+  user_id: number;
+  body: string;
+}
+
+function EditCommentModal(props: EditCommentModalProps) {
   const [id, body, sessionUser] = props.props;
   const { closeModal } = useModal();
   const [comment, setComment] = useState(body);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
 
   let isDisabled = true;
   if (comment.length > 0) {
     isDisabled = false;
   }
-  const handleSubmit = async (e) => {
-    const editedComment = {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const editedComment: EditedComment = {
       id: id,
-      article_id: id,
       user_id: sessionUser.id,
       body: comment,
     };
