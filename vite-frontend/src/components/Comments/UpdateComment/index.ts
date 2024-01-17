@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../../context/Modal";
 import { editComment } from "../../../store/comments";
 import "./EditCommentModal.css";
 import { useState } from "react";

@@ -1,23 +1,76 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./CommentsModal.css";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { postComment } from "../../../store/comments";
 import { getOneArticle } from "../../../store/articles";
-import OpenModal from "../../OpenModalButton";
 import DeleteCommentModal from "../DeleteCommentModal";
 import EditCommentModal from "../UpdateComment";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import store from "../../../store";
+import OpenModal from "../../OpenModalButton";
 
 
-function CommentsModal(props) {
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>;
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+};
+type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+  author: UserType;
+  comments: Comment[];
+  likes: string;
+  date_created: string;
+};
+
+type StateType = {
+  articles: {
+    allArticles: ArticleType[];
+    singleArticle: ArticleType;
+  };
+  session: {
+    user: UserType; // Replace UserType with the actual type of user
+  };
+  readingList: {
+    [key: string]: any;
+  };
+};
+
+type Comment = {
+  id: string;
+  body: string;
+  date_created: string;
+  commenter: {
+    id: number;
+    firstname: string;
+    // other properties of commenter
+  };
+  // other properties of comment
+};
+
+type NewComment = {
+  article_id: number;
+  user_id: number;
+  body: String;
+};
+
+function CommentsModal(props: { articleId: string }) {
   const [comment, setComment] = useState("");
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state: StateType) => state.session.user);
   const comments = useSelector(
-    (state) => state.articles.singleArticle.comments
+    (state: StateType) => state.articles.singleArticle.comments
   );
 
   const [reload, setReload] = useState(0);
-  const dispatch = useDispatch();
-  const articleId = props.props;
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
+  const articleId = props.articleId;
 
   let isDisabled = true;
   if (comment.length > 0) {
@@ -28,33 +81,34 @@ function CommentsModal(props) {
     dispatch(getOneArticle(articleId));
   }, [dispatch, articleId, reload]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const newComment = {
-      article_id: articleId,
+    const newComment: NewComment = {
+      article_id: articleId as unknown as number,
       user_id: sessionUser.id,
       body: comment,
     };
     const data = await dispatch(postComment(newComment));
-    if(data) {
+    if (data) {
       setComment("");
       setReload(reload + 1);
     }
   };
 
-  const resetComment = (e) => {
-    setComment('')
-  }
+  const resetComment = (e: FormEvent) => {
+    e.preventDefault();
+    setComment("");
+  };
 
-  const dateChanger = (date) => {
-    const newDate = date.split('').slice(5, 11).join('')
-    return newDate
-  }
+  const dateChanger = (date: String) => {
+    const newDate = date.split("").slice(5, 11).join("");
+    return newDate;
+  };
 
   return (
     <div className="comments-create-read-div">
       <div className="comments-responses-div">
-        <h3>Responses ({comments.length ? (comments.length) : (0)})</h3>
+        <h3>Responses ({comments.length ? comments.length : 0})</h3>
       </div>
       {sessionUser && sessionUser.id && (
         <div className="comments-create-div-with-buttons">
@@ -62,15 +116,18 @@ function CommentsModal(props) {
             <textarea
               className="post-comment-form"
               placeholder="What are your thoughts?"
-              maxLength='255'
+              maxLength={255}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
             <div className="comment-create-buttons">
               <div className="comment-form-buttons">
-                <button className="cancle-button-comment-form"
+                <button
+                  className="cancle-button-comment-form"
                   onClick={resetComment}
-                >Cancel</button>
+                >
+                  Cancel
+                </button>
               </div>
               <div className="comment-form-buttons">
                 <button
@@ -87,7 +144,6 @@ function CommentsModal(props) {
       )}
       <div className="comments-display">
         {comments &&
-          !comments.message &&
           comments.map(({ commenter, body, id, date_created }) => (
             <div key={id} className="comments-container">
               <div className="commentoer-name-date-edit-delete">
@@ -95,7 +151,9 @@ function CommentsModal(props) {
                   <div className="commentor-name">
                     {commenter.firstname}
                     <span>&#183;</span>
-                    <div className="comment-post-date">{dateChanger(date_created)}</div>
+                    <div className="comment-post-date">
+                      {dateChanger(date_created)}
+                    </div>
                   </div>
                 </div>
                 <div className="edit-delete-buttons-comments">

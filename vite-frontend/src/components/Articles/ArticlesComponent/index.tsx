@@ -8,12 +8,47 @@ import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import store from "../../../store";
+
+
+type UserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  bio: string;
+}
+type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+  author: UserType;
+  comments: string;
+  likes: string;
+  date_created: string;
+}
+type StateType = {
+  articles: {
+    allArticles: ArticleType[];
+    singleArticle: ArticleType;
+  };
+  session: {
+    user: UserType; // Replace UserType with the actual type of user
+  };
+  readingList: {
+    [key: string]: any;
+  };
+}
+type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 const ArticlesComponent = () => {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
-    const articles = useSelector((state) => state.articles.allArticles)
-    const readingList = useSelector((state) => state.readingList)
+    const dispatch: AppDispatch = useDispatch<AppDispatch>();
+    const sessionUser = useSelector((state: StateType) => state.session.user);
+    const articles = useSelector((state: StateType) => state.articles.allArticles)
+    const readingList = useSelector((state: StateType) => state.readingList)
 
 
     useEffect(() => {

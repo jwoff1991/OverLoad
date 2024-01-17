@@ -164,7 +164,7 @@ const SingleArticle = () => {
                     {ArticleLikes(sessionUser, likes, articleId!)}
                     <OpenModal
                       buttonText={commentButton}
-                      modalComponent={<CommentsModal props={articleId} />}
+                      modalComponent={<CommentsModal articleId={articleId!} />}
                       className="article-comments-modal-button"
                     />
                   </div>

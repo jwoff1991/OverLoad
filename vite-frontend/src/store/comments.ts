@@ -12,7 +12,13 @@ type Comment = {
   body: String,
 }
 
-export const postComment = (comment: Comment) => async (dispatch: AppDispatch) => {
+type NewComment = {
+  article_id: number,
+  user_id: number,
+  body: String,
+}
+
+export const postComment = (comment: NewComment) => async (dispatch: AppDispatch) => {
     try {
       const response = await fetch("/api/comments/new-comment/", {
         method: "POST",
