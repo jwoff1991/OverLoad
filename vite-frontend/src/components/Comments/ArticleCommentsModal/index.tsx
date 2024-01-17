@@ -44,7 +44,7 @@ type StateType = {
 };
 
 type Comment = {
-  id: string;
+  id: number;
   body: string;
   date_created: string;
   commenter: {
