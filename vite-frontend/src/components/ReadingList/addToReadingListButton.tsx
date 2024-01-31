@@ -7,8 +7,7 @@ import { FormEvent } from "react";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>;
 
-type ReadingListAddButtonProps = [ number,
-  number];
+type ReadingListAddButtonProps = [number, number];
 
 
 
