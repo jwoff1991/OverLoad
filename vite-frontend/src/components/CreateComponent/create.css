@@ -1,0 +1,20 @@
+.creat-component-content-container {
+    margin-top: 120px;
+    margin-left: 15%;
+    width: 45%;
+}
+
+.creat-component-content-container > p {
+    border-bottom: solid lightgrey 1px;
+    padding-bottom: 15px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .creat-component-content-container {
+        margin-top: 120px;
+        margin-left: 20px !important;
+        width: 85%;
+    }
+
+}
