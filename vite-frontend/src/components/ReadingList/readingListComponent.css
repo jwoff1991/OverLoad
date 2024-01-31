@@ -1,0 +1,47 @@
+.reading-list-topics-footer-container{
+    display:flex;
+    flex-direction: column;
+    margin-left: 15em;
+}
+
+.reading-list-container {
+    width: 625px;
+}
+
+.full-article-div {
+    height: 150px;
+    /* make adjustments to height to 120 once you figure out body */
+    border-bottom: rgb(179, 179, 179) solid 0.5px;
+    padding-top: 25px;
+}
+
+.date-author-reading-list-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-article-author{
+    gap: 5px
+}
+
+.article-author, .date-article-author {
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.author, .date-created, .reading-list-button{
+    font-size: 13px;
+}
+
+.article-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    /* ^ change to 1.5em */
+}
+
+.article-body {
+    padding-bottom: 12px;
+    font-size: 1.17em;
+    /* ^ change to 1.17em */
+}
