@@ -3,22 +3,11 @@ import { useModal } from "../../../../context/Modal";
 import { editComment } from "../../../store/comments";
 import "./EditCommentModal.css";
 import { FormEvent, useState } from "react";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../../store";
 
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+import { AppDispatch, UserType } from "../../../typeDeclerations";
+
 type EditCommentModalProps = {
   props: [id: number, body: string, sessionUser: UserType];
-};
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
 };
 
 type EditedComment = {

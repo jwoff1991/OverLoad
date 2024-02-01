@@ -5,55 +5,8 @@ import { postComment } from "../../../store/comments";
 import { getOneArticle } from "../../../store/articles";
 import DeleteCommentModal from "../DeleteCommentModal";
 import EditCommentModal from "../UpdateComment";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../../store";
 import OpenModal from "../../OpenModalButton";
-
-
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>;
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-};
-type ArticleType = {
-  id: number;
-  title: string;
-  body: string;
-  author: UserType;
-  comments: Comment[];
-  likes: string;
-  date_created: string;
-};
-
-type StateType = {
-  articles: {
-    allArticles: ArticleType[];
-    singleArticle: ArticleType;
-  };
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-  readingList: {
-    [key: string]: any;
-  };
-};
-
-type Comment = {
-  id: number;
-  body: string;
-  date_created: string;
-  commenter: {
-    id: number;
-    firstname: string;
-    // other properties of commenter
-  };
-  // other properties of comment
-};
+import { AppDispatch, StateType } from "../../../typeDeclerations";
 
 type NewComment = {
   article_id: number;
@@ -61,7 +14,7 @@ type NewComment = {
   body: String;
 };
 
-function CommentsModal(props: { articleId: string }) {
+function CommentsModal(props: { articleId: number }) {
   const [comment, setComment] = useState("");
   const sessionUser = useSelector((state: StateType) => state.session.user);
   const comments = useSelector(
@@ -84,7 +37,7 @@ function CommentsModal(props: { articleId: string }) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newComment: NewComment = {
-      article_id: articleId as unknown as number,
+      article_id: articleId,
       user_id: sessionUser.id,
       body: comment,
     };

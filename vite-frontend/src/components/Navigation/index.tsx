@@ -6,21 +6,8 @@ import ProfileButton from "./ProfileButton.tsx";
 import LoginFormModal from "../LoginFormModal/index.tsx";
 import SignupFormModal from "../SignupFormModal/index.tsx";
 import "./Navigation.css";
+import { StateType } from "../../typeDeclerations.ts";
 
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type StateType = {
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-}
 
 function Navigation({ isLoaded }: { isLoaded: boolean }) {
   const sessionUser = useSelector((state: StateType) => state.session?.user);

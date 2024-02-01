@@ -2,13 +2,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { deleteArticle } from '../../../store/articles'
 import "./DeleteArticleModal.css";
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import store from "../../../store";
 import { FormEvent } from "react";
 import { useModal } from "../../../../context/Modal";
+import { AppDispatch } from "../../../typeDeclerations";
 
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 function DeleteArticleModal(props: {props: string}) {
   const id = parseInt(props.props);

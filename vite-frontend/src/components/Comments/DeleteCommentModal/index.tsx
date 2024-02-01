@@ -3,14 +3,14 @@ import { useModal } from "../../../context/Modal";
 import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
 import { getOneArticle } from "../../../store/articles";
-import OpenModalButton from "../../OpenModalButton";
-import CommentsModal from "../ArticleCommentsModal";
+import { AppDispatch } from "../../../typeDeclerations";
 
-function DeleteCommentModal(props) {
+
+function DeleteCommentModal(props: { props: [number, number] }) {
   const commentId = props.props[0];
   const articleId = props.props[1]
   const { closeModal } = useModal();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const handleDelete = async (e) => {
     const data = await dispatch(deleteComment(commentId));

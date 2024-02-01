@@ -3,43 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postArticle } from "../../../store/articles";
 import "./createArticle.css";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../../store";
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type ArticleType = {
-  id: number;
-  title: string;
-  body: string;
-  author: UserType;
-  comments: string;
-  likes: string;
-  date_created: string;
-}
-type StateType = {
-  articles: {
-    allArticles: ArticleType[];
-    singleArticle: ArticleType;
-  };
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-  readingList: {
-    [key: string]: any;
-  };
-}
-
-
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 const CreateNewArticle = () => {
   const [title, setTitle] = useState("");

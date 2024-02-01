@@ -3,10 +3,8 @@ import { editArticle } from "../../../store/articles";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 import { getOneArticle } from "../../../store/articles";
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import store from "../../../store";
 import "./UpdateArticle.css";
+import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
 
 
 type ErrorsType = {
@@ -14,32 +12,6 @@ type ErrorsType = {
   body: string
 }
 
-type ArticleType = {
-  id: number,
-  user_id: number,
-  title: string,
-  body: string,
-};
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-
-type StateType = {
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-  articles: {
-    singleArticle: ArticleType; // Replace ArticleType with the actual type of singleArticle
-  };
-}
-
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 const EditArticle = () => {
   const articleId = useParams().id;

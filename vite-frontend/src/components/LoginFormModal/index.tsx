@@ -3,13 +3,10 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import store from '../../store/index.ts'; // Importing the Redux store
 import "./LoginForm.css";
+import { AppDispatch } from "../../typeDeclerations.ts";
 
 // Defining types for dispatch and error handling
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 type ErrorsType = {
   email: string | null;
   password: string | null;

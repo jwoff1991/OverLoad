@@ -8,41 +8,8 @@ import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../../store";
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type ArticleType = {
-  id: number;
-  title: string;
-  body: string;
-  author: UserType;
-  comments: string;
-  likes: string;
-  date_created: string;
-}
-type StateType = {
-  articles: {
-    allArticles: ArticleType[];
-    singleArticle: ArticleType;
-  };
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-  readingList: {
-    [key: string]: any;
-  };
-}
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 const ArticlesComponent = () => {
     const dispatch: AppDispatch = useDispatch<AppDispatch>();

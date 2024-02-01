@@ -1,21 +1,10 @@
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
 import { FormEvent } from "react";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../../store";
 import './articlelikes.css'
+import { AppDispatch, UserType } from "../../../typeDeclerations";
 
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
 
 const ArticleLikes = (
   sessionUser: UserType,

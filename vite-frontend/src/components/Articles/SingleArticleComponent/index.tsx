@@ -7,44 +7,15 @@ import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import ArticleLikes from "../ArticleLikes";
-import store from "../../../store";
 import { Link, useParams } from "react-router-dom";
 import { getUserReadingList } from "../../../store/readingList";
 import SpinnerLoadingScreen from "../../LoadingScreen";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
 
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type ArticleType = {
-  id: number;
-  title: string;
-  body: string;
-  author: UserType;
-  comments: string;
-  likes: ArrayLike<{ user_id: number; }>;
-  date_created: string;
-}
-type StateType = {
-  articles: {
-    allArticles: ArticleType[];
-    singleArticle: ArticleType;
-  };
-  session: {
-    user: UserType; // Replace UserType with the actual type of user
-  };
-  readingList: {
-    [key: string]: any;
-  };
-}
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
 
 const SingleArticle = () => {
   const articleId = useParams().id;

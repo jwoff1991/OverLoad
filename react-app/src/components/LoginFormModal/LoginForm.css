@@ -1,0 +1,38 @@
+.login-form-container {
+    height: 250px;
+    width: 325px ;
+    border: lightgrey 1px solid !important;
+    box-shadow: 0px 0px 20px rgb(185, 185, 185);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+}
+
+
+.login-form-container > form {
+    width: 275px;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-div-for-login, .password-for-login {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px
+}
+
+.login-form-submit-button {
+    background: none;
+	border: none;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.email-login-errors {
+    border-color: rgb(255, 145, 145);
+    box-shadow: 0px 0px 3px  rgb(255, 145, 145);
+    background-color: rgb(255, 186, 186) !important;
+}

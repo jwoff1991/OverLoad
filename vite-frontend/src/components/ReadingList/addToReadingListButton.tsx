@@ -1,11 +1,8 @@
 import { useDispatch } from "react-redux";
 import { addToReadingList } from "../../store/readingList";
-import { AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import store from "../../store";
 import { FormEvent } from "react";
+import { AppDispatch } from "../../typeDeclerations";
 
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>;
 
 type ReadingListAddButtonProps = [number, number];
 

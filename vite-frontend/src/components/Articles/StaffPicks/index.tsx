@@ -1,27 +1,8 @@
 import { useSelector } from "react-redux";
 import './staffpicks.css'
 import { Link } from "react-router-dom";
+import { StateType, ArticleType} from "../../../typeDeclerations";
 
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
-type ArticleType = {
-  id: number;
-  title: string;
-  body: string;
-  author: UserType;
-  date_created: string;
-}
-type StateType = {
-  articles: {
-    allArticles: ArticleType[];
-  };
-}
 
 
 const StaffPicks = () => {

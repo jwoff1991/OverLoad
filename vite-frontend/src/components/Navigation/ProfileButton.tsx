@@ -2,15 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { logout } from "../../store/session.ts";
 import { useNavigate } from "react-router-dom";
 import "./Navigation.css";
+import { UserType } from "../../typeDeclerations.ts";
 
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-}
 
 function ProfileButton({ user }: { user: UserType}) {
   const [showMenu, setShowMenu] = useState(false);
