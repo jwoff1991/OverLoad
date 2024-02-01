@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 import { getUserReadingList } from "../../store/readingList";
 import { NavLink } from "react-router-dom";
 import "./readingListComponent.css";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import ReadingListRemoveButtonComponent from "./removeFromReadingListButton";
 import SpinnerLoadingScreen from "../LoadingScreen";
+import { StateType, AppDispatch } from "../../typeDeclerations";
+
 
 const ReadingListComponent = () => {
   const userId = useParams().userid;
-  const dispatch = useDispatch();
-  const readingList = useSelector((state) => state.readingList);
-  const sessionUser = useSelector((state) => state.session.user);
-  const readingListAll = Object.values(readingList);
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
+  const readingList = useSelector((state: StateType) => state.readingList);
+  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const readingListAll: [] = Object.values(readingList);
 
   useEffect(() => {
     dispatch(getUserReadingList(userId));
@@ -25,19 +27,19 @@ const ReadingListComponent = () => {
   }, []);
 
   //converts article body so no more than 150 chars chows on preview
-  const articleBodyConverter = (body) => {
+  const articleBodyConverter = (body: string) => {
     let newArticleBody = body.split("").slice(0, 150).join("");
     return newArticleBody;
   };
 
   //converts date_created to a more readable format
-  const articleDateConverter = (date) => {
+  const articleDateConverter = (date: string) => {
     let createdAtSplit = date.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
 
   //gets all article ids in user reading list
-  const readingListDisplay = (readingListAll, readingList) => {
+  const readingListDisplay = (readingListAll: [], readingList: []) => {
     if (readingListAll && readingListAll.length && readingList[0]) {
       return <>{readingListAll.length} Article(s)</>;
     } else {
