@@ -40,7 +40,7 @@ const SingleArticle = () => {
 
   //gets article and user reading list
   useEffect(() => {
-    dispatch(getOneArticle(articleId!));
+    dispatch(getOneArticle(Number(articleId!)));
     if (sessionUser && sessionUser.id) {
       dispatch(getUserReadingList());
     }
