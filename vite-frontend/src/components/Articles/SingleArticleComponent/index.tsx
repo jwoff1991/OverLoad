@@ -1,8 +1,6 @@
 import "./singleArticle.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
 import { getOneArticle } from "../../../store/articles";
 import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
@@ -13,7 +11,7 @@ import SpinnerLoadingScreen from "../../LoadingScreen";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
-import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
+import { StateType, AppDispatch, SingleArticleType } from "../../../typeDeclerations";
 
 
 
@@ -58,7 +56,7 @@ const SingleArticle = () => {
   }
 
   //converts date from database format to usable format
-  const articleDateConverter = (article: ArticleType) => {
+  const articleDateConverter = (article: SingleArticleType) => {
     let createdAtSplit = article.date_created.split("").slice(5, 11).join("");
     return createdAtSplit;
   };
@@ -138,7 +136,7 @@ const SingleArticle = () => {
                     {ArticleLikes(sessionUser, likes, articleId!)}
                     <OpenModal
                       buttonText={commentButton}
-                      modalComponent={<CommentsModal articleId={articleId!} />}
+                      modalComponent={<CommentsModal articleId={Number(articleId!)} />}
                       className="article-comments-modal-button"
                     />
                   </div>

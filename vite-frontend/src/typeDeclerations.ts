@@ -63,4 +63,4 @@ type UserType = {
   };
 
 
-    export type { UserType, ArticleType, StateType, AppDispatch };
+    export type { UserType, ArticleType, StateType, AppDispatch, SingleArticleType };
