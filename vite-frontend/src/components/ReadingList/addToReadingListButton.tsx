@@ -4,13 +4,16 @@ import { FormEvent } from "react";
 import { AppDispatch } from "../../typeDeclerations";
 
 
-type ReadingListAddButtonProps = [number, number];
+type ReadingListAddButtonProps = {
+  articleId: number;
+  userId: number
+};
 
 
 
 const ReadingListAddButtonComponent = (props: ReadingListAddButtonProps) => {
-  let articleId = props[0];
-  let userId = props[1];
+  let articleId = props.articleId;
+  let userId = props.userId;
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const addToList = (e: FormEvent) => {

@@ -4,12 +4,15 @@ import { AppDispatch } from "../../typeDeclerations";
 import { FormEvent } from "react";
 
 
-type ReadingListRemoveButtonProps = [number, number];
+type ReadingListRemoveButtonProps = {
+  articleId: number;
+  userId: number
+};
 
 
 const ReadingListRemoveButtonComponent = (props: ReadingListRemoveButtonProps) => {
-  let articleId = props[0];
-  let userId = props[1];
+  let articleId = props.articleId;
+  let userId = props.userId;
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const removeFromList = (e: FormEvent) => {

@@ -22,7 +22,7 @@ const ArticlesComponent = () => {
         dispatch(getAllArticles());
         if(sessionUser && sessionUser.id) {
             dispatch(clearUserReadingList())
-            dispatch(getUserReadingList(sessionUser.id))
+            dispatch(getUserReadingList());
         }
       }, [dispatch, sessionUser]);
 
@@ -30,25 +30,25 @@ const ArticlesComponent = () => {
       articlesList.reverse()
 
     //converts article body so no more than 150 chars chows on preview
-    const articleBodyConverter = (body) => {
-        let newArticleBody = body.split('').slice(0, 150).join('')
-        return newArticleBody
-    }
+    const articleBodyConverter = (body: string) => {
+      let newArticleBody = body.split("").slice(0, 150).join("");
+      return newArticleBody;
+    };
 
     //converts date_created to a more readable format
-    const articleDateConverter =(date) => {
-        let createdAtSplit = date.split('').slice(5, 11).join('')
-        return createdAtSplit
-    }
+    const articleDateConverter = (date: string) => {
+      let createdAtSplit = date.split("").slice(5, 11).join("");
+      return createdAtSplit;
+    };
 
     //gets all article ids in user reading list
-    let userReadingListArticleId = []
+    let userReadingListArticleId: number[] = [];
     const userReadingList = Object.values(readingList)
-    const articleInReadingList = (userReadingList) => {
-        userReadingList.map(({article_id}) => {
-            userReadingListArticleId.push(article_id)
-        })
-    }
+    const articleInReadingList = (userReadingList: any[]) => {
+      userReadingList.map(({ article_id }) => {
+        userReadingListArticleId.push(article_id);
+      });
+    };
     articleInReadingList(userReadingList)
 
     return (
@@ -78,13 +78,15 @@ const ArticlesComponent = () => {
                           {userReadingListArticleId.includes(id) ? (
                             <>
                               <ReadingListRemoveButtonComponent
-                                props={[id, sessionUser.id]}
+                                articleId={id}
+                                userId={sessionUser.id}
                               />
                             </>
                           ) : (
                             <>
                               <ReadingListAddButtonComponent
-                                props={[id, sessionUser.id]}
+                                articleId={article.id}
+                                userId={sessionUser.id}
                               />
                             </>
                           )}

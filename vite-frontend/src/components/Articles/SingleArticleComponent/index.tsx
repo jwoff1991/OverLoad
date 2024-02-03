@@ -81,12 +81,15 @@ const SingleArticle = () => {
     if (userReadingListArticleId.includes(article.id)) {
       return (
         <ReadingListRemoveButtonComponent
-          props={[article.id, sessionUser.id]}
+          articleId={article.id}
+          userId={sessionUser.id}
         />
       );
     } else {
       return (
-        <ReadingListAddButtonComponent props={[article.id, sessionUser.id]} />
+        <ReadingListAddButtonComponent
+        articleId={article.id}
+        userId={sessionUser.id} />
       );
     }
   };

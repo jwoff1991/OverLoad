@@ -14,7 +14,6 @@ def get_reading_list():
     user = current_user.to_dict()
     user_id = user['id']
     reading_list = ReadingList.query.filter_by(user_id = user_id).all()
-    print('************', reading_list, '************')
     if not reading_list:
         message = 'There are currently articles on this readinglist'
         return message
