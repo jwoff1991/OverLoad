@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import Footer from "../../Footer";
+import StaffPicks from "../StaffPicks";
+import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
-import { NavLink } from 'react-router-dom';
-import './articlesComponent.css'
+import { useDispatch, useSelector } from "react-redux";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
-import StaffPicks from "../StaffPicks";
-import Footer from "../../Footer";
-import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
-import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import { StateType, AppDispatch } from "../../../typeDeclerations";
+import './articlesComponent.css'
 
 
 const ArticlesComponent = () => {
@@ -85,7 +85,7 @@ const ArticlesComponent = () => {
                           ) : (
                             <>
                               <ReadingListAddButtonComponent
-                                articleId={article.id}
+                                articleId={id}
                                 userId={sessionUser.id}
                               />
                             </>

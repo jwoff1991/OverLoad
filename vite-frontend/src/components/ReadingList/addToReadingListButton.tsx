@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addToReadingList } from "../../store/readingList";
+import { addToReadingList, getUserReadingList } from "../../store/readingList";
 import { FormEvent } from "react";
 import { AppDispatch } from "../../typeDeclerations";
 
@@ -19,7 +19,7 @@ const ReadingListAddButtonComponent = (props: ReadingListAddButtonProps) => {
   const addToList = (e: FormEvent) => {
     e.preventDefault();
     dispatch(addToReadingList(articleId, userId));
-    // dispatch(getUserReadingList(userId))
+    dispatch(getUserReadingList())
     return;
   };
   return (
