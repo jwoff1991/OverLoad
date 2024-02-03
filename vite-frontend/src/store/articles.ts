@@ -53,7 +53,7 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const getOneArticle = (id: string) => async (dispatch: Dispatch) => {
+export const getOneArticle = (id: number) => async (dispatch: Dispatch) => {
   try {
     const response = await fetch(`/api/articles/${id}`, {
       method: "GET",
