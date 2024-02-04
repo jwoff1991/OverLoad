@@ -18,7 +18,7 @@ import { StateType, AppDispatch, SingleArticleType } from "../../../typeDeclerat
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector((state: StateType) => state.articles.singleArticle);
-  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const sessionUser = useSelector((state: StateType) => state.session?.user);
   const readingList = useSelector((state: StateType) => state.readingList);
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
