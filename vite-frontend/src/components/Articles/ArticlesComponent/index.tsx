@@ -13,7 +13,7 @@ import './articlesComponent.css'
 
 const ArticlesComponent = () => {
     const dispatch: AppDispatch = useDispatch<AppDispatch>();
-    const sessionUser = useSelector((state: StateType) => state.session?.user);
+    const sessionUser = useSelector((state: StateType) => state.session.user);
     const articles = useSelector((state: StateType) => state.articles.allArticles)
     const readingList = useSelector((state: StateType) => state.readingList)
 

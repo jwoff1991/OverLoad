@@ -4,12 +4,14 @@ import { createLogger } from 'redux-logger';
 import { combineReducers } from 'redux';
 import articleReducer from './articles';
 import readingListReducer from './readingList';
+import userReducer from './session';
 
 
 // Define the root reducer
 const rootReducer = combineReducers({
   articles: articleReducer,
   readingList: readingListReducer,
+  session: userReducer,
 });
 
 // Define the middlewares
