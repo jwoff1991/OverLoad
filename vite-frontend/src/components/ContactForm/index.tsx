@@ -78,7 +78,7 @@ function ContactForm() {
           onChange={handleChange}
           required
         ></textarea><br />
-        <button type="submit" value="Submit" className='contact-form-submit'>Submit</button>
+        <button type="submit" value="Submit" className='contact-form-submit'>Send Message</button>
       </form>
     </div>
   );

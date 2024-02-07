@@ -11,9 +11,9 @@
 
 .contact-form-submit {
     margin-top: 10px;
-    width: 100px;
+    width: 150px;
     height: 30px;
-    background-color: #f5f5f5;
+    background-color: lightgreen;
     border: 1px solid #f5f5f5;
     border-radius: 5px;
     cursor: pointer;
