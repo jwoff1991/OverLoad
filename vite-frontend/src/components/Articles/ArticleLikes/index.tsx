@@ -42,9 +42,14 @@ const ArticleLikes = (
   };
 
   const addUserLike = (e: FormEvent) => {
+    console.log('button clicked')
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };
+
+  const userNotLoggedInLikeButton = (e:FormEvent) => {
+    alert('You must be logged in to like an article')
+  }
 
   //renders clickable like button if user is logged in and not on likeList, or renders unclickable like button if user is not logged in
   const likeButtonClear = (
@@ -65,7 +70,7 @@ const ArticleLikes = (
           </div>
         </button>
       ) : (
-        <button>
+        <button onClick={userNotLoggedInLikeButton}>
           <div className="likes-icon-and-number-container">
             <div className="likes-icon-container">
               <img
