@@ -24,6 +24,15 @@ function LoginFormModal() {
 
   // Handling form submission
   const handleSubmit = async (e: FormEvent) => {
+    const regex =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if (regex.test(email) === false) {
+      setErrors({email: 'Please enter a valid email', password: null});
+    }
+    if (password.length < 8) {
+      setErrors({email: null, password: 'Password must be at least 8 characters long'});
+    }
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
@@ -70,8 +79,8 @@ function LoginFormModal() {
                 required
               />
             </div>
-            {errors.password ? (
-              <div>Email and password combination are incorrect</div>
+            {errors.password || errors.email ? (
+              <div className="" >Invalid Email and password combination </div>
             ) : (
               <></>
             )}
