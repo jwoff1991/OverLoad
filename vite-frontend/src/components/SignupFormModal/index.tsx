@@ -1,13 +1,10 @@
-import { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../../context/Modal";
 import { signUp } from "../../store/session";
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import store from '../../store/index.ts';
+import { useModal } from "../../../context/Modal";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from '../../typeDeclerations';
+import { FormEvent, useState } from "react";
 import "./SignupForm.css";
 
-type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
 type ErrorsType = {
   password: string | null;
@@ -17,6 +14,8 @@ type ErrorsType = {
   email: string | null;
   bio: string | null;
 };
+
+
 function SignupFormModal() {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const [firstname, setFirstname] = useState("");
