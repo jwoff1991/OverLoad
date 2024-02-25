@@ -3,12 +3,12 @@ import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../typeDeclerations";
 import { deleteComment } from "../../../store/comments";
-import { getOneArticle } from "../../../store/articles";
+// import { getOneArticle } from "../../../store/articles";
 import "./DeleteCommentModal.css";
 
 
-function DeleteCommentModal(props: { props: [number, number] }) {
-  const [commentId, articleId ] = props.props;
+function DeleteCommentModal(props: { props: number /*[number, number] */ }) {
+  const commentId /* articleId */  = props.props;
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
@@ -16,7 +16,7 @@ function DeleteCommentModal(props: { props: [number, number] }) {
     e.preventDefault();
     const data = await dispatch(deleteComment(commentId));
     if(data) {
-      dispatch(getOneArticle(articleId))
+      // dispatch(getOneArticle(articleId))
       closeModal()
     }
   };
