@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import OpenModalButton from "../OpenModalButton/index.tsx";
 import ProfileButton from "./ProfileButton.tsx";
 import LoginFormModal from "../LoginFormModal/index.tsx";
+import OpenModalButton from "../OpenModalButton/index.tsx";
 import SignupFormModal from "../SignupFormModal/index.tsx";
-import "./Navigation.css";
+import { Link } from "react-router-dom";
 import { StateType } from "../../typeDeclerations.ts";
+import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from "react";
+import "./Navigation.css";
 
 
 function Navigation({ isLoaded }: { isLoaded: boolean }) {

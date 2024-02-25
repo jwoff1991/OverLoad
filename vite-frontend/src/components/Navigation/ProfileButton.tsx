@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
 import { logout } from "../../store/session.ts";
-import { useNavigate } from "react-router-dom";
-import "./Navigation.css";
 import { UserType } from "../../typeDeclerations.ts";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import "./Navigation.css";
 
 
 function ProfileButton({ user }: { user: UserType}) {

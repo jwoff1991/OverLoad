@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getUserReadingList } from "../../store/readingList";
-import { NavLink } from "react-router-dom";
-import "./readingListComponent.css";
-import { useParams } from "react-router-dom";
-import ReadingListRemoveButtonComponent from "./removeFromReadingListButton";
 import SpinnerLoadingScreen from "../LoadingScreen";
+import ReadingListRemoveButtonComponent from "./removeFromReadingListButton";
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getUserReadingList } from "../../store/readingList";
+import { useEffect, useState } from "react";
 import { StateType, AppDispatch } from "../../typeDeclerations";
+import { useDispatch, useSelector } from "react-redux";
+import "./readingListComponent.css";
 
 
 const ReadingListComponent = () => {

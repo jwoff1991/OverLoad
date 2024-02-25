@@ -1,6 +1,6 @@
-import "./mystory.css";
-import ContactForm from "../ContactForm";
 import Footer from "../Footer";
+import ContactForm from "../ContactForm";
+import "./mystory.css";
 
 function MyStoryComponent() {
   return (
