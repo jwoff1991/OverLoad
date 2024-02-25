@@ -1,13 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-import DeleteCommentModal from "../DeleteCommentModal";
-import EditCommentModal from "../UpdateComment";
 import OpenModal from "../../OpenModalButton";
+import EditCommentModal from "../UpdateComment";
+import DeleteCommentModal from "../DeleteCommentModal";
+import { UserType } from "../../../typeDeclerations";
+import { useState, useEffect, useRef } from "react";
 import './editDeleteButton.css'
 
-function EditDeleteButton(props) {
+type EditDeleteButtonProps = {
+  props: [id: number, body: string, sessionUser: UserType];
+}
+
+function EditDeleteButton(props: EditDeleteButtonProps) {
   const [id, body, sessionUser] = props.props
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef();
+  const ulRef = useRef<HTMLUListElement | null>(null);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -17,8 +22,8 @@ function EditDeleteButton(props) {
   useEffect(() => {
     if (!showMenu) return;
 
-    const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+    const closeMenu = (e: MouseEvent) => {
+      if (ulRef.current && !ulRef.current.contains(e.target as Node)) {
         setShowMenu(false);
       }
     };

@@ -1,10 +1,10 @@
-import { useDispatch } from "react-redux";
 import { useModal } from "../../../../context/Modal";
 import { editComment } from "../../../store/comments";
-import "./EditCommentModal.css";
+import { useDispatch } from "react-redux";
 import { FormEvent, useState } from "react";
-
 import { AppDispatch, UserType } from "../../../typeDeclerations";
+import "./EditCommentModal.css";
+
 
 type EditCommentModalProps = {
   props: [id: number, body: string, sessionUser: UserType];

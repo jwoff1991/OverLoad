@@ -10,6 +10,8 @@ type LoginErrorsType = {
   password: string | null;
 };
 
+
+
 type NewComment = {
   article_id: number;
   user_id: number;
