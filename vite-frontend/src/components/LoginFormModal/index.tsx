@@ -1,20 +1,14 @@
-import { FormEvent, useState } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { ErrorsType, AppDispatch } from "../../typeDeclerations.ts";
 import "./LoginForm.css";
-import { AppDispatch } from "../../typeDeclerations.ts";
 
-// Defining types for dispatch and error handling
-type ErrorsType = {
-  email: string | null;
-  password: string | null;
-};
 
-// Main component for the login form
+
 function LoginFormModal() {
-  // Initializing Redux dispatch, navigation, state variables, and modal context
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const nav = useNavigate();
   const [email, setEmail] = useState<string>("");

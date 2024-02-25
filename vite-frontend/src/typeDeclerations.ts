@@ -4,6 +4,12 @@ import store from "./store";
 
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
+
+type ErrorsType = {
+  email: string | null;
+  password: string | null;
+};
+
 type UserType = {
     id: number;
     firstname: string;
@@ -12,6 +18,7 @@ type UserType = {
     email: string;
     bio: string;
   }
+
   type ArticleType = {
     author: UserType;
     body: string;
@@ -20,6 +27,7 @@ type UserType = {
     title: string;
     likes: string;
   };
+
   type CommentType = {
     article: ArticleType;
     article_id: number;
@@ -29,11 +37,13 @@ type UserType = {
     id: number;
     user_id: number;
   };
+
   type LikesType = {
     article_id: number;
     id: number;
     user_id: number;
   };
+
   type SingleArticleType = {
     author: UserType;
     body: string;
@@ -44,6 +54,7 @@ type UserType = {
     title: string;
     user_id: number;
   };
+
   type StateType = {
     articles: {
       allArticles: ArticleType[];
@@ -63,4 +74,4 @@ type UserType = {
   };
 
 
-    export type { UserType, ArticleType, StateType, AppDispatch, SingleArticleType };
+    export type { UserType, ArticleType, StateType, AppDispatch, SingleArticleType, ErrorsType, CommentType, LikesType};
