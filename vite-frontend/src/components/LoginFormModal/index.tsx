@@ -3,7 +3,7 @@ import { useModal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
-import { ErrorsType, AppDispatch } from "../../typeDeclerations.ts";
+import { LoginErrorsType, AppDispatch } from "../../typeDeclerations.ts";
 import "./LoginForm.css";
 
 
@@ -13,7 +13,7 @@ function LoginFormModal() {
   const nav = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errors, setErrors] = useState<ErrorsType>({ email: null, password: null });
+  const [errors, setErrors] = useState<LoginErrorsType>({ email: null, password: null });
   const { closeModal } = useModal();
 
   // Handling form submission

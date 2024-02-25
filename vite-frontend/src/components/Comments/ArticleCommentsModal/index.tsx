@@ -1,18 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./CommentsModal.css";
-import { FormEvent, useEffect, useState } from "react";
+import OpenModal from "../../OpenModalButton";
+import EditCommentModal from "../UpdateComment";
+import DeleteCommentModal from "../DeleteCommentModal";
 import { postComment } from "../../../store/comments";
 import { getOneArticle } from "../../../store/articles";
-import DeleteCommentModal from "../DeleteCommentModal";
-import EditCommentModal from "../UpdateComment";
-import OpenModal from "../../OpenModalButton";
-import { AppDispatch, StateType } from "../../../typeDeclerations";
+import { useDispatch, useSelector } from "react-redux";
+import { FormEvent, useEffect, useState } from "react";
+import { AppDispatch, StateType, NewComment } from "../../../typeDeclerations";
+import "./CommentsModal.css";
 
-type NewComment = {
-  article_id: number;
-  user_id: number;
-  body: String;
-};
 
 function CommentsModal(props: { articleId: number }) {
   const [comment, setComment] = useState("");

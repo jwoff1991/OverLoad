@@ -1,10 +1,10 @@
+import { useModal } from "../../../../context/Modal";
+import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
+import { AppDispatch } from "../../../typeDeclerations";
 import { deleteArticle } from '../../../store/articles'
 import "./DeleteArticleModal.css";
-import { FormEvent } from "react";
-import { useModal } from "../../../../context/Modal";
-import { AppDispatch } from "../../../typeDeclerations";
 
 
 function DeleteArticleModal(props: {props: string}) {

@@ -5,9 +5,9 @@ import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadin
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
-import { StateType, AppDispatch } from "../../../typeDeclerations";
 import './articlesComponent.css'
 
 

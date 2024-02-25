@@ -1,17 +1,17 @@
-import "./singleArticle.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getOneArticle } from "../../../store/articles";
-import DeleteArticleModal from "../DeleteArticleModal";
 import OpenModal from "../../OpenModalButton";
 import ArticleLikes from "../ArticleLikes";
-import { Link, useParams } from "react-router-dom";
-import { getUserReadingList } from "../../../store/readingList";
-import SpinnerLoadingScreen from "../../LoadingScreen";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
+import DeleteArticleModal from "../DeleteArticleModal";
+import SpinnerLoadingScreen from "../../LoadingScreen";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import { getOneArticle } from "../../../store/articles";
+import { Link, useParams } from "react-router-dom";
+import { getUserReadingList } from "../../../store/readingList";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { StateType, AppDispatch, SingleArticleType } from "../../../typeDeclerations";
+import "./singleArticle.css";
 
 
 

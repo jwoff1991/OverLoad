@@ -1,9 +1,9 @@
-import { FormEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postArticle } from "../../../store/articles";
-import "./createArticle.css";
+import { FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { StateType, AppDispatch } from "../../../typeDeclerations";
+import "./createArticle.css";
 
 
 const CreateNewArticle = () => {

@@ -4,20 +4,16 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 import { getOneArticle } from "../../../store/articles";
 import "./UpdateArticle.css";
-import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
+import { StateType, AppDispatch, ArticleType, ArticleErrorsType } from "../../../typeDeclerations";
 
 
-type ErrorsType = {
-  title: string,
-  body: string
-}
 
 
 const EditArticle = () => {
   const articleId = useParams().id;
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [errors, setErrors] = useState<ErrorsType | undefined>();
+  const [errors, setErrors] = useState<ArticleErrorsType | undefined>();
   const nav = useNavigate();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const sessionUser = useSelector((state: StateType) => state.session.user);

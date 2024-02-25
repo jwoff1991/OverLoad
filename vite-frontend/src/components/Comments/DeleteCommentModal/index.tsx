@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { deleteComment } from "../../../store/comments";
-import "./DeleteCommentModal.css";
-import { getOneArticle } from "../../../store/articles";
+import { FormEvent } from "react";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../typeDeclerations";
+import { deleteComment } from "../../../store/comments";
+import { getOneArticle } from "../../../store/articles";
+import "./DeleteCommentModal.css";
 
 
 function DeleteCommentModal(props: { props: [number, number] }) {
@@ -12,7 +13,8 @@ function DeleteCommentModal(props: { props: [number, number] }) {
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  const handleDelete = async (e) => {
+  const handleDelete = async (e: FormEvent) => {
+    e.preventDefault();
     const data = await dispatch(deleteComment(commentId));
     if(data) {
       dispatch(getOneArticle(articleId))

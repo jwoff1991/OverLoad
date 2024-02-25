@@ -1,8 +1,8 @@
+import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
-import { FormEvent } from "react";
-import './articlelikes.css'
 import { AppDispatch, UserType } from "../../../typeDeclerations";
+import './articlelikes.css'
 
 
 
@@ -48,6 +48,7 @@ const ArticleLikes = (
   };
 
   const userNotLoggedInLikeButton = (e:FormEvent) => {
+    e.preventDefault();
     alert('You must be logged in to like an article')
   }
 

@@ -5,10 +5,21 @@ import store from "./store";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
-type ErrorsType = {
+type LoginErrorsType = {
   email: string | null;
   password: string | null;
 };
+
+type NewComment = {
+  article_id: number;
+  user_id: number;
+  body: String;
+};
+
+type ArticleErrorsType = {
+  title: string,
+  body: string
+}
 
 type UserType = {
     id: number;
@@ -74,4 +85,4 @@ type UserType = {
   };
 
 
-    export type { UserType, ArticleType, StateType, AppDispatch, SingleArticleType, ErrorsType, CommentType, LikesType};
+    export type { NewComment, ArticleErrorsType, UserType, ArticleType, StateType, AppDispatch, SingleArticleType, LoginErrorsType, CommentType, LikesType};

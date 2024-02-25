@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import './staffpicks.css'
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { StateType, ArticleType} from "../../../typeDeclerations";
+import './staffpicks.css'
 
 
 
