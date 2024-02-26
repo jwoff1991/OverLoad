@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getUserReadingList } from "../../store/readingList";
 import { useEffect, useState } from "react";
-import { StateType, AppDispatch, ArticleType } from "../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
+import { StateType, AppDispatch, ArticleType } from "../../typeDeclerations";
 import "./readingListComponent.css";
 
 

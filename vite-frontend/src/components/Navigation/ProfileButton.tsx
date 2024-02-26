@@ -1,33 +1,35 @@
 import { logout } from "../../store/session.ts";
 import { UserType } from "../../typeDeclerations.ts";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Navigation.css";
 
 
-function ProfileButton({ user }: { user: UserType}) {
-  const [showMenu, setShowMenu] = useState(false);
+function ProfileButton({ user }: { user: UserType }) {
+  console.log(user)
   const nav = useNavigate();
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const ulRef = useRef<HTMLUListElement>(null);
 
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+    if (showUserMenu) return;
+    setShowUserMenu(true);
   };
 
+
   useEffect(() => {
-    if (!showMenu) return;
+    if (!showUserMenu) return;
 
     const closeMenu = (e: MouseEvent) => {
       if (ulRef.current && !ulRef.current.contains(e.target as Node)) {
-        setShowMenu(false);
+        setShowUserMenu(false);
       }
     };
 
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  }, [showUserMenu]);
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -35,8 +37,8 @@ function ProfileButton({ user }: { user: UserType}) {
     nav("/");
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
+  const ulClassName = "profile-dropdown" + (showUserMenu ? "" : " hidden");
+  const closeMenu = () => setShowUserMenu(false);
 
   const readingListRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

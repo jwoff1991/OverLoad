@@ -29,7 +29,7 @@ type UserType = {
     lastname: string;
     username: string;
     email: string;
-    bio: string;
+    bio: string | null;
   }
 
   type ArticleType = {

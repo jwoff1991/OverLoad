@@ -1,20 +1,21 @@
-import ProfileButton from "./ProfileButton.tsx";
+// import ProfileButton from "./ProfileButton.tsx";
 import LoginFormModal from "../LoginFormModal/index.tsx";
 import OpenModalButton from "../OpenModalButton/index.tsx";
 import SignupFormModal from "../SignupFormModal/index.tsx";
-import { Link } from "react-router-dom";
+import {logout} from "../../store/session.ts";
 import { StateType } from "../../typeDeclerations.ts";
 import { useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 import "./Navigation.css";
 
 
 function Navigation({ isLoaded }: { isLoaded: boolean }) {
+  const nav = useNavigate();
   const sessionUser = useSelector((state: StateType) => state.session?.user);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement>(null);
-
-
+  const logoutUser = logout();
 
   useEffect(() => {
     if (!showMenu) return;
@@ -29,12 +30,22 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
   const closeMenu = () => setShowMenu(false);
-  // const openMenu = () => {
-  //   if (showMenu) return;
-  //   setShowMenu(true);
-  // };
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+
+  const readingListRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    nav(`/${sessionUser.id}/reading-list`);
+  };
+  
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    logoutUser;
+    nav("/");
+  };
+
 
   return (
     <>
@@ -43,7 +54,11 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
           <div className="nav-div-user-logged-in">
             <div className="nav-icon-user-logged-in">
               <Link to="/">
-              <img className='logo-on-nav' src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
+                <img
+                  className="logo-on-nav"
+                  src="/icons/rsz_logo.png"
+                  alt="honcomb with the word overload"
+                />
               </Link>
             </div>
             <div className="nav-blank-user-logged-in"></div>
@@ -54,7 +69,12 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
               <div className={ulClassName} ref={ulRef}></div>
               {isLoaded && (
                 <div className="profile-button-user-logged-in">
-                  <ProfileButton user={sessionUser} />
+                  <button onClick={readingListRedirect} className="reading-list-button">Reading List</button>
+                  <button
+                    onClick={handleLogout}
+                    className="drop-down-sign-out"
+                  >Logout</button>
+                  {/* <ProfileButton user={sessionUser} /> */}
                 </div>
               )}
             </div>
@@ -66,16 +86,20 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
           <div className="nav-div">
             <div className="nav-icon">
               <Link to="/">
-              <img className='logo-on-nav'src='/icons/rsz_logo.png' alt='honcomb with the word overload' />
+                <img
+                  className="logo-on-nav"
+                  src="/icons/rsz_logo.png"
+                  alt="honcomb with the word overload"
+                />
               </Link>
             </div>
             <div className="nav-blank"></div>
             <div className="rest-of-nav">
               <div className="nav-my-story">
-                <Link to='/my-story'>My Story</Link>
+                <Link to="/my-story">My Story</Link>
               </div>
               <div className="nav-create">
-                <Link to='/create'>Learn</Link>
+                <Link to="/create">Learn</Link>
               </div>
 
               <div className={ulClassName} ref={ulRef}></div>

@@ -23,17 +23,20 @@
   height: 54px !important;
 }
 
-.user-dropdown-menu > button{
+/* .user-dropdown-menu > button{
   background: none;
 	border: none;
   font-size: 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-}
+} */
 
 .drop-down-sign-out{
   color: red;
+  border: none;
+  background: none;
+  
 }
 
 .nav-div {
@@ -107,18 +110,18 @@
 }
 
 
-.user-profile-dropdown-button {
+/* .user-profile-dropdown-button {
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   gap: 2px
-}
+} */
 
-.profile-dropdwon-down-arrow {
+/* .profile-dropdwon-down-arrow {
   height: 13px;
   color: lightgray
-}
+} */
 
 
 @media only screen and (max-width: 600px) {
