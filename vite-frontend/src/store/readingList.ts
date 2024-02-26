@@ -29,6 +29,7 @@ export const getUserReadingList = () => async (dispatch: Dispatch) => {
     if (response.ok) {
       const data = await response.json();
       dispatch(getReadingList(data));
+      console.log(data)
       return data;
     } else {
       const errors = await response.json();

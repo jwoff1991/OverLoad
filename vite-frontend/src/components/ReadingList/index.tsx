@@ -4,9 +4,20 @@ import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getUserReadingList } from "../../store/readingList";
 import { useEffect, useState } from "react";
-import { StateType, AppDispatch } from "../../typeDeclerations";
+import { StateType, AppDispatch, ArticleType } from "../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
 import "./readingListComponent.css";
+
+
+type ReadingListType = {
+  article: ArticleType;
+  article_id: number;
+
+  id: number;
+  user_id: number;
+}
+
+type ReadingListAllType = ReadingListType[]
 
 
 const ReadingListComponent = () => {
@@ -14,10 +25,10 @@ const ReadingListComponent = () => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const readingList = useSelector((state: StateType) => state.readingList);
   const sessionUser = useSelector((state: StateType) => state.session.user);
-  const readingListAll: [] = Object.values(readingList);
+  const readingListAll: ReadingListAllType = Object.values(readingList);
 
   useEffect(() => {
-    dispatch(getUserReadingList(userId));
+    dispatch(getUserReadingList());
   }, [dispatch, userId, sessionUser]);
 
 
