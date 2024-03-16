@@ -19,7 +19,6 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
 
   useEffect(() => {
     if (!showMenu) return;
-    
 
     const closeMenu = (e: MouseEvent) => {
       if (ulRef.current && !ulRef.current.contains(e.target as Node)) {
