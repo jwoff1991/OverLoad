@@ -13,7 +13,7 @@ const ArticleLikes = (
 ) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  //gets like length
+
   let likesLength;
   if (likes && likes.length) {
     likesLength = likes.length;
@@ -22,7 +22,7 @@ const ArticleLikes = (
   let userIdFromLikes: number[] = [];
   let articleLikes: { user_id: number }[];
 
-  //get userId from likes list
+
   const userIdsInLikesList = (articleLikes: { user_id: number }[]) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
@@ -34,7 +34,7 @@ const ArticleLikes = (
     userIdsInLikesList(articleLikes);
   }
 
-  // let buttonDisabled = false;
+ 
 
   const removeUserLike = (e: FormEvent) => {
     e.preventDefault();
