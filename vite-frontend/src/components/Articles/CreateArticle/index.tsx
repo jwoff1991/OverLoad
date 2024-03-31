@@ -10,37 +10,52 @@ const CreateNewArticle = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState<{ title?: string, body?: string }>({});
-    const nav = useNavigate();
+  const [submitted, setSubmitted] = useState(false);
+  const nav = useNavigate();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const sessionUser = useSelector((state: StateType) => state.session.user);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    let articleId;
-    const new_article = {
-      user_id: sessionUser.id,
-      title: title,
-      body: body,
-    };
-    if (title.length > 4 && body.length > 10) {
-      dispatch(postArticle(new_article)).then((data) => {
-        articleId = data.id;
-        nav(`/articles/${articleId}`);
-        return;
-      });
-    }
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+    if (submitted) {
+      updateErrors({ ...errors, title: e.target.value.length < 4 ? "Title must be at least 4 characters" : "" });
+    }
+  };
+
+  const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBody(e.target.value);
+    if (submitted) {
+      updateErrors({ ...errors, body: e.target.value.length < 10 ? "Body must be at least 10 characters" : "" });
+    }
+  };
+
+  const updateErrors = (newErrors: { title?: string, body?: string }) => {
+    setErrors(newErrors);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: { title?: string, body?: string } = {};
     if (title.length < 4) {
-      setErrors({ title: "Title must be at least 4 characters" });
+      newErrors.title = "Title must be at least 4 characters";
     }
     if (body.length < 10) {
-      setErrors({ body: "Body must be at least 10 characters" });
+      newErrors.body = "Body must be at least 10 characters";
     }
-    if (title.length < 4 && body.length < 10) {
-      setErrors({
-        title: "Title must be at least 4 characters",
-        body: "Body must be at least 10 characters",
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      const new_article = {
+        user_id: sessionUser.id,
+        title: title,
+        body: body,
+      };
+      dispatch(postArticle(new_article)).then((data) => {
+        const articleId = data.id;
+        nav(`/articles/${articleId}`);
       });
+    } else {
+      setSubmitted(true);
     }
   };
 
@@ -56,7 +71,6 @@ const CreateNewArticle = () => {
             <button
               type="submit"
               className="submit-new-article-button"
-              // disabled={isDisabled}
             >
               Publish
             </button>
@@ -66,7 +80,7 @@ const CreateNewArticle = () => {
               name="title"
               value={title}
               maxLength={100}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={handleTitleChange}
               placeholder="Title (min 4 characters)"
               className={titleClass}
             />
@@ -76,7 +90,7 @@ const CreateNewArticle = () => {
               name="body"
               value={body}
               maxLength={5000}
-              onChange={(e) => setBody(e.target.value)}
+              onChange={handleBodyChange}
               placeholder="Tell your story...(min 10 characters)"
               className={bodyClass}
             />
