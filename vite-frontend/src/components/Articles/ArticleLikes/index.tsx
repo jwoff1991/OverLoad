@@ -13,7 +13,7 @@ const ArticleLikes = (
 ) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-
+  //gets like length
   let likesLength;
   if (likes && likes.length) {
     likesLength = likes.length;
@@ -22,7 +22,7 @@ const ArticleLikes = (
   let userIdFromLikes: number[] = [];
   let articleLikes: { user_id: number }[];
 
-
+  //get userId from likes list
   const userIdsInLikesList = (articleLikes: { user_id: number }[]) => {
     articleLikes.map(({ user_id }) => {
       userIdFromLikes.push(user_id);
@@ -34,7 +34,6 @@ const ArticleLikes = (
     userIdsInLikesList(articleLikes);
   }
 
- 
 
   const removeUserLike = (e: FormEvent) => {
     e.preventDefault();
@@ -56,7 +55,7 @@ const ArticleLikes = (
   const likeButtonClear = (
     <>
       {sessionUser ? (
-        <button onClick={addUserLike} /*disabled={buttonDisabled} */>
+        <button onClick={addUserLike}>
           <div className="likes-icon-and-number-container">
             <div className="likes-icon-container">
               <img
@@ -91,7 +90,7 @@ const ArticleLikes = (
 
   //renders black like button if user is inclued in article likes list
   const likeButtonBlack = (
-    <button onClick={removeUserLike} /*disabled={buttonDisabled} */>
+    <button onClick={removeUserLike}>
       <div className="likes-icon-and-number-container">
         <div className="likes-icon-container">
           <img className="likes-icon" src="/icons/like.png" alt="like icon" />
