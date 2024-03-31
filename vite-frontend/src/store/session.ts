@@ -75,16 +75,24 @@ export const login =
 
 export const logout =
   () => async (dispatch: Dispatch<ActionType>) => {
-    console.log('were hitting this')
-    const response = await fetch("/api/auth/logout", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(response, 'response')
+    try {
+      console.log('we are hitting this');
+      const response = await fetch("/api/auth/logout", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response, 'response');
 
-    if (response.ok) {
-      dispatch(removeUser());
+      if (response.ok) {
+        dispatch(removeUser());
+      } else {
+        // Handle non-successful response (e.g., server error)
+        console.error("Logout failed:", response.status);
+      }
+    } catch (error) {
+      // Handle any network errors or exceptions
+      console.error("Error occurred during logout:", error);
     }
   };
 

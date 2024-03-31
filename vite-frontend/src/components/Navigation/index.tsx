@@ -2,10 +2,10 @@
 import LoginFormModal from "../LoginFormModal/index.tsx";
 import OpenModalButton from "../OpenModalButton/index.tsx";
 import SignupFormModal from "../SignupFormModal/index.tsx";
-import {logout} from "../../store/session.ts";
-import { StateType } from "../../typeDeclerations.ts";
-import { useSelector } from "react-redux";
+import { logout } from "../../store/session.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { AppDispatch, StateType } from "../../typeDeclerations.ts";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import "./Navigation.css";
 
@@ -15,7 +15,7 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
   const sessionUser = useSelector((state: StateType) => state.session?.user);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement>(null);
-  const logoutUser = logout();
+  const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (!showMenu) return;
@@ -42,7 +42,7 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    logoutUser;
+    dispatch(logout())
     nav("/");
   };
 
