@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import articleReducer from './articles';
 import readingListReducer from './readingList';
 import userReducer from './session';
-
+import { AnyAction, Dispatch } from 'redux'; // Import AnyAction and Dispatch
 
 // Define the root reducer
 const rootReducer = combineReducers({
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 });
 
 // Define the middlewares
-const middlewares: Middleware[] = [thunk as ThunkMiddleware];
+const middlewares: Middleware<{}, any, Dispatch<AnyAction>>[] = [thunk as ThunkMiddleware];
 
 // Add logger middleware in development
 if (process.env.NODE_ENV !== 'production') {
@@ -29,7 +29,5 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
   devTools: process.env.NODE_ENV !== 'production',
 });
-
-
 
 export default store;
