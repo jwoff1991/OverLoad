@@ -12,7 +12,6 @@ import "./readingListComponent.css";
 type ReadingListType = {
   article: ArticleType;
   article_id: number;
-
   id: number;
   user_id: number;
 }
@@ -37,6 +36,11 @@ const ReadingListComponent = () => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
+  // useEffect(() => {
+  //   // This effect will run whenever readingList changes
+  //   // You can include additional logic here if needed
+  // }, [readingList]);
+
   //converts article body so no more than 150 chars chows on preview
   const articleBodyConverter = (body: string) => {
     let newArticleBody = body.split("").slice(0, 150).join("");
@@ -50,7 +54,7 @@ const ReadingListComponent = () => {
   };
 
   //gets all article ids in user reading list
-  const readingListDisplay = (readingListAll: [], readingList: []) => {
+  const readingListDisplay = (readingListAll: ReadingListType[], readingList: ReadingListType[]) => {
     if (readingListAll && readingListAll.length && readingList[0]) {
       return <>{readingListAll.length} Article(s)</>;
     } else {
@@ -89,7 +93,7 @@ const ReadingListComponent = () => {
                         </div>
                       </div>
                       <ReadingListRemoveButtonComponent
-                        props={[article.id, userId]}
+                        articleId={article.id} userId={userId!}
                       />
                     </div>
                     <NavLink
