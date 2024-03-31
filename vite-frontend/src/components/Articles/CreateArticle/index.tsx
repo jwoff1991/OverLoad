@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postArticle } from "../../../store/articles";
-import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StateType, AppDispatch } from "../../../typeDeclerations";
 import "./createArticle.css";
