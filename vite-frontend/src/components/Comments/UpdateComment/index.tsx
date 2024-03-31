@@ -7,17 +7,18 @@ import "./EditCommentModal.css";
 
 
 type EditCommentModalProps = {
-  props: [id: number, body: string, sessionUser: UserType];
+  props: [id: number, body: string, sessionUser: UserType, articleId: number];
 };
 
 type EditedComment = {
+  article_id: number;
   id: number;
   user_id: number;
   body: string;
 }
 
 function EditCommentModal(props: EditCommentModalProps) {
-  const [id, body, sessionUser] = props.props;
+  const [id, body, sessionUser, article_id] = props.props;
   const { closeModal } = useModal();
   const [comment, setComment] = useState(body);
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
@@ -32,9 +33,11 @@ function EditCommentModal(props: EditCommentModalProps) {
     const editedComment: EditedComment = {
       id: id,
       user_id: sessionUser.id,
+      article_id: article_id,
       body: comment,
     };
     const data = await dispatch(editComment(editedComment));
+    console.log(data)
     if(data) {
       closeModal()
     }

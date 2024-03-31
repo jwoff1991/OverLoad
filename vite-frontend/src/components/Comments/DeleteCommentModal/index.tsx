@@ -7,8 +7,8 @@ import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
 
 
-function DeleteCommentModal(props: { props: number /*[number, number] */ }) {
-  const commentId /* articleId */  = props.props;
+function DeleteCommentModal(props: { props: [commentId: number]  }) {
+  const [ commentId ]  = props.props;
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 

@@ -115,14 +115,14 @@ function CommentsModal(props: { articleId: number }) {
                           <OpenModal
                             buttonText="Edit"
                             modalComponent={
-                              <EditCommentModal props={[id, body, sessionUser]} />
+                              <EditCommentModal props={[id, body, sessionUser, articleId]} />
                             }
                             className="comment-edit-button"
                           />
                           <OpenModal
                             buttonText="Delete"
                             modalComponent={
-                              <DeleteCommentModal props={[id, articleId]} />
+                              <DeleteCommentModal props={[id]} />
                             }
                             className="comment-delete-button"
                           />

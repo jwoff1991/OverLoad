@@ -48,6 +48,7 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
 
   export const editComment = (comment: EditedComment) => async (dispatch: AppDispatch) => {
     const id = comment.id
+    console.log(comment, "***************comment************")
     try {
       const request = await fetch(`/api/comments/${id}/`, {
         method: "PUT",
@@ -56,11 +57,12 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
         },
         body: JSON.stringify(comment),
       });
-      if(!request.ok) {
-      const data = await request.json();
-      const editedComment = data;
-      dispatch(getOneArticle(editedComment.article_id));
-      return editedComment;
+      if(request.ok) {
+          const data = await request.json();
+          const editedComment = data;
+          console.log(editedComment, "***************editedComment************")
+          dispatch(getOneArticle(editedComment.article_id));
+          return editedComment;
       } else {
         const errors = await request.json();
         return errors;
