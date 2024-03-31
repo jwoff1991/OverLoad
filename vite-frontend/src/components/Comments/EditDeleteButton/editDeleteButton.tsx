@@ -6,11 +6,11 @@ import { useState, useEffect, useRef } from "react";
 import './editDeleteButton.css'
 
 type EditDeleteButtonProps = {
-  props: [id: number, body: string, sessionUser: UserType];
+  props: [id: number, body: string, sessionUser: UserType, articleId: number];
 }
 
 function EditDeleteButton(props: EditDeleteButtonProps) {
-  const [id, body, sessionUser] = props.props
+  const [id, body, sessionUser, articleId] = props.props
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLUListElement | null>(null);
 
@@ -50,14 +50,14 @@ function EditDeleteButton(props: EditDeleteButtonProps) {
               buttonText="Edit Comment"
               onItemClick={closeMenu}
               modalComponent={
-                <EditCommentModal props={[id, body, sessionUser]} />
+                <EditCommentModal props={[id, body, sessionUser, articleId]} />
               }
               className="article-delete-button"
             />
             <OpenModal
               buttonText="Delete"
               onItemClick={closeMenu}
-              modalComponent={<DeleteCommentModal props={id} />}
+              modalComponent={<DeleteCommentModal props={[id]} />}
               className="article-delete-button"
             />
           </>
