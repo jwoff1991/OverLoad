@@ -48,7 +48,6 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
 
   export const editComment = (comment: EditedComment) => async (dispatch: AppDispatch) => {
     const id = comment.id
-    console.log(comment, "***************comment************")
     try {
       const request = await fetch(`/api/comments/${id}/`, {
         method: "PUT",
@@ -60,7 +59,6 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
       if(request.ok) {
           const data = await request.json();
           const editedComment = data;
-          console.log(editedComment, "***************editedComment************")
           dispatch(getOneArticle(editedComment.article_id));
           return editedComment;
       } else {
@@ -75,17 +73,23 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
     }
   };
 
-  export const deleteComment = (commentId: number) => async () => {
-
-    const response = await fetch(`/api/comments/${commentId}/`, {
-      method: 'DELETE'
-    })
-    if(response.ok) {
-        const comment = await response.json();
-
-        return comment
-    }
-    else {
-        return response
-    }
-  }
+  export const deleteComment = (commentId: number) => {
+    return async (dispatch: AppDispatch) => {
+      try {
+        const response = await fetch(`/api/comments/${commentId}/`, {
+          method: 'DELETE'
+        });
+        if (response.ok) {
+          const comment = await response.json();
+          dispatch({ type: 'DELETE_COMMENT_SUCCESS', comment });
+        } else {
+          const errorText = await response.text();
+          dispatch({ type: 'DELETE_COMMENT_FAILURE', error: errorText });
+        }
+        return true;
+      } catch (error) {
+        console.error("An error occurred during comment deletion:", error);
+        return false;
+      }
+    };
+  };

@@ -21,25 +21,22 @@ const ModalContext = React.createContext<ModalContextType>({
 export function ModalProvider({ children } : { children: ReactNode }) {
   const modalRef = React.useRef<HTMLDivElement | null>(null);
   const [modalContent, setModalContent] = useState<ReactNode>(null);
-    // callback function that will be called when modal is closing
   const [onModalClose, setOnModalClose] = useState<(() => void) | null>(null);
 
   const closeModal = () => {
     setModalContent(null); // clear the modal contents
-    // If callback function is truthy, call the callback function and reset it
-    // to null:
-    if (typeof onModalClose === 'function') {
-      setOnModalClose(null);
-      onModalClose();
+    if (onModalClose) {
+      onModalClose(); // Call the callback function if it's set
+      setOnModalClose(null); // Reset the callback function after calling
     }
   };
 
   const contextValue = {
-    modalRef: React.useRef<HTMLDivElement | null>(null), // reference to modal div
-    modalContent, // React component to render inside modal
-    setModalContent, // function to set the React component to render inside modal
-    setOnModalClose, // function to set the callback function called when modal is closing
-    closeModal // function to close the modal
+    modalRef,
+    modalContent,
+    setModalContent,
+    setOnModalClose,
+    closeModal
   };
 
   return (
