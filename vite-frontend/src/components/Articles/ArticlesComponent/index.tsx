@@ -79,14 +79,14 @@ const ArticlesComponent = () => {
                             <>
                               <ReadingListRemoveButtonComponent
                                 articleId={id}
-                                userId={sessionUser.id}
+                                userId={sessionUser.id.toString()}
                               />
                             </>
                           ) : (
                             <>
                               <ReadingListAddButtonComponent
                                 articleId={id}
-                                userId={sessionUser.id}
+                                userId={parseInt(sessionUser.id.toString())}
                               />
                             </>
                           )}

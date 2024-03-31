@@ -80,7 +80,7 @@ const SingleArticle = () => {
       return (
         <ReadingListRemoveButtonComponent
           articleId={article.id}
-          userId={sessionUser.id}
+          userId={sessionUser.id.toString()}
         />
       );
     } else {
