@@ -13,11 +13,11 @@ const ArticleLikes = (
 ) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  //gets like length
-  let likesLength;
-  if (likes && likes.length) {
-    likesLength = likes.length;
-  }
+  //gets like length - possible unused
+  // let likesLength;
+  // if (likes && likes.length) {
+  //   likesLength = likes.length;
+  // }
 
   let userIdFromLikes: number[] = [];
   let articleLikes: { user_id: number }[];
