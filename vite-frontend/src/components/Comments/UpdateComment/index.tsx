@@ -23,7 +23,7 @@ function EditCommentModal(props: EditCommentModalProps) {
   const [comment, setComment] = useState(body);
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-
+  //do i want to get rid of this disabled feature? 
   let isDisabled = true;
   if (comment.length > 0) {
     isDisabled = false;
