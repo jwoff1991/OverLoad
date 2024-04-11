@@ -15,8 +15,6 @@ const rootReducer = combineReducers({
 });
 
 // Define the middlewares
-//src/store/index.ts(23,20): error TS2345: Argument of type 'Middleware<{}, any, Dispatch<UnknownAction>>'
-//is not assignable to parameter of type 'Middleware<{}, any, Dispatch<AnyAction>>'.
 const middlewares: Middleware<{}, any, Dispatch<AnyAction>>[] = [thunk as ThunkMiddleware];
 
 // Add logger middleware in development

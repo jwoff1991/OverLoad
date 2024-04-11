@@ -46,14 +46,6 @@ const SingleArticle = () => {
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
-  const [isInReadingList, setIsInReadingList] = useState(false);
-
-  // Update local state when readingList changes
-  useEffect(() => {
-    const userReadingListArticleIds = Object.values(readingList).map(item => item.article_id);
-    setIsInReadingList(userReadingListArticleIds.includes(article.id));
-  }, [readingList, article.id]);
-
   //if no article is found, renders this
   if (!article.id) {
     return (
@@ -71,11 +63,12 @@ const SingleArticle = () => {
 
 //READING LIST
 // Extract article IDs from user reading list
-
+const userReadingListArticleIds = Object.values(readingList).map(item => item.article_id);
 
 // Determine which button to render based on article ID presence in the reading list
 const readingListButton = () => {
-  if (isInReadingList) {
+  const isArticleInReadingList = userReadingListArticleIds.includes(article.id);
+  if (isArticleInReadingList) {
     return (
       <ReadingListRemoveButtonComponent
         articleId={article.id}
