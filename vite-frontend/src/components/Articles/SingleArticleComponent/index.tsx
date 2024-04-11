@@ -72,7 +72,7 @@ const readingListButton = () => {
     return (
       <ReadingListRemoveButtonComponent
         articleId={article.id}
-        userId={sessionUser.id.toString()}
+        userId={sessionUser.id}
       />
     );
   } else {
