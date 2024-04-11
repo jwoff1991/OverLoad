@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import articleReducer from './articles';
 import readingListReducer from './readingList';
 import userReducer from './session';
-// import { AnyAction, Dispatch } from 'redux'; // Import AnyAction and Dispatch
+import { AnyAction, Dispatch } from 'redux'; // Import AnyAction and Dispatch
 
 // Define the root reducer
 const rootReducer = combineReducers({
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 // Define the middlewares
 //src/store/index.ts(23,20): error TS2345: Argument of type 'Middleware<{}, any, Dispatch<UnknownAction>>'
 //is not assignable to parameter of type 'Middleware<{}, any, Dispatch<AnyAction>>'.
-const middlewares = [thunk as ThunkMiddleware];
+const middlewares: Middleware<{}, any, Dispatch<AnyAction>>[] = [thunk as ThunkMiddleware];
 
 // Add logger middleware in development
 if (process.env.NODE_ENV !== 'production') {
