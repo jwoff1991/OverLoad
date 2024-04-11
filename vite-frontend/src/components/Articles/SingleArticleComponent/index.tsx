@@ -61,36 +61,29 @@ const SingleArticle = () => {
     return createdAtSplit;
   };
 
-  //READING LIST
-  //pulls article ids from user reading list
-  let userReadingListArticleId: Number[] = [];
-  const userReadingList = Object.values(readingList);
-  const articleInReadingList = (userReadingList: any[]) => {
-    userReadingList.map(({ article_id }) => {
-      userReadingListArticleId.push(article_id);
-      return userReadingListArticleId;
-    });
-  };
-  articleInReadingList(userReadingList);
+//READING LIST
+// Extract article IDs from user reading list
+const userReadingListArticleIds = Object.values(readingList).map(item => item.article_id);
 
-  //compares article list from above to current article id
-  //to determine which button to render
-  const readingListButton = () => {
-    if (userReadingListArticleId.includes(article.id)) {
-      return (
-        <ReadingListRemoveButtonComponent
-          articleId={article.id}
-          userId={sessionUser.id.toString()}
-        />
-      );
-    } else {
-      return (
-        <ReadingListAddButtonComponent
+// Determine which button to render based on article ID presence in the reading list
+const readingListButton = () => {
+  const isArticleInReadingList = userReadingListArticleIds.includes(article.id);
+  if (isArticleInReadingList) {
+    return (
+      <ReadingListRemoveButtonComponent
         articleId={article.id}
-        userId={sessionUser.id} />
-      );
-    }
-  };
+        userId={sessionUser.id.toString()}
+      />
+    );
+  } else {
+    return (
+      <ReadingListAddButtonComponent
+        articleId={article.id}
+        userId={sessionUser.id}
+      />
+    );
+  }
+};
 
   //COMMENT BUTTON
   const commentButton = (
