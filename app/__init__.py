@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect, send_from_directory
+from flask import Flask, render_template, request, session, redirect, send_from_directory, current_app
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -13,6 +13,7 @@ from .api.article_likes import article_like_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.article_routes import article_routes
+from werkzeug.exceptions import NotFound
 
 app = Flask(__name__, static_folder='./disc', static_url_path='')
 
@@ -83,10 +84,14 @@ def api_help():
 
 @app.route('/')
 def index():
-    """
-    Serve the index.html file from the 'disc' directory
-    """
-    return send_from_directory(app.static_folder, 'index.html')
+    try:
+        static_folder = current_app.static_folder
+        index_path = os.path.join(static_folder, 'index.html')
+        current_app.logger.info(f"Attempting to send file from: {index_path}")
+        return send_from_directory(static_folder, 'index.html')
+    except NotFound as e:
+        current_app.logger.error(f"File not found: {index_path}")
+        raise e
 
 
 @app.route('/<path:filename>')
