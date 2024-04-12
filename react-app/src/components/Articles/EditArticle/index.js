@@ -17,22 +17,18 @@ const EditArticle = () => {
 
   useEffect(() => {
     dispatch(getOneArticle(articleId))
-        .then((article) => {
-            setTitle(article.title)
-            setBody(article.body)
-        })
+      .then((article) => {
+        setTitle(article.title);
+        setBody(article.body);
+      });
   }, [dispatch, articleId]);
 
   const titleClass = errors.title ? "article-title-errors" : "article-title-input";
   const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
 
-  // let isDisabled = true;
-  // if (title.length > 4 && body.length > 10) {
-  //   isDisabled = false;
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const errors = {};
     const new_article = {
       id: article.id,
       user_id: sessionUser.id,
@@ -40,22 +36,23 @@ const EditArticle = () => {
       body: body,
     };
 
-    if (title.length > 4 && body.length > 10) {
-      dispatch(editArticle(new_article)).then((data) => {
-        history.push(`/articles/${articleId}`);
-        return;
-      });
-    }
     if (title.length < 4) {
-        setErrors({title: 'Title must be at least 4 characters'})
+      errors.title = 'Title must be at least 4 characters';
     }
+
     if (body.length < 10) {
-        setErrors({body: 'Body must be at least 10 characters'})
+      errors.body = 'Body must be at least 10 characters';
     }
-    if (title.length < 4 && body.length < 10) {
-        setErrors({title: 'Title must be at least 4 characters', body: 'Body must be at least 10 characters'})
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(editArticle(new_article)).then(() => {
+        history.push(`/articles/${articleId}`);
+      });
+    } else {
+      setErrors(errors);
     }
   };
+
   return (
     <>
       <div className="create-new-article-form-container">

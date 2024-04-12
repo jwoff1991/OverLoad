@@ -5,28 +5,8 @@ import './articlelikes.css'
 const ArticleLikes = (sessionUser, likes, articleId) => {
   const dispatch = useDispatch();
 
-  //gets like length
-  let likesLength;
-  if (likes && likes.length) {
-    likesLength = likes.length;
-  }
-
-  let userIdFromLikes = [];
-  let articleLikes;
-
-  //get userId from likes list
-  const userIdsInLikesList = (articleLikes) => {
-    articleLikes.map(({ user_id }) => {
-      userIdFromLikes.push(user_id);
-    });
-  };
-
-  if (likes && likes.length) {
-    articleLikes = Object.values(likes);
-    userIdsInLikesList(articleLikes);
-  }
-
-  // let buttonDisabled = false;
+  const articleLikes = likes ? Object.values(likes) : [];
+  const userIdFromLikes = articleLikes.map(({ user_id }) => user_id);
 
   const removeUserLike = (e) => {
     e.preventDefault();

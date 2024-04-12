@@ -24,30 +24,21 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
-      const articlesList = Object.values(articles)
-      articlesList.reverse()
+    const articlesList = Object.values(articles).reverse();
 
-    //converts article body so no more than 150 chars shows on preview
-    const articleBodyConverter = (body) => {
-        let newArticleBody = body.split('').slice(0, 150).join('')
-        return newArticleBody
-    }
+    const articleBodyConverter = (body) => body.slice(0, 150);
 
-    //converts date_created to a more readable format
-    const articleDateConverter =(date) => {
-        let createdAtSplit = date.split('').slice(5, 11).join('')
-        return createdAtSplit
-    }
+    // Converts date_created to a more readable format (assuming date is in ISO format)
+    const articleDateConverter = (date) => {
+      return new Date(date).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    };
 
-    //gets all article ids in user reading list
-    let userReadingListArticleId = []
-    const userReadingList = Object.values(readingList)
-    const articleInReadingList = (userReadingList) => {
-        userReadingList.map(({article_id}) => {
-            userReadingListArticleId.push(article_id)
-        })
-    }
-    articleInReadingList(userReadingList)
+    const userReadingListArticleId = Object.values(readingList).map(({ article_id }) => article_id);
+
 
     return (
       <>

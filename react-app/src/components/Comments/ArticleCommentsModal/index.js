@@ -19,10 +19,7 @@ function CommentsModal(props) {
   const dispatch = useDispatch();
   const articleId = props.props;
 
-  let isDisabled = true;
-  if (comment.length > 0) {
-    isDisabled = false;
-  }
+  const isDisabled = comment.length === 0;
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
@@ -35,21 +32,20 @@ function CommentsModal(props) {
       user_id: sessionUser.id,
       body: comment,
     };
+    // Await the dispatch call itself
     const data = await dispatch(postComment(newComment));
-    if(data) {
+    if (data) {
       setComment("");
       setReload(reload + 1);
     }
   };
 
-  const resetComment = (e) => {
-    setComment('')
-  }
+  const resetComment = () => {
+    setComment('');
+  };
 
-  const dateChanger = (date) => {
-    const newDate = date.split('').slice(5, 11).join('')
-    return newDate
-  }
+  // Simplified dateChanger function
+  const dateChanger = (date) => date.slice(5, 11);
 
   return (
     <div className="comments-create-read-div">

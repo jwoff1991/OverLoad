@@ -14,38 +14,34 @@ const CreateNewArticle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let articleId;
+    const errors = {};
     const new_article = {
       user_id: sessionUser.id,
       title: title,
       body: body,
     };
-    if (title.length > 4 && body.length > 10) {
-      dispatch(postArticle(new_article)).then((data) => {
-        articleId = data.id;
-        history.push(`/articles/${articleId}`);
-        return;
-      });
-    }
 
     if (title.length < 4) {
-      setErrors({ title: "Title must be at least 4 characters" });
+      errors.title = "Title must be at least 4 characters";
     }
+
     if (body.length < 10) {
-      setErrors({ body: "Body must be at least 10 characters" });
+      errors.body = "Body must be at least 10 characters";
     }
-    if (title.length < 4 && body.length < 10) {
-      setErrors({
-        title: "Title must be at least 4 characters",
-        body: "Body must be at least 10 characters",
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(postArticle(new_article)).then((data) => {
+        const articleId = data.id;
+        history.push(`/articles/${articleId}`);
       });
+    } else {
+      setErrors(errors);
     }
   };
 
-    const titleClass = errors.title
-      ? "article-title-errors"
-      : "article-title-input";
-    const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
+  const titleClass = errors.title ? "article-title-errors" : "article-title-input";
+  const bodyClass = errors.body ? "article-body-errors" : "article-body-input";
+
   return (
     <>
       <div className="create-new-article-form-container">

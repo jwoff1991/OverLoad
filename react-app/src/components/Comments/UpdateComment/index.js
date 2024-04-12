@@ -12,23 +12,29 @@ function EditCommentModal(props) {
   const dispatch = useDispatch();
 
 
-  let isDisabled = true;
-  if (comment.length > 0) {
-    isDisabled = false;
-  }
+  // Simplified isDisabled assignment
+  const isDisabled = comment.length === 0;
+
   const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
     const editedComment = {
       id: id,
       article_id: id,
       user_id: sessionUser.id,
       body: comment,
     };
-    const data = await dispatch(editComment(editedComment));
-    if(data) {
-      closeModal()
+
+    try {
+      const data = await dispatch(editComment(editedComment));
+      if (data) {
+        closeModal(); // Close the modal only if the dispatch was successful
+      }
+    } catch (error) {
+      console.error("Failed to edit the comment:", error);
+      // Optionally, handle the error (e.g., display an error message to the user)
     }
   };
-
   return (
     <>
 

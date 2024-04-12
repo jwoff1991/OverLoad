@@ -25,26 +25,25 @@ const SingleArticle = () => {
   );
   const likes = useSelector((state) => state.articles.singleArticle.likes);
 
-  let commentsLength;
-  if (comments && comments.length) {
-    commentsLength = comments.length;
-  }
 
-  //creates a loading screen
+  const commentsLength = comments ? comments.length : 0;
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  //gets article and user reading list
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-    if (sessionUser && sessionUser.id) {
+    if (sessionUser?.id) {
       dispatch(getUserReadingList(sessionUser.id));
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
-  //if no article is found, renders this
+  if (loading) {
+    return <SpinnerLoadingScreen />;
+  }
+
   if (!article.id) {
     return (
       <div className="article-id-not-found">
@@ -53,39 +52,19 @@ const SingleArticle = () => {
     );
   }
 
-  //converts date from database format to usable format
-  const articleDateConverter = (article) => {
-    let createdAtSplit = article.date_created.split("").slice(5, 11).join("");
-    return createdAtSplit;
-  };
+  const articleDateConverter = (article) =>
+    article.date_created.slice(5, 11);
 
-  //READING LIST
-  //pulls article ids from user reading list
-  let userReadingListArticleId = [];
-  const userReadingList = Object.values(readingList);
-  const articleInReadingList = (userReadingList) => {
-    userReadingList.map(({ article_id }) => {
-      userReadingListArticleId.push(article_id);
-      return userReadingListArticleId;
-    });
-  };
-  articleInReadingList(userReadingList);
+  const userReadingListArticleId = Object.values(readingList).map(({ article_id }) => article_id);
 
-  //compares article list from above to current article id
-  //to determine which button to render
   const readingListButton = () => {
     if (userReadingListArticleId.includes(article.id)) {
-      return (
-        <ReadingListRemoveButtonComponent
-          props={[article.id, sessionUser.id]}
-        />
-      );
+      return <ReadingListRemoveButtonComponent props={[article.id, sessionUser.id]} />;
     } else {
-      return (
-        <ReadingListAddButtonComponent props={[article.id, sessionUser.id]} />
-      );
+      return <ReadingListAddButtonComponent props={[article.id, sessionUser.id]} />;
     }
   };
+
 
   //COMMENT BUTTON
   const commentButton = (
@@ -108,9 +87,6 @@ const SingleArticle = () => {
     : "article-container-logged-out";
   return (
     <>
-      {loading ? (
-        <SpinnerLoadingScreen />
-      ) : (
         <>
           <div className={loggedIn}>
             <div className="single-article-div">
@@ -167,7 +143,6 @@ const SingleArticle = () => {
             </div>
           </div>
         </>
-      )}
     </>
   );
 };

@@ -26,26 +26,25 @@ const ReadingListComponent = () => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  //converts article body so no more than 150 chars chows on preview
-  const articleBodyConverter = (body) => {
-    let newArticleBody = body.split("").slice(0, 150).join("");
-    return newArticleBody;
-  };
+// Truncates article body to no more than 150 characters for preview
+const articleBodyConverter = (body) => {
+  return body.length > 150 ? `${body.substring(0, 150)}...` : body;
+};
 
-  //converts date_created to a more readable format
-  const articleDateConverter = (date) => {
-    let createdAtSplit = date.split("").slice(5, 11).join("");
-    return createdAtSplit;
-  };
+// Converts date_created to a more readable format (assuming date is in ISO format)
+const articleDateConverter = (date) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
 
-  //gets all article ids in user reading list
-  const readingListDisplay = (readingListAll, readingList) => {
-    if (readingListAll && readingListAll.length && readingList[0]) {
-      return <>{readingListAll.length} Article(s)</>;
-    } else {
-      return <>0 Articles</>;
-    }
-  };
+// Gets the count of articles in the user's reading list
+const readingListDisplay = (readingListAll) => {
+  const articleCount = readingListAll?.length || 0;
+  return <>{articleCount} Article(s)</>;
+};
 
   return (
     <>
