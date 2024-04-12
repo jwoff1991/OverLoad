@@ -5,18 +5,16 @@ import { AppDispatch } from "../../../typeDeclerations";
 import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
 
-
-function DeleteCommentModal(props: { props: [commentId: number]  }) {
-  const [ commentId ]  = props.props;
+function DeleteCommentModal(props: { props: [commentId: number] }) {
+  const [commentId] = props.props;
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-
   const handleDelete = async (e: FormEvent) => {
     e.preventDefault();
-    const data = await dispatch(deleteComment(commentId))
-    if(data) {
-      console.log("No error deleting comment")
+    const data = await dispatch(deleteComment(commentId));
+    if (data) {
+      console.log("No error deleting comment");
     }
     closeModal();
     window.location.reload();
@@ -26,7 +24,7 @@ function DeleteCommentModal(props: { props: [commentId: number]  }) {
     e.preventDefault();
     closeModal();
     window.location.reload();
-  }
+  };
 
   return (
     <div className="delete-comment-confirm-delete-modal">
@@ -35,7 +33,10 @@ function DeleteCommentModal(props: { props: [commentId: number]  }) {
         <button className="delete-modal-delete-Comment" onClick={handleDelete}>
           Delete
         </button>
-        <button className="delete-modal-keep-Comment" onClick={returnToComments}>
+        <button
+          className="delete-modal-keep-Comment"
+          onClick={returnToComments}
+        >
           Cancel
         </button>
       </div>
