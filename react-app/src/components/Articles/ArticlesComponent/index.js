@@ -8,6 +8,9 @@ import StaffPicks from "../StaffPicks";
 import Footer from "../../Footer";
 import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import { articleBodyConverter, articleDateConverter } from "../../utils/helperFunctions";
+
+
 
 const ArticlesComponent = () => {
     const dispatch = useDispatch();
@@ -25,17 +28,6 @@ const ArticlesComponent = () => {
       }, [dispatch, sessionUser]);
 
     const articlesList = Object.values(articles).reverse();
-
-    const articleBodyConverter = (body) => body.slice(0, 150);
-
-    // Converts date_created to a more readable format (assuming date is in ISO format)
-    const articleDateConverter = (date) => {
-      return new Date(date).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-    };
 
     const userReadingListArticleId = Object.values(readingList).map(({ article_id }) => article_id);
 

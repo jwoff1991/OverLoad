@@ -37,7 +37,9 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
       method: "GET",
     });
     if (response.ok) {
-      const data = await response.json();
+      let data = await response.json();
+      // Sort the articles in the desired order before dispatching
+      data = data.sort((a: article, b: article) => b.id - a.id);
       dispatch(getArticles(data));
       return data;
     } else {

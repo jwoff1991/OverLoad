@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-from app.models import User, Article, Comment, ArticleLike
+from flask import Blueprint, request
+from app.models import Article
 from ..models.db import db
 from ..forms.new_article_form import NewArticleForm
 from datetime import datetime
@@ -14,9 +14,7 @@ session = db.session
 def article_index():
     all_articles = session.query(Article).order_by(Article.date_created)
     if not all_articles:
-        error = {}
-        error.message = "No stories found!"
-        return error.message
+        return {'message': 'No stories found!'}, 404
     else:
         result = [article.to_dict() for article in all_articles]
         return result
@@ -25,7 +23,7 @@ def article_index():
 def single_article(id):
     article = Article.query.get(id)
     if not article:
-        return {'message': 'This article could nto be found'}
+        return {'message': 'This article could nto be found'}, 404
     else:
         result = article.to_dict()
         return result
@@ -47,23 +45,7 @@ def post_article():
         db.session.add(article)
         db.session.commit()
         return article.to_dict()
-    print('errors', form.errors)
     return form.errors
-
-
-@article_routes.route('/<int:id>/', methods=['PUT'])
-def put_comment(id):
-    form = NewArticleForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-    if form.validate_on_submit():
-        article_to_update = Article.query.get(id)
-        article_to_update.title = form.data['title']
-        article_to_update.body = form.data['body']
-        db.session.commit()
-        return article_to_update.to_dict()
-    if form.errors:
-        return {"errors": "we got some errors"}
-
 
 @article_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_article(id):
@@ -86,4 +68,4 @@ def edit_article(id):
         db.session.commit()
         return article_to_update.to_dict()
     if form.errors:
-        return {"errors": "we got some errors"}
+        return {"errors": "an error has occured"}, 400

@@ -7,19 +7,11 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 const StaffPicks = () => {
   const articles = useSelector((state) => state.articles.allArticles);
 
-  // Function to shuffle an array
-  const shuffleArray = (array) => {
-    let shuffledArray = [...array]; // Create a copy of the array to avoid mutating the original
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
-    }
-    return shuffledArray;
-  };
-
-  // Shuffle the articles array and select the first five
-  const shuffledArticles = shuffleArray(articles);
-  const [article1, article2, article3, article4, article5] = shuffledArticles.slice(0, 5);
+  const article1 = articles[0]
+  const article2 = articles[1]
+  const article3 = articles[2]
+  const article4 = articles[3]
+  const article5 = articles[4]
 
   const articleDateConverter = (date) => {
     let createdAtSplit = date?.split("").slice(5, 11).join("");

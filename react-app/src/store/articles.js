@@ -22,6 +22,7 @@ export const getAllArticles = () => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
+      
       dispatch(getArticles(data));
       return data;
     } else {

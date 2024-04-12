@@ -5,7 +5,7 @@ import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadin
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
-import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
 import './articlesComponent.css'
@@ -27,7 +27,6 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
-      const articlesList: ArticleType[] = Object.values(articles).reverse();
 
 
     const userReadingListIds: number[] = userReadingListArticleIds(Object.values(readingList));
@@ -37,7 +36,7 @@ const ArticlesComponent = () => {
           <>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articlesList.map(
+                {articles.map(
                   ({ id, author, title, body, date_created }) => (
                     <NavLink
                       key={id}
@@ -111,7 +110,7 @@ const ArticlesComponent = () => {
             </div>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articlesList.map(
+                {articles.map(
                   ({ id, author, title, body, date_created }) => (
                     <NavLink
                       key={id}
