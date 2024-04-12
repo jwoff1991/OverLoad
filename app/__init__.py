@@ -15,7 +15,7 @@ from .config import Config
 from .api.article_routes import article_routes
 from werkzeug.exceptions import NotFound
 
-app = Flask(__name__, static_folder='/vite-frontend/dist', static_url_path='/assets')
+app = Flask(__name__, static_folder='vite-frontend/dist')
 
 
 # Setup login manager
