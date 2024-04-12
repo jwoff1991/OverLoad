@@ -1,5 +1,5 @@
 import { login } from "../../store/session";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../context/Modal.tsx";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
