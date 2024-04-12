@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { Provider } from 'react-redux';
-import { ModalProvider } from "./context/Modal.tsx";
+import { ModalProvider } from '../context/Modal.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/index.ts';
-import { Modal } from "./context/Modal.tsx";
+import { Modal } from '../context/Modal.tsx';
 
 
 // Wrap the application with the Modal provider and render the Modal component

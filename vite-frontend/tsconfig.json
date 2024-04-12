@@ -22,10 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules", // exclude the node_modules directory
-    "**/*.spec.ts" // exclude test files
-  ],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

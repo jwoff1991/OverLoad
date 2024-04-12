@@ -77,9 +77,9 @@ def api_help():
     Returns all API routes and their doc strings
     """
     acceptable_methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-    route_list = { rule.rule: [[ method for method in rule.methods if method in acceptable_methods ],
-                    app.view_functions[rule.endpoint].__doc__ ]
-                    for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
+    route_list = {rule.rule: [[method for method in rule.methods if method in acceptable_methods],
+                              app.view_functions[rule.endpoint].__doc__]
+                  for rule in app.url_map.iter_rules() if rule.endpoint != 'static'}
     return route_list
 
 
@@ -94,6 +94,13 @@ def index():
         current_app.logger.error(f"File not found: {index_path}")
         raise e
 
+
+@app.route('/<path:filename>')
+def static_files(filename):
+    """
+    Serve other static files (like CSS, JavaScript, etc.) from the 'disc' directory
+    """
+    return send_from_directory(app.static_folder, filename)
 
 @app.errorhandler(404)
 def not_found(e):
