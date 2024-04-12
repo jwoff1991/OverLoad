@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
-import ProfileButton from "./ProfileButton";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { logout } from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -37,7 +38,10 @@ function Navigation({ isLoaded }) {
     setShowMenu(true);
   };
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-
+  const readingListRedirect = (e) => {
+    e.preventDefault();
+    history.push(`/${sessionUser.id}/reading-list`);
+  };
   return (
     <>
       {sessionUser ? (
@@ -56,7 +60,12 @@ function Navigation({ isLoaded }) {
               <div className={ulClassName} ref={ulRef}></div>
               {isLoaded && (
                 <div className="profile-button-user-logged-in">
-                  <ProfileButton user={sessionUser} />
+                  <button onClick={readingListRedirect} className="reading-list-button">Reading List</button>
+                  <button
+                    onClick={handleLogout}
+                    className="drop-down-sign-out"
+                  >Logout</button>
+                  {/* <ProfileButton user={sessionUser} /> */}
                 </div>
               )}
             </div>

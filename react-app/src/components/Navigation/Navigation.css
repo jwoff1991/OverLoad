@@ -23,13 +23,19 @@
     height: 54px !important;
   }
 
-  .user-dropdown-menu > button{
+  .drop-down-sign-out{
     background: none;
-      border: none;
+    border: none;
     font-size: 12px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+  }
+
+  .profile-button-user-logged-in{
+    width: 100px!;
+    display: flex;
+    flex-direction: row;
   }
 
   .drop-down-sign-out{
