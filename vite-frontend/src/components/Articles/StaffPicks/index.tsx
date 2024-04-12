@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { StateType, ArticleType} from "../../../typeDeclerations";
 import './staffpicks.css'
-
-
+import { articleDateConverter } from "../../../helperFunctions";
 
 const StaffPicks = () => {
   const articles: ArticleType[] = useSelector((state: StateType) => state.articles.allArticles);
@@ -13,10 +12,6 @@ const StaffPicks = () => {
   let article4 = articles[1];
   let article5 = articles[7];
 
-  const articleDateConverter = (date: String) => {
-    let createdAtSplit = date?.split("").slice(5, 11).join("");
-    return createdAtSplit;
-  };
 
   return (
     <>

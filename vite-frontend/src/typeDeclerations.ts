@@ -86,5 +86,9 @@ type UserType = {
     ];
   };
 
+  interface ReadingListItem {
+    article_id: number;
+  }
 
-    export type { NewComment, ArticleErrorsType, UserType, ArticleType, StateType, AppDispatch, SingleArticleType, LoginErrorsType, CommentType, LikesType};
+
+    export type { ReadingListItem, NewComment, ArticleErrorsType, UserType, ArticleType, StateType, AppDispatch, SingleArticleType, LoginErrorsType, CommentType, LikesType};

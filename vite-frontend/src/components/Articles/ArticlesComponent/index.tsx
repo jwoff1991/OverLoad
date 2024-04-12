@@ -5,10 +5,11 @@ import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadin
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
-import { StateType, AppDispatch } from "../../../typeDeclerations";
+import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
 import './articlesComponent.css'
+import { articleDateConverter, articleBodyConverter, userReadingListArticleIds } from "../../../helperFunctions";
 
 
 const ArticlesComponent = () => {
@@ -26,31 +27,10 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
-      const articlesList = Object.values(articles)
-      articlesList.reverse()
+      const articlesList: ArticleType[] = Object.values(articles).reverse();
 
-    //converts article body so no more than 150 chars chows on preview
-    const articleBodyConverter = (body: string) => {
-      let newArticleBody = body.split("").slice(0, 150).join("");
-      return newArticleBody;
-    };
 
-    //converts date_created to a more readable format
-    const articleDateConverter = (date: string) => {
-      let createdAtSplit = date.split("").slice(5, 11).join("");
-      return createdAtSplit;
-    };
-
-    //gets all article ids in user reading list
-    let userReadingListArticleId: number[] = [];
-    const userReadingList = Object.values(readingList)
-    const articleInReadingList = (userReadingList: any[]) => {
-      userReadingList.map(({ article_id }) => {
-        userReadingListArticleId.push(article_id);
-      });
-    };
-    articleInReadingList(userReadingList)
-
+    const userReadingListIds: number[] = userReadingListArticleIds(Object.values(readingList));
     return (
       <>
         {sessionUser ? (
@@ -75,25 +55,25 @@ const ArticlesComponent = () => {
                               {articleDateConverter(date_created)}
                             </div>
                           </div>
-                          {userReadingListArticleId.includes(id) ? (
+                          {userReadingListIds.includes(id) ? (
                             <>
                               <ReadingListRemoveButtonComponent
                                 articleId={id}
-                                userId={sessionUser.id.toString()}
+                                userId={sessionUser.id}
                               />
                             </>
                           ) : (
                             <>
                               <ReadingListAddButtonComponent
                                 articleId={id}
-                                userId={parseInt(sessionUser.id.toString())}
+                                userId={(sessionUser.id)}
                               />
                             </>
                           )}
                         </div>
                         <div className="article-title">{title}</div>
                         <div className="article-body">
-                          {articleBodyConverter(body)}...
+                          {articleBodyConverter(body)}
                         </div>
                       </div>
                     </NavLink>

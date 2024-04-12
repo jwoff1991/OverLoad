@@ -1,4 +1,3 @@
-import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { removeLike, addLike } from "../../../store/likes";
 import { AppDispatch, UserType } from "../../../typeDeclerations";
@@ -13,43 +12,39 @@ const ArticleLikes = (
 ) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  //gets like length - possible unused
-  // let likesLength;
-  // if (likes && likes.length) {
-  //   likesLength = likes.length;
-  // }
+  interface Like {
+    user_id: number;
+  }
+
+  // Get userIds from likes list
+  const userIdsInLikesList = (articleLikes: Like[]): number[] => {
+    return articleLikes.map(({ user_id }) => user_id);
+  };
 
   let userIdFromLikes: number[] = [];
-  let articleLikes: { user_id: number }[];
-
-  //get userId from likes list
-  const userIdsInLikesList = (articleLikes: { user_id: number }[]) => {
-    articleLikes.map(({ user_id }) => {
-      userIdFromLikes.push(user_id);
-    });
-  };
+  let articleLikes: Like[] = [];
 
   if (likes && likes.length) {
     articleLikes = Object.values(likes);
-    userIdsInLikesList(articleLikes);
+    userIdFromLikes = userIdsInLikesList(articleLikes);
   }
 
-
-  const removeUserLike = (e: FormEvent) => {
+  const removeUserLike = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
   };
 
-  const addUserLike = (e: FormEvent) => {
-    console.log('button clicked')
+  const addUserLike = (e: React.FormEvent) => {
+    console.log('button clicked');
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };
 
-  const userNotLoggedInLikeButton = (e:FormEvent) => {
+  const userNotLoggedInLikeButton = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('You must be logged in to like an article')
-  }
+    alert('Please log in to like an article.');
+  };
+
 
   //renders clickable like button if user is logged in and not on likeList, or renders unclickable like button if user is not logged in
   const likeButtonClear = (

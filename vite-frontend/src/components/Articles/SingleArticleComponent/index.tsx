@@ -10,8 +10,9 @@ import { Link, useParams } from "react-router-dom";
 import { getUserReadingList } from "../../../store/readingList";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StateType, AppDispatch, SingleArticleType } from "../../../typeDeclerations";
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 import "./singleArticle.css";
+import { articleDateConverter } from "../../../helperFunctions";
 
 
 
@@ -27,10 +28,7 @@ const SingleArticle = () => {
   );
   const likes = useSelector((state: StateType) => state.articles.singleArticle.likes);
 
-  let commentsLength;
-  if (comments && comments.length) {
-    commentsLength = comments.length;
-  }
+  let commentsLength = comments && comments.length ? comments.length : 0;
 
   //creates a loading screen
   const [loading, setLoading] = useState(true);
@@ -46,8 +44,9 @@ const SingleArticle = () => {
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
-  //if no article is found, renders this
-  if (!article.id) {
+  if (loading) {
+    return <SpinnerLoadingScreen />;
+  } else if (!article.id) {
     return (
       <div className="article-id-not-found">
         The article you are looking for is not here
@@ -55,23 +54,12 @@ const SingleArticle = () => {
     );
   }
 
-  //converts date from database format to usable format
-  const articleDateConverter = (article: SingleArticleType) => {
-    let createdAtSplit = article.date_created.split("").slice(5, 11).join("");
-    return createdAtSplit;
-  };
 
   //READING LIST
   //pulls article ids from user reading list
-  let userReadingListArticleId: Number[] = [];
   const userReadingList = Object.values(readingList);
-  const articleInReadingList = (userReadingList: any[]) => {
-    userReadingList.map(({ article_id }) => {
-      userReadingListArticleId.push(article_id);
-      return userReadingListArticleId;
-    });
-  };
-  articleInReadingList(userReadingList);
+  const userReadingListArticleId: Number[] = userReadingList.map(({ article_id }) => article_id);
+
 
   //compares article list from above to current article id
   //to determine which button to render
@@ -80,7 +68,7 @@ const SingleArticle = () => {
       return (
         <ReadingListRemoveButtonComponent
           articleId={article.id}
-          userId={sessionUser.id.toString()}
+          userId={sessionUser.id}
         />
       );
     } else {
@@ -113,9 +101,6 @@ const SingleArticle = () => {
     : "article-container-logged-out";
   return (
     <>
-      {loading ? (
-        <SpinnerLoadingScreen />
-      ) : (
         <>
           <div className={loggedIn}>
             <div className="single-article-div">
@@ -127,7 +112,7 @@ const SingleArticle = () => {
                 </div>
                 <span>&#183;</span>
                 <div className="date-created">
-                  {articleDateConverter(article)}
+                  {articleDateConverter(article.date_created)}
                 </div>
               </div>
               <div className="likes-comments-edit-delete-container">
@@ -172,7 +157,6 @@ const SingleArticle = () => {
             </div>
           </div>
         </>
-      )}
     </>
   );
 };

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StateType, AppDispatch, ArticleType } from "../../typeDeclerations";
 import "./readingListComponent.css";
+import { articleBodyConverter, articleDateConverter } from "../../helperFunctions";
 
 
 type ReadingListType = {
@@ -36,31 +37,12 @@ const ReadingListComponent = () => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  // useEffect(() => {
-  //   // This effect will run whenever readingList changes
-  //   // You can include additional logic here if needed
-  // }, [readingList]);
+// Gets the count of all articles in the user reading list and displays it
+const readingListDisplay = (readingListAll: ReadingListType[]) => {
+  const articleCount = readingListAll?.length || 0;
+  return <>{articleCount} Article{articleCount === 1 ? '' : 's'}</>;
+};
 
-  //converts article body so no more than 150 chars chows on preview
-  const articleBodyConverter = (body: string) => {
-    let newArticleBody = body.split("").slice(0, 150).join("");
-    return newArticleBody;
-  };
-
-  //converts date_created to a more readable format
-  const articleDateConverter = (date: string) => {
-    let createdAtSplit = date.split("").slice(5, 11).join("");
-    return createdAtSplit;
-  };
-
-  //gets all article ids in user reading list
-  const readingListDisplay = (readingListAll: ReadingListType[], readingList: ReadingListType[]) => {
-    if (readingListAll && readingListAll.length && readingList[0]) {
-      return <>{readingListAll.length} Article(s)</>;
-    } else {
-      return <>0 Articles</>;
-    }
-  };
 
   return (
     <>
@@ -71,7 +53,7 @@ const ReadingListComponent = () => {
           <div className="user-information">
             <div className="username">{sessionUser.username}</div>
             <div className="list-length">
-              {readingListDisplay(readingListAll, readingList)}
+              {readingListDisplay(readingListAll)}
             </div>
           </div>
           <div className="heading-div">
@@ -93,7 +75,7 @@ const ReadingListComponent = () => {
                         </div>
                       </div>
                       <ReadingListRemoveButtonComponent
-                        articleId={article.id} userId={userId!}
+                        articleId={article.id} userId={parseInt(userId!)}
                       />
                     </div>
                     <NavLink

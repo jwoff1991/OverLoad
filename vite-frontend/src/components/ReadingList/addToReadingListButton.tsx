@@ -3,13 +3,10 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../typeDeclerations";
 import { addToReadingList, getUserReadingList } from "../../store/readingList";
 
-
 type ReadingListAddButtonProps = {
   articleId: number;
   userId: number
 };
-
-
 
 const ReadingListAddButtonComponent = (props: ReadingListAddButtonProps) => {
   let articleId = props.articleId;
