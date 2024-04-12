@@ -103,9 +103,7 @@ def static_files(filename):
 
 @app.errorhandler(404)
 def not_found(e):
-    """
-    If route not found, serve index.html to let the Vue Router handle the routing
-    """
+
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == "__main__":
