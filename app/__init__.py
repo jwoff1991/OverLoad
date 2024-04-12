@@ -15,7 +15,9 @@ from .config import Config
 from .api.article_routes import article_routes
 from werkzeug.exceptions import NotFound
 
-app = Flask(__name__, static_folder='dist')
+app = Flask(__name__, static_folder='./dist', static_url_path='./assets')
+app.static_folder = './dist/'
+app.template_folder = './dist/'
 
 # Setup login manager
 login = LoginManager(app)
