@@ -1,9 +1,9 @@
 {
-  "short_name": "Authenticate Me",
-  "name": "Authenticate Me App Academy Project",
+  "short_name": "OverLoad",
+  "name": "OverLoad - Built by John Wofford",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icons/favicon-16x16.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }

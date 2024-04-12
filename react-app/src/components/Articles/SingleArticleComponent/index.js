@@ -1,17 +1,17 @@
 import "./singleArticle.css";
+import DeleteArticleModal from "../DeleteArticleModal";
+import OpenModal from "../../OpenModalButton";
+import CommentsModal from "../../Comments/ArticleCommentsModal";
+import ArticleLikes from "../ArticleLikes";
+import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
+import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
+import SpinnerLoadingScreen from "../../LoadingScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getOneArticle } from "../../../store/articles";
-import DeleteArticleModal from "../DeleteArticleModal";
-import OpenModal from "../../OpenModalButton";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
-import CommentsModal from "../../Comments/ArticleCommentsModal";
-import ArticleLikes from "../ArticleLikes";
 import { getUserReadingList } from "../../../store/readingList";
-import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
-import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
-import SpinnerLoadingScreen from "../../LoadingScreen";
 
 const SingleArticle = () => {
   const articleId = useParams().id;

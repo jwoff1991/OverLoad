@@ -46,6 +46,14 @@ const SingleArticle = () => {
     }
   }, [dispatch, articleId, commentsLength, sessionUser]);
 
+  const [isInReadingList, setIsInReadingList] = useState(false);
+
+  // Update local state when readingList changes
+  useEffect(() => {
+    const userReadingListArticleIds = Object.values(readingList).map(item => item.article_id);
+    setIsInReadingList(userReadingListArticleIds.includes(article.id));
+  }, [readingList, article.id]);
+
   //if no article is found, renders this
   if (!article.id) {
     return (
@@ -61,6 +69,30 @@ const SingleArticle = () => {
     return createdAtSplit;
   };
 
+<<<<<<< HEAD
+//READING LIST
+// Extract article IDs from user reading list
+
+
+// Determine which button to render based on article ID presence in the reading list
+const readingListButton = () => {
+  if (isInReadingList) {
+    return (
+      <ReadingListRemoveButtonComponent
+        articleId={article.id}
+        userId={sessionUser.id}
+      />
+    );
+  } else {
+    return (
+      <ReadingListAddButtonComponent
+        articleId={article.id}
+        userId={sessionUser.id}
+      />
+    );
+  }
+};
+=======
   //READING LIST
   //pulls article ids from user reading list
   let userReadingListArticleId: Number[] = [];
@@ -91,6 +123,7 @@ const SingleArticle = () => {
       );
     }
   };
+>>>>>>> parent of 08f1b6f (changing syntax)
 
   //COMMENT BUTTON
   const commentButton = (

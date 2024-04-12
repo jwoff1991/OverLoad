@@ -93,7 +93,7 @@ const ReadingListComponent = () => {
                         </div>
                       </div>
                       <ReadingListRemoveButtonComponent
-                        articleId={article.id} userId={userId!}
+                        articleId={article.id} userId={parseInt(userId!)}
                       />
                     </div>
                     <NavLink

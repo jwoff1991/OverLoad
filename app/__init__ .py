@@ -14,7 +14,7 @@ from .seeds import seed_commands
 from .config import Config
 from .api.article_routes import article_routes
 
-app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
+app = Flask(__name__, static_folder='../vite-frontend/dist', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
@@ -81,7 +81,7 @@ def api_help():
     return route_list
 
 
-@app.route('/', defaults={'path': ''})
+@app.route('/')
 @app.route('/<path:path>')
 def react_root(path):
     """

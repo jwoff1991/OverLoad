@@ -50,21 +50,6 @@ def post_article():
     print('errors', form.errors)
     return form.errors
 
-
-@article_routes.route('/<int:id>/', methods=['PUT'])
-def put_comment(id):
-    form = NewArticleForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-    if form.validate_on_submit():
-        article_to_update = Article.query.get(id)
-        article_to_update.title = form.data['title']
-        article_to_update.body = form.data['body']
-        db.session.commit()
-        return article_to_update.to_dict()
-    if form.errors:
-        return {"errors": "we got some errors"}
-
-
 @article_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_article(id):
     article = Article.query.get(id)
@@ -87,3 +72,16 @@ def edit_article(id):
         return article_to_update.to_dict()
     if form.errors:
         return {"errors": "we got some errors"}
+
+# @article_routes.route('/<int:id>/', methods=['PUT'])
+# def put_comment(id):
+#     form = NewArticleForm()
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+#     if form.validate_on_submit():
+#         article_to_update = Article.query.get(id)
+#         article_to_update.title = form.data['title']
+#         article_to_update.body = form.data['body']
+#         db.session.commit()
+#         return article_to_update.to_dict()
+#     if form.errors:
+#         return {"errors": "we got some errors"}

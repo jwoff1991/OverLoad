@@ -35,8 +35,6 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Routes>
-          <Route path="/login">{/* <LoginFormPage /> */}</Route>
-          <Route path="/signup">{/* <SignupFormPage /> */}</Route>
           <Route path="/" element={<ArticlesComponent />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/new-article" element={<CreateNewArticle />} />

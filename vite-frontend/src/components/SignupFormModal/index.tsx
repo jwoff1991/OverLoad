@@ -1,5 +1,5 @@
 import { signUp } from "../../store/session";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from '../../typeDeclerations';
 import { FormEvent, useState } from "react";
