@@ -1,19 +1,11 @@
 import { signUp } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from '../../typeDeclerations';
+import { AppDispatch, ErrorsType } from '../../typeDeclerations';
 import { FormEvent, useState } from "react";
+import { validateField } from "../../helperFunctions";
+import { ErrorMessages } from "../../helperComponents";
 import "./SignupForm.css";
-
-
-type ErrorsType = {
-  password: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  username: string | null;
-  email: string | null;
-  bio: string | null;
-};
 
 
 function SignupFormModal() {
@@ -49,23 +41,17 @@ function SignupFormModal() {
       email: null,
     };
 
-    // Check if email is valid
-    if (regex.test(email) === false) {
-      newErrors.email = "Please enter a valid email";
-    }
+    newErrors.email = !regex.test(email) ? "Please enter a valid email" : null;
+    newErrors.password =
+      password.length < 8 ? "Password should be at least 8 characters" : null;
+    newErrors.password =
+      password !== confirmPassword
+        ? "Confirm Password field must be the same as the Password field"
+        : newErrors.password;
+    newErrors.firstname = validateField(firstname, "First name is required");
+    newErrors.lastname = validateField(lastname, "Last name is required");
+    newErrors.username = validateField(username, "Username is required");
 
-    // Check if password is long enough
-    if (password.length < 8) {
-      newErrors.password = "Password should be at least 8 characters";
-    }
-
-    // Check if passwords match
-    if (password !== confirmPassword) {
-      newErrors.password =
-        "Confirm Password field must be the same as the Password field";
-    }
-
-    // Set the errors state with accumulated errors
     setErrors(newErrors);
 
     // If there are no errors, proceed with the sign-up process
@@ -163,9 +149,7 @@ function SignupFormModal() {
               />
             </div>
             <div className="error-validation-div">
-              {Object.values(errors).map((error, index) =>
-                error ? <div key={index}>{error}</div> : null
-              )}
+              <ErrorMessages errors={errors} />
             </div>
           </div>
           <button type="submit" className="signup-button-submit">

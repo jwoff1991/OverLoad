@@ -27,7 +27,7 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
-      const articlesList = Object.values(articles)
+    const articlesList = Object.values(articles)
 
     const userReadingListIds: number[] = userReadingListArticleIds(Object.values(readingList));
     return (

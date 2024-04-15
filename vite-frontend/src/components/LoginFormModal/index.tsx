@@ -3,50 +3,48 @@ import { useModal } from "../../context/Modal.tsx";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
-import { LoginErrorsType, AppDispatch } from "../../typeDeclerations.ts";
+import { AppDispatch } from "../../typeDeclerations.ts";
 import "./LoginForm.css";
-
-
 
 function LoginFormModal() {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const nav = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errors, setErrors] = useState<LoginErrorsType>({ email: null, password: null });
+  const [error, setError] = useState<string | null>(null);
   const { closeModal } = useModal();
 
-  // Handling form submission
-  const handleSubmit = async (e: FormEvent) => {
-    const regex =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    if (regex.test(email) === false) {
-      setErrors({email: 'Please enter a valid email', password: null});
-    }
-    if (password.length < 8) {
-      setErrors({email: null, password: 'Password must be at least 8 characters long'});
-    }
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const regex =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\\.,;:\s@\"]+\.)+[^<>()[\]\\.,;:\s@\"]{2,})$/i;
+
+
+    if (!regex.test(email) || password.length < 8) {
+      setError('Invalid Email and password combination');
+      return;
+    }
+
+
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data); // Setting errors if login is unsuccessful
+      setError('Invalid Email and password combination'); // Setting error if login is unsuccessful
     } else {
       closeModal(); // Closing modal if login is successful
+      nav("/"); // Navigating to the home page
     }
   };
 
   // Logging in as a demo user
-  const loginDemo = (e: FormEvent) => {
+  const loginDemo = async (e: FormEvent) => {
     e.preventDefault();
-    dispatch(login("demo@aa.io", "password")).then(closeModal);
+    await dispatch(login("demo@aa.io", "password"));
+    closeModal();
     nav("/"); // Navigating to the home page after logging in as a demo user
   };
 
-  // Determining the CSS class for displaying errors
-  const errorsClass = errors.email || errors.password ? "email-login-errors" : "";
-
-  // Rendering the login form
   return (
     <>
       <div className="login-form-container">
@@ -56,7 +54,6 @@ function LoginFormModal() {
             <div className="email-div-for-login">
               <label>Email</label>
               <input
-                className={errorsClass}
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -66,18 +63,13 @@ function LoginFormModal() {
             <div className="password-for-login">
               <label>Password</label>
               <input
-                className={errorsClass}
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            {errors.password || errors.email ? (
-              <div className="" >Invalid Email and password combination </div>
-            ) : (
-              <></>
-            )}
+            {error && <div className="error-message">{error}</div>}
           </div>
           <button className="login-form-submit-button" type="submit">
             Log In

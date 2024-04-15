@@ -90,5 +90,14 @@ type UserType = {
     article_id: number;
   }
 
+  interface ErrorsType {
+    password: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    username: string | null;
+    email: string | null;
+    bio: string | null;
+  };
 
-    export type { ReadingListItem, NewComment, ArticleErrorsType, UserType, ArticleType, StateType, AppDispatch, SingleArticleType, LoginErrorsType, CommentType, LikesType};
+
+    export type { ErrorsType, ReadingListItem, NewComment, ArticleErrorsType, UserType, ArticleType, StateType, AppDispatch, SingleArticleType, LoginErrorsType, CommentType, LikesType};

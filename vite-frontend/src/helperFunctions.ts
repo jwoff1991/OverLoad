@@ -20,3 +20,12 @@ export const articleBodyConverter = (body: string): string => {
 export const userReadingListArticleIds = (userReadingList: ReadingListItem[]): number[] => {
     return userReadingList.map(({ article_id }) => article_id);
 };
+
+
+export const validateField = (field: string, message: string) => {
+    if (!field.trim()) {
+      return message;
+    }
+    return null;
+  };
+
