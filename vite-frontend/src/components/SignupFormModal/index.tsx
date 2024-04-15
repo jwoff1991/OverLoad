@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, ErrorsType } from '../../typeDeclerations';
 import { FormEvent, useState } from "react";
 import { validateField } from "../../helperFunctions";
-import { ErrorMessages } from "../../helperComponents";
+import { ErrorMessages } from "../errorMessages";
 import "./SignupForm.css";
 
 
