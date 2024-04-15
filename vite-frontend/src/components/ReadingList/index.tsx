@@ -59,7 +59,7 @@ const readingListDisplay = (readingListAll: ReadingListType[]) => {
           <div className="heading-div">
             <h1>Reading List</h1>
           </div>
-          {readingListAll && readingListAll[0]?.article && (
+          {readingListAll && readingListAll[0]?.article ? (
             <>
               <div className="reading-list-container">
                 {readingListAll.map(({ article }) => (
@@ -92,6 +92,10 @@ const readingListDisplay = (readingListAll: ReadingListType[]) => {
                 ))}
               </div>
             </>
+          ) : (
+            <div className="no-articles-div">
+              <h2>No articles in your reading list.</h2>
+            </div>
           )}
         </div>
       )}

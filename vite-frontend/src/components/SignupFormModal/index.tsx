@@ -40,36 +40,36 @@ function SignupFormModal() {
     const regex =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    //tests if email is valid
+    let newErrors: ErrorsType = {
+      password: null,
+      firstname: null,
+      lastname: null,
+      username: null,
+      bio: null,
+      email: null,
+    };
+
+    // Check if email is valid
     if (regex.test(email) === false) {
-      setErrors({
-        email: "Please enter a valid email",
-        password: null,
-        firstname: null,
-        lastname: null,
-        username: null,
-        bio: null,
-      });
-    } else if (password.length < 8) {
-      setErrors({
-        password: "Password should be at least 8 characters",
-        firstname: null,
-        lastname: null,
-        username: null,
-        bio: null,
-        email: null,
-      });
-    } else if (password !== confirmPassword) {
-      setErrors({
-        password:
-          "Confirm Password field must be the same as the Password field",
-        firstname: null,
-        lastname: null,
-        username: null,
-        bio: null,
-        email: null,
-      });
-    } else if (password === confirmPassword && password.length >= 8) {
+      newErrors.email = "Please enter a valid email";
+    }
+
+    // Check if password is long enough
+    if (password.length < 8) {
+      newErrors.password = "Password should be at least 8 characters";
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      newErrors.password =
+        "Confirm Password field must be the same as the Password field";
+    }
+
+    // Set the errors state with accumulated errors
+    setErrors(newErrors);
+
+    // If there are no errors, proceed with the sign-up process
+    if (!newErrors.email && !newErrors.password) {
       const data = await dispatch(
         signUp(firstname, lastname, username, email, bio, password)
       );
@@ -162,9 +162,11 @@ function SignupFormModal() {
                 required
               />
             </div>
-            <div className="error-validation-div">{errors.email}</div>
-            <div className="error-validation-div">{errors.username}</div>
-            <div className="error-validation-div">{errors.password}</div>
+            <div className="error-validation-div">
+              {Object.values(errors).map((error, index) =>
+                error ? <div key={index}>{error}</div> : null
+              )}
+            </div>
           </div>
           <button type="submit" className="signup-button-submit">
             Sign Up

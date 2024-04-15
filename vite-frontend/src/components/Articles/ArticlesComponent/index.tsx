@@ -27,7 +27,7 @@ const ArticlesComponent = () => {
         }
       }, [dispatch, sessionUser]);
 
-
+      const articlesList = Object.values(articles)
 
     const userReadingListIds: number[] = userReadingListArticleIds(Object.values(readingList));
     return (
@@ -36,7 +36,7 @@ const ArticlesComponent = () => {
           <>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articles.map(
+                {articlesList.map(
                   ({ id, author, title, body, date_created }) => (
                     <NavLink
                       key={id}
@@ -110,7 +110,7 @@ const ArticlesComponent = () => {
             </div>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articles.map(
+                {articlesList.map(
                   ({ id, author, title, body, date_created }) => (
                     <NavLink
                       key={id}
