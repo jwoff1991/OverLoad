@@ -29,7 +29,6 @@ export const getUserReadingList = () => async (dispatch: Dispatch) => {
     if (response.ok) {
       const data = await response.json();
       dispatch(getReadingList(data));
-      console.log(data)
       return data;
     } else {
       const errors = await response.json();
@@ -54,7 +53,6 @@ export const addToReadingList =
     );
     if (response.ok) {
       const article = await response.json();
-      getUserReadingList();
       return article;
     } else {
       return response;
@@ -71,7 +69,6 @@ export const removeFromReadingList =
     );
     if (response.ok) {
       const article = await response.json();
-      getUserReadingList();
       return article;
     } else {
       return response;
