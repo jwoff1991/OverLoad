@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../typeDeclerations";
-import { removeFromReadingList } from "../../store/readingList";
+import { getUserReadingList, removeFromReadingList } from "../../store/readingList";
 
 
 type ReadingListRemoveButtonProps = {
@@ -18,6 +18,7 @@ const ReadingListRemoveButtonComponent = (props: ReadingListRemoveButtonProps) =
   const removeFromList = (e: FormEvent) => {
     e.preventDefault();
     dispatch(removeFromReadingList(articleId, userId));
+    dispatch(getUserReadingList())
     return;
   };
 

@@ -14,8 +14,6 @@ import { StateType, AppDispatch } from "../../../typeDeclerations";
 import "./singleArticle.css";
 import { articleDateConverter } from "../../../helperFunctions";
 
-
-
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector((state: StateType) => state.articles.singleArticle);
@@ -28,22 +26,27 @@ const SingleArticle = () => {
   );
   const likes = useSelector((state: StateType) => state.articles.singleArticle.likes);
 
-  let commentsLength = comments && comments.length ? comments.length : 0;
-
-  //creates a loading screen
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1500);
-  }, []);
 
-  //gets article and user reading list
-  useEffect(() => {
+    setLoading(true);
+
     dispatch(getOneArticle(Number(articleId!)));
+
     if (sessionUser && sessionUser.id) {
       dispatch(getUserReadingList());
     }
-  }, [dispatch, articleId, commentsLength, sessionUser]);
 
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [dispatch, articleId, sessionUser]);
+
+  //LOADING SCREEN
   if (loading) {
     return <SpinnerLoadingScreen />;
   } else if (!article.id) {
@@ -54,15 +57,10 @@ const SingleArticle = () => {
     );
   }
 
-
-  //READING LIST
-  //pulls article ids from user reading list
   const userReadingList = Object.values(readingList);
   const userReadingListArticleId: Number[] = userReadingList.map(({ article_id }) => article_id);
 
-
-  //compares article list from above to current article id
-  //to determine which button to render
+  //READING LIST BUTTON
   const readingListButton = () => {
     if (userReadingListArticleId.includes(article.id)) {
       return (
@@ -100,7 +98,7 @@ const SingleArticle = () => {
     ? "article-container"
     : "article-container-logged-out";
   return (
-    <>
+
         <>
           <div className={loggedIn}>
             <div className="single-article-div">
@@ -157,7 +155,6 @@ const SingleArticle = () => {
             </div>
           </div>
         </>
-    </>
   );
 };
 

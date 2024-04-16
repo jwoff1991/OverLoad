@@ -6,6 +6,7 @@ import { getOneArticle } from "../../../store/articles";
 import { useDispatch, useSelector } from "react-redux";
 import { FormEvent, useEffect, useState } from "react";
 import { AppDispatch, StateType, NewComment } from "../../../typeDeclerations";
+import { articleDateConverter } from "../../../helperFunctions";
 import "./CommentsModal.css";
 
 
@@ -16,7 +17,7 @@ function CommentsModal(props: { articleId: number }) {
     (state: StateType) => state.articles.singleArticle.comments
   );
 
-  const [reload, setReload] = useState(0);
+  // const [reload, setReload] = useState(0);
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const articleId = props.articleId;
 
@@ -27,7 +28,7 @@ function CommentsModal(props: { articleId: number }) {
 
   useEffect(() => {
     dispatch(getOneArticle(articleId));
-  }, [dispatch, articleId, reload]);
+  }, [dispatch, articleId]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,7 +40,6 @@ function CommentsModal(props: { articleId: number }) {
     const data = await dispatch(postComment(newComment));
     if (data) {
       setComment("");
-      setReload(reload + 1);
     }
   };
 
@@ -48,10 +48,6 @@ function CommentsModal(props: { articleId: number }) {
     setComment("");
   };
 
-  const dateChanger = (date: String) => {
-    const newDate = date.split("").slice(5, 11).join("");
-    return newDate;
-  };
 
   return (
     <div className="comments-create-read-div">
@@ -103,7 +99,7 @@ function CommentsModal(props: { articleId: number }) {
                       {commenter.firstname}
                       <span>&#183;</span>
                       <div className="comment-post-date">
-                        {dateChanger(date_created)}
+                        {articleDateConverter(date_created)}
                       </div>
                     </div>
                   </div>
@@ -122,7 +118,7 @@ function CommentsModal(props: { articleId: number }) {
                           <OpenModal
                             buttonText="Delete"
                             modalComponent={
-                              <DeleteCommentModal props={[id]} />
+                              <DeleteCommentModal props={[id, articleId]} />
                             }
                             className="comment-delete-button"
                           />

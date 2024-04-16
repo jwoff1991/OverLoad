@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../typeDeclerations";
 import { deleteComment } from "../../../store/comments";
 import "./DeleteCommentModal.css";
+import { getOneArticle } from "../../../store/articles";
 
-function DeleteCommentModal(props: { props: [commentId: number] }) {
-  const [commentId] = props.props;
+function DeleteCommentModal(props: { props: [commentId: number, articleId: number] }) {
+  const [commentId, articleId] = props.props;
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
+
 
   const handleDelete = async (e: FormEvent) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ function DeleteCommentModal(props: { props: [commentId: number] }) {
       console.log("No error deleting comment");
     }
     closeModal();
-    window.location.reload();
+    dispatch(getOneArticle(articleId))
   };
 
   const returnToComments = (e: FormEvent) => {

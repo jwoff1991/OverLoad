@@ -1,11 +1,5 @@
 import { Dispatch } from "redux";
-
-type article = {
-    id: number;
-    user_id: number;
-    title: string;
-    body: string;
-};
+import { ArticleType } from "../typeDeclerations";
 
 type newArticle = {
   user_id: number;
@@ -39,7 +33,7 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
     if (response.ok) {
       let data = await response.json();
       // Sort the articles in the desired order before dispatching
-      data = data.sort((a: article, b: article) => b.id - a.id);
+      data = data.sort((a: ArticleType, b: ArticleType) => b.id - a.id);
       dispatch(getArticles(data));
       return data;
     } else {
@@ -109,7 +103,7 @@ export const postArticle = (article: newArticle) => async (dispatch: Dispatch) =
   }
 };
 
-export const editArticle = (article: article) => async (dispatch: Dispatch) => {
+export const editArticle = (article: ArticleType) => async (dispatch: Dispatch) => {
   try {
     let id = article.id;
     const request = await fetch(`/api/articles/edit/${id}/`, {
@@ -121,9 +115,9 @@ export const editArticle = (article: article) => async (dispatch: Dispatch) => {
     });
     const data = await request.json();
     if (data.ok) {
-      const newArticle = data;
-      dispatch(getSingleArticle(newArticle));
-      return newArticle;
+      const editedArticle = data;
+      dispatch(getSingleArticle(editedArticle));
+      return editedArticle;
     }
   } catch (error) {
     const errors =

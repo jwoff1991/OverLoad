@@ -1,10 +1,7 @@
 import React from 'react';
 import ReadingListRemoveButtonComponent from './ReadingList/removeFromReadingListButton';
 import ReadingListAddButtonComponent from './ReadingList/addToReadingListButton';
-
-interface ArticleType {
-  // ... define the properties of ArticleType here
-}
+import { ArticleType } from '../typeDeclerations';
 
 interface ReadingListItem {
   article: ArticleType;
