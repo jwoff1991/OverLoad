@@ -1,30 +1,36 @@
+// ReadingListButton.tsx
 import React from 'react';
-import ReadingListRemoveButtonComponent from './ReadingList/removeFromReadingListButton';
+import { useSelector } from 'react-redux';
 import ReadingListAddButtonComponent from './ReadingList/addToReadingListButton';
-import { ArticleType } from '../typeDeclerations';
-
-interface ReadingListItem {
-  article: ArticleType;
-  article_id: number;
-  id: number;
-  user_id: number;
-}
+import ReadingListRemoveButtonComponent from './ReadingList/removeFromReadingListButton';
+import { userReadingListArticleIds } from '../helperFunctions';
+import { StateType } from '../typeDeclerations';
 
 interface ReadingListButtonProps {
-  readingList: ReadingListItem[];
   articleId: number;
-  userId: number;
 }
 
-const ReadingListButton: React.FC<ReadingListButtonProps> = ({ readingList, articleId, userId }) => {
-    // Check if readingList is an array before calling map
-    const userReadingListArticleId: number[] = Array.isArray(readingList) ? readingList.map(({ article_id }) => article_id) : [];
+const ReadingListButton: React.FC<ReadingListButtonProps> = ({ articleId }) => {
+  const sessionUser = useSelector((state: StateType) => state.session.user);
+  const readingList = useSelector((state: StateType) => state.readingList);
 
-    if (userReadingListArticleId.includes(articleId)) {
-      return <ReadingListRemoveButtonComponent articleId={articleId} userId={userId} />;
-    } else {
-      return <ReadingListAddButtonComponent articleId={articleId} userId={userId} />;
-    }
-  };
+  const userArticleIds = userReadingListArticleIds(Object.values(readingList));
 
-  export default ReadingListButton;
+  if (userArticleIds.includes(articleId)) {
+    return (
+      <ReadingListRemoveButtonComponent
+        articleId={articleId}
+        userId={sessionUser.id}
+      />
+    );
+  } else {
+    return (
+      <ReadingListAddButtonComponent
+        articleId={articleId}
+        userId={sessionUser.id}
+      />
+    );
+  }
+};
+
+export default ReadingListButton;

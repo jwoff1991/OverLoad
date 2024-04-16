@@ -3,8 +3,6 @@ import ArticleLikes from "../ArticleLikes";
 import CommentsModal from "../../Comments/ArticleCommentsModal";
 import DeleteArticleModal from "../DeleteArticleModal";
 import SpinnerLoadingScreen from "../../LoadingScreen";
-import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
-import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import { getOneArticle } from "../../../store/articles";
 import { Link, useParams } from "react-router-dom";
 import { getUserReadingList } from "../../../store/readingList";
@@ -13,37 +11,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateType, AppDispatch } from "../../../typeDeclerations";
 import "./singleArticle.css";
 import { articleDateConverter } from "../../../helperFunctions";
+import ReadingListButton from "../../readingListButton";
 
 const SingleArticle = () => {
   const articleId = useParams().id;
-  const article = useSelector((state: StateType) => state.articles.singleArticle);
+  const article = useSelector(
+    (state: StateType) => state.articles.singleArticle
+  );
   const sessionUser = useSelector((state: StateType) => state.session.user);
-  const readingList = useSelector((state: StateType) => state.readingList);
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
   const comments = useSelector(
     (state: StateType) => state.articles.singleArticle.comments
   );
-  const likes = useSelector((state: StateType) => state.articles.singleArticle.likes);
+  const likes = useSelector(
+    (state: StateType) => state.articles.singleArticle.likes
+  );
 
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-
-    setLoading(true);
-
-    dispatch(getOneArticle(Number(articleId!)));
-
-    if (sessionUser && sessionUser.id) {
-      dispatch(getUserReadingList());
-    }
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(timer);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await dispatch(getOneArticle(Number(articleId!)));
+        if (sessionUser && sessionUser.id) {
+          await dispatch(getUserReadingList());
+        }
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
+
+    fetchData();
   }, [dispatch, articleId, sessionUser]);
 
   //LOADING SCREEN
@@ -56,27 +58,6 @@ const SingleArticle = () => {
       </div>
     );
   }
-
-  const userReadingList = Object.values(readingList);
-  const userReadingListArticleId: Number[] = userReadingList.map(({ article_id }) => article_id);
-
-  //READING LIST BUTTON
-  const readingListButton = () => {
-    if (userReadingListArticleId.includes(article.id)) {
-      return (
-        <ReadingListRemoveButtonComponent
-          articleId={article.id}
-          userId={sessionUser.id}
-        />
-      );
-    } else {
-      return (
-        <ReadingListAddButtonComponent
-        articleId={article.id}
-        userId={sessionUser.id} />
-      );
-    }
-  };
 
   //COMMENT BUTTON
   const commentButton = (
@@ -98,63 +79,61 @@ const SingleArticle = () => {
     ? "article-container"
     : "article-container-logged-out";
   return (
-
-        <>
-          <div className={loggedIn}>
-            <div className="single-article-div">
-              <div className="article-title">{article.title}</div>
-              <div className="article-author-and-date">
-                <div className="author">
-                  {article.author && article.author.firstname}{" "}
-                  {article.author && article.author.lastname}
-                </div>
-                <span>&#183;</span>
-                <div className="date-created">
-                  {articleDateConverter(article.date_created)}
-                </div>
-              </div>
-              <div className="likes-comments-edit-delete-container">
-                <div className="comment-and-reading-list-buttons">
-                  <div className="comments-modal-button-container">
-                    {ArticleLikes(sessionUser, likes, articleId!)}
-                    <OpenModal
-                      buttonText={commentButton}
-                      modalComponent={<CommentsModal articleId={Number(articleId!)} />}
-                      className="article-comments-modal-button"
-                    />
-                  </div>
-                  {sessionUser ? <>{readingListButton()}</> : <></>}
-                </div>
-                {article.author &&
-                  article.author.id &&
-                  sessionUser &&
-                  sessionUser.id === article.author.id && (
-                    <>
-                      <div className="edit-delete-buttons">
-                        <OpenModal
-                          buttonText="Delete"
-                          modalComponent={
-                            <DeleteArticleModal props={articleId!} />
-                          }
-                          className="article-delete-button"
-                        />
-                        <Link
-                          key={article.id}
-                          to={`/article/${article.id}/edit`}
-                        >
-                          <button className="article-edit-button">
-                            Edit Article
-                          </button>
-                        </Link>
-                      </div>
-                    </>
-                  )}
-              </div>
-              <div className="article-body">{article.body}</div>
-              <div></div>
+    <>
+      <div className={loggedIn}>
+        <div className="single-article-div">
+          <div className="article-title">{article.title}</div>
+          <div className="article-author-and-date">
+            <div className="author">
+              {article.author && article.author.firstname}{" "}
+              {article.author && article.author.lastname}
+            </div>
+            <span>&#183;</span>
+            <div className="date-created">
+              {articleDateConverter(article.date_created)}
             </div>
           </div>
-        </>
+          <div className="likes-comments-edit-delete-container">
+            <div className="comment-and-reading-list-buttons">
+              <div className="comments-modal-button-container">
+                {ArticleLikes(sessionUser, likes, articleId!)}
+                <OpenModal
+                  buttonText={commentButton}
+                  modalComponent={
+                    <CommentsModal articleId={Number(articleId!)} />
+                  }
+                  className="article-comments-modal-button"
+                />
+              </div>
+              {sessionUser ? (
+                <ReadingListButton articleId={article.id} />
+              ) : null}
+            </div>
+            {article.author &&
+              article.author.id &&
+              sessionUser &&
+              sessionUser.id === article.author.id && (
+                <>
+                  <div className="edit-delete-buttons">
+                    <OpenModal
+                      buttonText="Delete"
+                      modalComponent={<DeleteArticleModal props={articleId!} />}
+                      className="article-delete-button"
+                    />
+                    <Link key={article.id} to={`/article/${article.id}/edit`}>
+                      <button className="article-edit-button">
+                        Edit Article
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
+          </div>
+          <div className="article-body">{article.body}</div>
+          <div></div>
+        </div>
+      </div>
+    </>
   );
 };
 

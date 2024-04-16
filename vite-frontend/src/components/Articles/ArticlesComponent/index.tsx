@@ -1,7 +1,5 @@
 import Footer from "../../Footer";
 import StaffPicks from "../StaffPicks";
-import ReadingListAddButtonComponent from "../../ReadingList/addToReadingListButton";
-import ReadingListRemoveButtonComponent from "../../ReadingList/removeFromReadingListButton";
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
 import { getAllArticles } from "../../../store/articles";
@@ -9,15 +7,14 @@ import { StateType, AppDispatch } from "../../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
 import './articlesComponent.css'
-import { articleDateConverter, articleBodyConverter, userReadingListArticleIds } from "../../../helperFunctions";
+import { articleDateConverter, articleBodyConverter } from "../../../helperFunctions";
+import ReadingListButton from "../../readingListButton";
 
 
 const ArticlesComponent = () => {
     const dispatch: AppDispatch = useDispatch<AppDispatch>();
     const sessionUser = useSelector((state: StateType) => state.session.user);
     const articles = useSelector((state: StateType) => state.articles.allArticles)
-    const readingList = useSelector((state: StateType) => state.readingList)
-
 
     useEffect(() => {
         dispatch(getAllArticles());
@@ -29,7 +26,7 @@ const ArticlesComponent = () => {
 
     const articlesList = Object.values(articles)
 
-    const userReadingListIds: number[] = userReadingListArticleIds(Object.values(readingList));
+
     return (
       <>
         {sessionUser ? (
@@ -54,21 +51,7 @@ const ArticlesComponent = () => {
                               {articleDateConverter(date_created)}
                             </div>
                           </div>
-                          {userReadingListIds.includes(id) ? (
-                            <>
-                              <ReadingListRemoveButtonComponent
-                                articleId={id}
-                                userId={sessionUser.id}
-                              />
-                            </>
-                          ) : (
-                            <>
-                              <ReadingListAddButtonComponent
-                                articleId={id}
-                                userId={(sessionUser.id)}
-                              />
-                            </>
-                          )}
+                          {<ReadingListButton articleId={id} />}
                         </div>
                         <div className="article-title">{title}</div>
                         <div className="article-body">

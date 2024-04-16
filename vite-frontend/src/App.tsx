@@ -1,4 +1,4 @@
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,8 +7,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import store from './store/index.ts';
 
-const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+// const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
+// ReactGA.initialize(TRACKING_ID);
 
 import './index.css'
 import Navigation from './components/Navigation';
