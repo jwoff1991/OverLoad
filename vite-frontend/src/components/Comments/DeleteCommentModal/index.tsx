@@ -25,7 +25,6 @@ function DeleteCommentModal(props: { props: [commentId: number, articleId: numbe
   const returnToComments = (e: FormEvent) => {
     e.preventDefault();
     closeModal();
-    window.location.reload();
   };
 
   return (
