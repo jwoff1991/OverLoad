@@ -7,10 +7,11 @@ type newArticle = {
   body: string;
 }
 
-
+//actiontype
 const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
 
+//actioncreator
 const getArticles = (data: {}) => {
   return {
     type: GET_ARTICLES,
@@ -25,6 +26,7 @@ const getSingleArticle = (data: {}) => {
   };
 };
 
+//thunk
 export const getAllArticles = () => async (dispatch: Dispatch) => {
   try {
     const response = await fetch("/api/articles/all", {
