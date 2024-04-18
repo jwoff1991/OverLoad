@@ -1,15 +1,17 @@
-import Footer from "../../Footer";
-import StaffPicks from "../StaffPicks";
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
-import { getAllArticles } from "../../../store/articles";
-import { StateType, AppDispatch } from "../../../typeDeclerations";
 import { useDispatch, useSelector } from "react-redux";
+
+import { getAllArticles } from "../../../store/articles";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
-import './articlesComponent.css'
+import { StateType, AppDispatch } from "../../../typeDeclerations";
 import { articleDateConverter, articleBodyConverter } from "../../../helperFunctions";
+
+import Footer from "../../Footer";
+import StaffPicks from "../StaffPicks";
 import ReadingListButton from "../../readingListButton";
 
+import './articlesComponent.css'
 
 const ArticlesComponent = () => {
     const dispatch: AppDispatch = useDispatch<AppDispatch>();
@@ -19,7 +21,7 @@ const ArticlesComponent = () => {
     useEffect(() => {
         dispatch(getAllArticles());
         if(sessionUser && sessionUser.id) {
-            dispatch(clearUserReadingList())
+            dispatch(clearUserReadingList());
             dispatch(getUserReadingList());
         }
       }, [dispatch, sessionUser]);

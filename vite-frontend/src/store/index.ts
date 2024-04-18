@@ -1,11 +1,11 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit';
+import { combineReducers, AnyAction, Dispatch } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { combineReducers } from 'redux';
+
 import articleReducer from './articles';
 import readingListReducer from './readingList';
 import userReducer from './session';
-import { AnyAction, Dispatch } from 'redux'; // Import AnyAction and Dispatch
 
 // Define the root reducer
 const rootReducer = combineReducers({
