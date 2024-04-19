@@ -19,6 +19,7 @@ import EditArticle from "./components/Articles/EditArticle/index.tsx";
 import ReadingListComponent from "./components/ReadingList/index.tsx";
 import MyStoryComponent from "./components/MyStoryComponent/index.tsx";
 import CreateComponent from "./components/CreateComponent/index.tsx";
+import NotFoundComponent from "./components/NotFoundComponent/index.tsx";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
@@ -35,8 +36,6 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Routes>
-          <Route path="/login">{/* <LoginFormPage /> */}</Route>
-          <Route path="/signup">{/* <SignupFormPage /> */}</Route>
           <Route path="/" element={<ArticlesComponent />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/new-article" element={<CreateNewArticle />} />
@@ -47,6 +46,7 @@ function App() {
           />
           <Route path="/my-story" element={<MyStoryComponent />} />
           <Route path="/create" element={<CreateComponent />} />
+          <Route path="*" element={<NotFoundComponent />} />
         </Routes>
       )}
     </>
