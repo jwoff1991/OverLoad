@@ -81,15 +81,13 @@ const SingleArticle = () => {
   const loggedIn = sessionUser
     ? "article-container"
     : "article-container-logged-out";
-  return (
-    <>
+    return (
       <div className={loggedIn}>
         <div className="single-article-div">
           <div className="article-title">{article.title}</div>
           <div className="article-author-and-date">
             <div className="author">
-              {article.author && article.author.firstname}{" "}
-              {article.author && article.author.lastname}
+              {article.author?.firstname} {article.author?.lastname}
             </div>
             <span>&#183;</span>
             <div className="date-created">
@@ -102,42 +100,31 @@ const SingleArticle = () => {
                 {ArticleLikes(sessionUser, likes, articleId!)}
                 <OpenModal
                   buttonText={commentButton}
-                  modalComponent={
-                    <CommentsModal articleId={Number(articleId!)} />
-                  }
+                  modalComponent={<CommentsModal articleId={Number(articleId!)} />}
                   className="article-comments-modal-button"
                 />
               </div>
-              {sessionUser ? (
-                <ReadingListButton articleId={article.id} />
-              ) : null}
+              {sessionUser && <ReadingListButton articleId={article.id} />}
             </div>
-            {article.author &&
-              article.author.id &&
-              sessionUser &&
-              sessionUser.id === article.author.id && (
-                <>
-                  <div className="edit-delete-buttons">
-                    <OpenModal
-                      buttonText="Delete"
-                      modalComponent={<DeleteArticleModal props={articleId!} />}
-                      className="article-delete-button"
-                    />
-                    <Link key={article.id} to={`/article/${article.id}/edit`}>
-                      <button className="article-edit-button">
-                        Edit Article
-                      </button>
-                    </Link>
-                  </div>
-                </>
-              )}
+            {sessionUser?.id === article.author?.id && (
+              <div className="edit-delete-buttons">
+                <OpenModal
+                  buttonText="Delete"
+                  modalComponent={<DeleteArticleModal props={articleId!} />}
+                  className="article-delete-button"
+                />
+                <Link key={article.id} to={`/article/${article.id}/edit`}>
+                  <button className="article-edit-button">
+                    Edit Article
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
           <div className="article-body">{article.body}</div>
-          <div></div>
         </div>
       </div>
-    </>
-  );
+    );
 };
 
 export default SingleArticle;
