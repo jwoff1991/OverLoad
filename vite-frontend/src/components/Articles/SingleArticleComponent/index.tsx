@@ -51,17 +51,6 @@ const SingleArticle = () => {
     fetchData();
   }, [dispatch, articleId, sessionUser]);
 
-  //LOADING SCREEN
-  if (loading) {
-    return <SpinnerLoadingScreen />;
-  } else if (!article.id) {
-    return (
-      <div className="article-id-not-found">
-        The article you are looking for is not here
-      </div>
-    );
-  }
-
   //COMMENT BUTTON
   const commentButton = (
     <div className="comments-icon-and-number-container">
@@ -78,53 +67,65 @@ const SingleArticle = () => {
     </div>
   );
 
-  const loggedIn = sessionUser
-    ? "article-container"
-    : "article-container-logged-out";
+  //LOADING SCREEN
+  if (loading) {
+    return <SpinnerLoadingScreen />;
+  } else if (!article.id) {
     return (
-      <div className={loggedIn}>
-        <div className="single-article-div">
-          <div className="article-title">{article.title}</div>
-          <div className="article-author-and-date">
-            <div className="author">
-              {article.author?.firstname} {article.author?.lastname}
-            </div>
-            <span>&#183;</span>
-            <div className="date-created">
-              {articleDateConverter(article.date_created)}
-            </div>
-          </div>
-          <div className="likes-comments-edit-delete-container">
-            <div className="comment-and-reading-list-buttons">
-              <div className="comments-modal-button-container">
-                {ArticleLikes(sessionUser, likes, articleId!)}
-                <OpenModal
-                  buttonText={commentButton}
-                  modalComponent={<CommentsModal articleId={Number(articleId!)} />}
-                  className="article-comments-modal-button"
-                />
-              </div>
-              {sessionUser && <ReadingListButton articleId={article.id} />}
-            </div>
-            {sessionUser?.id === article.author?.id && (
-              <div className="edit-delete-buttons">
-                <OpenModal
-                  buttonText="Delete"
-                  modalComponent={<DeleteArticleModal props={articleId!} />}
-                  className="article-delete-button"
-                />
-                <Link key={article.id} to={`/article/${article.id}/edit`}>
-                  <button className="article-edit-button">
-                    Edit Article
-                  </button>
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="article-body">{article.body}</div>
-        </div>
+      <div className="article-id-not-found">
+        The article you are looking for is not here
       </div>
     );
+  }
+
+  return (
+    <div
+      className={
+        sessionUser ? "article-container" : "article-container-logged-out"
+      }
+    >
+      <div className="single-article-div">
+        <div className="article-title">{article.title}</div>
+        <div className="article-author-and-date">
+          <div className="author">
+            {article.author?.firstname} {article.author?.lastname}
+          </div>
+          <span>&#183;</span>
+          <div className="date-created">
+            {articleDateConverter(article.date_created)}
+          </div>
+        </div>
+        <div className="likes-comments-edit-delete-container">
+          <div className="comment-and-reading-list-buttons">
+            <div className="comments-modal-button-container">
+              {ArticleLikes(sessionUser, likes, articleId!)}
+              <OpenModal
+                buttonText={commentButton}
+                modalComponent={
+                  <CommentsModal articleId={Number(articleId!)} />
+                }
+                className="article-comments-modal-button"
+              />
+            </div>
+            {sessionUser && <ReadingListButton articleId={article.id} />}
+          </div>
+          {sessionUser?.id === article.author?.id && (
+            <div className="edit-delete-buttons">
+              <OpenModal
+                buttonText="Delete"
+                modalComponent={<DeleteArticleModal props={articleId!} />}
+                className="article-delete-button"
+              />
+              <Link key={article.id} to={`/article/${article.id}/edit`}>
+                <button className="article-edit-button">Edit Article</button>
+              </Link>
+            </div>
+          )}
+        </div>
+        <div className="article-body">{article.body}</div>
+      </div>
+    </div>
+  );
 };
 
 export default SingleArticle;
