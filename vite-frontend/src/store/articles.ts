@@ -16,14 +16,14 @@ const GET_SINGLE = "/article/single";
 const getArticles = (articles: {}) => {
   return {
     type: GET_ARTICLES,
-    articles: articles,
+    payload: articles,
   };
 };
 
 const getSingleArticle = (article: {}) => {
   return {
     type: GET_SINGLE,
-    article: article,
+    payload: article,
   };
 };
 
@@ -150,19 +150,18 @@ const articleReducer = (
   state = initialState,
   action: {
     type: typeof GET_ARTICLES | typeof GET_SINGLE;
-    articles: {} | null;
-    article: {} | null;
+    payload: {} | null;
   }
 ) => {
   let newState;
   switch (action.type) {
     case GET_ARTICLES:
       newState = Object.assign({ ...state });
-      newState.allArticles = action.articles;
+      newState['allArticles'] = action.payload;
       return newState;
     case GET_SINGLE:
       newState = Object.assign({ ...state });
-      newState.singleArticle = action.article;
+      newState.singleArticle = action.payload;
       return newState;
     default:
       return state;

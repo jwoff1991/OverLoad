@@ -3,8 +3,6 @@ import { removeLike, addLike } from "../../../store/likes";
 import { AppDispatch, UserType } from "../../../typeDeclerations";
 import './articlelikes.css'
 
-
-
 const ArticleLikes = (
   sessionUser: UserType,
   likes: ArrayLike<{ user_id: number }>,
@@ -12,39 +10,20 @@ const ArticleLikes = (
 ) => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-  interface Like {
-    user_id: number;
-  }
-
-  // Get userIds from likes list
-  const userIdsInLikesList = (articleLikes: Like[]): number[] => {
-    return articleLikes.map(({ user_id }) => user_id);
-  };
-
-  let userIdFromLikes: number[] = [];
-  let articleLikes: Like[] = [];
-
-  if (likes && likes.length) {
-    articleLikes = Object.values(likes);
-    userIdFromLikes = userIdsInLikesList(articleLikes);
-  }
-
   const removeUserLike = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(removeLike(articleId, sessionUser.id));
   };
 
   const addUserLike = (e: React.FormEvent) => {
-    console.log('button clicked');
     e.preventDefault();
     dispatch(addLike(articleId, sessionUser.id));
   };
 
   const userNotLoggedInLikeButton = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Please log in to like an article.');
+    alert("Please log in to like an article.");
   };
-
 
   //renders clickable like button if user is logged in and not on likeList, or renders unclickable like button if user is not logged in
   const likeButtonClear = (
@@ -97,14 +76,10 @@ const ArticleLikes = (
     </button>
   );
 
-  //choses which button to display based on if user is in artile like list or not
-  const likeButton = () => {
-    if (sessionUser && userIdFromLikes.includes(sessionUser.id)) {
-      return likeButtonBlack;
-    } else {
-      return likeButtonClear;
-    }
-  };
+  const likeButton = () =>
+    sessionUser && Array.from(likes ?? []).some((like) => like.user_id === sessionUser.id)
+      ? likeButtonBlack
+      : likeButtonClear;
 
   return <>{likeButton()}</>;
 };
