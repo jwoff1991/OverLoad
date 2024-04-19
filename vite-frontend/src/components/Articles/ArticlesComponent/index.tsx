@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAllArticles } from "../../../store/articles";
 import { clearUserReadingList, getUserReadingList } from "../../../store/readingList";
-import { StateType, AppDispatch } from "../../../typeDeclerations";
+import { StateType, AppDispatch, ArticleType } from "../../../typeDeclerations";
 import { articleDateConverter, articleBodyConverter } from "../../../helperFunctions";
 
 import Footer from "../../Footer";
@@ -16,18 +16,38 @@ import './articlesComponent.css'
 const ArticlesComponent = () => {
     const dispatch: AppDispatch = useDispatch<AppDispatch>();
     const sessionUser = useSelector((state: StateType) => state.session.user);
-    const articles = useSelector((state: StateType) => state.articles.allArticles)
+    const articlesList = useSelector((state: StateType) =>
+      Object.values(state.articles.allArticles)
+    );
 
     useEffect(() => {
-        dispatch(getAllArticles());
-        if(sessionUser && sessionUser.id) {
-            dispatch(clearUserReadingList());
-            dispatch(getUserReadingList());
-        }
-      }, [dispatch, sessionUser]);
+      dispatch(getAllArticles());
+      if (sessionUser && sessionUser.id) {
+        dispatch(clearUserReadingList());
+        dispatch(getUserReadingList());
+      }
+    }, [dispatch, sessionUser]);
 
-    const articlesList = Object.values(articles)
-
+    const ArticleLink = ({ id, author, title, body, date_created }: ArticleType) => (
+      <NavLink key={id} to={`/articles/${id}`} className="text-link">
+        <div className="full-article-div">
+          <div className="date-author-reading-list-div">
+            <div className="date-article-author">
+              <div className="author">
+                {author.firstname} {author.lastname}
+              </div>
+              <span>&#183;</span>
+              <div className="date-created">
+                {articleDateConverter(date_created)}
+              </div>
+            </div>
+            {sessionUser && <ReadingListButton articleId={id} />}
+          </div>
+          <div className="article-title">{title}</div>
+          <div className="article-body">{articleBodyConverter(body)}</div>
+        </div>
+      </NavLink>
+    );
 
     return (
       <>
@@ -35,41 +55,15 @@ const ArticlesComponent = () => {
           <>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articlesList.map(
-                  ({ id, author, title, body, date_created }) => (
-                    <NavLink
-                      key={id}
-                      to={`/articles/${id}`}
-                      className="text-link"
-                    >
-                      <div className="full-article-div">
-                        <div className="date-author-reading-list-div">
-                          <div className="date-article-author">
-                            <div className="author">
-                              {author.firstname} {author.lastname}
-                            </div>
-                            <span>&#183;</span>
-                            <div className="date-created">
-                              {articleDateConverter(date_created)}
-                            </div>
-                          </div>
-                          {<ReadingListButton articleId={id} />}
-                        </div>
-                        <div className="article-title">{title}</div>
-                        <div className="article-body">
-                          {articleBodyConverter(body)}
-                        </div>
-                      </div>
-                    </NavLink>
-                  )
-                )}
+                {articlesList.map((article) => (
+                  <ArticleLink {...article} />
+                ))}
               </div>
               <div className="topics-footer-container-user-logged-in">
                 <div className="staff-picks-user-logged-in">
                   <StaffPicks />
                   <Footer />
                 </div>
-                <div className="footer-user-not-logged-in"></div>
               </div>
             </div>
           </>
@@ -95,30 +89,9 @@ const ArticlesComponent = () => {
             </div>
             <div className="articles-topics-footer-container">
               <div className="articles-container">
-                {articlesList.map(
-                  ({ id, author, title, body, date_created }) => (
-                    <NavLink
-                      key={id}
-                      to={`/articles/${id}`}
-                      className="text-link"
-                    >
-                      <div className="full-article-div">
-                        <div className="article-author">
-                          <div className="author">
-                            {author.firstname} {author.lastname}
-                          </div>
-                        </div>
-                        <div className="article-title">{title}</div>
-                        <div className="article-body">
-                          {articleBodyConverter(body)}...
-                        </div>
-                        <div className="date-created">
-                          {articleDateConverter(date_created)}
-                        </div>
-                      </div>
-                    </NavLink>
-                  )
-                )}
+                {articlesList.map((article) => (
+                  <ArticleLink {...article} />
+                ))}
               </div>
               <div className="topics-footer-container-user-not-logged-in">
                 <div className="staff-picks-user-not-logged-in">

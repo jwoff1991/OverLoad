@@ -2,6 +2,7 @@ import { ReadingListItem } from "./typeDeclerations";
 
 
 //converts date from database format to usable format
+//data normalization
 export const articleDateConverter = (date: string): string => {
     const dateObj = new Date(date);
     return dateObj.toLocaleDateString('en-US', {
@@ -28,4 +29,3 @@ export const validateField = (field: string, message: string) => {
     }
     return null;
   };
-

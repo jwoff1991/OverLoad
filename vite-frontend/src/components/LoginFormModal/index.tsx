@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { AppDispatch } from "../../typeDeclerations.ts";
 import "./LoginForm.css";
+import { ErrorMessages } from "../errorMessages.tsx";
 
 function LoginFormModal() {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
@@ -45,6 +46,8 @@ function LoginFormModal() {
     nav("/"); // Navigating to the home page after logging in as a demo user
   };
 
+  const emailErrorsClass = error?.length ? "email-login-errors" : ""
+
   return (
     <>
       <div className="login-form-container">
@@ -55,6 +58,7 @@ function LoginFormModal() {
               <label>Email</label>
               <input
                 type="text"
+                className={emailErrorsClass}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -64,6 +68,7 @@ function LoginFormModal() {
               <label>Password</label>
               <input
                 type="password"
+                className={emailErrorsClass}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
