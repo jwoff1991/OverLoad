@@ -5,7 +5,6 @@ from ..forms.new_article_form import NewArticleForm
 from datetime import datetime
 
 
-
 article_routes = Blueprint('articles', __name__)
 session = db.session
 

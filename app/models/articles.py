@@ -1,5 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask import jsonify
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Article(db.Model):
@@ -24,7 +22,7 @@ class Article(db.Model):
     reading_list = db.relationship('ReadingList', back_populates='article', cascade='all, delete-orphan')
     likes = db.relationship('ArticleLike', back_populates='article', cascade='all, delete-orphan')
 
-    def to_dict(self):
+    def to_dict(self): #serializes the object to easily convert to JSON
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -32,5 +30,4 @@ class Article(db.Model):
             "body": self.body,
             "date_created": self.date_created,
             "author": self.author.to_dict(),
-            # "readingList": self.reading_list
         }
