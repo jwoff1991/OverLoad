@@ -1,4 +1,3 @@
-// import ReactGA from 'react-ga';
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,10 +6,6 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import store from './store/index.ts';
 
-// const TRACKING_ID = "G-CEEJHMT4H8"; // YOUR_OWN_TRACKING_ID
-// ReactGA.initialize(TRACKING_ID);
-
-import './index.css'
 import Navigation from './components/Navigation';
 import ArticlesComponent from "./components/Articles/ArticlesComponent/index.tsx";
 import SingleArticle from "./components/Articles/SingleArticleComponent/index.tsx";
@@ -20,6 +15,8 @@ import ReadingListComponent from "./components/ReadingList/index.tsx";
 import MyStoryComponent from "./components/MyStoryComponent/index.tsx";
 import CreateComponent from "./components/CreateComponent/index.tsx";
 import NotFoundComponent from "./components/NotFoundComponent/index.tsx";
+
+import './index.css'
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 

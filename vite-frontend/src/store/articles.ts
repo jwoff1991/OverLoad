@@ -13,17 +13,17 @@ const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
 
 //actioncreator
-const getArticles = (data: {}) => {
+const getArticles = (articles: {}) => {
   return {
     type: GET_ARTICLES,
-    articles: data,
+    articles: articles,
   };
 };
 
-const getSingleArticle = (data: {}) => {
+const getSingleArticle = (article: {}) => {
   return {
     type: GET_SINGLE,
-    article: data,
+    article: article,
   };
 };
 
@@ -34,11 +34,11 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
       method: "GET",
     });
     if (response.ok) {
-      let data = await response.json();
+      let articles = await response.json();
       // Sort the articles in the desired order before dispatching
-      data = data.sort((a: ArticleType, b: ArticleType) => b.id - a.id);
-      dispatch(getArticles(data));
-      return data;
+      articles = articles.sort((a: ArticleType, b: ArticleType) => b.id - a.id);
+      dispatch(getArticles(articles));
+      return articles;
     } else {
       const errors = await response.json();
       return errors;
@@ -62,15 +62,15 @@ export const getOneArticle = (id: number | string) => async (dispatch: Dispatch)
     });
     const likeResponse = await fetch(`/api/article-likes/${id}`);
     if (response.ok) {
-      const data = await response.json();
+      const article = await response.json();
       const commentData = await res.json();
-      data["comments"] = commentData;
+      article["comments"] = commentData;
 
       const likeData = await likeResponse.json();
-      data["likes"] = likeData;
+      article["likes"] = likeData;
 
-      dispatch(getSingleArticle(data));
-      return data;
+      dispatch(getSingleArticle(article));
+      return article;
     } else {
       const errors = await response.json();
       return errors;
@@ -93,8 +93,7 @@ export const postArticle = (article: newArticle) => async (dispatch: Dispatch) =
       },
       body: JSON.stringify(article),
     });
-    const data = await request.json();
-    const newArticle = data;
+    const newArticle = await request.json();
     dispatch(getSingleArticle(newArticle));
     return newArticle;
   } catch (error) {
@@ -116,9 +115,8 @@ export const editArticle = (article: ArticleType) => async (dispatch: Dispatch) 
       },
       body: JSON.stringify(article),
     });
-    const data = await request.json();
-    if (data.ok) {
-      const editedArticle = data;
+    const editedArticle = await request.json();
+    if (editedArticle.ok) {
       dispatch(getSingleArticle(editedArticle));
       return editedArticle;
     }
