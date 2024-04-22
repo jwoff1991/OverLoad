@@ -16,6 +16,7 @@ import ReadingListButton from "../../readingListButton";
 
 import "./singleArticle.css";
 
+
 const SingleArticle = () => {
   const articleId = useParams().id;
   const article = useSelector(
@@ -33,21 +34,21 @@ const SingleArticle = () => {
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        await dispatch(getOneArticle(Number(articleId!)));
-        if (sessionUser && sessionUser.id) {
-          await dispatch(getUserReadingList());
-        }
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      await dispatch(getOneArticle(Number(articleId!)));
+      if (sessionUser && sessionUser.id) {
+        await dispatch(getUserReadingList());
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [dispatch, articleId, sessionUser]);
 
