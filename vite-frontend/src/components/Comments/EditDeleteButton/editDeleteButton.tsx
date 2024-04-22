@@ -57,7 +57,7 @@ function EditDeleteButton(props: EditDeleteButtonProps) {
             <OpenModal
               buttonText="Delete"
               onItemClick={closeMenu}
-              modalComponent={<DeleteCommentModal props={[id]} />}
+              modalComponent={<DeleteCommentModal props={[id, articleId]} />}
               className="article-delete-button"
             />
           </>
