@@ -2,6 +2,7 @@ const GET_LIST = "list/get";
 const CLEAR_LIST = "CLEAR_LIST";
 
 import { Dispatch } from "redux";
+import { createErrorObject } from "../helperFunctions";
 
 const getReadingList = (data: {}) => {
   return {
@@ -35,43 +36,49 @@ export const getUserReadingList = () => async (dispatch: Dispatch) => {
       return errors;
     }
   } catch (error) {
-    const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-    return errors;
+    return createErrorObject(error);
   }
 };
 
 export const addToReadingList =
   (articleId: Number, userId: Number) => async () => {
-    const response = await fetch(
-      `/api/reading-list/add/${articleId}/${userId}/`,
-      {
-        method: "POST",
+    try {
+      const response = await fetch(
+        `/api/reading-list/add/${articleId}/${userId}/`,
+        {
+          method: "POST",
+        }
+      );
+      if (response.ok) {
+        const article = await response.json();
+        return article;
+      } else {
+        const errors = await response.json();
+        return errors;
       }
-    );
-    if (response.ok) {
-      const article = await response.json();
-      return article;
-    } else {
-      return response;
+    } catch (error) {
+      return createErrorObject(error);
     }
   };
 
 export const removeFromReadingList =
   (articleId: Number, userId: Number) => async () => {
-    const response = await fetch(
-      `/api/reading-list/remove/${userId}/${articleId}/`,
-      {
-        method: "DELETE",
+    try {
+      const response = await fetch(
+        `/api/reading-list/remove/${userId}/${articleId}/`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        const article = await response.json();
+        return article;
+      } else {
+        const errors = await response.json();
+        return errors;
       }
-    );
-    if (response.ok) {
-      const article = await response.json();
-      return article;
-    } else {
-      return response;
+    } catch (error) {
+      return createErrorObject(error);
     }
   };
 

@@ -1,4 +1,6 @@
 import { Dispatch } from "react";
+import { createErrorObject } from "../helperFunctions";
+import { UserType } from "../typeDeclerations";
 
 type ActionType = ReturnType<typeof setUser> | ReturnType<typeof removeUser>
 
@@ -6,14 +8,6 @@ type ActionType = ReturnType<typeof setUser> | ReturnType<typeof removeUser>
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  username: string;
-  email: string;
-  bio: string;
-};
 type PasswordType = string;
 
 const setUser = (user: UserType) => ({
@@ -38,9 +32,8 @@ export const authenticate =
     if (response.ok) {
       const data = await response.json();
       if (data.errors) {
-        return;
+        return data.errors;
       }
-
       dispatch(setUser(data));
     }
   };
@@ -85,12 +78,11 @@ export const logout =
       if (response.ok) {
         dispatch(removeUser());
       } else {
-        // Handle non-successful response (e.g., server error)
-        console.error("Logout failed:", response.status);
+        const errors = await response.json();
+        return errors;
       }
     } catch (error) {
-      // Handle any network errors or exceptions
-      console.error("Error occurred during logout:", error);
+      return createErrorObject(error);
     }
   };
 

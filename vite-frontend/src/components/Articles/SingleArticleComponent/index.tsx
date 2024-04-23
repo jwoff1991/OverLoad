@@ -34,22 +34,24 @@ const SingleArticle = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      await dispatch(getOneArticle(Number(articleId!)));
-      if (sessionUser && sessionUser.id) {
-        await dispatch(getUserReadingList());
-      }
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchData();
+    (async () => {
+      try {
+        setLoading(true);
+        await dispatch(getOneArticle(Number(articleId!)));
+        if (sessionUser && sessionUser.id) {
+          await dispatch(getUserReadingList());
+        }
+      } catch (error) {
+        alert(
+          `Failed to fetch data: ${
+            error instanceof Error ? error.message : "An unknown error occurred"
+          }`
+        );
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, [dispatch, articleId, sessionUser]);
 
   //COMMENT BUTTON

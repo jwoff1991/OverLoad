@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import store from '.';
 import {getOneArticle} from './articles'
+import { createErrorObject } from '../helperFunctions';
 
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
@@ -38,11 +39,7 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
         return errors;
       }
     } catch (error) {
-      const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-      return errors;
+      return createErrorObject(error);
     }
   };
 
@@ -66,10 +63,7 @@ export const postComment = (comment: NewComment) => async (dispatch: AppDispatch
         return errors;
       }
     } catch (error) {
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-        return error;
+      return createErrorObject(error);
     }
   };
 
