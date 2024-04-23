@@ -29,3 +29,8 @@ export const validateField = (field: string, message: string) => {
     }
     return null;
   };
+
+
+export const createErrorObject = (error: unknown) => ({
+  message: error instanceof Error ? error.toString() : "An error occurred",
+});

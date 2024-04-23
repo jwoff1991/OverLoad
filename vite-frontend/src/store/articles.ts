@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 
 import { ArticleType } from "../typeDeclerations";
+import { createErrorObject } from "../helperFunctions";
 
 type newArticle = {
   user_id: number;
@@ -12,7 +13,7 @@ type newArticle = {
 const GET_ARTICLES = "/articles/getAll";
 const GET_SINGLE = "/article/single";
 
-//actioncreator
+//actioncreators
 const getArticles = (articles: {}) => {
   return {
     type: GET_ARTICLES,
@@ -35,7 +36,6 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
     });
     if (response.ok) {
       let articles = await response.json();
-      // Sort the articles in the desired order before dispatching
       articles = articles.sort((a: ArticleType, b: ArticleType) => b.id - a.id);
       dispatch(getArticles(articles));
       return articles;
@@ -44,11 +44,7 @@ export const getAllArticles = () => async (dispatch: Dispatch) => {
       return errors;
     }
   } catch (error) {
-    const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-    return errors;
+    return createErrorObject(error);
   }
 };
 
@@ -76,56 +72,51 @@ export const getOneArticle = (id: number | string) => async (dispatch: Dispatch)
       return errors;
     }
   } catch (error) {
-    const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-    return errors;
+    return createErrorObject(error);
   }
 };
 
 export const postArticle = (article: newArticle) => async (dispatch: Dispatch) => {
   try {
-    const request = await fetch("/api/articles/new-article/", {
+    const response = await fetch("/api/articles/new-article/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(article),
     });
-    const newArticle = await request.json();
-    dispatch(getSingleArticle(newArticle));
-    return newArticle;
+    if(response.ok) {
+      const newArticle = await response.json();
+      dispatch(getSingleArticle(newArticle));
+      return newArticle;
+    } else {
+      const errors = await response.json();
+      return errors;
+    }
   } catch (error) {
-    const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-    return errors;
+    return createErrorObject(error)
   }
 };
 
 export const editArticle = (article: ArticleType) => async (dispatch: Dispatch) => {
   try {
-    let id = article.id;
-    const request = await fetch(`/api/articles/edit/${id}/`, {
+    const response = await fetch(`/api/articles/edit/${article.id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(article),
     });
-    const editedArticle = await request.json();
-    if (editedArticle.ok) {
+    if (response.ok) {
+      const editedArticle = await response.json();
       dispatch(getSingleArticle(editedArticle));
       return editedArticle;
+    } else {
+      const errors = await response.json();
+      return errors;
     }
   } catch (error) {
-    const errors =
-      error instanceof Error
-        ? { message: error.toString() }
-        : { message: "An error occurred" };
-    return errors;
+    return createErrorObject(error);
   }
 };
 
@@ -137,7 +128,8 @@ export const deleteArticle = (id: number) => async () => {
     const article = await response.json();
     return article;
   } else {
-    return response;
+    const errors = await response.json();
+    return errors;
   }
 };
 
