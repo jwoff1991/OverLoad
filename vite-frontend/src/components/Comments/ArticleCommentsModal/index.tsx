@@ -120,4 +120,4 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ articleId }) => {
   );
 };
 
-export default React.memo(CommentsModal);
+export default CommentsModal;
