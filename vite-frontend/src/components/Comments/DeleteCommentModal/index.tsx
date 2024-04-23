@@ -11,15 +11,17 @@ function DeleteCommentModal(props: { props: [commentId: number, articleId: numbe
   const { closeModal } = useModal();
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
 
-
   const handleDelete = async (e: FormEvent) => {
     e.preventDefault();
-    const data = await dispatch(deleteComment(commentId));
-    if (data) {
-      console.log("No error deleting comment");
+    try {
+      const data = await dispatch(deleteComment(commentId));
+      if (data) {
+        closeModal();
+        dispatch(getOneArticle(articleId));
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
     }
-    closeModal();
-    dispatch(getOneArticle(articleId))
   };
 
   const returnToComments = (e: FormEvent) => {

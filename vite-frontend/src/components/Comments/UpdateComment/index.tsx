@@ -36,7 +36,6 @@ function EditCommentModal(props: EditCommentModalProps) {
       body: comment,
     };
     const data = await dispatch(editComment(editedComment));
-    console.log(data);
     if (data) {
       closeModal();
     }

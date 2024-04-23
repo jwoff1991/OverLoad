@@ -76,13 +76,11 @@ export const login =
 export const logout =
   () => async (dispatch: Dispatch<ActionType>) => {
     try {
-      console.log('we are hitting this');
       const response = await fetch("/api/auth/logout", {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response, 'response');
 
       if (response.ok) {
         dispatch(removeUser());
@@ -143,7 +141,6 @@ export default function reducer(
     case SET_USER:
       return { user: action.payload };
     case REMOVE_USER:
-      console.log('were hitting this')
       return { user: null };
     default:
       return state;

@@ -14,7 +14,6 @@ const ReadingListComponent = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const readingListAll = Object.values(readingList);
   const state = useSelector((state) => state);
-  console.log(state)
 
   useEffect(() => {
     dispatch(getUserReadingList(userId));

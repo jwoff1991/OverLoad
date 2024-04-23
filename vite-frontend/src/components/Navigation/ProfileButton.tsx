@@ -6,7 +6,6 @@ import "./Navigation.css";
 
 
 function ProfileButton({ user }: { user: UserType }) {
-  console.log(user)
   const nav = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const ulRef = useRef<HTMLUListElement>(null);

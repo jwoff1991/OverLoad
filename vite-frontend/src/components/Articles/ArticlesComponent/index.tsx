@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { useEffect } from "react";
-import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllArticles } from "../../../store/articles";
@@ -17,15 +16,9 @@ import './articlesComponent.css'
 const ArticlesComponent = () => {
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
   const sessionUser = useSelector((state: StateType) => state.session.user);
-  const selectAllArticles = (state: StateType) => state.articles.allArticles;
+  const selectAllArticles = useSelector((state: StateType) => state.articles.allArticles);
 
-  // Memoized selector that returns the same reference if the underlying articles haven't changed
-  const selectArticlesList = createSelector(
-    [selectAllArticles],
-    (allArticles) => Object.values(allArticles)
-  );
-
-  const articlesList = useSelector(selectArticlesList);
+  const articlesList = Object.values(selectAllArticles);
 
   useEffect(() => {
     dispatch(getAllArticles());
@@ -35,7 +28,7 @@ const ArticlesComponent = () => {
     }
   }, [dispatch, sessionUser]);
 
-  const ArticleLink = ({
+  const ArticleChunk = ({
     id,
     author,
     title,
@@ -69,7 +62,7 @@ const ArticlesComponent = () => {
           <div className="articles-topics-footer-container">
             <div className="articles-container">
               {articlesList.map((article) => (
-                <ArticleLink key={article.id} {...article} />
+                <ArticleChunk key={article.id} {...article} />
               ))}
             </div>
             <div className="topics-footer-container-user-logged-in">
@@ -88,7 +81,7 @@ const ArticlesComponent = () => {
               <h4>(a Medium.com clone)</h4>
               <p>
                 Feel free to navigate the site, you can create your own signin,
-                or login as a demo user. You can also, create an article, or
+                or login as a demo user. You can also create an article or
                 comment on one you find interesting! If you have any questions
                 or want to find out more about the sourcecode, visit the My
                 Story link!
@@ -103,7 +96,7 @@ const ArticlesComponent = () => {
           <div className="articles-topics-footer-container">
             <div className="articles-container">
               {articlesList.map((article) => (
-                <ArticleLink key={article.id} {...article} />
+                <ArticleChunk key={article.id} {...article} />
               ))}
             </div>
             <div className="topics-footer-container-user-not-logged-in">

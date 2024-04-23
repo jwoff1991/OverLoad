@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState, useCallback } from "react";
+import React, { FormEvent, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModal from "../../OpenModalButton";
 import EditCommentModal from "../UpdateComment";
@@ -7,7 +7,6 @@ import { postComment } from "../../../store/comments";
 import { StateType, NewComment, AppDispatch } from "../../../typeDeclerations";
 import { articleDateConverter } from "../../../helperFunctions";
 import "./CommentsModal.css";
-import { getOneArticle } from "../../../store/articles";
 
 interface CommentsModalProps {
   articleId: number;
@@ -20,10 +19,6 @@ const CommentsModal: React.FC<CommentsModalProps> = ({ articleId }) => {
     (state: StateType) => state.articles.singleArticle.comments
   );
   const dispatch: AppDispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(getOneArticle(Number(articleId!)));
-  }, [dispatch, articleId]);
 
   const handleSubmit = useCallback(
     async (e: FormEvent) => {

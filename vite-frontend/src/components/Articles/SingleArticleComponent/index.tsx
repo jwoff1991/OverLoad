@@ -36,7 +36,6 @@ const SingleArticle = () => {
 
   const fetchData = async () => {
     try {
-      setLoading(true);
       await dispatch(getOneArticle(Number(articleId!)));
       if (sessionUser && sessionUser.id) {
         await dispatch(getUserReadingList());
