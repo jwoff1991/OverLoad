@@ -8,7 +8,7 @@ import { AppDispatch, StateType } from "../../typeDeclerations.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import "./Navigation.css";
-
+import React from "react";
 
 function Navigation({ isLoaded }: { isLoaded: boolean }) {
   const nav = useNavigate();
@@ -74,7 +74,6 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
                     onClick={handleLogout}
                     className="drop-down-sign-out"
                   >Logout</button>
-                  {/* <ProfileButton user={sessionUser} /> */}
                 </div>
               )}
             </div>
@@ -126,4 +125,4 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
   );
 }
 
-export default Navigation;
+export default React.memo(Navigation);
