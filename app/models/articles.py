@@ -11,12 +11,8 @@ class Article(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    # MAKE SURE TO ADD IN ARTICLE TYPE LATER
-
     date_created = db.Column(db.DateTime, nullable=False)
 
-
-    # Articles has one => many relationships with Users, ArticleComments, ArticleLikes
     author = db.relationship('User', back_populates='articles')
     comments = db.relationship('Comment', back_populates='article', cascade='all, delete-orphan')
     reading_list = db.relationship('ReadingList', back_populates='article', cascade='all, delete-orphan')
@@ -31,3 +27,4 @@ class Article(db.Model):
             "date_created": self.date_created,
             "author": self.author.to_dict(),
         }
+

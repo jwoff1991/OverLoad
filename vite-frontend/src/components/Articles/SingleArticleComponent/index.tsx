@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneArticle } from "../../../store/articles";
 import { getUserReadingList } from "../../../store/readingList";
 import { StateType, AppDispatch } from "../../../typeDeclerations";
-import { articleDateConverter } from "../../../helperFunctions";
+import { articleDateConverter, createErrorObject } from "../../../helperFunctions";
 
 import OpenModal from "../../OpenModalButton";
 import ArticleLikes from "../ArticleLikes";
@@ -45,7 +45,7 @@ const SingleArticle = () => {
       } catch (error) {
         alert(
           `Failed to fetch data: ${
-            error instanceof Error ? error.message : "An unknown error occurred"
+            createErrorObject(error)
           }`
         );
       } finally {
