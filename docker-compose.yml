@@ -1,0 +1,16 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile-frontend
+    image: overload-frontend
+    ports:
+      - "80:80"
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile-backend
+    image: overload-backend
+    ports:
+      - "5000:5000"
