@@ -1,16 +1,17 @@
 ## OVERLOAD
 
-Now available on docker!
-
-Frontend: https://hub.docker.com/r/jwoff91/overload-frontend
-
-Backend: https://hub.docker.com/r/jwoff91/overload-backend
-
 
 Welcome to OverLoad, a Medium clone. Feel free to browse the site. You can create a login or signin as the demo user to utilize all the functionality.
 
 
 https://aacapstoneproj.onrender.com
+
+
+# Docker
+
+Frontend: https://hub.docker.com/r/jwoff91/overload-frontend
+
+Backend: https://hub.docker.com/r/jwoff91/overload-backend
 
 # Index
 
