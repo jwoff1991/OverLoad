@@ -17,6 +17,7 @@ import CreateComponent from "./components/CreateComponent/index.tsx";
 import NotFoundComponent from "./components/NotFoundComponent/index.tsx";
 
 import './index.css'
+import UserProfile from "./components/UserProfile/userProfile.tsx";
 
 type AppDispatch = ThunkDispatch<typeof store, unknown, AnyAction>
 
@@ -34,6 +35,7 @@ function App() {
       {isLoaded && (
         <Routes>
           <Route path="/" element={<ArticlesComponent />} />
+          <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/new-article" element={<CreateNewArticle />} />
           <Route path="/article/:id/edit" element={<EditArticle />} />
