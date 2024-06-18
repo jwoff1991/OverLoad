@@ -40,6 +40,11 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
     nav(`/${sessionUser.id}/reading-list`);
   };
 
+  const userProfileRedirect = () => {
+    closeMenu();
+    nav("/userprofile");
+  };
+
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(logout())
@@ -70,6 +75,7 @@ function Navigation({ isLoaded }: { isLoaded: boolean }) {
               {isLoaded && (
                 <div className="profile-button-user-logged-in">
                   <button onClick={readingListRedirect} className="reading-list-button">Reading List</button>
+                  <button onClick={userProfileRedirect} className="reading-list-button">User Profile</button>
                   <button
                     onClick={handleLogout}
                     className="drop-down-sign-out"
