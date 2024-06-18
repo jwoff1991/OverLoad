@@ -45,6 +45,11 @@ function ProfileButton({ user }: { user: UserType }) {
     nav(`/${user.id}/reading-list`);
   };
 
+  const userProfileRedirect = () => {
+    closeMenu();
+    nav("/userprofile"); 
+  };
+
   return (
     <>
       <button onClick={openMenu} className="user-profile-dropdown-button">
@@ -60,6 +65,7 @@ function ProfileButton({ user }: { user: UserType }) {
           <>
             <div className="user-dropdown-menu">
               <button onClick={readingListRedirect}>Reading List</button>
+              <button onClick={userProfileRedirect}>User Profile</button>
               <button onClick={handleLogout} className="drop-down-sign-out">
                 Sign Out
               </button>
