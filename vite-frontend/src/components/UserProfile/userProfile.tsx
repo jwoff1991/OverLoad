@@ -43,7 +43,7 @@ const UserProfile = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, field: keyof UserInfoType) => {
     setUserInfo({ ...userInfo, [field]: e.target.value });
-  };
+  }; //want to remove this or set it based on incoming database info
 
   const handleSave = (field: keyof UserInfoType) => {
     setEditMode({ ...editMode, [field]: false });
