@@ -83,3 +83,25 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': ['Unauthorized']}, 401
+
+@auth_routes.route('/edit_user/<int:id>/', methods=['PUT'])
+def edit_user(id):
+    form = SignUpForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        user_to_update = User.query.get(id)
+        if user_to_update:
+            user_to_update.first_name = form.data['first_name']
+            user_to_update.last_name = form.data['last_name']
+            user_to_update.username = form.data['username']
+            user_to_update.email = form.data['email']
+            user_to_update.bio = form.data['bio']
+            # Ensure password is hashed before updating
+            user_to_update.password=form.data['password']
+
+            db.session.commit()
+            return user_to_update.to_dict()
+        else:
+            return {"errors": "User not found"}, 404
+    if form.errors:
+        return {"errors": form.errors}, 400
