@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../typeDeclerations";
 import { useState, ChangeEvent } from "react";
+import './UserProfile.css';
 
 interface EditModeType {
   firstname: boolean;
@@ -54,7 +55,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div>
+    <div className="user-profile">
       {Object.keys(editMode).map((field) => (
         <div key={field}>
           <strong>{field.charAt(0).toUpperCase() + field.slice(1)}:</strong>

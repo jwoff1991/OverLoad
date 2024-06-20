@@ -1,0 +1,39 @@
+/* UserProfile.css */
+.user-profile {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+
+  .user-profile div {
+    margin-bottom: 10px;
+  }
+
+  .user-profile strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .user-profile input[type="text"] {
+    width: calc(100% - 60px);
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .user-profile button {
+    padding: 8px 16px;
+    background-color: transparent; /* No background */
+    color: #007bff; /* Blue text */
+    border: none; /* No border */
+    cursor: pointer;
+  }
+
+  .user-profile button:hover {
+    color: #0056b3; /* Darker blue on hover */
+  }
